@@ -3,24 +3,87 @@
 		"Behaviour": [
 			{
 				"name": "level",
-				"type": "ENUM (Attentive, Relaxed, Optimistic, Sceptic)",
+				"type": "ENUM(Attentive,Relaxed,Optimistic,Sceptic)",
 				"default": ""
 			},
 			{
 				"name": "profile",
-				"type": "ENUM(Newcomer, Experienced, Scared)",
+				"type": "ENUM(Newcomer,Experienced,Scared)",
 				"default": ""
 			}
-		]
+		],
+		"Occupant": [
+			{
+				"name": "notified",
+				"type": "boolean",
+				"default": false
+			},
+			{
+				"name": "running",
+				"type": "boolean",
+				"default": false
+			},
+			{
+				"name": "name",
+				"type": "string",
+				"default": ""
+			}
+		],
+		"A_behaviour": []
 	},
 	"constraints": [],
 	"actions": [],
 	"cardinalities": {
-		"Behaviour": []
+		"Behaviour": [
+			{
+				"dir": "in",
+				"type": "A_behaviour",
+				"min": "0",
+				"max": "Infinity"
+			}
+		],
+		"Occupant": [
+			{
+				"dir": "out",
+				"type": "A_behaviour",
+				"min": "0",
+				"max": "Infinity"
+			}
+		],
+		"A_behaviour": [
+			{
+				"dir": "in",
+				"type": "",
+				"min": "1",
+				"max": "1"
+			},
+			{
+				"dir": "in",
+				"type": "Occupant",
+				"min": "0",
+				"max": "1"
+			},
+			{
+				"dir": "out",
+				"type": "Behaviour",
+				"min": "0",
+				"max": "1"
+			}
+		]
 	},
-	"legalConnections": {},
-	"connectorTypes": {},
+	"legalConnections": {
+		"Occupant": {
+			"Behaviour": [
+				"A_behaviour"
+			]
+		}
+	},
+	"connectorTypes": {
+		"A_behaviour": "containment"
+	},
 	"types2parentTypes": {
-		"Behaviour": []
+		"Behaviour": [],
+		"Occupant": [],
+		"A_behaviour": []
 	}
 }
