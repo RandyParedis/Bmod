@@ -1,0 +1,26 @@
+{
+	"types": {
+		"Behaviour": [
+			{
+				"name": "level",
+				"type": "ENUM (Attentive, Relaxed, Optimistic, Sceptic)",
+				"default": ""
+			},
+			{
+				"name": "profile",
+				"type": "ENUM(Newcomer, Experienced, Scared)",
+				"default": ""
+			}
+		]
+	},
+	"constraints": [],
+	"actions": [],
+	"cardinalities": {
+		"Behaviour": []
+	},
+	"legalConnections": {},
+	"connectorTypes": {},
+	"types2parentTypes": {
+		"Behaviour": []
+	}
+}
