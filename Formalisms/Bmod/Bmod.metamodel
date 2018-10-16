@@ -55,7 +55,12 @@
 			}
 		],
 		"A_holds": [],
-		"A_movement": []
+		"A_movement": [],
+		"Room": [],
+		"A_cells": [],
+		"Door": [],
+		"A_doorcell": [],
+		"A_celldoor": []
 	},
 	"constraints": [
 		{
@@ -128,6 +133,24 @@
 				"type": "A_movement",
 				"min": "0",
 				"max": "Infinity"
+			},
+			{
+				"dir": "in",
+				"type": "A_cells",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "in",
+				"type": "A_doorcell",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "out",
+				"type": "A_celldoor",
+				"min": "0",
+				"max": "Infinity"
 			}
 		],
 		"A_holds": [
@@ -157,6 +180,70 @@
 				"min": "0",
 				"max": "1"
 			}
+		],
+		"Room": [
+			{
+				"dir": "out",
+				"type": "A_cells",
+				"min": "0",
+				"max": "Infinity"
+			}
+		],
+		"A_cells": [
+			{
+				"dir": "in",
+				"type": "Room",
+				"min": "0",
+				"max": "1"
+			},
+			{
+				"dir": "out",
+				"type": "Cell",
+				"min": "0",
+				"max": "1"
+			}
+		],
+		"Door": [
+			{
+				"dir": "out",
+				"type": "A_doorcell",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "in",
+				"type": "A_celldoor",
+				"min": "0",
+				"max": "Infinity"
+			}
+		],
+		"A_doorcell": [
+			{
+				"dir": "in",
+				"type": "Door",
+				"min": "0",
+				"max": "1"
+			},
+			{
+				"dir": "out",
+				"type": "Cell",
+				"min": "0",
+				"max": "1"
+			}
+		],
+		"A_celldoor": [
+			{
+				"dir": "in",
+				"type": "Cell",
+				"min": "0",
+				"max": "1"
+			},
+			{
+				"dir": "out",
+				"type": "Door",
+				"min": "0",
+				"max": "1"
+			}
 		]
 	},
 	"legalConnections": {
@@ -171,13 +258,29 @@
 			],
 			"Cell": [
 				"A_movement"
+			],
+			"Door": [
+				"A_celldoor"
+			]
+		},
+		"Room": {
+			"Cell": [
+				"A_cells"
+			]
+		},
+		"Door": {
+			"Cell": [
+				"A_doorcell"
 			]
 		}
 	},
 	"connectorTypes": {
 		"A_behaviour": "containment",
 		"A_holds": "containment",
-		"A_movement": "visual"
+		"A_movement": "visual",
+		"A_cells": "containment",
+		"A_doorcell": "visual",
+		"A_celldoor": "visual"
 	},
 	"types2parentTypes": {
 		"Behaviour": [],
@@ -188,6 +291,11 @@
 			"Location"
 		],
 		"A_holds": [],
-		"A_movement": []
+		"A_movement": [],
+		"Room": [],
+		"A_cells": [],
+		"Door": [],
+		"A_doorcell": [],
+		"A_celldoor": []
 	}
 }

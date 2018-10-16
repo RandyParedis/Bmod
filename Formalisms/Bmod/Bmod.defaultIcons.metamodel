@@ -281,8 +281,8 @@
 				"name": "position",
 				"type": "list<double>",
 				"default": [
-					285.07459461515714,
-					125
+					803.0745946151571,
+					126
 				]
 			},
 			{
@@ -502,7 +502,7 @@
 				"type": "list<double>",
 				"default": [
 					556,
-					353
+					350
 				]
 			},
 			{
@@ -571,8 +571,8 @@
 							"position": {
 								"type": "list<double>",
 								"value": [
-									4,
-									1
+									3,
+									2
 								]
 							},
 							"orientation": {
@@ -627,8 +627,8 @@
 				"name": "position",
 				"type": "list<double>",
 				"default": [
-					787,
-					132
+					268,
+					126
 				]
 			},
 			{
@@ -703,8 +703,8 @@
 				"name": "position",
 				"type": "list<double>",
 				"default": [
-					791,
-					362
+					9,
+					128
 				]
 			},
 			{
@@ -748,6 +748,442 @@
 				"type": "map<string,list<string>>",
 				"default": {}
 			}
+		],
+		"RoomIcon": [
+			{
+				"name": "typename",
+				"type": "string",
+				"default": "RoomIcon"
+			},
+			{
+				"name": "position",
+				"type": "list<double>",
+				"default": [
+					800.894,
+					347.759
+				]
+			},
+			{
+				"name": "orientation",
+				"type": "double",
+				"default": 0
+			},
+			{
+				"name": "scale",
+				"type": "list<double>",
+				"default": [
+					1,
+					1
+				]
+			},
+			{
+				"name": "mapper",
+				"type": "code",
+				"default": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */"
+			},
+			{
+				"name": "parser",
+				"type": "code",
+				"default": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+			},
+			{
+				"name": "$contents",
+				"type": "map<string,*>",
+				"default": {
+					"nodes": {
+						"63": {
+							"width": {
+								"type": "double",
+								"value": 200
+							},
+							"height": {
+								"type": "double",
+								"value": 200
+							},
+							"cornerRadius": {
+								"type": "double",
+								"value": 5
+							},
+							"style": {
+								"type": "map<string,string>",
+								"value": {
+									"stroke": "#000000",
+									"stroke-dasharray": "",
+									"fill": "#ffffff",
+									"fill-opacity": 1,
+									"font-size": "20px",
+									"stroke-width": 1,
+									"arrow-start": "none",
+									"arrow-end": "none"
+								}
+							},
+							"mapper": {
+								"type": "code",
+								"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */"
+							},
+							"parser": {
+								"type": "code",
+								"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+							},
+							"$type": "/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax/Rectangle",
+							"position": {
+								"type": "list<double>",
+								"value": [
+									4,
+									3
+								]
+							},
+							"orientation": {
+								"type": "double",
+								"value": 0
+							},
+							"scale": {
+								"type": "list<double>",
+								"value": [
+									1.149,
+									1.1518
+								]
+							}
+						}
+					},
+					"edges": []
+				}
+			},
+			{
+				"name": "$asuri",
+				"type": "string",
+				"default": "-1"
+			}
+		],
+		"A_cellsLink": [
+			{
+				"name": "link-style",
+				"type": "map<string,string>",
+				"default": {
+					"stroke": "#000000",
+					"stroke-dasharray": "",
+					"stroke-opacity": 0,
+					"stroke-width": 0
+				}
+			},
+			{
+				"name": "arrowHead",
+				"type": "ENUM(circle-black,circle-black-large,circle-white,circle-white-large,diamond-black,diamond-black-large,diamond-white,diamond-white-large,triangle-black,triangle-black-large,triangle-white,triangle-white-large,arrow-black,arrow-black-large,arrow-empty,arrow-empty-large,custom)",
+				"default": "custom"
+			},
+			{
+				"name": "arrowTail",
+				"type": "ENUM(circle-black,circle-black-large,circle-white,circle-white-large,diamond-black,diamond-black-large,diamond-white,diamond-white-large,triangle-black,triangle-black-large,triangle-white,triangle-white-large,arrow-black,arrow-black-large,arrow-empty,arrow-empty-large,custom)",
+				"default": "arrow-black"
+			},
+			{
+				"name": "typename",
+				"type": "string",
+				"default": "A_cellsLink"
+			},
+			{
+				"name": "position",
+				"type": "list<double>",
+				"default": [
+					4,
+					347
+				]
+			},
+			{
+				"name": "orientation",
+				"type": "double",
+				"default": 0
+			},
+			{
+				"name": "scale",
+				"type": "list<double>",
+				"default": [
+					1,
+					1
+				]
+			},
+			{
+				"name": "mapper",
+				"type": "code",
+				"default": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */"
+			},
+			{
+				"name": "parser",
+				"type": "code",
+				"default": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+			},
+			{
+				"name": "$contents",
+				"type": "map<string,*>",
+				"default": {
+					"nodes": {},
+					"edges": []
+				}
+			},
+			{
+				"name": "$asuri",
+				"type": "string",
+				"default": "-1"
+			},
+			{
+				"name": "$segments",
+				"type": "map<string,list<string>>",
+				"default": {}
+			}
+		],
+		"A_celldoorLink": [
+			{
+				"name": "link-style",
+				"type": "map<string,string>",
+				"default": {
+					"stroke": "#000000",
+					"stroke-dasharray": "",
+					"stroke-opacity": 1,
+					"stroke-width": 2
+				}
+			},
+			{
+				"name": "arrowHead",
+				"type": "ENUM(circle-black,circle-black-large,circle-white,circle-white-large,diamond-black,diamond-black-large,diamond-white,diamond-white-large,triangle-black,triangle-black-large,triangle-white,triangle-white-large,arrow-black,arrow-black-large,arrow-empty,arrow-empty-large,custom)",
+				"default": "custom"
+			},
+			{
+				"name": "arrowTail",
+				"type": "ENUM(circle-black,circle-black-large,circle-white,circle-white-large,diamond-black,diamond-black-large,diamond-white,diamond-white-large,triangle-black,triangle-black-large,triangle-white,triangle-white-large,arrow-black,arrow-black-large,arrow-empty,arrow-empty-large,custom)",
+				"default": "arrow-black"
+			},
+			{
+				"name": "typename",
+				"type": "string",
+				"default": "A_celldoorLink"
+			},
+			{
+				"name": "position",
+				"type": "list<double>",
+				"default": [
+					1065,
+					129
+				]
+			},
+			{
+				"name": "orientation",
+				"type": "double",
+				"default": 0
+			},
+			{
+				"name": "scale",
+				"type": "list<double>",
+				"default": [
+					1,
+					1
+				]
+			},
+			{
+				"name": "mapper",
+				"type": "code",
+				"default": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */"
+			},
+			{
+				"name": "parser",
+				"type": "code",
+				"default": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+			},
+			{
+				"name": "$contents",
+				"type": "map<string,*>",
+				"default": {
+					"nodes": {},
+					"edges": []
+				}
+			},
+			{
+				"name": "$asuri",
+				"type": "string",
+				"default": "-1"
+			},
+			{
+				"name": "$segments",
+				"type": "map<string,list<string>>",
+				"default": {}
+			}
+		],
+		"A_doorcellLink": [
+			{
+				"name": "link-style",
+				"type": "map<string,string>",
+				"default": {
+					"stroke": "#000000",
+					"stroke-dasharray": "",
+					"stroke-opacity": 1,
+					"stroke-width": 2
+				}
+			},
+			{
+				"name": "arrowHead",
+				"type": "ENUM(circle-black,circle-black-large,circle-white,circle-white-large,diamond-black,diamond-black-large,diamond-white,diamond-white-large,triangle-black,triangle-black-large,triangle-white,triangle-white-large,arrow-black,arrow-black-large,arrow-empty,arrow-empty-large,custom)",
+				"default": "custom"
+			},
+			{
+				"name": "arrowTail",
+				"type": "ENUM(circle-black,circle-black-large,circle-white,circle-white-large,diamond-black,diamond-black-large,diamond-white,diamond-white-large,triangle-black,triangle-black-large,triangle-white,triangle-white-large,arrow-black,arrow-black-large,arrow-empty,arrow-empty-large,custom)",
+				"default": "arrow-black"
+			},
+			{
+				"name": "typename",
+				"type": "string",
+				"default": "A_doorcellLink"
+			},
+			{
+				"name": "position",
+				"type": "list<double>",
+				"default": [
+					1082,
+					352
+				]
+			},
+			{
+				"name": "orientation",
+				"type": "double",
+				"default": 0
+			},
+			{
+				"name": "scale",
+				"type": "list<double>",
+				"default": [
+					1,
+					1
+				]
+			},
+			{
+				"name": "mapper",
+				"type": "code",
+				"default": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */"
+			},
+			{
+				"name": "parser",
+				"type": "code",
+				"default": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+			},
+			{
+				"name": "$contents",
+				"type": "map<string,*>",
+				"default": {
+					"nodes": {},
+					"edges": []
+				}
+			},
+			{
+				"name": "$asuri",
+				"type": "string",
+				"default": "-1"
+			},
+			{
+				"name": "$segments",
+				"type": "map<string,list<string>>",
+				"default": {}
+			}
+		],
+		"DoorIcon": [
+			{
+				"name": "typename",
+				"type": "string",
+				"default": "DoorIcon"
+			},
+			{
+				"name": "position",
+				"type": "list<double>",
+				"default": [
+					23,
+					568
+				]
+			},
+			{
+				"name": "orientation",
+				"type": "double",
+				"default": 0
+			},
+			{
+				"name": "scale",
+				"type": "list<double>",
+				"default": [
+					1,
+					1
+				]
+			},
+			{
+				"name": "mapper",
+				"type": "code",
+				"default": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */"
+			},
+			{
+				"name": "parser",
+				"type": "code",
+				"default": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+			},
+			{
+				"name": "$contents",
+				"type": "map<string,*>",
+				"default": {
+					"nodes": {
+						"71": {
+							"r": {
+								"type": "double",
+								"value": 50
+							},
+							"sides": {
+								"type": "int",
+								"value": 4
+							},
+							"style": {
+								"type": "map<string,string>",
+								"value": {
+									"stroke": "#000000",
+									"stroke-dasharray": "",
+									"fill": "#592509",
+									"fill-opacity": 1,
+									"font-size": "20px",
+									"stroke-width": 1,
+									"arrow-start": "none",
+									"arrow-end": "none"
+								}
+							},
+							"mapper": {
+								"type": "code",
+								"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */"
+							},
+							"parser": {
+								"type": "code",
+								"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+							},
+							"$type": "/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax/Polygon",
+							"position": {
+								"type": "list<double>",
+								"value": [
+									54,
+									50
+								]
+							},
+							"orientation": {
+								"type": "double",
+								"value": 0
+							},
+							"scale": {
+								"type": "list<double>",
+								"value": [
+									1,
+									1
+								]
+							}
+						}
+					},
+					"edges": []
+				}
+			},
+			{
+				"name": "$asuri",
+				"type": "string",
+				"default": "-1"
+			}
 		]
 	},
 	"constraints": [],
@@ -758,7 +1194,12 @@
 		"A_behaviourLink": [],
 		"CellIcon": [],
 		"A_holdsLink": [],
-		"A_movementLink": []
+		"A_movementLink": [],
+		"RoomIcon": [],
+		"A_cellsLink": [],
+		"A_celldoorLink": [],
+		"A_doorcellLink": [],
+		"DoorIcon": []
 	},
 	"legalConnections": {},
 	"connectorTypes": {},
@@ -768,6 +1209,11 @@
 		"A_behaviourLink": [],
 		"CellIcon": [],
 		"A_holdsLink": [],
-		"A_movementLink": []
+		"A_movementLink": [],
+		"RoomIcon": [],
+		"A_cellsLink": [],
+		"A_celldoorLink": [],
+		"A_doorcellLink": [],
+		"DoorIcon": []
 	}
 }
