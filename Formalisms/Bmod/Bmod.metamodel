@@ -29,9 +29,42 @@
 				"default": ""
 			}
 		],
-		"A_behaviour": []
+		"A_behaviour": [],
+		"Location": [
+			{
+				"name": "x",
+				"type": "double",
+				"default": ""
+			},
+			{
+				"name": "y",
+				"type": "double",
+				"default": ""
+			}
+		],
+		"Cell": [
+			{
+				"name": "x",
+				"type": "double",
+				"default": ""
+			},
+			{
+				"name": "y",
+				"type": "double",
+				"default": ""
+			}
+		],
+		"A_holds": [],
+		"A_movement": []
 	},
-	"constraints": [],
+	"constraints": [
+		{
+			"name": "noAbstractInstances",
+			"event": "pre-create",
+			"code": "false",
+			"targetType": "Location"
+		}
+	],
 	"actions": [],
 	"cardinalities": {
 		"Behaviour": [
@@ -46,6 +79,12 @@
 			{
 				"dir": "out",
 				"type": "A_behaviour",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "in",
+				"type": "A_holds",
 				"min": "0",
 				"max": "Infinity"
 			}
@@ -69,6 +108,55 @@
 				"min": "0",
 				"max": "1"
 			}
+		],
+		"Location": [],
+		"Cell": [
+			{
+				"dir": "out",
+				"type": "A_holds",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "out",
+				"type": "A_movement",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "in",
+				"type": "A_movement",
+				"min": "0",
+				"max": "Infinity"
+			}
+		],
+		"A_holds": [
+			{
+				"dir": "in",
+				"type": "Cell",
+				"min": "0",
+				"max": "1"
+			},
+			{
+				"dir": "out",
+				"type": "Occupant",
+				"min": "0",
+				"max": "1"
+			}
+		],
+		"A_movement": [
+			{
+				"dir": "in",
+				"type": "Cell",
+				"min": "0",
+				"max": "1"
+			},
+			{
+				"dir": "out",
+				"type": "Cell",
+				"min": "0",
+				"max": "1"
+			}
 		]
 	},
 	"legalConnections": {
@@ -76,14 +164,30 @@
 			"Behaviour": [
 				"A_behaviour"
 			]
+		},
+		"Cell": {
+			"Occupant": [
+				"A_holds"
+			],
+			"Cell": [
+				"A_movement"
+			]
 		}
 	},
 	"connectorTypes": {
-		"A_behaviour": "containment"
+		"A_behaviour": "containment",
+		"A_holds": "containment",
+		"A_movement": "visual"
 	},
 	"types2parentTypes": {
 		"Behaviour": [],
 		"Occupant": [],
-		"A_behaviour": []
+		"A_behaviour": [],
+		"Location": [],
+		"Cell": [
+			"Location"
+		],
+		"A_holds": [],
+		"A_movement": []
 	}
 }
