@@ -60,7 +60,10 @@
 		"A_cells": [],
 		"Door": [],
 		"A_doorcell": [],
-		"A_celldoor": []
+		"A_celldoor": [],
+		"EmergencySign": [],
+		"A_next": [],
+		"A_sign": []
 	},
 	"constraints": [
 		{
@@ -215,6 +218,18 @@
 				"type": "A_celldoor",
 				"min": "0",
 				"max": "Infinity"
+			},
+			{
+				"dir": "in",
+				"type": "A_next",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "out",
+				"type": "A_sign",
+				"min": "0",
+				"max": "Infinity"
 			}
 		],
 		"A_doorcell": [
@@ -241,6 +256,48 @@
 			{
 				"dir": "out",
 				"type": "Door",
+				"min": "0",
+				"max": "1"
+			}
+		],
+		"EmergencySign": [
+			{
+				"dir": "out",
+				"type": "A_next",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "in",
+				"type": "A_sign",
+				"min": "0",
+				"max": "Infinity"
+			}
+		],
+		"A_next": [
+			{
+				"dir": "in",
+				"type": "EmergencySign",
+				"min": "0",
+				"max": "1"
+			},
+			{
+				"dir": "out",
+				"type": "Door",
+				"min": "0",
+				"max": "1"
+			}
+		],
+		"A_sign": [
+			{
+				"dir": "in",
+				"type": "Door",
+				"min": "0",
+				"max": "1"
+			},
+			{
+				"dir": "out",
+				"type": "EmergencySign",
 				"min": "0",
 				"max": "1"
 			}
@@ -271,6 +328,14 @@
 		"Door": {
 			"Cell": [
 				"A_doorcell"
+			],
+			"EmergencySign": [
+				"A_sign"
+			]
+		},
+		"EmergencySign": {
+			"Door": [
+				"A_next"
 			]
 		}
 	},
@@ -280,7 +345,9 @@
 		"A_movement": "visual",
 		"A_cells": "containment",
 		"A_doorcell": "visual",
-		"A_celldoor": "visual"
+		"A_celldoor": "visual",
+		"A_next": "visual",
+		"A_sign": "containment"
 	},
 	"types2parentTypes": {
 		"Behaviour": [],
@@ -296,6 +363,9 @@
 		"A_cells": [],
 		"Door": [],
 		"A_doorcell": [],
-		"A_celldoor": []
+		"A_celldoor": [],
+		"EmergencySign": [],
+		"A_next": [],
+		"A_sign": []
 	}
 }
