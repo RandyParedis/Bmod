@@ -27,43 +27,64 @@
 				"name": "name",
 				"type": "string",
 				"default": ""
+			},
+			{
+				"name": "position",
+				"type": "list<int>",
+				"default": [
+					0,
+					0
+				]
 			}
 		],
 		"A_behaviour": [],
 		"Location": [
 			{
-				"name": "x",
-				"type": "double",
-				"default": ""
-			},
-			{
-				"name": "y",
-				"type": "double",
-				"default": ""
+				"name": "position",
+				"type": "list<int>",
+				"default": [
+					0,
+					0
+				]
 			}
 		],
 		"Cell": [
 			{
-				"name": "x",
-				"type": "double",
-				"default": ""
-			},
-			{
-				"name": "y",
-				"type": "double",
-				"default": ""
+				"name": "position",
+				"type": "list<int>",
+				"default": [
+					0,
+					0
+				]
 			}
 		],
 		"A_holds": [],
-		"A_movement": [],
-		"Room": [],
+		"Room": [
+			{
+				"name": "name",
+				"type": "string",
+				"default": ""
+			}
+		],
 		"A_cells": [],
-		"Door": [],
-		"A_doorcell": [],
+		"Door": [
+			{
+				"name": "position",
+				"type": "list<int>",
+				"default": [
+					0,
+					0
+				]
+			}
+		],
 		"A_celldoor": [],
 		"EmergencySign": [],
 		"A_next": [],
-		"A_sign": []
+		"A_sign": [],
+		"A_bottom": [],
+		"A_left": [],
+		"A_top": [],
+		"A_right": []
 	},
 	"constraints": [
 		{
@@ -73,7 +94,32 @@
 			"targetType": "Location"
 		}
 	],
-	"actions": [],
+	"actions": [
+		{
+			"name": "snapToTarget",
+			"event": "post-connect",
+			"code": "/*newline*/var neighborLinks = getNeighbors('>');/*newline*/var neighborLink = neighborLinks[neighborLinks.length-1];/*newline*/var occR = 35;/*newline*/var cellS = 90;/*newline*/var offset = (cellS - 2*occR) / 2;/*newline*/if( neighborLink ) {/*newline*/    if( getAttr('$type', neighborLink).match(/A_holds/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position');/*newline*/        setAttr('position', [npos[0] + offset, npos[1] + offset], neigh);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_bottom/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0], npos[1] + cellS]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_top/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0], npos[1] - cellS]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_left/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0] - cellS, npos[1]]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_right/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0] + cellS, npos[1]]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_celldoor/) ){/*newline*/        var door = getNeighbors('>','*',neighborLink)[0];/*newline*/        var celldoors = getNeighbors('<','*', door);/*newline*/        cells = [];/*newline*/        for(i in celldoors) {/*newline*/            var ta = getNeighbors('<', '*', celldoors[i])[0];/*newline*/            if(!(ta in cells)) { cells.push(ta); }/*newline*/        }/*newline*/        if(cells.length == 2) {/*newline*/            var cpos = [getAttr('position', cells[0]), getAttr('position', cells[1])];/*newline*/            var dpos = [Math.max(cpos[0][0], cpos[1][0]), Math.max(cpos[0][1], cpos[1][1])];/*newline*/            if(cpos[0][0] == cpos[1][0]) {/*newline*/                dpos[1] -= cellS;/*newline*/                dpos[0] -= cellS / 2;/*newline*/            } else if(cpos[0][1] == cpos[1][1]) {/*newline*/                dpos[0] -= cellS;/*newline*/                dpos[1] -= cellS / 2;/*newline*/            }/*newline*/            setAttr('position', dpos, door);/*newline*/        }/*newline*/    }/*newline*/}/*newline*/  ",
+			"targetType": "Occupant"
+		},
+		{
+			"name": "snapToTarget",
+			"event": "post-connect",
+			"code": "/*newline*/var neighborLinks = getNeighbors('>');/*newline*/var neighborLink = neighborLinks[neighborLinks.length-1];/*newline*/var occR = 35;/*newline*/var cellS = 90;/*newline*/var offset = (cellS - 2*occR) / 2;/*newline*/if( neighborLink ) {/*newline*/    if( getAttr('$type', neighborLink).match(/A_holds/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position');/*newline*/        setAttr('position', [npos[0] + offset, npos[1] + offset], neigh);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_bottom/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0], npos[1] + cellS]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_top/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0], npos[1] - cellS]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_left/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0] - cellS, npos[1]]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_right/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0] + cellS, npos[1]]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_celldoor/) ){/*newline*/        var door = getNeighbors('>','*',neighborLink)[0];/*newline*/        var celldoors = getNeighbors('<','*', door);/*newline*/        cells = [];/*newline*/        for(i in celldoors) {/*newline*/            var ta = getNeighbors('<', '*', celldoors[i])[0];/*newline*/            if(!(ta in cells)) { cells.push(ta); }/*newline*/        }/*newline*/        if(cells.length == 2) {/*newline*/            var cpos = [getAttr('position', cells[0]), getAttr('position', cells[1])];/*newline*/            var dpos = [Math.max(cpos[0][0], cpos[1][0]), Math.max(cpos[0][1], cpos[1][1])];/*newline*/            if(cpos[0][0] == cpos[1][0]) {/*newline*/                dpos[1] -= cellS;/*newline*/                dpos[0] -= cellS / 2;/*newline*/            } else if(cpos[0][1] == cpos[1][1]) {/*newline*/                dpos[0] -= cellS;/*newline*/                dpos[1] -= cellS / 2;/*newline*/            }/*newline*/            setAttr('position', dpos, door);/*newline*/        }/*newline*/    }/*newline*/}/*newline*/  ",
+			"targetType": "Location"
+		},
+		{
+			"name": "snapToTarget",
+			"event": "post-connect",
+			"code": "/*newline*/var neighborLinks = getNeighbors('>');/*newline*/var neighborLink = neighborLinks[neighborLinks.length-1];/*newline*/var occR = 35;/*newline*/var cellS = 90;/*newline*/var offset = (cellS - 2*occR) / 2;/*newline*/if( neighborLink ) {/*newline*/    if( getAttr('$type', neighborLink).match(/A_holds/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position');/*newline*/        setAttr('position', [npos[0] + offset, npos[1] + offset], neigh);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_bottom/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0], npos[1] + cellS]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_top/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0], npos[1] - cellS]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_left/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0] - cellS, npos[1]]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_right/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0] + cellS, npos[1]]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_celldoor/) ){/*newline*/        var door = getNeighbors('>','*',neighborLink)[0];/*newline*/        var celldoors = getNeighbors('<','*', door);/*newline*/        cells = [];/*newline*/        for(i in celldoors) {/*newline*/            var ta = getNeighbors('<', '*', celldoors[i])[0];/*newline*/            if(!(ta in cells)) { cells.push(ta); }/*newline*/        }/*newline*/        if(cells.length == 2) {/*newline*/            var cpos = [getAttr('position', cells[0]), getAttr('position', cells[1])];/*newline*/            var dpos = [Math.max(cpos[0][0], cpos[1][0]), Math.max(cpos[0][1], cpos[1][1])];/*newline*/            if(cpos[0][0] == cpos[1][0]) {/*newline*/                dpos[1] -= cellS;/*newline*/                dpos[0] -= cellS / 2;/*newline*/            } else if(cpos[0][1] == cpos[1][1]) {/*newline*/                dpos[0] -= cellS;/*newline*/                dpos[1] -= cellS / 2;/*newline*/            }/*newline*/            setAttr('position', dpos, door);/*newline*/        }/*newline*/    }/*newline*/}/*newline*/  ",
+			"targetType": "Cell"
+		},
+		{
+			"name": "snapToTarget",
+			"event": "post-connect",
+			"code": "/*newline*/var neighborLinks = getNeighbors('>');/*newline*/var neighborLink = neighborLinks[neighborLinks.length-1];/*newline*/var occR = 35;/*newline*/var cellS = 90;/*newline*/var offset = (cellS - 2*occR) / 2;/*newline*/if( neighborLink ) {/*newline*/    if( getAttr('$type', neighborLink).match(/A_holds/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position');/*newline*/        setAttr('position', [npos[0] + offset, npos[1] + offset], neigh);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_bottom/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0], npos[1] + cellS]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_top/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0], npos[1] - cellS]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_left/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0] - cellS, npos[1]]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_right/) ){/*newline*/        var neigh = getNeighbors('>','*',neighborLink)[0];/*newline*/        var npos = getAttr('position', neigh);/*newline*/        setAttr('position', [npos[0] + cellS, npos[1]]);/*newline*/    } else if( getAttr('$type', neighborLink).match(/A_celldoor/) ){/*newline*/        var door = getNeighbors('>','*',neighborLink)[0];/*newline*/        var celldoors = getNeighbors('<','*', door);/*newline*/        cells = [];/*newline*/        for(i in celldoors) {/*newline*/            var ta = getNeighbors('<', '*', celldoors[i])[0];/*newline*/            if(!(ta in cells)) { cells.push(ta); }/*newline*/        }/*newline*/        if(cells.length == 2) {/*newline*/            var cpos = [getAttr('position', cells[0]), getAttr('position', cells[1])];/*newline*/            var dpos = [Math.max(cpos[0][0], cpos[1][0]), Math.max(cpos[0][1], cpos[1][1])];/*newline*/            if(cpos[0][0] == cpos[1][0]) {/*newline*/                dpos[1] -= cellS;/*newline*/                dpos[0] -= cellS / 2;/*newline*/            } else if(cpos[0][1] == cpos[1][1]) {/*newline*/                dpos[0] -= cellS;/*newline*/                dpos[1] -= cellS / 2;/*newline*/            }/*newline*/            setAttr('position', dpos, door);/*newline*/        }/*newline*/    }/*newline*/}/*newline*/  ",
+			"targetType": "Door"
+		}
+	],
 	"cardinalities": {
 		"Behaviour": [
 			{
@@ -126,32 +172,62 @@
 				"max": "Infinity"
 			},
 			{
-				"dir": "out",
-				"type": "A_movement",
-				"min": "0",
-				"max": "Infinity"
-			},
-			{
-				"dir": "in",
-				"type": "A_movement",
-				"min": "0",
-				"max": "Infinity"
-			},
-			{
 				"dir": "in",
 				"type": "A_cells",
 				"min": "0",
 				"max": "Infinity"
 			},
 			{
-				"dir": "in",
-				"type": "A_doorcell",
+				"dir": "out",
+				"type": "A_celldoor",
 				"min": "0",
 				"max": "Infinity"
 			},
 			{
 				"dir": "out",
-				"type": "A_celldoor",
+				"type": "A_bottom",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "in",
+				"type": "A_bottom",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "out",
+				"type": "A_left",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "in",
+				"type": "A_left",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "out",
+				"type": "A_top",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "in",
+				"type": "A_top",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "out",
+				"type": "A_right",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "in",
+				"type": "A_right",
 				"min": "0",
 				"max": "Infinity"
 			}
@@ -166,20 +242,6 @@
 			{
 				"dir": "out",
 				"type": "Occupant",
-				"min": "0",
-				"max": "1"
-			}
-		],
-		"A_movement": [
-			{
-				"dir": "in",
-				"type": "Cell",
-				"min": "0",
-				"max": "1"
-			},
-			{
-				"dir": "out",
-				"type": "Cell",
 				"min": "0",
 				"max": "1"
 			}
@@ -208,12 +270,6 @@
 		],
 		"Door": [
 			{
-				"dir": "out",
-				"type": "A_doorcell",
-				"min": "0",
-				"max": "Infinity"
-			},
-			{
 				"dir": "in",
 				"type": "A_celldoor",
 				"min": "0",
@@ -230,20 +286,6 @@
 				"type": "A_sign",
 				"min": "0",
 				"max": "Infinity"
-			}
-		],
-		"A_doorcell": [
-			{
-				"dir": "in",
-				"type": "Door",
-				"min": "0",
-				"max": "1"
-			},
-			{
-				"dir": "out",
-				"type": "Cell",
-				"min": "0",
-				"max": "1"
 			}
 		],
 		"A_celldoor": [
@@ -301,6 +343,62 @@
 				"min": "0",
 				"max": "1"
 			}
+		],
+		"A_bottom": [
+			{
+				"dir": "in",
+				"type": "Cell",
+				"min": "0",
+				"max": "1"
+			},
+			{
+				"dir": "out",
+				"type": "Cell",
+				"min": "0",
+				"max": "1"
+			}
+		],
+		"A_left": [
+			{
+				"dir": "in",
+				"type": "Cell",
+				"min": "0",
+				"max": "1"
+			},
+			{
+				"dir": "out",
+				"type": "Cell",
+				"min": "0",
+				"max": "1"
+			}
+		],
+		"A_top": [
+			{
+				"dir": "in",
+				"type": "Cell",
+				"min": "0",
+				"max": "1"
+			},
+			{
+				"dir": "out",
+				"type": "Cell",
+				"min": "0",
+				"max": "1"
+			}
+		],
+		"A_right": [
+			{
+				"dir": "in",
+				"type": "Cell",
+				"min": "0",
+				"max": "1"
+			},
+			{
+				"dir": "out",
+				"type": "Cell",
+				"min": "0",
+				"max": "1"
+			}
 		]
 	},
 	"legalConnections": {
@@ -313,11 +411,14 @@
 			"Occupant": [
 				"A_holds"
 			],
-			"Cell": [
-				"A_movement"
-			],
 			"Door": [
 				"A_celldoor"
+			],
+			"Cell": [
+				"A_bottom",
+				"A_left",
+				"A_top",
+				"A_right"
 			]
 		},
 		"Room": {
@@ -326,9 +427,6 @@
 			]
 		},
 		"Door": {
-			"Cell": [
-				"A_doorcell"
-			],
 			"EmergencySign": [
 				"A_sign"
 			]
@@ -342,30 +440,38 @@
 	"connectorTypes": {
 		"A_behaviour": "containment",
 		"A_holds": "containment",
-		"A_movement": "visual",
 		"A_cells": "containment",
-		"A_doorcell": "visual",
 		"A_celldoor": "visual",
 		"A_next": "visual",
-		"A_sign": "containment"
+		"A_sign": "containment",
+		"A_bottom": "visual",
+		"A_left": "visual",
+		"A_top": "visual",
+		"A_right": "visual"
 	},
 	"types2parentTypes": {
 		"Behaviour": [],
-		"Occupant": [],
+		"Occupant": [
+			"Location"
+		],
 		"A_behaviour": [],
 		"Location": [],
 		"Cell": [
 			"Location"
 		],
 		"A_holds": [],
-		"A_movement": [],
 		"Room": [],
 		"A_cells": [],
-		"Door": [],
-		"A_doorcell": [],
+		"Door": [
+			"Location"
+		],
 		"A_celldoor": [],
 		"EmergencySign": [],
 		"A_next": [],
-		"A_sign": []
+		"A_sign": [],
+		"A_bottom": [],
+		"A_left": [],
+		"A_top": [],
+		"A_right": []
 	}
 }
