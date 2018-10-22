@@ -795,8 +795,8 @@
 				"default": {
 					"stroke": "#000000",
 					"stroke-dasharray": "",
-					"stroke-opacity": 1,
-					"stroke-width": 2
+					"stroke-opacity": 0.5,
+					"stroke-width": 1
 				}
 			},
 			{
@@ -1016,8 +1016,8 @@
 							"position": {
 								"type": "list<double>",
 								"value": [
-									49,
-									43
+									4,
+									1
 								]
 							},
 							"orientation": {

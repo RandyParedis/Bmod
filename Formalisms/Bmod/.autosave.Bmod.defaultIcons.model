@@ -9570,8 +9570,8 @@
 									"value": {
 										"stroke": "#000000",
 										"stroke-dasharray": "",
-										"stroke-opacity": 0,
-										"stroke-width": 0
+										"stroke-opacity": 0.5,
+										"stroke-width": 1
 									}
 								},
 								"mapper": {
@@ -15072,8 +15072,8 @@
 				"scale": {
 					"type": "list<double>",
 					"value": [
-						1,
-						1
+						1.2049999999999998,
+						1.3734939759036147
 					]
 				},
 				"mapper": {
@@ -15248,8 +15248,8 @@
 				"position": {
 					"type": "list<double>",
 					"value": [
-						71,
-						581
+						26,
+						539
 					]
 				},
 				"orientation": {
@@ -15398,7 +15398,7 @@
 					"type": "map<string,list<string>>",
 					"value": {
 						"/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax.defaultIcons/IconIcon/70.instance--/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax.defaultIcons/IconContentsLink/72.instance": "M63,600L115.10833326367455,650.1041665996871",
-						"/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax.defaultIcons/IconContentsLink/72.instance--/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax.defaultIcons/PolygonIcon/71.instance": "M115.1080323383275,650.1038772483919L120.99939870541834,630.9994218321331"
+						"/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax.defaultIcons/IconContentsLink/72.instance--/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax.defaultIcons/PolygonIcon/71.instance": "M115.1080323383275,650.1038772483919L75.99939870541834,588.9994218321331"
 					}
 				},
 				"$type": "/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax.defaultIcons/IconContentsLink"
@@ -31554,8 +31554,8 @@
 					"value": {
 						"stroke": "#000000",
 						"stroke-dasharray": "",
-						"stroke-opacity": 0,
-						"stroke-width": 0
+						"stroke-opacity": 0.5,
+						"stroke-width": 1
 					}
 				},
 				"arrowHead": {
@@ -31667,8 +31667,8 @@
 				"scale": {
 					"type": "list<double>",
 					"value": [
-						1,
-						1
+						1.2049999999999998,
+						1.3734939759036147
 					]
 				},
 				"mapper": {
