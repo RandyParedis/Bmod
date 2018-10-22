@@ -84,7 +84,9 @@
 		"A_bottom": [],
 		"A_left": [],
 		"A_top": [],
-		"A_right": []
+		"A_right": [],
+		"FloorPlan": [],
+		"A_rooms": []
 	},
 	"constraints": [
 		{
@@ -252,6 +254,12 @@
 				"type": "A_cells",
 				"min": "0",
 				"max": "Infinity"
+			},
+			{
+				"dir": "in",
+				"type": "A_rooms",
+				"min": "0",
+				"max": "Infinity"
 			}
 		],
 		"A_cells": [
@@ -399,6 +407,28 @@
 				"min": "0",
 				"max": "1"
 			}
+		],
+		"FloorPlan": [
+			{
+				"dir": "out",
+				"type": "A_rooms",
+				"min": "0",
+				"max": "Infinity"
+			}
+		],
+		"A_rooms": [
+			{
+				"dir": "in",
+				"type": "FloorPlan",
+				"min": "0",
+				"max": "1"
+			},
+			{
+				"dir": "out",
+				"type": "Room",
+				"min": "0",
+				"max": "1"
+			}
 		]
 	},
 	"legalConnections": {
@@ -435,6 +465,11 @@
 			"Door": [
 				"A_next"
 			]
+		},
+		"FloorPlan": {
+			"Room": [
+				"A_rooms"
+			]
 		}
 	},
 	"connectorTypes": {
@@ -447,7 +482,8 @@
 		"A_bottom": "visual",
 		"A_left": "visual",
 		"A_top": "visual",
-		"A_right": "visual"
+		"A_right": "visual",
+		"A_rooms": "containment"
 	},
 	"types2parentTypes": {
 		"Behaviour": [],
@@ -472,6 +508,8 @@
 		"A_bottom": [],
 		"A_left": [],
 		"A_top": [],
-		"A_right": []
+		"A_right": [],
+		"FloorPlan": [],
+		"A_rooms": []
 	}
 }
