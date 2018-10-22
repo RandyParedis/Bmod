@@ -11072,6 +11072,974 @@
 					}
 				},
 				"$type": "/Formalisms/Bmod/Bmod.defaultIcons/A_celldoorLink"
+			},
+			"153": {
+				"typename": {
+					"type": "string",
+					"value": "BehaviourIcon"
+				},
+				"position": {
+					"type": "list<double>",
+					"value": [
+						618,
+						872
+					]
+				},
+				"orientation": {
+					"type": "double",
+					"value": 0
+				},
+				"scale": {
+					"type": "list<double>",
+					"value": [
+						1,
+						1
+					]
+				},
+				"mapper": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */"
+				},
+				"parser": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+				},
+				"$contents": {
+					"type": "map<string,*>",
+					"value": {
+						"nodes": {
+							"114": {
+								"r": {
+									"type": "double",
+									"value": 30
+								},
+								"sides": {
+									"type": "int",
+									"value": 5
+								},
+								"style": {
+									"type": "map<string,string>",
+									"value": {
+										"stroke": "#000000",
+										"stroke-dasharray": "",
+										"fill": "#ffffff",
+										"fill-opacity": 1,
+										"font-size": "20px",
+										"stroke-width": 1,
+										"arrow-start": "none",
+										"arrow-end": "none"
+									}
+								},
+								"mapper": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */"
+								},
+								"parser": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+								},
+								"$type": "/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax/Polygon",
+								"position": {
+									"type": "list<double>",
+									"value": [
+										4,
+										2
+									]
+								},
+								"orientation": {
+									"type": "double",
+									"value": 0
+								},
+								"scale": {
+									"type": "list<double>",
+									"value": [
+										1,
+										1
+									]
+								}
+							},
+							"150": {
+								"textContent": {
+									"type": "string",
+									"value": "P: Sca"
+								},
+								"style": {
+									"type": "map<string,string>",
+									"value": {
+										"stroke": "#000000",
+										"stroke-dasharray": "",
+										"fill": "#000000",
+										"fill-opacity": 1,
+										"font-size": "10px",
+										"stroke-width": 1,
+										"arrow-start": "none",
+										"arrow-end": "none"
+									}
+								},
+								"mapper": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */\nvar name = getAttr(\"profile\").substring(0, 3);\n({textContent:\"P: \"+name})"
+								},
+								"parser": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+								},
+								"$type": "/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax/Text",
+								"position": {
+									"type": "list<double>",
+									"value": [
+										18,
+										40
+									]
+								},
+								"orientation": {
+									"type": "double",
+									"value": 0
+								},
+								"scale": {
+									"type": "list<double>",
+									"value": [
+										1,
+										1
+									]
+								}
+							},
+							"152": {
+								"$type": "/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax/Contain",
+								"position": {
+									"type": "list<double>",
+									"value": [
+										18.6953125,
+										24.817627457812108
+									]
+								},
+								"orientation": {
+									"type": "double",
+									"value": 0
+								},
+								"scale": {
+									"type": "list<double>",
+									"value": [
+										1,
+										1
+									]
+								},
+								"link-style": {
+									"type": "map<string,string>",
+									"value": {
+										"stroke": "#00ffff",
+										"stroke-dasharray": "",
+										"stroke-opacity": 0.1,
+										"stroke-width": 1
+									}
+								}
+							},
+							"153": {
+								"textContent": {
+									"type": "string",
+									"value": "L: Rel"
+								},
+								"style": {
+									"type": "map<string,string>",
+									"value": {
+										"stroke": "#000000",
+										"stroke-dasharray": "",
+										"fill": "#000000",
+										"fill-opacity": 1,
+										"font-size": "10px",
+										"stroke-width": 1,
+										"arrow-start": "none",
+										"arrow-end": "none"
+									}
+								},
+								"mapper": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */\nvar name = getAttr(\"level\").substring(0, 3);\n({textContent:\"L: \"+name})"
+								},
+								"parser": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+								},
+								"$type": "/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax/Text",
+								"position": {
+									"type": "list<double>",
+									"value": [
+										17,
+										24
+									]
+								},
+								"orientation": {
+									"type": "double",
+									"value": 0
+								},
+								"scale": {
+									"type": "list<double>",
+									"value": [
+										1,
+										1
+									]
+								}
+							},
+							"155": {
+								"$type": "/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax/Contain",
+								"position": {
+									"type": "list<double>",
+									"value": [
+										17.308413947521785,
+										15.917760989701634
+									]
+								},
+								"orientation": {
+									"type": "double",
+									"value": 0
+								},
+								"scale": {
+									"type": "list<double>",
+									"value": [
+										1,
+										1
+									]
+								},
+								"link-style": {
+									"type": "map<string,string>",
+									"value": {
+										"stroke": "#00ffff",
+										"stroke-dasharray": "",
+										"stroke-opacity": 0.1,
+										"stroke-width": 1
+									}
+								}
+							}
+						},
+						"edges": [
+							{
+								"src": "114",
+								"dest": "152"
+							},
+							{
+								"src": "152",
+								"dest": "150"
+							},
+							{
+								"src": "114",
+								"dest": "155"
+							},
+							{
+								"src": "155",
+								"dest": "153"
+							}
+						]
+					}
+				},
+				"$asuri": {
+					"type": "string",
+					"value": "/Formalisms/Bmod/Bmod/Behaviour/153.instance"
+				},
+				"$type": "/Formalisms/Bmod/Bmod.defaultIcons/BehaviourIcon"
+			},
+			"154": {
+				"typename": {
+					"type": "string",
+					"value": "BehaviourIcon"
+				},
+				"position": {
+					"type": "list<double>",
+					"value": [
+						663,
+						413
+					]
+				},
+				"orientation": {
+					"type": "double",
+					"value": 0
+				},
+				"scale": {
+					"type": "list<double>",
+					"value": [
+						1,
+						1
+					]
+				},
+				"mapper": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */"
+				},
+				"parser": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+				},
+				"$contents": {
+					"type": "map<string,*>",
+					"value": {
+						"nodes": {
+							"114": {
+								"r": {
+									"type": "double",
+									"value": 30
+								},
+								"sides": {
+									"type": "int",
+									"value": 5
+								},
+								"style": {
+									"type": "map<string,string>",
+									"value": {
+										"stroke": "#000000",
+										"stroke-dasharray": "",
+										"fill": "#ffffff",
+										"fill-opacity": 1,
+										"font-size": "20px",
+										"stroke-width": 1,
+										"arrow-start": "none",
+										"arrow-end": "none"
+									}
+								},
+								"mapper": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */"
+								},
+								"parser": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+								},
+								"$type": "/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax/Polygon",
+								"position": {
+									"type": "list<double>",
+									"value": [
+										4,
+										2
+									]
+								},
+								"orientation": {
+									"type": "double",
+									"value": 0
+								},
+								"scale": {
+									"type": "list<double>",
+									"value": [
+										1,
+										1
+									]
+								}
+							},
+							"150": {
+								"textContent": {
+									"type": "string",
+									"value": "P: Exp"
+								},
+								"style": {
+									"type": "map<string,string>",
+									"value": {
+										"stroke": "#000000",
+										"stroke-dasharray": "",
+										"fill": "#000000",
+										"fill-opacity": 1,
+										"font-size": "10px",
+										"stroke-width": 1,
+										"arrow-start": "none",
+										"arrow-end": "none"
+									}
+								},
+								"mapper": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */\nvar name = getAttr(\"profile\").substring(0, 3);\n({textContent:\"P: \"+name})"
+								},
+								"parser": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+								},
+								"$type": "/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax/Text",
+								"position": {
+									"type": "list<double>",
+									"value": [
+										18,
+										40
+									]
+								},
+								"orientation": {
+									"type": "double",
+									"value": 0
+								},
+								"scale": {
+									"type": "list<double>",
+									"value": [
+										1,
+										1
+									]
+								}
+							},
+							"152": {
+								"$type": "/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax/Contain",
+								"position": {
+									"type": "list<double>",
+									"value": [
+										18.6953125,
+										24.817627457812108
+									]
+								},
+								"orientation": {
+									"type": "double",
+									"value": 0
+								},
+								"scale": {
+									"type": "list<double>",
+									"value": [
+										1,
+										1
+									]
+								},
+								"link-style": {
+									"type": "map<string,string>",
+									"value": {
+										"stroke": "#00ffff",
+										"stroke-dasharray": "",
+										"stroke-opacity": 0.1,
+										"stroke-width": 1
+									}
+								}
+							},
+							"153": {
+								"textContent": {
+									"type": "string",
+									"value": "L: Sce"
+								},
+								"style": {
+									"type": "map<string,string>",
+									"value": {
+										"stroke": "#000000",
+										"stroke-dasharray": "",
+										"fill": "#000000",
+										"fill-opacity": 1,
+										"font-size": "10px",
+										"stroke-width": 1,
+										"arrow-start": "none",
+										"arrow-end": "none"
+									}
+								},
+								"mapper": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */\nvar name = getAttr(\"level\").substring(0, 3);\n({textContent:\"L: \"+name})"
+								},
+								"parser": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+								},
+								"$type": "/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax/Text",
+								"position": {
+									"type": "list<double>",
+									"value": [
+										17,
+										24
+									]
+								},
+								"orientation": {
+									"type": "double",
+									"value": 0
+								},
+								"scale": {
+									"type": "list<double>",
+									"value": [
+										1,
+										1
+									]
+								}
+							},
+							"155": {
+								"$type": "/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax/Contain",
+								"position": {
+									"type": "list<double>",
+									"value": [
+										17.308413947521785,
+										15.917760989701634
+									]
+								},
+								"orientation": {
+									"type": "double",
+									"value": 0
+								},
+								"scale": {
+									"type": "list<double>",
+									"value": [
+										1,
+										1
+									]
+								},
+								"link-style": {
+									"type": "map<string,string>",
+									"value": {
+										"stroke": "#00ffff",
+										"stroke-dasharray": "",
+										"stroke-opacity": 0.1,
+										"stroke-width": 1
+									}
+								}
+							}
+						},
+						"edges": [
+							{
+								"src": "114",
+								"dest": "152"
+							},
+							{
+								"src": "152",
+								"dest": "150"
+							},
+							{
+								"src": "114",
+								"dest": "155"
+							},
+							{
+								"src": "155",
+								"dest": "153"
+							}
+						]
+					}
+				},
+				"$asuri": {
+					"type": "string",
+					"value": "/Formalisms/Bmod/Bmod/Behaviour/154.instance"
+				},
+				"$type": "/Formalisms/Bmod/Bmod.defaultIcons/BehaviourIcon"
+			},
+			"155": {
+				"typename": {
+					"type": "string",
+					"value": "OccupantIcon"
+				},
+				"position": {
+					"type": "list<double>",
+					"value": [
+						615,
+						871
+					]
+				},
+				"orientation": {
+					"type": "double",
+					"value": 0
+				},
+				"scale": {
+					"type": "list<double>",
+					"value": [
+						1,
+						1
+					]
+				},
+				"mapper": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */\n({position:getAttr(\"position\")})"
+				},
+				"parser": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */\n({position:getAttr(\"position\")})"
+				},
+				"$contents": {
+					"type": "map<string,*>",
+					"value": {
+						"nodes": {
+							"31": {
+								"r": {
+									"type": "double",
+									"value": 35
+								},
+								"style": {
+									"type": "map<string,string>",
+									"value": {
+										"fill": "#e8e8e8"
+									}
+								},
+								"mapper": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */\nvar colour = \"#e8e8e8\";\nif(getAttr(\"running\")) {\n  colour = \"#4286f4\";\n} else if(getAttr(\"notified\")) {\n  colour = \"#41f4eb\";\n}\n({style:{\"fill\":colour}})"
+								},
+								"parser": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */\n"
+								},
+								"$type": "/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax/Circle",
+								"position": {
+									"type": "list<double>",
+									"value": [
+										2,
+										4
+									]
+								},
+								"orientation": {
+									"type": "double",
+									"value": 0
+								},
+								"scale": {
+									"type": "list<double>",
+									"value": [
+										1.1989572310867165,
+										1.174638
+									]
+								}
+							}
+						},
+						"edges": []
+					}
+				},
+				"$asuri": {
+					"type": "string",
+					"value": "/Formalisms/Bmod/Bmod/Occupant/155.instance"
+				},
+				"$type": "/Formalisms/Bmod/Bmod.defaultIcons/OccupantIcon"
+			},
+			"156": {
+				"typename": {
+					"type": "string",
+					"value": "OccupantIcon"
+				},
+				"position": {
+					"type": "list<double>",
+					"value": [
+						664,
+						411
+					]
+				},
+				"orientation": {
+					"type": "double",
+					"value": 0
+				},
+				"scale": {
+					"type": "list<double>",
+					"value": [
+						1,
+						1
+					]
+				},
+				"mapper": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */\n({position:getAttr(\"position\")})"
+				},
+				"parser": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */\n({position:getAttr(\"position\")})"
+				},
+				"$contents": {
+					"type": "map<string,*>",
+					"value": {
+						"nodes": {
+							"31": {
+								"r": {
+									"type": "double",
+									"value": 35
+								},
+								"style": {
+									"type": "map<string,string>",
+									"value": {
+										"fill": "#e8e8e8"
+									}
+								},
+								"mapper": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */\nvar colour = \"#e8e8e8\";\nif(getAttr(\"running\")) {\n  colour = \"#4286f4\";\n} else if(getAttr(\"notified\")) {\n  colour = \"#41f4eb\";\n}\n({style:{\"fill\":colour}})"
+								},
+								"parser": {
+									"type": "code",
+									"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */\n"
+								},
+								"$type": "/Formalisms/__LanguageSyntax__/ConcreteSyntax/ConcreteSyntax/Circle",
+								"position": {
+									"type": "list<double>",
+									"value": [
+										2,
+										4
+									]
+								},
+								"orientation": {
+									"type": "double",
+									"value": 0
+								},
+								"scale": {
+									"type": "list<double>",
+									"value": [
+										1.1989572310867165,
+										1.174638
+									]
+								}
+							}
+						},
+						"edges": []
+					}
+				},
+				"$asuri": {
+					"type": "string",
+					"value": "/Formalisms/Bmod/Bmod/Occupant/156.instance"
+				},
+				"$type": "/Formalisms/Bmod/Bmod.defaultIcons/OccupantIcon"
+			},
+			"159": {
+				"link-style": {
+					"type": "map<string,string>",
+					"value": {
+						"stroke": "#000000",
+						"stroke-dasharray": "",
+						"stroke-opacity": 0,
+						"stroke-width": 0
+					}
+				},
+				"arrowHead": {
+					"type": "ENUM(circle-black,circle-black-large,circle-white,circle-white-large,diamond-black,diamond-black-large,diamond-white,diamond-white-large,triangle-black,triangle-black-large,triangle-white,triangle-white-large,arrow-black,arrow-black-large,arrow-empty,arrow-empty-large,custom)",
+					"value": "custom"
+				},
+				"arrowTail": {
+					"type": "ENUM(circle-black,circle-black-large,circle-white,circle-white-large,diamond-black,diamond-black-large,diamond-white,diamond-white-large,triangle-black,triangle-black-large,triangle-white,triangle-white-large,arrow-black,arrow-black-large,arrow-empty,arrow-empty-large,custom)",
+					"value": "arrow-black"
+				},
+				"typename": {
+					"type": "string",
+					"value": "A_behaviourLink"
+				},
+				"position": {
+					"type": "list<double>",
+					"value": [
+						631.3440026646574,
+						883.1771791607644
+					]
+				},
+				"orientation": {
+					"type": "double",
+					"value": 0
+				},
+				"scale": {
+					"type": "list<double>",
+					"value": [
+						1,
+						1
+					]
+				},
+				"mapper": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */"
+				},
+				"parser": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+				},
+				"$contents": {
+					"type": "map<string,*>",
+					"value": {
+						"nodes": {},
+						"edges": []
+					}
+				},
+				"$asuri": {
+					"type": "string",
+					"value": "/Formalisms/Bmod/Bmod/A_behaviour/159.instance"
+				},
+				"$segments": {
+					"type": "map<string,list<string>>",
+					"value": {
+						"/Formalisms/Bmod/Bmod.defaultIcons/OccupantIcon/155.instance--/Formalisms/Bmod/Bmod.defaultIcons/A_behaviourLink/159.instance": "M615.9477837693902,867L631.3440026646575,883.1771791607644",
+						"/Formalisms/Bmod/Bmod.defaultIcons/A_behaviourLink/159.instance--/Formalisms/Bmod/Bmod.defaultIcons/BehaviourIcon/153.instance": "M631.2916346629327,883.1221548361586L646.5312231133826,899.1347586044142"
+					}
+				},
+				"$type": "/Formalisms/Bmod/Bmod.defaultIcons/A_behaviourLink"
+			},
+			"160": {
+				"link-style": {
+					"type": "map<string,string>",
+					"value": {
+						"stroke": "#000000",
+						"stroke-dasharray": "",
+						"stroke-opacity": 0,
+						"stroke-width": 0
+					}
+				},
+				"arrowHead": {
+					"type": "ENUM(circle-black,circle-black-large,circle-white,circle-white-large,diamond-black,diamond-black-large,diamond-white,diamond-white-large,triangle-black,triangle-black-large,triangle-white,triangle-white-large,arrow-black,arrow-black-large,arrow-empty,arrow-empty-large,custom)",
+					"value": "custom"
+				},
+				"arrowTail": {
+					"type": "ENUM(circle-black,circle-black-large,circle-white,circle-white-large,diamond-black,diamond-black-large,diamond-white,diamond-white-large,triangle-black,triangle-black-large,triangle-white,triangle-white-large,arrow-black,arrow-black-large,arrow-empty,arrow-empty-large,custom)",
+					"value": "arrow-black"
+				},
+				"typename": {
+					"type": "string",
+					"value": "A_behaviourLink"
+				},
+				"position": {
+					"type": "list<double>",
+					"value": [
+						676.8405935972266,
+						423.68058822819484
+					]
+				},
+				"orientation": {
+					"type": "double",
+					"value": 0
+				},
+				"scale": {
+					"type": "list<double>",
+					"value": [
+						1,
+						1
+					]
+				},
+				"mapper": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */"
+				},
+				"parser": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+				},
+				"$contents": {
+					"type": "map<string,*>",
+					"value": {
+						"nodes": {},
+						"edges": []
+					}
+				},
+				"$asuri": {
+					"type": "string",
+					"value": "/Formalisms/Bmod/Bmod/A_behaviour/160.instance"
+				},
+				"$segments": {
+					"type": "map<string,list<string>>",
+					"value": {
+						"/Formalisms/Bmod/Bmod.defaultIcons/OccupantIcon/156.instance--/Formalisms/Bmod/Bmod.defaultIcons/A_behaviourLink/160.instance": "M661.9477837693903,407L676.8405935972268,423.6805882281949",
+						"/Formalisms/Bmod/Bmod.defaultIcons/A_behaviourLink/160.instance--/Formalisms/Bmod/Bmod.defaultIcons/BehaviourIcon/154.instance": "M676.7899378683068,423.6238516307843L691.5312385857717,440.13474313202505"
+					}
+				},
+				"$type": "/Formalisms/Bmod/Bmod.defaultIcons/A_behaviourLink"
+			},
+			"161": {
+				"link-style": {
+					"type": "map<string,string>",
+					"value": {
+						"stroke": "#000000",
+						"stroke-dasharray": "",
+						"stroke-opacity": 0,
+						"stroke-width": 0
+					}
+				},
+				"arrowHead": {
+					"type": "ENUM(circle-black,circle-black-large,circle-white,circle-white-large,diamond-black,diamond-black-large,diamond-white,diamond-white-large,triangle-black,triangle-black-large,triangle-white,triangle-white-large,arrow-black,arrow-black-large,arrow-empty,arrow-empty-large,custom)",
+					"value": "custom"
+				},
+				"arrowTail": {
+					"type": "ENUM(circle-black,circle-black-large,circle-white,circle-white-large,diamond-black,diamond-black-large,diamond-white,diamond-white-large,triangle-black,triangle-black-large,triangle-white,triangle-white-large,arrow-black,arrow-black-large,arrow-empty,arrow-empty-large,custom)",
+					"value": "arrow-black"
+				},
+				"typename": {
+					"type": "string",
+					"value": "A_holdsLink"
+				},
+				"position": {
+					"type": "list<double>",
+					"value": [
+						675.5,
+						420
+					]
+				},
+				"orientation": {
+					"type": "double",
+					"value": 0
+				},
+				"scale": {
+					"type": "list<double>",
+					"value": [
+						1,
+						1
+					]
+				},
+				"mapper": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */"
+				},
+				"parser": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+				},
+				"$contents": {
+					"type": "map<string,*>",
+					"value": {
+						"nodes": {},
+						"edges": []
+					}
+				},
+				"$asuri": {
+					"type": "string",
+					"value": "/Formalisms/Bmod/Bmod/A_holds/161.instance"
+				},
+				"$segments": {
+					"type": "map<string,list<string>>",
+					"value": {
+						"/Formalisms/Bmod/Bmod.defaultIcons/CellIcon/58.instance--/Formalisms/Bmod/Bmod.defaultIcons/A_holdsLink/161.instance": "M656,402L675.5,420",
+						"/Formalisms/Bmod/Bmod.defaultIcons/A_holdsLink/161.instance--/Formalisms/Bmod/Bmod.defaultIcons/OccupantIcon/156.instance": "M675.5549803553266,420.0507510972246L694.9995840055885,437.99961600515866"
+					}
+				},
+				"$type": "/Formalisms/Bmod/Bmod.defaultIcons/A_holdsLink"
+			},
+			"162": {
+				"link-style": {
+					"type": "map<string,string>",
+					"value": {
+						"stroke": "#000000",
+						"stroke-dasharray": "",
+						"stroke-opacity": 0,
+						"stroke-width": 0
+					}
+				},
+				"arrowHead": {
+					"type": "ENUM(circle-black,circle-black-large,circle-white,circle-white-large,diamond-black,diamond-black-large,diamond-white,diamond-white-large,triangle-black,triangle-black-large,triangle-white,triangle-white-large,arrow-black,arrow-black-large,arrow-empty,arrow-empty-large,custom)",
+					"value": "custom"
+				},
+				"arrowTail": {
+					"type": "ENUM(circle-black,circle-black-large,circle-white,circle-white-large,diamond-black,diamond-black-large,diamond-white,diamond-white-large,triangle-black,triangle-black-large,triangle-white,triangle-white-large,arrow-black,arrow-black-large,arrow-empty,arrow-empty-large,custom)",
+					"value": "arrow-black"
+				},
+				"typename": {
+					"type": "string",
+					"value": "A_holdsLink"
+				},
+				"position": {
+					"type": "list<double>",
+					"value": [
+						628.1145449496619,
+						880.0981813854245
+					]
+				},
+				"orientation": {
+					"type": "double",
+					"value": 0
+				},
+				"scale": {
+					"type": "list<double>",
+					"value": [
+						1,
+						1
+					]
+				},
+				"mapper": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,csattr:val,...} */"
+				},
+				"parser": {
+					"type": "code",
+					"value": "/* specify code that evaluates to an associative array of the form {...,attr:val,...} */"
+				},
+				"$contents": {
+					"type": "map<string,*>",
+					"value": {
+						"nodes": {},
+						"edges": []
+					}
+				},
+				"$asuri": {
+					"type": "string",
+					"value": "/Formalisms/Bmod/Bmod/A_holds/162.instance"
+				},
+				"$segments": {
+					"type": "map<string,list<string>>",
+					"value": {
+						"/Formalisms/Bmod/Bmod.defaultIcons/CellIcon/126.instance--/Formalisms/Bmod/Bmod.defaultIcons/A_holdsLink/162.instance": "M607,862L628.1145449496619,880.0981813854245",
+						"/Formalisms/Bmod/Bmod.defaultIcons/A_holdsLink/162.instance--/Formalisms/Bmod/Bmod.defaultIcons/OccupantIcon/155.instance": "M628.0570644003855,880.0489123431876L648.9995839759579,897.999643407964"
+					}
+				},
+				"$type": "/Formalisms/Bmod/Bmod.defaultIcons/A_holdsLink"
 			}
 		},
 		"edges": [],
@@ -11738,6 +12706,84 @@
 			},
 			"152": {
 				"$type": "/Formalisms/Bmod/Bmod/A_celldoor"
+			},
+			"153": {
+				"level": {
+					"type": "ENUM(Attentive,Relaxed,Optimistic,Sceptic)",
+					"value": "Relaxed"
+				},
+				"profile": {
+					"type": "ENUM(Newcomer,Experienced,Scared)",
+					"value": "Scared"
+				},
+				"$type": "/Formalisms/Bmod/Bmod/Behaviour"
+			},
+			"154": {
+				"level": {
+					"type": "ENUM(Attentive,Relaxed,Optimistic,Sceptic)",
+					"value": "Sceptic"
+				},
+				"profile": {
+					"type": "ENUM(Newcomer,Experienced,Scared)",
+					"value": "Experienced"
+				},
+				"$type": "/Formalisms/Bmod/Bmod/Behaviour"
+			},
+			"155": {
+				"notified": {
+					"type": "boolean",
+					"value": false
+				},
+				"running": {
+					"type": "boolean",
+					"value": false
+				},
+				"name": {
+					"type": "string",
+					"value": ""
+				},
+				"position": {
+					"type": "list<int>",
+					"value": [
+						615,
+						871
+					]
+				},
+				"$type": "/Formalisms/Bmod/Bmod/Occupant"
+			},
+			"156": {
+				"notified": {
+					"type": "boolean",
+					"value": false
+				},
+				"running": {
+					"type": "boolean",
+					"value": false
+				},
+				"name": {
+					"type": "string",
+					"value": ""
+				},
+				"position": {
+					"type": "list<int>",
+					"value": [
+						664,
+						411
+					]
+				},
+				"$type": "/Formalisms/Bmod/Bmod/Occupant"
+			},
+			"159": {
+				"$type": "/Formalisms/Bmod/Bmod/A_behaviour"
+			},
+			"160": {
+				"$type": "/Formalisms/Bmod/Bmod/A_behaviour"
+			},
+			"161": {
+				"$type": "/Formalisms/Bmod/Bmod/A_holds"
+			},
+			"162": {
+				"$type": "/Formalisms/Bmod/Bmod/A_holds"
 			}
 		},
 		"edges": [
@@ -12300,6 +13346,38 @@
 			{
 				"src": "152",
 				"dest": "146"
+			},
+			{
+				"src": "155",
+				"dest": "159"
+			},
+			{
+				"src": "159",
+				"dest": "153"
+			},
+			{
+				"src": "156",
+				"dest": "160"
+			},
+			{
+				"src": "160",
+				"dest": "154"
+			},
+			{
+				"src": "58",
+				"dest": "161"
+			},
+			{
+				"src": "161",
+				"dest": "156"
+			},
+			{
+				"src": "126",
+				"dest": "162"
+			},
+			{
+				"src": "162",
+				"dest": "155"
 			}
 		],
 		"metamodels": [
