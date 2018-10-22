@@ -93,7 +93,27 @@
 		"FloorPlan": [],
 		"A_rooms": [],
 		"Exit": [],
-		"A_cellexit": []
+		"A_cellexit": [],
+		"Condition": [
+			{
+				"name": "name",
+				"type": "string",
+				"default": ""
+			}
+		],
+		"OccupancyCondition": [
+			{
+				"name": "max_amount",
+				"type": "int",
+				"default": 1
+			},
+			{
+				"name": "name",
+				"type": "string",
+				"default": ""
+			}
+		],
+		"A_occ_condition": []
 	},
 	"constraints": [
 		{
@@ -101,6 +121,12 @@
 			"event": "pre-create",
 			"code": "false",
 			"targetType": "Location"
+		},
+		{
+			"name": "noAbstractInstances",
+			"event": "pre-create",
+			"code": "false",
+			"targetType": "Condition"
 		}
 	],
 	"actions": [
@@ -271,6 +297,12 @@
 			{
 				"dir": "in",
 				"type": "A_rooms",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "out",
+				"type": "A_occ_condition",
 				"min": "0",
 				"max": "Infinity"
 			}
@@ -464,6 +496,29 @@
 				"min": "0",
 				"max": "1"
 			}
+		],
+		"Condition": [],
+		"OccupancyCondition": [
+			{
+				"dir": "in",
+				"type": "A_occ_condition",
+				"min": "0",
+				"max": "Infinity"
+			}
+		],
+		"A_occ_condition": [
+			{
+				"dir": "in",
+				"type": "Room",
+				"min": "0",
+				"max": "1"
+			},
+			{
+				"dir": "out",
+				"type": "OccupancyCondition",
+				"min": "0",
+				"max": "1"
+			}
 		]
 	},
 	"legalConnections": {
@@ -492,6 +547,9 @@
 		"Room": {
 			"Cell": [
 				"A_cells"
+			],
+			"OccupancyCondition": [
+				"A_occ_condition"
 			]
 		},
 		"Door": {
@@ -522,7 +580,8 @@
 		"A_top": "visual",
 		"A_right": "visual",
 		"A_rooms": "containment",
-		"A_cellexit": "containment"
+		"A_cellexit": "containment",
+		"A_occ_condition": "containment"
 	},
 	"types2parentTypes": {
 		"Behaviour": [],
@@ -551,6 +610,11 @@
 		"FloorPlan": [],
 		"A_rooms": [],
 		"Exit": [],
-		"A_cellexit": []
+		"A_cellexit": [],
+		"Condition": [],
+		"OccupancyCondition": [
+			"Condition"
+		],
+		"A_occ_condition": []
 	}
 }
