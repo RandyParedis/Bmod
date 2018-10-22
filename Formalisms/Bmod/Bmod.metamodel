@@ -50,6 +50,11 @@
 		],
 		"Cell": [
 			{
+				"name": "On_fire",
+				"type": "boolean",
+				"default": false
+			},
+			{
 				"name": "position",
 				"type": "list<int>",
 				"default": [
@@ -86,7 +91,9 @@
 		"A_top": [],
 		"A_right": [],
 		"FloorPlan": [],
-		"A_rooms": []
+		"A_rooms": [],
+		"Exit": [],
+		"A_cellexit": []
 	},
 	"constraints": [
 		{
@@ -230,6 +237,12 @@
 			{
 				"dir": "in",
 				"type": "A_right",
+				"min": "0",
+				"max": "Infinity"
+			},
+			{
+				"dir": "out",
+				"type": "A_cellexit",
 				"min": "0",
 				"max": "Infinity"
 			}
@@ -429,6 +442,28 @@
 				"min": "0",
 				"max": "1"
 			}
+		],
+		"Exit": [
+			{
+				"dir": "in",
+				"type": "A_cellexit",
+				"min": "0",
+				"max": "Infinity"
+			}
+		],
+		"A_cellexit": [
+			{
+				"dir": "in",
+				"type": "Cell",
+				"min": "0",
+				"max": "1"
+			},
+			{
+				"dir": "out",
+				"type": "Exit",
+				"min": "0",
+				"max": "1"
+			}
 		]
 	},
 	"legalConnections": {
@@ -449,6 +484,9 @@
 				"A_left",
 				"A_top",
 				"A_right"
+			],
+			"Exit": [
+				"A_cellexit"
 			]
 		},
 		"Room": {
@@ -483,7 +521,8 @@
 		"A_left": "visual",
 		"A_top": "visual",
 		"A_right": "visual",
-		"A_rooms": "containment"
+		"A_rooms": "containment",
+		"A_cellexit": "containment"
 	},
 	"types2parentTypes": {
 		"Behaviour": [],
@@ -510,6 +549,8 @@
 		"A_top": [],
 		"A_right": [],
 		"FloorPlan": [],
-		"A_rooms": []
+		"A_rooms": [],
+		"Exit": [],
+		"A_cellexit": []
 	}
 }
