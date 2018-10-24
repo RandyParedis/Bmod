@@ -1,0 +1,57 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\begin{document}
+
+\title{Assignment 2\\Building modelling in AToMPM}
+\author{Zohra Akbari \& Randy Paredis}
+\date{}
+\maketitle
+
+In this report, accompagnied by the \texttt{AToMPM} source (model) files, we will describe what we did for each task, how we approached them and which issues we experienced.
+
+\section{Accompagnied Files}
+Before we go further into detail about the implementation of the assignment, let's first discuss which files have which purpose.
+\begin{description}
+	\item[\texttt{assignment2\_report.pdf}] Normally, this is the file you're reading at the moment. It contains a detailed description of each task.
+	
+	\item[\texttt{BmodMM.model}] This is the abstract syntax model file of \texttt{Bmod}.
+	
+	\item[\texttt{Bmod.defaultIcons.model}] This file is the concrete syntax file of our abstract syntax model.
+	
+	\item[\texttt{Bmod.defaultIcons.metamodel}] This is the compiled concrete syntax, compiled from \texttt{Bmod.defaultIcons.model}.
+	
+	\item[\texttt{task4.model}] This file is the non-trivial floor, modelled for task 4.
+\end{description}
+
+\section{Task 1}
+For this task, we based ourselves on the \texttt{Bmod.mdepth} file from the last assignment. Although, everything seems to be the same, there were a few changes made, which we've listed below.
+\begin{itemize}
+	\item The \texttt{Behaviour} (visually represented with a pentagon in our model) holds the information about the action profile and the perception levels, which is the same as in out \texttt{Bmod.mdepth} file, but this time, each possibility was set using an \texttt{ENUM}, instead of a hardcoded value from a string.
+	\item The \texttt{Movement Edge} changed into four \texttt{Association}s: \texttt{A\_left}, \texttt{A\_right}, \texttt{A\_top} and \texttt{A\_bottom}. This allowed the \textit{snapping} that was required in task 3 (section \ref{sec:task3}).
+	\item The \texttt{Fire Node} changed into a boolean field (called \texttt{On\_fire}) in the \texttt{Cell Class}.
+\end{itemize}
+
+\section{Task 2}
+As an addition to our current functionality, we added a \texttt{name} attribute to the \texttt{Room Class}, so we could display it for this task. It will be displayed on top of the room, if it is set.
+
+As said before, the action profile and perception levels are encoded in the \texttt{Behaviour Class}.
+
+\section{Task 3}
+\label{sec:task3}
+So here, we added some \textit{snapping} functionality, as required. A \texttt{Person} will be placed roughly in the middle of a cell and using the valid \texttt{association}s, you can snap the cells validly together.
+
+Also, the color coding, we used is as follows:
+\begin{description}
+	\item[grey] is used for a normal \texttt{Occupant}.
+	\item[blue] is used when the \texttt{Occupant} is running (and thus is aware of the \texttt{Fire}).
+	\item[cyan] is used to denote the \texttt{Occupant} has been told there is a \texttt{Fire}.
+\end{description}
+
+\section{Task 4}
+We created a single floor and a rather easy one for that matter. The reason we did not make a more detailed floor is because the software was in our opinion way to finicky to do things without losing our patience.
+
+The dangerous condition we modelled was the \texttt{OccupancyCondition} from last assignment, e.g. to warn the user if, during a simulation, it occurs that there are way to many people inside a room. It is displayed using a star, with the maximal number of occupants, denoted inside; and connected to a \texttt{Room}.
+
+\section{Man-Hours}
+In total, we believe we've spent 30 man-hours on this project.
+\end{document}
