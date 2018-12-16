@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.xtext.ha.ide
+Bundle-ManifestVersion: 2
+Bundle-Name: org.xtext.ha.ide
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.xtext.ha.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.xtext.ha,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.xtext.ha.ide.contentassist.antlr.internal,
+ org.xtext.ha.ide.contentassist.antlr

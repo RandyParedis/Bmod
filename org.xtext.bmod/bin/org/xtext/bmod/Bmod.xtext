@@ -1,0 +1,51 @@
+grammar org.xtext.bmod.Bmod with org.eclipse.xtext.common.Terminals
+
+generate bmod "http://www.xtext.org/bmod/Bmod"
+
+Model:
+	Floorplan
+;
+
+Floorplan:
+	{Floorplan}
+	(
+		rooms += Room | doors += Door |
+		persons += Person | profiles += Profile | levels += Level
+	)*
+;
+
+Room:
+	'Room' name=VARNAME 'named' named=STRING
+		area=Area
+;
+
+Door:
+	'Door' name=VARNAME 'from' from=Coordinate 'to' to=Coordinate
+;
+
+Profile:
+	'Profile' name=VARNAME
+;
+
+Level:
+	'Level' name=VARNAME
+;
+
+Person:
+	'Person' name=VARNAME 'named' named=STRING 'in' location=Coordinate
+		(('Profile' ':' profile=[Profile|VARNAME] ','
+		'Level' ':' level=[Level|VARNAME])|
+		('Level' ':' profile=[Level|VARNAME] ','
+		'Profile' ':' level=[Profile|VARNAME]))?
+;
+	
+Coordinate: '(' x=INT ',' y=INT ')';
+
+Area:
+	'from' from=Coordinate 'to' to=Coordinate
+	('without' without+=Coordinate (',' without+=Coordinate)*)?
+;
+
+terminal VARNAME:
+	('A'..'Z'|'a'..'z'|'_')('A'..'Z'|'a'..'z'|'0'..'9'|'_')*
+;

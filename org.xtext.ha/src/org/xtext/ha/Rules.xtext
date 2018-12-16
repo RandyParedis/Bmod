@@ -1,0 +1,22 @@
+grammar org.xtext.ha.Rules with org.eclipse.xtext.common.Terminals
+
+generate rules "http://www.xtext.org/ha/Rules"
+
+Model:
+	declarations+=Declaration*;
+
+Declaration:
+	Device | Rule;
+
+Device:
+	'Device' name=ID 'can' 'be' states+=State (',' states+=State)*;
+
+State:
+	name=ID;
+
+Rule:
+	'Rule' description=STRING
+		'when' when=[State|QualifiedName]
+		'then' then=[State|QualifiedName];
+
+QualifiedName: ID '.' ID;
