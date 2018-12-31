@@ -3,6 +3,8 @@
  */
 package org.xtext.bmod.bmod;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -16,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.xtext.bmod.bmod.Room#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Room#getNamed <em>Named</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.Room#getArea <em>Area</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.Room#getAreas <em>Areas</em>}</li>
  * </ul>
  *
  * @see org.xtext.bmod.bmod.BmodPackage#getRoom()
@@ -78,29 +80,19 @@ public interface Room extends EObject
   void setNamed(String value);
 
   /**
-   * Returns the value of the '<em><b>Area</b></em>' containment reference.
+   * Returns the value of the '<em><b>Areas</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.bmod.bmod.Area}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Area</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Areas</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Area</em>' containment reference.
-   * @see #setArea(Area)
-   * @see org.xtext.bmod.bmod.BmodPackage#getRoom_Area()
+   * @return the value of the '<em>Areas</em>' containment reference list.
+   * @see org.xtext.bmod.bmod.BmodPackage#getRoom_Areas()
    * @model containment="true"
    * @generated
    */
-  Area getArea();
-
-  /**
-   * Sets the value of the '{@link org.xtext.bmod.bmod.Room#getArea <em>Area</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Area</em>' containment reference.
-   * @see #getArea()
-   * @generated
-   */
-  void setArea(Area value);
+  EList<Area> getAreas();
 
 } // Room

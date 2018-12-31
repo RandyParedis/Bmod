@@ -3,14 +3,21 @@
  */
 package org.xtext.bmod.bmod.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.bmod.bmod.Area;
 import org.xtext.bmod.bmod.BmodPackage;
@@ -26,7 +33,7 @@ import org.xtext.bmod.bmod.Room;
  * <ul>
  *   <li>{@link org.xtext.bmod.bmod.impl.RoomImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.impl.RoomImpl#getNamed <em>Named</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.impl.RoomImpl#getArea <em>Area</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.impl.RoomImpl#getAreas <em>Areas</em>}</li>
  * </ul>
  *
  * @generated
@@ -74,14 +81,14 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
   protected String named = NAMED_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getArea() <em>Area</em>}' containment reference.
+   * The cached value of the '{@link #getAreas() <em>Areas</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getArea()
+   * @see #getAreas()
    * @generated
    * @ordered
    */
-  protected Area area;
+  protected EList<Area> areas;
 
   /**
    * <!-- begin-user-doc -->
@@ -155,47 +162,13 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
    * <!-- end-user-doc -->
    * @generated
    */
-  public Area getArea()
+  public EList<Area> getAreas()
   {
-    return area;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetArea(Area newArea, NotificationChain msgs)
-  {
-    Area oldArea = area;
-    area = newArea;
-    if (eNotificationRequired())
+    if (areas == null)
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BmodPackage.ROOM__AREA, oldArea, newArea);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      areas = new EObjectContainmentEList<Area>(Area.class, this, BmodPackage.ROOM__AREAS);
     }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setArea(Area newArea)
-  {
-    if (newArea != area)
-    {
-      NotificationChain msgs = null;
-      if (area != null)
-        msgs = ((InternalEObject)area).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BmodPackage.ROOM__AREA, null, msgs);
-      if (newArea != null)
-        msgs = ((InternalEObject)newArea).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BmodPackage.ROOM__AREA, null, msgs);
-      msgs = basicSetArea(newArea, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.ROOM__AREA, newArea, newArea));
+    return areas;
   }
 
   /**
@@ -208,8 +181,8 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
   {
     switch (featureID)
     {
-      case BmodPackage.ROOM__AREA:
-        return basicSetArea(null, msgs);
+      case BmodPackage.ROOM__AREAS:
+        return ((InternalEList<?>)getAreas()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -228,8 +201,8 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
         return getName();
       case BmodPackage.ROOM__NAMED:
         return getNamed();
-      case BmodPackage.ROOM__AREA:
-        return getArea();
+      case BmodPackage.ROOM__AREAS:
+        return getAreas();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -239,6 +212,7 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -250,8 +224,9 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
       case BmodPackage.ROOM__NAMED:
         setNamed((String)newValue);
         return;
-      case BmodPackage.ROOM__AREA:
-        setArea((Area)newValue);
+      case BmodPackage.ROOM__AREAS:
+        getAreas().clear();
+        getAreas().addAll((Collection<? extends Area>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -273,8 +248,8 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
       case BmodPackage.ROOM__NAMED:
         setNamed(NAMED_EDEFAULT);
         return;
-      case BmodPackage.ROOM__AREA:
-        setArea((Area)null);
+      case BmodPackage.ROOM__AREAS:
+        getAreas().clear();
         return;
     }
     super.eUnset(featureID);
@@ -294,8 +269,8 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case BmodPackage.ROOM__NAMED:
         return NAMED_EDEFAULT == null ? named != null : !NAMED_EDEFAULT.equals(named);
-      case BmodPackage.ROOM__AREA:
-        return area != null;
+      case BmodPackage.ROOM__AREAS:
+        return areas != null && !areas.isEmpty();
     }
     return super.eIsSet(featureID);
   }

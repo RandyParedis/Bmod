@@ -17,8 +17,9 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getRooms <em>Rooms</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getDoors <em>Doors</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getPersons <em>Persons</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.Floorplan#getProfiles <em>Profiles</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.Floorplan#getLevels <em>Levels</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.Floorplan#getExits <em>Exits</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.Floorplan#getSigns <em>Signs</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.Floorplan#getDancons <em>Dancons</em>}</li>
  * </ul>
  *
  * @see org.xtext.bmod.bmod.BmodPackage#getFloorplan()
@@ -76,35 +77,51 @@ public interface Floorplan extends Model
   EList<Person> getPersons();
 
   /**
-   * Returns the value of the '<em><b>Profiles</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.bmod.bmod.Profile}.
+   * Returns the value of the '<em><b>Exits</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.bmod.bmod.Exit}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Profiles</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Exits</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Profiles</em>' containment reference list.
-   * @see org.xtext.bmod.bmod.BmodPackage#getFloorplan_Profiles()
+   * @return the value of the '<em>Exits</em>' containment reference list.
+   * @see org.xtext.bmod.bmod.BmodPackage#getFloorplan_Exits()
    * @model containment="true"
    * @generated
    */
-  EList<Profile> getProfiles();
+  EList<Exit> getExits();
 
   /**
-   * Returns the value of the '<em><b>Levels</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.bmod.bmod.Level}.
+   * Returns the value of the '<em><b>Signs</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.bmod.bmod.EmergencySign}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Levels</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Signs</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Levels</em>' containment reference list.
-   * @see org.xtext.bmod.bmod.BmodPackage#getFloorplan_Levels()
+   * @return the value of the '<em>Signs</em>' containment reference list.
+   * @see org.xtext.bmod.bmod.BmodPackage#getFloorplan_Signs()
    * @model containment="true"
    * @generated
    */
-  EList<Level> getLevels();
+  EList<EmergencySign> getSigns();
+
+  /**
+   * Returns the value of the '<em><b>Dancons</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.bmod.bmod.DangerousCondition}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Dancons</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Dancons</em>' containment reference list.
+   * @see org.xtext.bmod.bmod.BmodPackage#getFloorplan_Dancons()
+   * @model containment="true"
+   * @generated
+   */
+  EList<DangerousCondition> getDancons();
 
 } // Floorplan

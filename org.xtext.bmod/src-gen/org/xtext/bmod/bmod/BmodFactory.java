@@ -60,24 +60,6 @@ public interface BmodFactory extends EFactory
   Door createDoor();
 
   /**
-   * Returns a new object of class '<em>Profile</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Profile</em>'.
-   * @generated
-   */
-  Profile createProfile();
-
-  /**
-   * Returns a new object of class '<em>Level</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Level</em>'.
-   * @generated
-   */
-  Level createLevel();
-
-  /**
    * Returns a new object of class '<em>Person</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -85,6 +67,33 @@ public interface BmodFactory extends EFactory
    * @generated
    */
   Person createPerson();
+
+  /**
+   * Returns a new object of class '<em>Exit</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Exit</em>'.
+   * @generated
+   */
+  Exit createExit();
+
+  /**
+   * Returns a new object of class '<em>Emergency Sign</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Emergency Sign</em>'.
+   * @generated
+   */
+  EmergencySign createEmergencySign();
+
+  /**
+   * Returns a new object of class '<em>Dangerous Condition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Dangerous Condition</em>'.
+   * @generated
+   */
+  DangerousCondition createDangerousCondition();
 
   /**
    * Returns a new object of class '<em>Coordinate</em>'.

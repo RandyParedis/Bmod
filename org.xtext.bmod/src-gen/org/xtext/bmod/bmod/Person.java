@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.xtext.bmod.bmod.Person#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Person#getNamed <em>Named</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Person#getLocation <em>Location</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.Person#getProfile <em>Profile</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.Person#getLevel <em>Level</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.Person#getPerception <em>Perception</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.Person#getAction <em>Action</em>}</li>
  * </ul>
  *
  * @see org.xtext.bmod.bmod.BmodPackage#getPerson()
@@ -106,55 +106,61 @@ public interface Person extends EObject
   void setLocation(Coordinate value);
 
   /**
-   * Returns the value of the '<em><b>Profile</b></em>' reference.
+   * Returns the value of the '<em><b>Perception</b></em>' attribute.
+   * The literals are from the enumeration {@link org.xtext.bmod.bmod.Perception}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Profile</em>' reference isn't clear,
+   * If the meaning of the '<em>Perception</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Profile</em>' reference.
-   * @see #setProfile(EObject)
-   * @see org.xtext.bmod.bmod.BmodPackage#getPerson_Profile()
+   * @return the value of the '<em>Perception</em>' attribute.
+   * @see org.xtext.bmod.bmod.Perception
+   * @see #setPerception(Perception)
+   * @see org.xtext.bmod.bmod.BmodPackage#getPerson_Perception()
    * @model
    * @generated
    */
-  EObject getProfile();
+  Perception getPerception();
 
   /**
-   * Sets the value of the '{@link org.xtext.bmod.bmod.Person#getProfile <em>Profile</em>}' reference.
+   * Sets the value of the '{@link org.xtext.bmod.bmod.Person#getPerception <em>Perception</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Profile</em>' reference.
-   * @see #getProfile()
+   * @param value the new value of the '<em>Perception</em>' attribute.
+   * @see org.xtext.bmod.bmod.Perception
+   * @see #getPerception()
    * @generated
    */
-  void setProfile(EObject value);
+  void setPerception(Perception value);
 
   /**
-   * Returns the value of the '<em><b>Level</b></em>' reference.
+   * Returns the value of the '<em><b>Action</b></em>' attribute.
+   * The literals are from the enumeration {@link org.xtext.bmod.bmod.Action}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Level</em>' reference isn't clear,
+   * If the meaning of the '<em>Action</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Level</em>' reference.
-   * @see #setLevel(EObject)
-   * @see org.xtext.bmod.bmod.BmodPackage#getPerson_Level()
+   * @return the value of the '<em>Action</em>' attribute.
+   * @see org.xtext.bmod.bmod.Action
+   * @see #setAction(Action)
+   * @see org.xtext.bmod.bmod.BmodPackage#getPerson_Action()
    * @model
    * @generated
    */
-  EObject getLevel();
+  Action getAction();
 
   /**
-   * Sets the value of the '{@link org.xtext.bmod.bmod.Person#getLevel <em>Level</em>}' reference.
+   * Sets the value of the '{@link org.xtext.bmod.bmod.Person#getAction <em>Action</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Level</em>' reference.
-   * @see #getLevel()
+   * @param value the new value of the '<em>Action</em>' attribute.
+   * @see org.xtext.bmod.bmod.Action
+   * @see #getAction()
    * @generated
    */
-  void setLevel(EObject value);
+  void setAction(Action value);
 
 } // Person

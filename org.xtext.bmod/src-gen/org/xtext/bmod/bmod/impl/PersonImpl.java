@@ -7,14 +7,15 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.xtext.bmod.bmod.Action;
 import org.xtext.bmod.bmod.BmodPackage;
 import org.xtext.bmod.bmod.Coordinate;
+import org.xtext.bmod.bmod.Perception;
 import org.xtext.bmod.bmod.Person;
 
 /**
@@ -28,8 +29,8 @@ import org.xtext.bmod.bmod.Person;
  *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getNamed <em>Named</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getLocation <em>Location</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getProfile <em>Profile</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getLevel <em>Level</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getPerception <em>Perception</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getAction <em>Action</em>}</li>
  * </ul>
  *
  * @generated
@@ -87,24 +88,44 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
   protected Coordinate location;
 
   /**
-   * The cached value of the '{@link #getProfile() <em>Profile</em>}' reference.
+   * The default value of the '{@link #getPerception() <em>Perception</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getProfile()
+   * @see #getPerception()
    * @generated
    * @ordered
    */
-  protected EObject profile;
+  protected static final Perception PERCEPTION_EDEFAULT = Perception.ATTENTIVE;
 
   /**
-   * The cached value of the '{@link #getLevel() <em>Level</em>}' reference.
+   * The cached value of the '{@link #getPerception() <em>Perception</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLevel()
+   * @see #getPerception()
    * @generated
    * @ordered
    */
-  protected EObject level;
+  protected Perception perception = PERCEPTION_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getAction() <em>Action</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAction()
+   * @generated
+   * @ordered
+   */
+  protected static final Action ACTION_EDEFAULT = Action.NEWCOMER;
+
+  /**
+   * The cached value of the '{@link #getAction() <em>Action</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAction()
+   * @generated
+   * @ordered
+   */
+  protected Action action = ACTION_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -226,19 +247,9 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
    * <!-- end-user-doc -->
    * @generated
    */
-  public EObject getProfile()
+  public Perception getPerception()
   {
-    if (profile != null && profile.eIsProxy())
-    {
-      InternalEObject oldProfile = (InternalEObject)profile;
-      profile = eResolveProxy(oldProfile);
-      if (profile != oldProfile)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, BmodPackage.PERSON__PROFILE, oldProfile, profile));
-      }
-    }
-    return profile;
+    return perception;
   }
 
   /**
@@ -246,22 +257,12 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
    * <!-- end-user-doc -->
    * @generated
    */
-  public EObject basicGetProfile()
+  public void setPerception(Perception newPerception)
   {
-    return profile;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setProfile(EObject newProfile)
-  {
-    EObject oldProfile = profile;
-    profile = newProfile;
+    Perception oldPerception = perception;
+    perception = newPerception == null ? PERCEPTION_EDEFAULT : newPerception;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__PROFILE, oldProfile, profile));
+      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__PERCEPTION, oldPerception, perception));
   }
 
   /**
@@ -269,19 +270,9 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
    * <!-- end-user-doc -->
    * @generated
    */
-  public EObject getLevel()
+  public Action getAction()
   {
-    if (level != null && level.eIsProxy())
-    {
-      InternalEObject oldLevel = (InternalEObject)level;
-      level = eResolveProxy(oldLevel);
-      if (level != oldLevel)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, BmodPackage.PERSON__LEVEL, oldLevel, level));
-      }
-    }
-    return level;
+    return action;
   }
 
   /**
@@ -289,22 +280,12 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
    * <!-- end-user-doc -->
    * @generated
    */
-  public EObject basicGetLevel()
+  public void setAction(Action newAction)
   {
-    return level;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setLevel(EObject newLevel)
-  {
-    EObject oldLevel = level;
-    level = newLevel;
+    Action oldAction = action;
+    action = newAction == null ? ACTION_EDEFAULT : newAction;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__LEVEL, oldLevel, level));
+      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__ACTION, oldAction, action));
   }
 
   /**
@@ -339,12 +320,10 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
         return getNamed();
       case BmodPackage.PERSON__LOCATION:
         return getLocation();
-      case BmodPackage.PERSON__PROFILE:
-        if (resolve) return getProfile();
-        return basicGetProfile();
-      case BmodPackage.PERSON__LEVEL:
-        if (resolve) return getLevel();
-        return basicGetLevel();
+      case BmodPackage.PERSON__PERCEPTION:
+        return getPerception();
+      case BmodPackage.PERSON__ACTION:
+        return getAction();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -368,11 +347,11 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
       case BmodPackage.PERSON__LOCATION:
         setLocation((Coordinate)newValue);
         return;
-      case BmodPackage.PERSON__PROFILE:
-        setProfile((EObject)newValue);
+      case BmodPackage.PERSON__PERCEPTION:
+        setPerception((Perception)newValue);
         return;
-      case BmodPackage.PERSON__LEVEL:
-        setLevel((EObject)newValue);
+      case BmodPackage.PERSON__ACTION:
+        setAction((Action)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -397,11 +376,11 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
       case BmodPackage.PERSON__LOCATION:
         setLocation((Coordinate)null);
         return;
-      case BmodPackage.PERSON__PROFILE:
-        setProfile((EObject)null);
+      case BmodPackage.PERSON__PERCEPTION:
+        setPerception(PERCEPTION_EDEFAULT);
         return;
-      case BmodPackage.PERSON__LEVEL:
-        setLevel((EObject)null);
+      case BmodPackage.PERSON__ACTION:
+        setAction(ACTION_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -423,10 +402,10 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
         return NAMED_EDEFAULT == null ? named != null : !NAMED_EDEFAULT.equals(named);
       case BmodPackage.PERSON__LOCATION:
         return location != null;
-      case BmodPackage.PERSON__PROFILE:
-        return profile != null;
-      case BmodPackage.PERSON__LEVEL:
-        return level != null;
+      case BmodPackage.PERSON__PERCEPTION:
+        return perception != PERCEPTION_EDEFAULT;
+      case BmodPackage.PERSON__ACTION:
+        return action != ACTION_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -446,6 +425,10 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
     result.append(name);
     result.append(", named: ");
     result.append(named);
+    result.append(", perception: ");
+    result.append(perception);
+    result.append(", action: ");
+    result.append(action);
     result.append(')');
     return result.toString();
   }

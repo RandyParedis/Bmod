@@ -17,11 +17,12 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransi
 import org.xtext.bmod.bmod.Area;
 import org.xtext.bmod.bmod.BmodPackage;
 import org.xtext.bmod.bmod.Coordinate;
+import org.xtext.bmod.bmod.DangerousCondition;
 import org.xtext.bmod.bmod.Door;
+import org.xtext.bmod.bmod.EmergencySign;
+import org.xtext.bmod.bmod.Exit;
 import org.xtext.bmod.bmod.Floorplan;
-import org.xtext.bmod.bmod.Level;
 import org.xtext.bmod.bmod.Person;
-import org.xtext.bmod.bmod.Profile;
 import org.xtext.bmod.bmod.Room;
 import org.xtext.bmod.services.BmodGrammarAccess;
 
@@ -45,20 +46,23 @@ public class BmodSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case BmodPackage.COORDINATE:
 				sequence_Coordinate(context, (Coordinate) semanticObject); 
 				return; 
+			case BmodPackage.DANGEROUS_CONDITION:
+				sequence_DangerousCondition(context, (DangerousCondition) semanticObject); 
+				return; 
 			case BmodPackage.DOOR:
 				sequence_Door(context, (Door) semanticObject); 
+				return; 
+			case BmodPackage.EMERGENCY_SIGN:
+				sequence_EmergencySign(context, (EmergencySign) semanticObject); 
+				return; 
+			case BmodPackage.EXIT:
+				sequence_Exit(context, (Exit) semanticObject); 
 				return; 
 			case BmodPackage.FLOORPLAN:
 				sequence_Floorplan(context, (Floorplan) semanticObject); 
 				return; 
-			case BmodPackage.LEVEL:
-				sequence_Level(context, (Level) semanticObject); 
-				return; 
 			case BmodPackage.PERSON:
 				sequence_Person(context, (Person) semanticObject); 
-				return; 
-			case BmodPackage.PROFILE:
-				sequence_Profile(context, (Profile) semanticObject); 
 				return; 
 			case BmodPackage.ROOM:
 				sequence_Room(context, (Room) semanticObject); 
@@ -103,6 +107,27 @@ public class BmodSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     DangerousCondition returns DangerousCondition
+	 *
+	 * Constraint:
+	 *     (on=[Room|VARNAME] amount=INT)
+	 */
+	protected void sequence_DangerousCondition(ISerializationContext context, DangerousCondition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BmodPackage.Literals.DANGEROUS_CONDITION__ON) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BmodPackage.Literals.DANGEROUS_CONDITION__ON));
+			if (transientValues.isValueTransient(semanticObject, BmodPackage.Literals.DANGEROUS_CONDITION__AMOUNT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BmodPackage.Literals.DANGEROUS_CONDITION__AMOUNT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getDangerousConditionAccess().getOnRoomVARNAMETerminalRuleCall_2_0_1(), semanticObject.eGet(BmodPackage.Literals.DANGEROUS_CONDITION__ON, false));
+		feeder.accept(grammarAccess.getDangerousConditionAccess().getAmountINTTerminalRuleCall_3_0(), semanticObject.getAmount());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Door returns Door
 	 *
 	 * Constraint:
@@ -127,11 +152,57 @@ public class BmodSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EmergencySign returns EmergencySign
+	 *
+	 * Constraint:
+	 *     (on=[Door|VARNAME] to=[Door|VARNAME])
+	 */
+	protected void sequence_EmergencySign(ISerializationContext context, EmergencySign semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BmodPackage.Literals.EMERGENCY_SIGN__ON) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BmodPackage.Literals.EMERGENCY_SIGN__ON));
+			if (transientValues.isValueTransient(semanticObject, BmodPackage.Literals.EMERGENCY_SIGN__TO) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BmodPackage.Literals.EMERGENCY_SIGN__TO));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEmergencySignAccess().getOnDoorVARNAMETerminalRuleCall_2_0_1(), semanticObject.eGet(BmodPackage.Literals.EMERGENCY_SIGN__ON, false));
+		feeder.accept(grammarAccess.getEmergencySignAccess().getToDoorVARNAMETerminalRuleCall_4_0_1(), semanticObject.eGet(BmodPackage.Literals.EMERGENCY_SIGN__TO, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Exit returns Exit
+	 *
+	 * Constraint:
+	 *     location=Coordinate
+	 */
+	protected void sequence_Exit(ISerializationContext context, Exit semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BmodPackage.Literals.EXIT__LOCATION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BmodPackage.Literals.EXIT__LOCATION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getExitAccess().getLocationCoordinateParserRuleCall_2_0(), semanticObject.getLocation());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Model returns Floorplan
 	 *     Floorplan returns Floorplan
 	 *
 	 * Constraint:
-	 *     (rooms+=Room | doors+=Door | persons+=Person | profiles+=Profile | levels+=Level)*
+	 *     (
+	 *         rooms+=Room | 
+	 *         doors+=Door | 
+	 *         persons+=Person | 
+	 *         exits+=Exit | 
+	 *         signs+=EmergencySign | 
+	 *         dancons+=DangerousCondition
+	 *     )*
 	 */
 	protected void sequence_Floorplan(ISerializationContext context, Floorplan semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -140,33 +211,10 @@ public class BmodSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     Level returns Level
-	 *
-	 * Constraint:
-	 *     name=VARNAME
-	 */
-	protected void sequence_Level(ISerializationContext context, Level semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BmodPackage.Literals.LEVEL__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BmodPackage.Literals.LEVEL__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getLevelAccess().getNameVARNAMETerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     Person returns Person
 	 *
 	 * Constraint:
-	 *     (
-	 *         name=VARNAME 
-	 *         named=STRING 
-	 *         location=Coordinate 
-	 *         ((profile=[Profile|VARNAME] level=[Level|VARNAME]) | (profile=[Level|VARNAME] level=[Profile|VARNAME]))?
-	 *     )
+	 *     (name=VARNAME named=STRING location=Coordinate ((perception=Perception action=Action) | (action=Action perception=Perception)))
 	 */
 	protected void sequence_Person(ISerializationContext context, Person semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -175,43 +223,13 @@ public class BmodSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     Profile returns Profile
-	 *
-	 * Constraint:
-	 *     name=VARNAME
-	 */
-	protected void sequence_Profile(ISerializationContext context, Profile semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BmodPackage.Literals.PROFILE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BmodPackage.Literals.PROFILE__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getProfileAccess().getNameVARNAMETerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     Room returns Room
 	 *
 	 * Constraint:
-	 *     (name=VARNAME named=STRING area=Area)
+	 *     (name=VARNAME named=STRING areas+=Area areas+=Area*)
 	 */
 	protected void sequence_Room(ISerializationContext context, Room semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BmodPackage.Literals.ROOM__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BmodPackage.Literals.ROOM__NAME));
-			if (transientValues.isValueTransient(semanticObject, BmodPackage.Literals.ROOM__NAMED) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BmodPackage.Literals.ROOM__NAMED));
-			if (transientValues.isValueTransient(semanticObject, BmodPackage.Literals.ROOM__AREA) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BmodPackage.Literals.ROOM__AREA));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getRoomAccess().getNameVARNAMETerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getRoomAccess().getNamedSTRINGTerminalRuleCall_3_0(), semanticObject.getNamed());
-		feeder.accept(grammarAccess.getRoomAccess().getAreaAreaParserRuleCall_4_0(), semanticObject.getArea());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

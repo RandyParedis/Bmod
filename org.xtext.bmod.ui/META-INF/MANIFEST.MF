@@ -17,10 +17,14 @@ Require-Bundle: org.xtext.bmod,
  org.eclipse.compare,
  org.eclipse.xtext.builder,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
- org.eclipse.xtend.lib;bundle-version="2.14.0";resolution:=optional
+ org.eclipse.xtend.lib;bundle-version="2.14.0";resolution:=optional,
+ org.eclipse.xtext.common.types.ui,
+ org.eclipse.xtext.xbase.ui,
+ org.eclipse.jdt.debug.ui
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.xtext.bmod.ui.quickfix,
  org.xtext.bmod.ui.contentassist,
- org.xtext.bmod.ui.internal
+ org.xtext.bmod.ui.internal,
+ org.xtext.bmod.ui.editor
 Bundle-Activator: org.xtext.bmod.ui.internal.BmodActivator

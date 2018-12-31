@@ -1,3 +1,4 @@
 org.dslforge*
 org.eclipse*
 .metadata
+/.recommenders/

@@ -12,6 +12,7 @@ import org.xtext.bmod.Helper;
 import org.xtext.bmod.bmod.Area;
 import org.xtext.bmod.bmod.Coordinate;
 import org.xtext.bmod.bmod.Door;
+import org.xtext.bmod.bmod.EmergencySign;
 import org.xtext.bmod.bmod.Floorplan;
 import org.xtext.bmod.bmod.Room;
 import org.xtext.bmod.validation.AbstractBmodValidator;
@@ -31,11 +32,11 @@ public class BmodValidator extends AbstractBmodValidator {
   }
   
   @Check
-  public void checkAreaAllCellsConnected(final Area area) {
-    final ArrayList<Coordinate> coords = Helper.getAreaCoords(area);
+  public void checkRoomAllCellsConnected(final Room room) {
+    final ArrayList<Coordinate> coords = Helper.getRoomCoords(room);
     boolean _isEmpty = coords.isEmpty();
     if (_isEmpty) {
-      this.error("Area must contain cells", area, null);
+      this.error("Area must contain cells", room.getAreas().get(0), null);
     } else {
       ArrayList<Coordinate> set = CollectionLiterals.<Coordinate>newArrayList(coords.get(0));
       for (int i = 0; (i < set.size()); i++) {
@@ -49,7 +50,7 @@ public class BmodValidator extends AbstractBmodValidator {
       int _size_1 = coords.size();
       boolean _notEquals = (_size != _size_1);
       if (_notEquals) {
-        this.error("Area has disconnected cells", area, null);
+        this.error("Room has disconnected cells", room, null);
       }
     }
   }
@@ -60,9 +61,42 @@ public class BmodValidator extends AbstractBmodValidator {
     for (final Room a : _rooms) {
       EList<Room> _rooms_1 = fp.getRooms();
       for (final Room b : _rooms_1) {
-        if (((!Objects.equal(a, b)) && Helper.areIntersecting(Helper.getAreaCoords(a.getArea()), Helper.getAreaCoords(b.getArea())))) {
+        if (((!Objects.equal(a, b)) && Helper.areIntersecting(Helper.getRoomCoords(a), Helper.getRoomCoords(b)))) {
           this.error("Rooms are overlapping", b, null);
         }
+      }
+    }
+  }
+  
+  @Check
+  public void checkRoomsConnected(final Floorplan fp) {
+    boolean _isEmpty = fp.getRooms().isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      ArrayList<Room> set = CollectionLiterals.<Room>newArrayList(fp.getRooms().get(0));
+      for (int i = 0; (i < set.size()); i++) {
+        EList<Room> _rooms = fp.getRooms();
+        for (final Room r : _rooms) {
+          {
+            boolean connected = false;
+            EList<Door> _doors = fp.getDoors();
+            for (final Door door : _doors) {
+              if ((Helper.isIn(door.getFrom(), Helper.getRoomCoords(set.get(i))) && 
+                Helper.isIn(door.getTo(), Helper.getRoomCoords(r)))) {
+                connected = true;
+              }
+            }
+            if ((connected && (!Helper.isIn(r, set)))) {
+              set.add(r);
+            }
+          }
+        }
+      }
+      int _size = set.size();
+      int _size_1 = fp.getRooms().size();
+      boolean _notEquals = (_size != _size_1);
+      if (_notEquals) {
+        this.error("Floorplan has disconnected rooms", fp, null);
       }
     }
   }
@@ -81,11 +115,48 @@ public class BmodValidator extends AbstractBmodValidator {
     EList<Room> _rooms = fp.getRooms();
     for (final Room room : _rooms) {
       {
-        final ArrayList<Coordinate> cells = Helper.getAreaCoords(room.getArea());
+        final ArrayList<Coordinate> cells = Helper.getRoomCoords(room);
         EList<Door> _doors = fp.getDoors();
         for (final Door door : _doors) {
           if ((Helper.isIn(door.getFrom(), cells) && Helper.isIn(door.getTo(), cells))) {
             this.error("The cells of the door must be in different rooms", door, null);
+          }
+        }
+      }
+    }
+  }
+  
+  @Check
+  public void checkAtLeastOneExit(final Floorplan fp) {
+    boolean _isEmpty = fp.getExits().isEmpty();
+    if (_isEmpty) {
+      this.error("There must be at least one Exit in the floorplan", fp, null);
+    }
+  }
+  
+  @Check
+  public void checkNonCyclicSigns(final Floorplan fp) {
+    EList<EmergencySign> _signs = fp.getSigns();
+    for (final EmergencySign sign : _signs) {
+      {
+        EList<Door> set = fp.getDoors();
+        EmergencySign current = sign;
+        while ((current != null)) {
+          {
+            boolean in = false;
+            for (final Door e : set) {
+              Door _on = current.getOn();
+              boolean _equals = Objects.equal(_on, e);
+              if (_equals) {
+                in = true;
+              }
+            }
+            if ((!in)) {
+              this.error("The emergency signs are circular dependant", sign, null);
+              return;
+            }
+            set.remove(current.getOn());
+            current = Helper.getDoorSign(current.getTo(), fp);
           }
         }
       }

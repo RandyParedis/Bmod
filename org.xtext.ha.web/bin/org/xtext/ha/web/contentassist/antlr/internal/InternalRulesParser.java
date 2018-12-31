@@ -1,4 +1,4 @@
-// $ANTLR 3.3 avr. 19, 2016 01:13:22 /home/red/Software/eclipse/workspace/org.xtext.ha.web/bin/org/xtext/ha/web/contentassist/antlr/internal/InternalRules.g 2018-12-16 15:05:12
+// $ANTLR 3.3 avr. 19, 2016 01:13:22 /home/red/Software/eclipse/workspace/org.xtext.ha.web/bin/org/xtext/ha/web/contentassist/antlr/internal/InternalRules.g 2018-12-30 11:41:02
 
 package org.xtext.ha.web.contentassist.antlr.internal; 
 

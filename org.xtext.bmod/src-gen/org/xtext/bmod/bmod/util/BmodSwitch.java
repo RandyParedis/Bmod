@@ -102,24 +102,31 @@ public class BmodSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case BmodPackage.PROFILE:
-      {
-        Profile profile = (Profile)theEObject;
-        T result = caseProfile(profile);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case BmodPackage.LEVEL:
-      {
-        Level level = (Level)theEObject;
-        T result = caseLevel(level);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case BmodPackage.PERSON:
       {
         Person person = (Person)theEObject;
         T result = casePerson(person);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BmodPackage.EXIT:
+      {
+        Exit exit = (Exit)theEObject;
+        T result = caseExit(exit);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BmodPackage.EMERGENCY_SIGN:
+      {
+        EmergencySign emergencySign = (EmergencySign)theEObject;
+        T result = caseEmergencySign(emergencySign);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BmodPackage.DANGEROUS_CONDITION:
+      {
+        DangerousCondition dangerousCondition = (DangerousCondition)theEObject;
+        T result = caseDangerousCondition(dangerousCondition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -206,38 +213,6 @@ public class BmodSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Profile</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Profile</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseProfile(Profile object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Level</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Level</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseLevel(Level object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Person</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -249,6 +224,54 @@ public class BmodSwitch<T> extends Switch<T>
    * @generated
    */
   public T casePerson(Person object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Exit</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Exit</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExit(Exit object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Emergency Sign</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Emergency Sign</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEmergencySign(EmergencySign object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Dangerous Condition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Dangerous Condition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDangerousCondition(DangerousCondition object)
   {
     return null;
   }

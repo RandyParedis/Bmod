@@ -8,6 +8,8 @@ import org.xtext.bmod.Helper
 import org.xtext.bmod.bmod.Area
 import org.xtext.bmod.bmod.Door
 import org.xtext.bmod.bmod.Floorplan
+import org.xtext.bmod.bmod.Room
+import java.util.ArrayList
 
 /**
  * This class contains custom validation rules. 
@@ -23,12 +25,12 @@ class BmodValidator extends AbstractBmodValidator {
 	}
 	
 	@Check
-	def void checkAreaAllCellsConnected(Area area) {
+	def void checkRoomAllCellsConnected(Room room) {
 		// Create the Cell List
-		val coords = Helper.getAreaCoords(area);
+		val coords = Helper.getRoomCoords(room);
 				
 		if(coords.empty) {
-			error("Area must contain cells", area, null);
+			error("Area must contain cells", room.areas.get(0), null);
 		} else {
 			// Do Floodfill to check if all cells are connected
 			var set = newArrayList(coords.get(0));
@@ -41,7 +43,7 @@ class BmodValidator extends AbstractBmodValidator {
 				}
 			}
 			if(set.size != coords.size) {
-				error("Area has disconnected cells", area, null);
+				error("Room has disconnected cells", room, null);
 			}
 		}
 	}
@@ -50,10 +52,34 @@ class BmodValidator extends AbstractBmodValidator {
 	def void checkRoomsNoOverlap(Floorplan fp) {
 		for(a: fp.rooms) {
 			for(b: fp.rooms) {
-				if(a != b && Helper.areIntersecting(Helper.getAreaCoords(a.area), Helper.getAreaCoords(b.area))) {
+				if(a != b && Helper.areIntersecting(Helper.getRoomCoords(a), Helper.getRoomCoords(b))) {
 					error("Rooms are overlapping", b, null);
 				}
 			}
+		}
+	}
+	
+	@Check
+	def void checkRoomsConnected(Floorplan fp) {
+		if(!fp.rooms.empty) {
+			var set = newArrayList(fp.rooms.get(0));
+			for(var i = 0; i < set.size; i++) {
+				for(r: fp.rooms) {
+					var connected = false;
+					for(door: fp.doors) {
+						if(Helper.isIn(door.from, Helper.getRoomCoords(set.get(i))) &&
+							Helper.isIn(door.to, Helper.getRoomCoords(r))) {
+								connected = true;
+							}
+					}
+					if(connected && !Helper.isIn(r, set)) {
+						set.add(r);
+					}
+				}
+			}
+			if(set.size != fp.rooms.size) {
+				error("Floorplan has disconnected rooms", fp, null);
+			}			
 		}
 	}
 	
@@ -67,11 +93,40 @@ class BmodValidator extends AbstractBmodValidator {
 	@Check
 	def void checkDoorCellsDifferentRooms(Floorplan fp) {
 		for(room: fp.rooms) {
-			val cells = Helper.getAreaCoords(room.area);
+			val cells = Helper.getRoomCoords(room);
 			for(door: fp.doors) {
 				if(Helper.isIn(door.from, cells) && Helper.isIn(door.to, cells)) {
 					error("The cells of the door must be in different rooms", door, null);
 				}
+			}
+		}
+	}
+	
+	@Check
+	def void checkAtLeastOneExit(Floorplan fp) {
+		if(fp.exits.empty) {
+			error("There must be at least one Exit in the floorplan", fp, null);
+		}
+	}
+	
+	@Check
+	def void checkNonCyclicSigns(Floorplan fp) {
+		for(sign: fp.signs) {			
+			var set = fp.doors;
+			var current = sign;
+			while(current !== null) {
+				var in = false;
+				for(e: set) {
+					if(current.on == e) {
+						in = true;
+					}
+				}
+				if(!in) {
+					error("The emergency signs are circular dependant", sign, null);
+					return;
+				}			
+				set.remove(current.on);
+				current = Helper.getDoorSign(current.to, fp);
 			}
 		}
 	}

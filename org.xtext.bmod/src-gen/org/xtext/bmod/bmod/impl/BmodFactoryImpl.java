@@ -4,6 +4,7 @@
 package org.xtext.bmod.bmod.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -69,13 +70,52 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
       case BmodPackage.FLOORPLAN: return createFloorplan();
       case BmodPackage.ROOM: return createRoom();
       case BmodPackage.DOOR: return createDoor();
-      case BmodPackage.PROFILE: return createProfile();
-      case BmodPackage.LEVEL: return createLevel();
       case BmodPackage.PERSON: return createPerson();
+      case BmodPackage.EXIT: return createExit();
+      case BmodPackage.EMERGENCY_SIGN: return createEmergencySign();
+      case BmodPackage.DANGEROUS_CONDITION: return createDangerousCondition();
       case BmodPackage.COORDINATE: return createCoordinate();
       case BmodPackage.AREA: return createArea();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object createFromString(EDataType eDataType, String initialValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case BmodPackage.PERCEPTION:
+        return createPerceptionFromString(eDataType, initialValue);
+      case BmodPackage.ACTION:
+        return createActionFromString(eDataType, initialValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String convertToString(EDataType eDataType, Object instanceValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case BmodPackage.PERCEPTION:
+        return convertPerceptionToString(eDataType, instanceValue);
+      case BmodPackage.ACTION:
+        return convertActionToString(eDataType, instanceValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
   }
 
@@ -128,32 +168,43 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Profile createProfile()
-  {
-    ProfileImpl profile = new ProfileImpl();
-    return profile;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Level createLevel()
-  {
-    LevelImpl level = new LevelImpl();
-    return level;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public Person createPerson()
   {
     PersonImpl person = new PersonImpl();
     return person;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Exit createExit()
+  {
+    ExitImpl exit = new ExitImpl();
+    return exit;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EmergencySign createEmergencySign()
+  {
+    EmergencySignImpl emergencySign = new EmergencySignImpl();
+    return emergencySign;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DangerousCondition createDangerousCondition()
+  {
+    DangerousConditionImpl dangerousCondition = new DangerousConditionImpl();
+    return dangerousCondition;
   }
 
   /**
@@ -176,6 +227,50 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
   {
     AreaImpl area = new AreaImpl();
     return area;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Perception createPerceptionFromString(EDataType eDataType, String initialValue)
+  {
+    Perception result = Perception.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertPerceptionToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Action createActionFromString(EDataType eDataType, String initialValue)
+  {
+    Action result = Action.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertActionToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

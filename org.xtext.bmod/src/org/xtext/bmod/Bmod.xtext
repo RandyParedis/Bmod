@@ -10,33 +10,44 @@ Floorplan:
 	{Floorplan}
 	(
 		rooms += Room | doors += Door |
-		persons += Person | profiles += Profile | levels += Level
+		persons += Person | exits += Exit |
+		signs += EmergencySign | dancons += DangerousCondition
 	)*
 ;
 
 Room:
 	'Room' name=VARNAME 'named' named=STRING
-		area=Area
+		areas += Area ('and' areas += Area)*
 ;
 
 Door:
 	'Door' name=VARNAME 'from' from=Coordinate 'to' to=Coordinate
 ;
 
-Profile:
-	'Profile' name=VARNAME
+enum Perception:
+	ATTENTIVE = 'attentive'   | RELAXED = 'relaxed' |
+	OPTIMISTIC = 'optimistic' | SCEPTIC = 'sceptic' 
 ;
 
-Level:
-	'Level' name=VARNAME
+enum Action:
+	NEWCOMER = 'newcomer' | EXPERIENCED = 'experienced' | PANIC = 'panic'
 ;
 
 Person:
-	'Person' name=VARNAME 'named' named=STRING 'in' location=Coordinate
-		(('Profile' ':' profile=[Profile|VARNAME] ','
-		'Level' ':' level=[Level|VARNAME])|
-		('Level' ':' profile=[Level|VARNAME] ','
-		'Profile' ':' level=[Profile|VARNAME]))?
+	'Person' name=VARNAME 'named' named=STRING 'in' location=Coordinate ':'
+	((perception=Perception ',' action=Action)|(action=Action ',' perception=Perception))
+;
+
+Exit:
+	'Exit' 'in' location=Coordinate
+;
+
+EmergencySign:
+	'Sign' 'on' on=[Door|VARNAME] 'to' to=[Door|VARNAME]
+;
+
+DangerousCondition:
+	'Condition' 'on' on=[Room|VARNAME] amount=INT
 ;
 	
 Coordinate: '(' x=INT ',' y=INT ')';

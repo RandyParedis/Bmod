@@ -16,11 +16,12 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.bmod.bmod.BmodPackage;
+import org.xtext.bmod.bmod.DangerousCondition;
 import org.xtext.bmod.bmod.Door;
+import org.xtext.bmod.bmod.EmergencySign;
+import org.xtext.bmod.bmod.Exit;
 import org.xtext.bmod.bmod.Floorplan;
-import org.xtext.bmod.bmod.Level;
 import org.xtext.bmod.bmod.Person;
-import org.xtext.bmod.bmod.Profile;
 import org.xtext.bmod.bmod.Room;
 
 /**
@@ -34,8 +35,9 @@ import org.xtext.bmod.bmod.Room;
  *   <li>{@link org.xtext.bmod.bmod.impl.FloorplanImpl#getRooms <em>Rooms</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.impl.FloorplanImpl#getDoors <em>Doors</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.impl.FloorplanImpl#getPersons <em>Persons</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.impl.FloorplanImpl#getProfiles <em>Profiles</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.impl.FloorplanImpl#getLevels <em>Levels</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.impl.FloorplanImpl#getExits <em>Exits</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.impl.FloorplanImpl#getSigns <em>Signs</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.impl.FloorplanImpl#getDancons <em>Dancons</em>}</li>
  * </ul>
  *
  * @generated
@@ -73,24 +75,34 @@ public class FloorplanImpl extends ModelImpl implements Floorplan
   protected EList<Person> persons;
 
   /**
-   * The cached value of the '{@link #getProfiles() <em>Profiles</em>}' containment reference list.
+   * The cached value of the '{@link #getExits() <em>Exits</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getProfiles()
+   * @see #getExits()
    * @generated
    * @ordered
    */
-  protected EList<Profile> profiles;
+  protected EList<Exit> exits;
 
   /**
-   * The cached value of the '{@link #getLevels() <em>Levels</em>}' containment reference list.
+   * The cached value of the '{@link #getSigns() <em>Signs</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLevels()
+   * @see #getSigns()
    * @generated
    * @ordered
    */
-  protected EList<Level> levels;
+  protected EList<EmergencySign> signs;
+
+  /**
+   * The cached value of the '{@link #getDancons() <em>Dancons</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDancons()
+   * @generated
+   * @ordered
+   */
+  protected EList<DangerousCondition> dancons;
 
   /**
    * <!-- begin-user-doc -->
@@ -160,13 +172,13 @@ public class FloorplanImpl extends ModelImpl implements Floorplan
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Profile> getProfiles()
+  public EList<Exit> getExits()
   {
-    if (profiles == null)
+    if (exits == null)
     {
-      profiles = new EObjectContainmentEList<Profile>(Profile.class, this, BmodPackage.FLOORPLAN__PROFILES);
+      exits = new EObjectContainmentEList<Exit>(Exit.class, this, BmodPackage.FLOORPLAN__EXITS);
     }
-    return profiles;
+    return exits;
   }
 
   /**
@@ -174,13 +186,27 @@ public class FloorplanImpl extends ModelImpl implements Floorplan
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Level> getLevels()
+  public EList<EmergencySign> getSigns()
   {
-    if (levels == null)
+    if (signs == null)
     {
-      levels = new EObjectContainmentEList<Level>(Level.class, this, BmodPackage.FLOORPLAN__LEVELS);
+      signs = new EObjectContainmentEList<EmergencySign>(EmergencySign.class, this, BmodPackage.FLOORPLAN__SIGNS);
     }
-    return levels;
+    return signs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<DangerousCondition> getDancons()
+  {
+    if (dancons == null)
+    {
+      dancons = new EObjectContainmentEList<DangerousCondition>(DangerousCondition.class, this, BmodPackage.FLOORPLAN__DANCONS);
+    }
+    return dancons;
   }
 
   /**
@@ -199,10 +225,12 @@ public class FloorplanImpl extends ModelImpl implements Floorplan
         return ((InternalEList<?>)getDoors()).basicRemove(otherEnd, msgs);
       case BmodPackage.FLOORPLAN__PERSONS:
         return ((InternalEList<?>)getPersons()).basicRemove(otherEnd, msgs);
-      case BmodPackage.FLOORPLAN__PROFILES:
-        return ((InternalEList<?>)getProfiles()).basicRemove(otherEnd, msgs);
-      case BmodPackage.FLOORPLAN__LEVELS:
-        return ((InternalEList<?>)getLevels()).basicRemove(otherEnd, msgs);
+      case BmodPackage.FLOORPLAN__EXITS:
+        return ((InternalEList<?>)getExits()).basicRemove(otherEnd, msgs);
+      case BmodPackage.FLOORPLAN__SIGNS:
+        return ((InternalEList<?>)getSigns()).basicRemove(otherEnd, msgs);
+      case BmodPackage.FLOORPLAN__DANCONS:
+        return ((InternalEList<?>)getDancons()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -223,10 +251,12 @@ public class FloorplanImpl extends ModelImpl implements Floorplan
         return getDoors();
       case BmodPackage.FLOORPLAN__PERSONS:
         return getPersons();
-      case BmodPackage.FLOORPLAN__PROFILES:
-        return getProfiles();
-      case BmodPackage.FLOORPLAN__LEVELS:
-        return getLevels();
+      case BmodPackage.FLOORPLAN__EXITS:
+        return getExits();
+      case BmodPackage.FLOORPLAN__SIGNS:
+        return getSigns();
+      case BmodPackage.FLOORPLAN__DANCONS:
+        return getDancons();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -254,13 +284,17 @@ public class FloorplanImpl extends ModelImpl implements Floorplan
         getPersons().clear();
         getPersons().addAll((Collection<? extends Person>)newValue);
         return;
-      case BmodPackage.FLOORPLAN__PROFILES:
-        getProfiles().clear();
-        getProfiles().addAll((Collection<? extends Profile>)newValue);
+      case BmodPackage.FLOORPLAN__EXITS:
+        getExits().clear();
+        getExits().addAll((Collection<? extends Exit>)newValue);
         return;
-      case BmodPackage.FLOORPLAN__LEVELS:
-        getLevels().clear();
-        getLevels().addAll((Collection<? extends Level>)newValue);
+      case BmodPackage.FLOORPLAN__SIGNS:
+        getSigns().clear();
+        getSigns().addAll((Collection<? extends EmergencySign>)newValue);
+        return;
+      case BmodPackage.FLOORPLAN__DANCONS:
+        getDancons().clear();
+        getDancons().addAll((Collection<? extends DangerousCondition>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -285,11 +319,14 @@ public class FloorplanImpl extends ModelImpl implements Floorplan
       case BmodPackage.FLOORPLAN__PERSONS:
         getPersons().clear();
         return;
-      case BmodPackage.FLOORPLAN__PROFILES:
-        getProfiles().clear();
+      case BmodPackage.FLOORPLAN__EXITS:
+        getExits().clear();
         return;
-      case BmodPackage.FLOORPLAN__LEVELS:
-        getLevels().clear();
+      case BmodPackage.FLOORPLAN__SIGNS:
+        getSigns().clear();
+        return;
+      case BmodPackage.FLOORPLAN__DANCONS:
+        getDancons().clear();
         return;
     }
     super.eUnset(featureID);
@@ -311,10 +348,12 @@ public class FloorplanImpl extends ModelImpl implements Floorplan
         return doors != null && !doors.isEmpty();
       case BmodPackage.FLOORPLAN__PERSONS:
         return persons != null && !persons.isEmpty();
-      case BmodPackage.FLOORPLAN__PROFILES:
-        return profiles != null && !profiles.isEmpty();
-      case BmodPackage.FLOORPLAN__LEVELS:
-        return levels != null && !levels.isEmpty();
+      case BmodPackage.FLOORPLAN__EXITS:
+        return exits != null && !exits.isEmpty();
+      case BmodPackage.FLOORPLAN__SIGNS:
+        return signs != null && !signs.isEmpty();
+      case BmodPackage.FLOORPLAN__DANCONS:
+        return dancons != null && !dancons.isEmpty();
     }
     return super.eIsSet(featureID);
   }
