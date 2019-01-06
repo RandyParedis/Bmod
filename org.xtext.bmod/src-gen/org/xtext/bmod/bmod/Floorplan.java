@@ -14,6 +14,8 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.bmod.bmod.Floorplan#getPerceptions <em>Perceptions</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.Floorplan#getActions <em>Actions</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getRooms <em>Rooms</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getDoors <em>Doors</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getPersons <em>Persons</em>}</li>
@@ -28,6 +30,38 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Floorplan extends Model
 {
+  /**
+   * Returns the value of the '<em><b>Perceptions</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.bmod.bmod.PerceptionLevel}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Perceptions</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Perceptions</em>' containment reference list.
+   * @see org.xtext.bmod.bmod.BmodPackage#getFloorplan_Perceptions()
+   * @model containment="true"
+   * @generated
+   */
+  EList<PerceptionLevel> getPerceptions();
+
+  /**
+   * Returns the value of the '<em><b>Actions</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.bmod.bmod.ActionProfile}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Actions</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Actions</em>' containment reference list.
+   * @see org.xtext.bmod.bmod.BmodPackage#getFloorplan_Actions()
+   * @model containment="true"
+   * @generated
+   */
+  EList<ActionProfile> getActions();
+
   /**
    * Returns the value of the '<em><b>Rooms</b></em>' containment reference list.
    * The list contents are of type {@link org.xtext.bmod.bmod.Room}.

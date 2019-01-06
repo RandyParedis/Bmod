@@ -3,282 +3,80 @@
  */
 package org.xtext.bmod.bmod;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Perception</b></em>',
- * and utility methods for working with them.
+ * A representation of the model object '<em><b>Perception</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link org.xtext.bmod.bmod.Perception#getExisting <em>Existing</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.Perception#getCustom <em>Custom</em>}</li>
+ * </ul>
+ *
  * @see org.xtext.bmod.bmod.BmodPackage#getPerception()
  * @model
  * @generated
  */
-public enum Perception implements Enumerator
+public interface Perception extends EObject
 {
   /**
-   * The '<em><b>ATTENTIVE</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #ATTENTIVE_VALUE
-   * @generated
-   * @ordered
-   */
-  ATTENTIVE(0, "ATTENTIVE", "attentive"),
-
-  /**
-   * The '<em><b>RELAXED</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #RELAXED_VALUE
-   * @generated
-   * @ordered
-   */
-  RELAXED(1, "RELAXED", "relaxed"),
-
-  /**
-   * The '<em><b>OPTIMISTIC</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #OPTIMISTIC_VALUE
-   * @generated
-   * @ordered
-   */
-  OPTIMISTIC(2, "OPTIMISTIC", "optimistic"),
-
-  /**
-   * The '<em><b>SCEPTIC</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #SCEPTIC_VALUE
-   * @generated
-   * @ordered
-   */
-  SCEPTIC(3, "SCEPTIC", "sceptic");
-
-  /**
-   * The '<em><b>ATTENTIVE</b></em>' literal value.
+   * Returns the value of the '<em><b>Existing</b></em>' attribute.
+   * The literals are from the enumeration {@link org.xtext.bmod.bmod.PerceptionEnum}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>ATTENTIVE</b></em>' literal object isn't clear,
+   * If the meaning of the '<em>Existing</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #ATTENTIVE
-   * @model literal="attentive"
+   * @return the value of the '<em>Existing</em>' attribute.
+   * @see org.xtext.bmod.bmod.PerceptionEnum
+   * @see #setExisting(PerceptionEnum)
+   * @see org.xtext.bmod.bmod.BmodPackage#getPerception_Existing()
+   * @model
    * @generated
-   * @ordered
    */
-  public static final int ATTENTIVE_VALUE = 0;
+  PerceptionEnum getExisting();
 
   /**
-   * The '<em><b>RELAXED</b></em>' literal value.
+   * Sets the value of the '{@link org.xtext.bmod.bmod.Perception#getExisting <em>Existing</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Existing</em>' attribute.
+   * @see org.xtext.bmod.bmod.PerceptionEnum
+   * @see #getExisting()
+   * @generated
+   */
+  void setExisting(PerceptionEnum value);
+
+  /**
+   * Returns the value of the '<em><b>Custom</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>RELAXED</b></em>' literal object isn't clear,
+   * If the meaning of the '<em>Custom</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #RELAXED
-   * @model literal="relaxed"
+   * @return the value of the '<em>Custom</em>' reference.
+   * @see #setCustom(PerceptionLevel)
+   * @see org.xtext.bmod.bmod.BmodPackage#getPerception_Custom()
+   * @model
    * @generated
-   * @ordered
    */
-  public static final int RELAXED_VALUE = 1;
+  PerceptionLevel getCustom();
 
   /**
-   * The '<em><b>OPTIMISTIC</b></em>' literal value.
+   * Sets the value of the '{@link org.xtext.bmod.bmod.Perception#getCustom <em>Custom</em>}' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>OPTIMISTIC</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
-   * @see #OPTIMISTIC
-   * @model literal="optimistic"
+   * @param value the new value of the '<em>Custom</em>' reference.
+   * @see #getCustom()
    * @generated
-   * @ordered
    */
-  public static final int OPTIMISTIC_VALUE = 2;
+  void setCustom(PerceptionLevel value);
 
-  /**
-   * The '<em><b>SCEPTIC</b></em>' literal value.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>SCEPTIC</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @see #SCEPTIC
-   * @model literal="sceptic"
-   * @generated
-   * @ordered
-   */
-  public static final int SCEPTIC_VALUE = 3;
-
-  /**
-   * An array of all the '<em><b>Perception</b></em>' enumerators.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private static final Perception[] VALUES_ARRAY =
-    new Perception[]
-    {
-      ATTENTIVE,
-      RELAXED,
-      OPTIMISTIC,
-      SCEPTIC,
-    };
-
-  /**
-   * A public read-only list of all the '<em><b>Perception</b></em>' enumerators.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public static final List<Perception> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
-
-  /**
-   * Returns the '<em><b>Perception</b></em>' literal with the specified literal value.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param literal the literal.
-   * @return the matching enumerator or <code>null</code>.
-   * @generated
-   */
-  public static Perception get(String literal)
-  {
-    for (int i = 0; i < VALUES_ARRAY.length; ++i)
-    {
-      Perception result = VALUES_ARRAY[i];
-      if (result.toString().equals(literal))
-      {
-        return result;
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Returns the '<em><b>Perception</b></em>' literal with the specified name.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param name the name.
-   * @return the matching enumerator or <code>null</code>.
-   * @generated
-   */
-  public static Perception getByName(String name)
-  {
-    for (int i = 0; i < VALUES_ARRAY.length; ++i)
-    {
-      Perception result = VALUES_ARRAY[i];
-      if (result.getName().equals(name))
-      {
-        return result;
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Returns the '<em><b>Perception</b></em>' literal with the specified integer value.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the integer value.
-   * @return the matching enumerator or <code>null</code>.
-   * @generated
-   */
-  public static Perception get(int value)
-  {
-    switch (value)
-    {
-      case ATTENTIVE_VALUE: return ATTENTIVE;
-      case RELAXED_VALUE: return RELAXED;
-      case OPTIMISTIC_VALUE: return OPTIMISTIC;
-      case SCEPTIC_VALUE: return SCEPTIC;
-    }
-    return null;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private final int value;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private final String name;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private final String literal;
-
-  /**
-   * Only this class can construct instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private Perception(int value, String name, String literal)
-  {
-    this.value = value;
-    this.name = name;
-    this.literal = literal;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public int getValue()
-  {
-    return value;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getLiteral()
-  {
-    return literal;
-  }
-
-  /**
-   * Returns the literal value of the enumerator, which is its string representation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    return literal;
-  }
-  
-} //Perception
+} // Perception

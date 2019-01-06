@@ -4,6 +4,7 @@
 package org.xtext.bmod.bmod.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -13,6 +14,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.bmod.bmod.BmodPackage;
 import org.xtext.bmod.bmod.Door;
+import org.xtext.bmod.bmod.DoorRef;
 import org.xtext.bmod.bmod.EmergencySign;
 
 /**
@@ -42,14 +44,14 @@ public class EmergencySignImpl extends MinimalEObjectImpl.Container implements E
   protected Door on;
 
   /**
-   * The cached value of the '{@link #getTo() <em>To</em>}' reference.
+   * The cached value of the '{@link #getTo() <em>To</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getTo()
    * @generated
    * @ordered
    */
-  protected Door to;
+  protected DoorRef to;
 
   /**
    * <!-- begin-user-doc -->
@@ -120,27 +122,7 @@ public class EmergencySignImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  public Door getTo()
-  {
-    if (to != null && to.eIsProxy())
-    {
-      InternalEObject oldTo = (InternalEObject)to;
-      to = (Door)eResolveProxy(oldTo);
-      if (to != oldTo)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, BmodPackage.EMERGENCY_SIGN__TO, oldTo, to));
-      }
-    }
-    return to;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Door basicGetTo()
+  public DoorRef getTo()
   {
     return to;
   }
@@ -150,12 +132,53 @@ public class EmergencySignImpl extends MinimalEObjectImpl.Container implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTo(Door newTo)
+  public NotificationChain basicSetTo(DoorRef newTo, NotificationChain msgs)
   {
-    Door oldTo = to;
+    DoorRef oldTo = to;
     to = newTo;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.EMERGENCY_SIGN__TO, oldTo, to));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BmodPackage.EMERGENCY_SIGN__TO, oldTo, newTo);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setTo(DoorRef newTo)
+  {
+    if (newTo != to)
+    {
+      NotificationChain msgs = null;
+      if (to != null)
+        msgs = ((InternalEObject)to).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BmodPackage.EMERGENCY_SIGN__TO, null, msgs);
+      if (newTo != null)
+        msgs = ((InternalEObject)newTo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BmodPackage.EMERGENCY_SIGN__TO, null, msgs);
+      msgs = basicSetTo(newTo, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.EMERGENCY_SIGN__TO, newTo, newTo));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case BmodPackage.EMERGENCY_SIGN__TO:
+        return basicSetTo(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -172,8 +195,7 @@ public class EmergencySignImpl extends MinimalEObjectImpl.Container implements E
         if (resolve) return getOn();
         return basicGetOn();
       case BmodPackage.EMERGENCY_SIGN__TO:
-        if (resolve) return getTo();
-        return basicGetTo();
+        return getTo();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -192,7 +214,7 @@ public class EmergencySignImpl extends MinimalEObjectImpl.Container implements E
         setOn((Door)newValue);
         return;
       case BmodPackage.EMERGENCY_SIGN__TO:
-        setTo((Door)newValue);
+        setTo((DoorRef)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -212,7 +234,7 @@ public class EmergencySignImpl extends MinimalEObjectImpl.Container implements E
         setOn((Door)null);
         return;
       case BmodPackage.EMERGENCY_SIGN__TO:
-        setTo((Door)null);
+        setTo((DoorRef)null);
         return;
     }
     super.eUnset(featureID);

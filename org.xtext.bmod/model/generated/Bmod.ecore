@@ -3,6 +3,10 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bmod" nsURI="http://www.xtext.org/bmod/Bmod" nsPrefix="bmod">
   <eClassifiers xsi:type="ecore:EClass" name="Model"/>
   <eClassifiers xsi:type="ecore:EClass" name="Floorplan" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="perceptions" upperBound="-1"
+        eType="#//PerceptionLevel" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//ActionProfile" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rooms" upperBound="-1"
         eType="#//Room" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="doors" upperBound="-1"
@@ -29,24 +33,40 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//Coordinate"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="Perception">
-    <eLiterals name="ATTENTIVE" literal="attentive"/>
-    <eLiterals name="RELAXED" value="1" literal="relaxed"/>
-    <eLiterals name="OPTIMISTIC" value="2" literal="optimistic"/>
-    <eLiterals name="SCEPTIC" value="3" literal="sceptic"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PerceptionLevel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="Action">
-    <eLiterals name="NEWCOMER" literal="newcomer"/>
-    <eLiterals name="EXPERIENCED" value="1" literal="experienced"/>
-    <eLiterals name="PANIC" value="2" literal="panic"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActionProfile">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Perception">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="existing" eType="#//PerceptionEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="custom" eType="#//PerceptionLevel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="existing" eType="#//ActionEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="custom" eType="#//ActionProfile"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PerceptionEnum">
+    <eLiterals name="attentive" literal="attentive"/>
+    <eLiterals name="relaxed" value="1" literal="relaxed"/>
+    <eLiterals name="optimistic" value="2" literal="optimistic"/>
+    <eLiterals name="sceptic" value="3" literal="sceptic"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ActionEnum">
+    <eLiterals name="newcomer" literal="newcomer"/>
+    <eLiterals name="experienced" value="1" literal="experienced"/>
+    <eLiterals name="panic" value="2" literal="panic"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Person">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="named" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" eType="#//Coordinate"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="perception" eType="#//Perception"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" eType="#//Action"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="perception" eType="#//Perception"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//Action"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Exit">
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" eType="#//Coordinate"
@@ -54,7 +74,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EmergencySign">
     <eStructuralFeatures xsi:type="ecore:EReference" name="on" eType="#//Door"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//Door"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//DoorRef"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DoorRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//Door"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DangerousCondition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="on" eType="#//Room"/>

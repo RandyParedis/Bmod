@@ -60,6 +60,42 @@ public interface BmodFactory extends EFactory
   Door createDoor();
 
   /**
+   * Returns a new object of class '<em>Perception Level</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Perception Level</em>'.
+   * @generated
+   */
+  PerceptionLevel createPerceptionLevel();
+
+  /**
+   * Returns a new object of class '<em>Action Profile</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Action Profile</em>'.
+   * @generated
+   */
+  ActionProfile createActionProfile();
+
+  /**
+   * Returns a new object of class '<em>Perception</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Perception</em>'.
+   * @generated
+   */
+  Perception createPerception();
+
+  /**
+   * Returns a new object of class '<em>Action</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Action</em>'.
+   * @generated
+   */
+  Action createAction();
+
+  /**
    * Returns a new object of class '<em>Person</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -85,6 +121,15 @@ public interface BmodFactory extends EFactory
    * @generated
    */
   EmergencySign createEmergencySign();
+
+  /**
+   * Returns a new object of class '<em>Door Ref</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Door Ref</em>'.
+   * @generated
+   */
+  DoorRef createDoorRef();
 
   /**
    * Returns a new object of class '<em>Dangerous Condition</em>'.

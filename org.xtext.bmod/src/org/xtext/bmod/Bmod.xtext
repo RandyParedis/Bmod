@@ -9,6 +9,7 @@ Model:
 Floorplan:
 	{Floorplan}
 	(
+		perceptions += PerceptionLevel | actions += ActionProfile |
 		rooms += Room | doors += Door |
 		persons += Person | exits += Exit |
 		signs += EmergencySign | dancons += DangerousCondition
@@ -16,7 +17,7 @@ Floorplan:
 ;
 
 Room:
-	'Room' name=VARNAME 'named' named=STRING
+	'Room' name=VARNAME ('named' named=STRING)?
 		areas += Area ('and' areas += Area)*
 ;
 
@@ -24,18 +25,36 @@ Door:
 	'Door' name=VARNAME 'from' from=Coordinate 'to' to=Coordinate
 ;
 
-enum Perception:
-	ATTENTIVE = 'attentive'   | RELAXED = 'relaxed' |
-	OPTIMISTIC = 'optimistic' | SCEPTIC = 'sceptic' 
+PerceptionLevel:
+	'PerceptionLevel' name=VARNAME
 ;
 
-enum Action:
-	NEWCOMER = 'newcomer' | EXPERIENCED = 'experienced' | PANIC = 'panic'
+ActionProfile:
+	'ActionProfile' name=VARNAME
+;
+
+Perception:
+	(existing=PerceptionEnum)|
+	(custom=[PerceptionLevel|VARNAME])
+;
+
+Action:
+	(existing=ActionEnum)|
+	(custom=[ActionProfile|VARNAME])
+;
+
+enum PerceptionEnum:
+	attentive = 'attentive'   | relaxed = 'relaxed' |
+	optimistic = 'optimistic' | sceptic = 'sceptic'
+;
+
+enum ActionEnum:
+	newcomer = 'newcomer' | experienced = 'experienced' | panic = 'panic'
 ;
 
 Person:
 	'Person' name=VARNAME 'named' named=STRING 'in' location=Coordinate ':'
-	((perception=Perception ',' action=Action)|(action=Action ',' perception=Perception))
+	perception=Perception ',' action=Action
 ;
 
 Exit:
@@ -43,7 +62,11 @@ Exit:
 ;
 
 EmergencySign:
-	'Sign' 'on' on=[Door|VARNAME] 'to' to=[Door|VARNAME]
+	'Sign' 'on' on=[Door|VARNAME] to=DoorRef
+;
+
+DoorRef:
+	'to' ref=[Door|VARNAME]
 ;
 
 DangerousCondition:
@@ -58,5 +81,5 @@ Area:
 ;
 
 terminal VARNAME:
-	('A'..'Z'|'a'..'z'|'_')('A'..'Z'|'a'..'z'|'0'..'9'|'_')*
+	('a'..'z'|'A'..'Z'|'_')('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
 ;

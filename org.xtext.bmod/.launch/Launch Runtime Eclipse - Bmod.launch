@@ -18,10 +18,40 @@
 <listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
 <listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
 </listAttribute>
+<listAttribute key="org.eclipse.eclemma.core.SCOPE_IDS">
+<listEntry value="=org.xtext.ha/src-gen"/>
+<listEntry value="=org.xtext.ha.ide/src-gen"/>
+<listEntry value="=org.xtext.bmod.tests/src"/>
+<listEntry value="=org.xtext.bmod.ide/src-gen"/>
+<listEntry value="=org.xtext.ha.tests/src-gen"/>
+<listEntry value="=org.xtext.bmod.ui.tests/src-gen"/>
+<listEntry value="=org.xtext.ha.ui/src"/>
+<listEntry value="=org.xtext.ha.ui/xtend-gen"/>
+<listEntry value="=org.xtext.bmod.ui.tests/src"/>
+<listEntry value="=org.xtext.ha.ui.tests/src"/>
+<listEntry value="=org.xtext.bmod.ide/xtend-gen"/>
+<listEntry value="=org.xtext.bmod.tests/src-gen"/>
+<listEntry value="=org.xtext.ha.tests/xtend-gen"/>
+<listEntry value="=org.xtext.bmod.ui/xtend-gen"/>
+<listEntry value="=org.xtext.ha.ui/src-gen"/>
+<listEntry value="=org.xtext.bmod.tests/xtend-gen"/>
+<listEntry value="=org.xtext.ha/src"/>
+<listEntry value="=org.xtext.ha.ui.tests/src-gen"/>
+<listEntry value="=org.xtext.ha.ide/src"/>
+<listEntry value="=org.xtext.bmod.ui/src-gen"/>
+<listEntry value="=org.xtext.ha/xtend-gen"/>
+<listEntry value="=org.xtext.bmod.ide/src"/>
+<listEntry value="=org.xtext.ha.ide/xtend-gen"/>
+<listEntry value="=org.xtext.ha.tests/src"/>
+<listEntry value="=org.xtext.bmod.ui.tests/xtend-gen"/>
+<listEntry value="=org.xtext.ha.ui.tests/xtend-gen"/>
+<listEntry value="=org.xtext.bmod.ui/src"/>
+</listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl}"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xms40m -Xmx512m"/>
+<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc}"/>
 <stringAttribute key="pde.version" value="3.3"/>
 <stringAttribute key="product" value="org.eclipse.platform.ide"/>
 <booleanAttribute key="show_selected_only" value="false"/>

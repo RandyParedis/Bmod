@@ -51,29 +51,29 @@ public interface EmergencySign extends EObject
   void setOn(Door value);
 
   /**
-   * Returns the value of the '<em><b>To</b></em>' reference.
+   * Returns the value of the '<em><b>To</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>To</em>' reference isn't clear,
+   * If the meaning of the '<em>To</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>To</em>' reference.
-   * @see #setTo(Door)
+   * @return the value of the '<em>To</em>' containment reference.
+   * @see #setTo(DoorRef)
    * @see org.xtext.bmod.bmod.BmodPackage#getEmergencySign_To()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  Door getTo();
+  DoorRef getTo();
 
   /**
-   * Sets the value of the '{@link org.xtext.bmod.bmod.EmergencySign#getTo <em>To</em>}' reference.
+   * Sets the value of the '{@link org.xtext.bmod.bmod.EmergencySign#getTo <em>To</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>To</em>' reference.
+   * @param value the new value of the '<em>To</em>' containment reference.
    * @see #getTo()
    * @generated
    */
-  void setTo(Door value);
+  void setTo(DoorRef value);
 
 } // EmergencySign

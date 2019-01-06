@@ -3,23 +3,124 @@
  */
 package org.xtext.bmod.generator
 
+import org.bmod.simulation.GenerationHelper
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.generator.IGenerator2
 import org.eclipse.xtext.generator.IGeneratorContext
+import org.xtext.bmod.bmod.ActionProfile
+import org.xtext.bmod.bmod.Door
+import org.xtext.bmod.bmod.EmergencySign
+import org.xtext.bmod.bmod.Exit
+import org.xtext.bmod.bmod.Person
+import org.xtext.bmod.bmod.Room
+import org.xtext.bmod.bmod.PerceptionLevel
 
 /**
  * Generates code from your model files on save.
  * 
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
-class BmodGenerator extends AbstractGenerator {
+class BmodGenerator implements IGenerator2 {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
-//			resource.allContents
-//				.filter(Greeting)
-//				.map[name]
-//				.join(', '))
+		// Generate simulation package
+		val files = GenerationHelper.files;
+		files.forEach[key, value| fsa.generateFile(key, value);];
+		
+		val simpleClassName = resource.getURI.trimFileExtension.lastSegment
+		if(resource.contents?.head === null) {
+			return;
+		}
+		val floorplan = resource.contents.head.eContents;
+		
+		fsa.generateFile(simpleClassName + '.java', '''
+			import org.bmod.simulation.Cell;
+			import org.bmod.simulation.Door;
+			import org.bmod.simulation.EmergencySign;
+			import org.bmod.simulation.Person;
+			import org.bmod.simulation.Room;
+			import org.bmod.simulation.Simulatable;
+			import org.bmod.simulation.Simulator;
+			
+			import java.util.ArrayList;
+			
+			public class «simpleClassName» {
+				public static void main(String... args) {
+					ArrayList<Simulatable> list = new ArrayList<Simulatable>();
+					
+					// Rooms and Cells
+					«FOR room: floorplan.filter(Room)»
+						Room room_«room.name» = new Room();
+						«FOR cell: Helper.getRoomCoords(room)»
+							Cell cell_«cell.x»_«cell.y» = new Cell(«cell.x», «cell.y»);
+							«FOR exit: floorplan.filter(Exit)»
+								«IF exit.location.x == cell.x && exit.location.y == cell.y»
+									cell_«cell.x»_«cell.y».setExit(true);
+								«ENDIF»
+							«ENDFOR»
+							room_«room.name».add(cell_«cell.x»_«cell.y»);
+							list.add(cell_«cell.x»_«cell.y»);
+						«ENDFOR»
+						list.add(room_«room.name»);
+						
+					«ENDFOR»
+					
+					// Doors
+					«FOR door: floorplan.filter(Door)»
+						Door door_«door.name» = new Door(«door.from.x», «door.from.y», «door.to.x», «door.to.y»);
+						door_«door.name».setup(list);
+						list.add(door_«door.name»);
+						
+					«ENDFOR»
+					
+					// Emergency Signs
+					«FOR sign: floorplan.filter(EmergencySign)»
+						EmergencySign sign_«sign.on.name»_«sign.to.ref.name» = new EmergencySign(door_«sign.on.name», door_«sign.to.ref.name»);
+						sign_«sign.on.name»_«sign.to.ref.name».setup(list);
+						list.add(sign_«sign.on.name»_«sign.to.ref.name»);
+						
+					«ENDFOR»
+					
+					// Actions and Perceptions
+					«FOR action: floorplan.filter(ActionProfile)»
+						Person.actions.put("«action.name»", (Person p, ArrayList<Simulatable> objects) -> BLOCK);
+					«ENDFOR»
+					«FOR perception: floorplan.filter(PerceptionLevel)»
+						Person.actions.put("«perception.name»", (Person p, ArrayList<Simulatable> objects) -> BLOCK);
+					«ENDFOR»
+					
+					// Persons
+					«FOR person: floorplan.filter(Person)»
+						«IF person.action.existing !== null»
+							«IF person.perception.existing !== null»
+							Person person_«person.name» = new Person("«person.named»", «person.location.x», «person.location.y», "«person.perception.existing.getName»", "«person.action.existing.getName»");
+							«ELSE»
+							Person person_«person.name» = new Person("«person.named»", «person.location.x», «person.location.y», "«person.perception.custom.toString»", "«person.action.existing.getName»");
+							«ENDIF»
+						«ELSE»
+							«IF person.perception.existing !== null»
+							Person person_«person.name» = new Person("«person.named»", «person.location.x», «person.location.y», "«person.perception.existing.getName»", "«person.action.custom.toString»");
+							«ELSE»
+							Person person_«person.name» = new Person("«person.named»", «person.location.x», «person.location.y», "«person.perception.custom.toString»", "«person.action.custom.toString»");
+							«ENDIF»
+						«ENDIF»
+						list.add(person_«person.name»);
+					«ENDFOR»
+					
+					// Simulation itself
+					new Simulator(list);
+				}
+			}
+		''');
 	}
+	
+	override afterGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
+//		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override beforeGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
+//		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
 }

@@ -22,12 +22,13 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBmodParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_VARNAME", "RULE_STRING", "RULE_INT", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'Room'", "'named'", "'and'", "'Door'", "'from'", "'to'", "'Person'", "'in'", "':'", "','", "'Exit'", "'Sign'", "'on'", "'Condition'", "'('", "')'", "'without'", "'attentive'", "'relaxed'", "'optimistic'", "'sceptic'", "'newcomer'", "'experienced'", "'panic'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_VARNAME", "RULE_STRING", "RULE_INT", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'Room'", "'named'", "'and'", "'Door'", "'from'", "'to'", "'PerceptionLevel'", "'ActionProfile'", "'Person'", "'in'", "':'", "','", "'Exit'", "'Sign'", "'on'", "'Condition'", "'('", "')'", "'without'", "'attentive'", "'relaxed'", "'optimistic'", "'sceptic'", "'newcomer'", "'experienced'", "'panic'"
     };
     public static final int RULE_STRING=5;
     public static final int RULE_SL_COMMENT=9;
     public static final int T__19=19;
     public static final int T__15=15;
+    public static final int T__37=37;
     public static final int T__16=16;
     public static final int T__17=17;
     public static final int T__18=18;
@@ -37,6 +38,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
     public static final int T__13=13;
     public static final int T__35=35;
     public static final int T__14=14;
+    public static final int T__36=36;
     public static final int EOF=-1;
     public static final int T__30=30;
     public static final int T__31=31;
@@ -216,32 +218,36 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFloorplan"
-    // InternalBmod.g:97:1: ruleFloorplan returns [EObject current=null] : ( () ( ( (lv_rooms_1_0= ruleRoom ) ) | ( (lv_doors_2_0= ruleDoor ) ) | ( (lv_persons_3_0= rulePerson ) ) | ( (lv_exits_4_0= ruleExit ) ) | ( (lv_signs_5_0= ruleEmergencySign ) ) | ( (lv_dancons_6_0= ruleDangerousCondition ) ) )* ) ;
+    // InternalBmod.g:97:1: ruleFloorplan returns [EObject current=null] : ( () ( ( (lv_perceptions_1_0= rulePerceptionLevel ) ) | ( (lv_actions_2_0= ruleActionProfile ) ) | ( (lv_rooms_3_0= ruleRoom ) ) | ( (lv_doors_4_0= ruleDoor ) ) | ( (lv_persons_5_0= rulePerson ) ) | ( (lv_exits_6_0= ruleExit ) ) | ( (lv_signs_7_0= ruleEmergencySign ) ) | ( (lv_dancons_8_0= ruleDangerousCondition ) ) )* ) ;
     public final EObject ruleFloorplan() throws RecognitionException {
         EObject current = null;
 
-        EObject lv_rooms_1_0 = null;
+        EObject lv_perceptions_1_0 = null;
 
-        EObject lv_doors_2_0 = null;
+        EObject lv_actions_2_0 = null;
 
-        EObject lv_persons_3_0 = null;
+        EObject lv_rooms_3_0 = null;
 
-        EObject lv_exits_4_0 = null;
+        EObject lv_doors_4_0 = null;
 
-        EObject lv_signs_5_0 = null;
+        EObject lv_persons_5_0 = null;
 
-        EObject lv_dancons_6_0 = null;
+        EObject lv_exits_6_0 = null;
+
+        EObject lv_signs_7_0 = null;
+
+        EObject lv_dancons_8_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalBmod.g:103:2: ( ( () ( ( (lv_rooms_1_0= ruleRoom ) ) | ( (lv_doors_2_0= ruleDoor ) ) | ( (lv_persons_3_0= rulePerson ) ) | ( (lv_exits_4_0= ruleExit ) ) | ( (lv_signs_5_0= ruleEmergencySign ) ) | ( (lv_dancons_6_0= ruleDangerousCondition ) ) )* ) )
-            // InternalBmod.g:104:2: ( () ( ( (lv_rooms_1_0= ruleRoom ) ) | ( (lv_doors_2_0= ruleDoor ) ) | ( (lv_persons_3_0= rulePerson ) ) | ( (lv_exits_4_0= ruleExit ) ) | ( (lv_signs_5_0= ruleEmergencySign ) ) | ( (lv_dancons_6_0= ruleDangerousCondition ) ) )* )
+            // InternalBmod.g:103:2: ( ( () ( ( (lv_perceptions_1_0= rulePerceptionLevel ) ) | ( (lv_actions_2_0= ruleActionProfile ) ) | ( (lv_rooms_3_0= ruleRoom ) ) | ( (lv_doors_4_0= ruleDoor ) ) | ( (lv_persons_5_0= rulePerson ) ) | ( (lv_exits_6_0= ruleExit ) ) | ( (lv_signs_7_0= ruleEmergencySign ) ) | ( (lv_dancons_8_0= ruleDangerousCondition ) ) )* ) )
+            // InternalBmod.g:104:2: ( () ( ( (lv_perceptions_1_0= rulePerceptionLevel ) ) | ( (lv_actions_2_0= ruleActionProfile ) ) | ( (lv_rooms_3_0= ruleRoom ) ) | ( (lv_doors_4_0= ruleDoor ) ) | ( (lv_persons_5_0= rulePerson ) ) | ( (lv_exits_6_0= ruleExit ) ) | ( (lv_signs_7_0= ruleEmergencySign ) ) | ( (lv_dancons_8_0= ruleDangerousCondition ) ) )* )
             {
-            // InternalBmod.g:104:2: ( () ( ( (lv_rooms_1_0= ruleRoom ) ) | ( (lv_doors_2_0= ruleDoor ) ) | ( (lv_persons_3_0= rulePerson ) ) | ( (lv_exits_4_0= ruleExit ) ) | ( (lv_signs_5_0= ruleEmergencySign ) ) | ( (lv_dancons_6_0= ruleDangerousCondition ) ) )* )
-            // InternalBmod.g:105:3: () ( ( (lv_rooms_1_0= ruleRoom ) ) | ( (lv_doors_2_0= ruleDoor ) ) | ( (lv_persons_3_0= rulePerson ) ) | ( (lv_exits_4_0= ruleExit ) ) | ( (lv_signs_5_0= ruleEmergencySign ) ) | ( (lv_dancons_6_0= ruleDangerousCondition ) ) )*
+            // InternalBmod.g:104:2: ( () ( ( (lv_perceptions_1_0= rulePerceptionLevel ) ) | ( (lv_actions_2_0= ruleActionProfile ) ) | ( (lv_rooms_3_0= ruleRoom ) ) | ( (lv_doors_4_0= ruleDoor ) ) | ( (lv_persons_5_0= rulePerson ) ) | ( (lv_exits_6_0= ruleExit ) ) | ( (lv_signs_7_0= ruleEmergencySign ) ) | ( (lv_dancons_8_0= ruleDangerousCondition ) ) )* )
+            // InternalBmod.g:105:3: () ( ( (lv_perceptions_1_0= rulePerceptionLevel ) ) | ( (lv_actions_2_0= ruleActionProfile ) ) | ( (lv_rooms_3_0= ruleRoom ) ) | ( (lv_doors_4_0= ruleDoor ) ) | ( (lv_persons_5_0= rulePerson ) ) | ( (lv_exits_6_0= ruleExit ) ) | ( (lv_signs_7_0= ruleEmergencySign ) ) | ( (lv_dancons_8_0= ruleDangerousCondition ) ) )*
             {
             // InternalBmod.g:105:3: ()
             // InternalBmod.g:106:4: 
@@ -254,39 +260,49 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalBmod.g:112:3: ( ( (lv_rooms_1_0= ruleRoom ) ) | ( (lv_doors_2_0= ruleDoor ) ) | ( (lv_persons_3_0= rulePerson ) ) | ( (lv_exits_4_0= ruleExit ) ) | ( (lv_signs_5_0= ruleEmergencySign ) ) | ( (lv_dancons_6_0= ruleDangerousCondition ) ) )*
+            // InternalBmod.g:112:3: ( ( (lv_perceptions_1_0= rulePerceptionLevel ) ) | ( (lv_actions_2_0= ruleActionProfile ) ) | ( (lv_rooms_3_0= ruleRoom ) ) | ( (lv_doors_4_0= ruleDoor ) ) | ( (lv_persons_5_0= rulePerson ) ) | ( (lv_exits_6_0= ruleExit ) ) | ( (lv_signs_7_0= ruleEmergencySign ) ) | ( (lv_dancons_8_0= ruleDangerousCondition ) ) )*
             loop1:
             do {
-                int alt1=7;
+                int alt1=9;
                 switch ( input.LA(1) ) {
-                case 12:
+                case 18:
                     {
                     alt1=1;
                     }
                     break;
-                case 15:
+                case 19:
                     {
                     alt1=2;
                     }
                     break;
-                case 18:
+                case 12:
                     {
                     alt1=3;
                     }
                     break;
-                case 22:
+                case 15:
                     {
                     alt1=4;
                     }
                     break;
-                case 23:
+                case 20:
                     {
                     alt1=5;
                     }
                     break;
-                case 25:
+                case 24:
                     {
                     alt1=6;
+                    }
+                    break;
+                case 25:
+                    {
+                    alt1=7;
+                    }
+                    break;
+                case 27:
+                    {
+                    alt1=8;
                     }
                     break;
 
@@ -294,19 +310,19 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalBmod.g:113:4: ( (lv_rooms_1_0= ruleRoom ) )
+            	    // InternalBmod.g:113:4: ( (lv_perceptions_1_0= rulePerceptionLevel ) )
             	    {
-            	    // InternalBmod.g:113:4: ( (lv_rooms_1_0= ruleRoom ) )
-            	    // InternalBmod.g:114:5: (lv_rooms_1_0= ruleRoom )
+            	    // InternalBmod.g:113:4: ( (lv_perceptions_1_0= rulePerceptionLevel ) )
+            	    // InternalBmod.g:114:5: (lv_perceptions_1_0= rulePerceptionLevel )
             	    {
-            	    // InternalBmod.g:114:5: (lv_rooms_1_0= ruleRoom )
-            	    // InternalBmod.g:115:6: lv_rooms_1_0= ruleRoom
+            	    // InternalBmod.g:114:5: (lv_perceptions_1_0= rulePerceptionLevel )
+            	    // InternalBmod.g:115:6: lv_perceptions_1_0= rulePerceptionLevel
             	    {
 
-            	    						newCompositeNode(grammarAccess.getFloorplanAccess().getRoomsRoomParserRuleCall_1_0_0());
+            	    						newCompositeNode(grammarAccess.getFloorplanAccess().getPerceptionsPerceptionLevelParserRuleCall_1_0_0());
             	    					
             	    pushFollow(FOLLOW_3);
-            	    lv_rooms_1_0=ruleRoom();
+            	    lv_perceptions_1_0=rulePerceptionLevel();
 
             	    state._fsp--;
 
@@ -316,9 +332,9 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
             	    						}
             	    						add(
             	    							current,
-            	    							"rooms",
-            	    							lv_rooms_1_0,
-            	    							"org.xtext.bmod.Bmod.Room");
+            	    							"perceptions",
+            	    							lv_perceptions_1_0,
+            	    							"org.xtext.bmod.Bmod.PerceptionLevel");
             	    						afterParserOrEnumRuleCall();
             	    					
 
@@ -331,19 +347,19 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalBmod.g:133:4: ( (lv_doors_2_0= ruleDoor ) )
+            	    // InternalBmod.g:133:4: ( (lv_actions_2_0= ruleActionProfile ) )
             	    {
-            	    // InternalBmod.g:133:4: ( (lv_doors_2_0= ruleDoor ) )
-            	    // InternalBmod.g:134:5: (lv_doors_2_0= ruleDoor )
+            	    // InternalBmod.g:133:4: ( (lv_actions_2_0= ruleActionProfile ) )
+            	    // InternalBmod.g:134:5: (lv_actions_2_0= ruleActionProfile )
             	    {
-            	    // InternalBmod.g:134:5: (lv_doors_2_0= ruleDoor )
-            	    // InternalBmod.g:135:6: lv_doors_2_0= ruleDoor
+            	    // InternalBmod.g:134:5: (lv_actions_2_0= ruleActionProfile )
+            	    // InternalBmod.g:135:6: lv_actions_2_0= ruleActionProfile
             	    {
 
-            	    						newCompositeNode(grammarAccess.getFloorplanAccess().getDoorsDoorParserRuleCall_1_1_0());
+            	    						newCompositeNode(grammarAccess.getFloorplanAccess().getActionsActionProfileParserRuleCall_1_1_0());
             	    					
             	    pushFollow(FOLLOW_3);
-            	    lv_doors_2_0=ruleDoor();
+            	    lv_actions_2_0=ruleActionProfile();
 
             	    state._fsp--;
 
@@ -353,9 +369,9 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
             	    						}
             	    						add(
             	    							current,
-            	    							"doors",
-            	    							lv_doors_2_0,
-            	    							"org.xtext.bmod.Bmod.Door");
+            	    							"actions",
+            	    							lv_actions_2_0,
+            	    							"org.xtext.bmod.Bmod.ActionProfile");
             	    						afterParserOrEnumRuleCall();
             	    					
 
@@ -368,19 +384,19 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalBmod.g:153:4: ( (lv_persons_3_0= rulePerson ) )
+            	    // InternalBmod.g:153:4: ( (lv_rooms_3_0= ruleRoom ) )
             	    {
-            	    // InternalBmod.g:153:4: ( (lv_persons_3_0= rulePerson ) )
-            	    // InternalBmod.g:154:5: (lv_persons_3_0= rulePerson )
+            	    // InternalBmod.g:153:4: ( (lv_rooms_3_0= ruleRoom ) )
+            	    // InternalBmod.g:154:5: (lv_rooms_3_0= ruleRoom )
             	    {
-            	    // InternalBmod.g:154:5: (lv_persons_3_0= rulePerson )
-            	    // InternalBmod.g:155:6: lv_persons_3_0= rulePerson
+            	    // InternalBmod.g:154:5: (lv_rooms_3_0= ruleRoom )
+            	    // InternalBmod.g:155:6: lv_rooms_3_0= ruleRoom
             	    {
 
-            	    						newCompositeNode(grammarAccess.getFloorplanAccess().getPersonsPersonParserRuleCall_1_2_0());
+            	    						newCompositeNode(grammarAccess.getFloorplanAccess().getRoomsRoomParserRuleCall_1_2_0());
             	    					
             	    pushFollow(FOLLOW_3);
-            	    lv_persons_3_0=rulePerson();
+            	    lv_rooms_3_0=ruleRoom();
 
             	    state._fsp--;
 
@@ -390,9 +406,9 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
             	    						}
             	    						add(
             	    							current,
-            	    							"persons",
-            	    							lv_persons_3_0,
-            	    							"org.xtext.bmod.Bmod.Person");
+            	    							"rooms",
+            	    							lv_rooms_3_0,
+            	    							"org.xtext.bmod.Bmod.Room");
             	    						afterParserOrEnumRuleCall();
             	    					
 
@@ -405,19 +421,19 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // InternalBmod.g:173:4: ( (lv_exits_4_0= ruleExit ) )
+            	    // InternalBmod.g:173:4: ( (lv_doors_4_0= ruleDoor ) )
             	    {
-            	    // InternalBmod.g:173:4: ( (lv_exits_4_0= ruleExit ) )
-            	    // InternalBmod.g:174:5: (lv_exits_4_0= ruleExit )
+            	    // InternalBmod.g:173:4: ( (lv_doors_4_0= ruleDoor ) )
+            	    // InternalBmod.g:174:5: (lv_doors_4_0= ruleDoor )
             	    {
-            	    // InternalBmod.g:174:5: (lv_exits_4_0= ruleExit )
-            	    // InternalBmod.g:175:6: lv_exits_4_0= ruleExit
+            	    // InternalBmod.g:174:5: (lv_doors_4_0= ruleDoor )
+            	    // InternalBmod.g:175:6: lv_doors_4_0= ruleDoor
             	    {
 
-            	    						newCompositeNode(grammarAccess.getFloorplanAccess().getExitsExitParserRuleCall_1_3_0());
+            	    						newCompositeNode(grammarAccess.getFloorplanAccess().getDoorsDoorParserRuleCall_1_3_0());
             	    					
             	    pushFollow(FOLLOW_3);
-            	    lv_exits_4_0=ruleExit();
+            	    lv_doors_4_0=ruleDoor();
 
             	    state._fsp--;
 
@@ -427,9 +443,9 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
             	    						}
             	    						add(
             	    							current,
-            	    							"exits",
-            	    							lv_exits_4_0,
-            	    							"org.xtext.bmod.Bmod.Exit");
+            	    							"doors",
+            	    							lv_doors_4_0,
+            	    							"org.xtext.bmod.Bmod.Door");
             	    						afterParserOrEnumRuleCall();
             	    					
 
@@ -442,19 +458,19 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 5 :
-            	    // InternalBmod.g:193:4: ( (lv_signs_5_0= ruleEmergencySign ) )
+            	    // InternalBmod.g:193:4: ( (lv_persons_5_0= rulePerson ) )
             	    {
-            	    // InternalBmod.g:193:4: ( (lv_signs_5_0= ruleEmergencySign ) )
-            	    // InternalBmod.g:194:5: (lv_signs_5_0= ruleEmergencySign )
+            	    // InternalBmod.g:193:4: ( (lv_persons_5_0= rulePerson ) )
+            	    // InternalBmod.g:194:5: (lv_persons_5_0= rulePerson )
             	    {
-            	    // InternalBmod.g:194:5: (lv_signs_5_0= ruleEmergencySign )
-            	    // InternalBmod.g:195:6: lv_signs_5_0= ruleEmergencySign
+            	    // InternalBmod.g:194:5: (lv_persons_5_0= rulePerson )
+            	    // InternalBmod.g:195:6: lv_persons_5_0= rulePerson
             	    {
 
-            	    						newCompositeNode(grammarAccess.getFloorplanAccess().getSignsEmergencySignParserRuleCall_1_4_0());
+            	    						newCompositeNode(grammarAccess.getFloorplanAccess().getPersonsPersonParserRuleCall_1_4_0());
             	    					
             	    pushFollow(FOLLOW_3);
-            	    lv_signs_5_0=ruleEmergencySign();
+            	    lv_persons_5_0=rulePerson();
 
             	    state._fsp--;
 
@@ -464,9 +480,9 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
             	    						}
             	    						add(
             	    							current,
-            	    							"signs",
-            	    							lv_signs_5_0,
-            	    							"org.xtext.bmod.Bmod.EmergencySign");
+            	    							"persons",
+            	    							lv_persons_5_0,
+            	    							"org.xtext.bmod.Bmod.Person");
             	    						afterParserOrEnumRuleCall();
             	    					
 
@@ -479,19 +495,93 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 6 :
-            	    // InternalBmod.g:213:4: ( (lv_dancons_6_0= ruleDangerousCondition ) )
+            	    // InternalBmod.g:213:4: ( (lv_exits_6_0= ruleExit ) )
             	    {
-            	    // InternalBmod.g:213:4: ( (lv_dancons_6_0= ruleDangerousCondition ) )
-            	    // InternalBmod.g:214:5: (lv_dancons_6_0= ruleDangerousCondition )
+            	    // InternalBmod.g:213:4: ( (lv_exits_6_0= ruleExit ) )
+            	    // InternalBmod.g:214:5: (lv_exits_6_0= ruleExit )
             	    {
-            	    // InternalBmod.g:214:5: (lv_dancons_6_0= ruleDangerousCondition )
-            	    // InternalBmod.g:215:6: lv_dancons_6_0= ruleDangerousCondition
+            	    // InternalBmod.g:214:5: (lv_exits_6_0= ruleExit )
+            	    // InternalBmod.g:215:6: lv_exits_6_0= ruleExit
             	    {
 
-            	    						newCompositeNode(grammarAccess.getFloorplanAccess().getDanconsDangerousConditionParserRuleCall_1_5_0());
+            	    						newCompositeNode(grammarAccess.getFloorplanAccess().getExitsExitParserRuleCall_1_5_0());
             	    					
             	    pushFollow(FOLLOW_3);
-            	    lv_dancons_6_0=ruleDangerousCondition();
+            	    lv_exits_6_0=ruleExit();
+
+            	    state._fsp--;
+
+
+            	    						if (current==null) {
+            	    							current = createModelElementForParent(grammarAccess.getFloorplanRule());
+            	    						}
+            	    						add(
+            	    							current,
+            	    							"exits",
+            	    							lv_exits_6_0,
+            	    							"org.xtext.bmod.Bmod.Exit");
+            	    						afterParserOrEnumRuleCall();
+            	    					
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 7 :
+            	    // InternalBmod.g:233:4: ( (lv_signs_7_0= ruleEmergencySign ) )
+            	    {
+            	    // InternalBmod.g:233:4: ( (lv_signs_7_0= ruleEmergencySign ) )
+            	    // InternalBmod.g:234:5: (lv_signs_7_0= ruleEmergencySign )
+            	    {
+            	    // InternalBmod.g:234:5: (lv_signs_7_0= ruleEmergencySign )
+            	    // InternalBmod.g:235:6: lv_signs_7_0= ruleEmergencySign
+            	    {
+
+            	    						newCompositeNode(grammarAccess.getFloorplanAccess().getSignsEmergencySignParserRuleCall_1_6_0());
+            	    					
+            	    pushFollow(FOLLOW_3);
+            	    lv_signs_7_0=ruleEmergencySign();
+
+            	    state._fsp--;
+
+
+            	    						if (current==null) {
+            	    							current = createModelElementForParent(grammarAccess.getFloorplanRule());
+            	    						}
+            	    						add(
+            	    							current,
+            	    							"signs",
+            	    							lv_signs_7_0,
+            	    							"org.xtext.bmod.Bmod.EmergencySign");
+            	    						afterParserOrEnumRuleCall();
+            	    					
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 8 :
+            	    // InternalBmod.g:253:4: ( (lv_dancons_8_0= ruleDangerousCondition ) )
+            	    {
+            	    // InternalBmod.g:253:4: ( (lv_dancons_8_0= ruleDangerousCondition ) )
+            	    // InternalBmod.g:254:5: (lv_dancons_8_0= ruleDangerousCondition )
+            	    {
+            	    // InternalBmod.g:254:5: (lv_dancons_8_0= ruleDangerousCondition )
+            	    // InternalBmod.g:255:6: lv_dancons_8_0= ruleDangerousCondition
+            	    {
+
+            	    						newCompositeNode(grammarAccess.getFloorplanAccess().getDanconsDangerousConditionParserRuleCall_1_7_0());
+            	    					
+            	    pushFollow(FOLLOW_3);
+            	    lv_dancons_8_0=ruleDangerousCondition();
 
             	    state._fsp--;
 
@@ -502,7 +592,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
             	    						add(
             	    							current,
             	    							"dancons",
-            	    							lv_dancons_6_0,
+            	    							lv_dancons_8_0,
             	    							"org.xtext.bmod.Bmod.DangerousCondition");
             	    						afterParserOrEnumRuleCall();
             	    					
@@ -544,7 +634,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRoom"
-    // InternalBmod.g:237:1: entryRuleRoom returns [EObject current=null] : iv_ruleRoom= ruleRoom EOF ;
+    // InternalBmod.g:277:1: entryRuleRoom returns [EObject current=null] : iv_ruleRoom= ruleRoom EOF ;
     public final EObject entryRuleRoom() throws RecognitionException {
         EObject current = null;
 
@@ -552,8 +642,8 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBmod.g:237:45: (iv_ruleRoom= ruleRoom EOF )
-            // InternalBmod.g:238:2: iv_ruleRoom= ruleRoom EOF
+            // InternalBmod.g:277:45: (iv_ruleRoom= ruleRoom EOF )
+            // InternalBmod.g:278:2: iv_ruleRoom= ruleRoom EOF
             {
              newCompositeNode(grammarAccess.getRoomRule()); 
             pushFollow(FOLLOW_1);
@@ -580,7 +670,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRoom"
-    // InternalBmod.g:244:1: ruleRoom returns [EObject current=null] : (otherlv_0= 'Room' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) ( (lv_areas_4_0= ruleArea ) ) (otherlv_5= 'and' ( (lv_areas_6_0= ruleArea ) ) )* ) ;
+    // InternalBmod.g:284:1: ruleRoom returns [EObject current=null] : (otherlv_0= 'Room' ( (lv_name_1_0= RULE_VARNAME ) ) (otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) )? ( (lv_areas_4_0= ruleArea ) ) (otherlv_5= 'and' ( (lv_areas_6_0= ruleArea ) ) )* ) ;
     public final EObject ruleRoom() throws RecognitionException {
         EObject current = null;
 
@@ -598,21 +688,21 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBmod.g:250:2: ( (otherlv_0= 'Room' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) ( (lv_areas_4_0= ruleArea ) ) (otherlv_5= 'and' ( (lv_areas_6_0= ruleArea ) ) )* ) )
-            // InternalBmod.g:251:2: (otherlv_0= 'Room' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) ( (lv_areas_4_0= ruleArea ) ) (otherlv_5= 'and' ( (lv_areas_6_0= ruleArea ) ) )* )
+            // InternalBmod.g:290:2: ( (otherlv_0= 'Room' ( (lv_name_1_0= RULE_VARNAME ) ) (otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) )? ( (lv_areas_4_0= ruleArea ) ) (otherlv_5= 'and' ( (lv_areas_6_0= ruleArea ) ) )* ) )
+            // InternalBmod.g:291:2: (otherlv_0= 'Room' ( (lv_name_1_0= RULE_VARNAME ) ) (otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) )? ( (lv_areas_4_0= ruleArea ) ) (otherlv_5= 'and' ( (lv_areas_6_0= ruleArea ) ) )* )
             {
-            // InternalBmod.g:251:2: (otherlv_0= 'Room' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) ( (lv_areas_4_0= ruleArea ) ) (otherlv_5= 'and' ( (lv_areas_6_0= ruleArea ) ) )* )
-            // InternalBmod.g:252:3: otherlv_0= 'Room' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) ( (lv_areas_4_0= ruleArea ) ) (otherlv_5= 'and' ( (lv_areas_6_0= ruleArea ) ) )*
+            // InternalBmod.g:291:2: (otherlv_0= 'Room' ( (lv_name_1_0= RULE_VARNAME ) ) (otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) )? ( (lv_areas_4_0= ruleArea ) ) (otherlv_5= 'and' ( (lv_areas_6_0= ruleArea ) ) )* )
+            // InternalBmod.g:292:3: otherlv_0= 'Room' ( (lv_name_1_0= RULE_VARNAME ) ) (otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) )? ( (lv_areas_4_0= ruleArea ) ) (otherlv_5= 'and' ( (lv_areas_6_0= ruleArea ) ) )*
             {
             otherlv_0=(Token)match(input,12,FOLLOW_4); 
 
             			newLeafNode(otherlv_0, grammarAccess.getRoomAccess().getRoomKeyword_0());
             		
-            // InternalBmod.g:256:3: ( (lv_name_1_0= RULE_VARNAME ) )
-            // InternalBmod.g:257:4: (lv_name_1_0= RULE_VARNAME )
+            // InternalBmod.g:296:3: ( (lv_name_1_0= RULE_VARNAME ) )
+            // InternalBmod.g:297:4: (lv_name_1_0= RULE_VARNAME )
             {
-            // InternalBmod.g:257:4: (lv_name_1_0= RULE_VARNAME )
-            // InternalBmod.g:258:5: lv_name_1_0= RULE_VARNAME
+            // InternalBmod.g:297:4: (lv_name_1_0= RULE_VARNAME )
+            // InternalBmod.g:298:5: lv_name_1_0= RULE_VARNAME
             {
             lv_name_1_0=(Token)match(input,RULE_VARNAME,FOLLOW_5); 
 
@@ -634,46 +724,63 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,13,FOLLOW_6); 
+            // InternalBmod.g:314:3: (otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) )?
+            int alt2=2;
+            int LA2_0 = input.LA(1);
 
-            			newLeafNode(otherlv_2, grammarAccess.getRoomAccess().getNamedKeyword_2());
-            		
-            // InternalBmod.g:278:3: ( (lv_named_3_0= RULE_STRING ) )
-            // InternalBmod.g:279:4: (lv_named_3_0= RULE_STRING )
-            {
-            // InternalBmod.g:279:4: (lv_named_3_0= RULE_STRING )
-            // InternalBmod.g:280:5: lv_named_3_0= RULE_STRING
-            {
-            lv_named_3_0=(Token)match(input,RULE_STRING,FOLLOW_7); 
+            if ( (LA2_0==13) ) {
+                alt2=1;
+            }
+            switch (alt2) {
+                case 1 :
+                    // InternalBmod.g:315:4: otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) )
+                    {
+                    otherlv_2=(Token)match(input,13,FOLLOW_6); 
 
-            					newLeafNode(lv_named_3_0, grammarAccess.getRoomAccess().getNamedSTRINGTerminalRuleCall_3_0());
-            				
+                    				newLeafNode(otherlv_2, grammarAccess.getRoomAccess().getNamedKeyword_2_0());
+                    			
+                    // InternalBmod.g:319:4: ( (lv_named_3_0= RULE_STRING ) )
+                    // InternalBmod.g:320:5: (lv_named_3_0= RULE_STRING )
+                    {
+                    // InternalBmod.g:320:5: (lv_named_3_0= RULE_STRING )
+                    // InternalBmod.g:321:6: lv_named_3_0= RULE_STRING
+                    {
+                    lv_named_3_0=(Token)match(input,RULE_STRING,FOLLOW_5); 
 
-            					if (current==null) {
-            						current = createModelElement(grammarAccess.getRoomRule());
-            					}
-            					setWithLastConsumed(
-            						current,
-            						"named",
-            						lv_named_3_0,
-            						"org.eclipse.xtext.common.Terminals.STRING");
-            				
+                    						newLeafNode(lv_named_3_0, grammarAccess.getRoomAccess().getNamedSTRINGTerminalRuleCall_2_1_0());
+                    					
+
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getRoomRule());
+                    						}
+                    						setWithLastConsumed(
+                    							current,
+                    							"named",
+                    							lv_named_3_0,
+                    							"org.eclipse.xtext.common.Terminals.STRING");
+                    					
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
 
             }
 
-
-            }
-
-            // InternalBmod.g:296:3: ( (lv_areas_4_0= ruleArea ) )
-            // InternalBmod.g:297:4: (lv_areas_4_0= ruleArea )
+            // InternalBmod.g:338:3: ( (lv_areas_4_0= ruleArea ) )
+            // InternalBmod.g:339:4: (lv_areas_4_0= ruleArea )
             {
-            // InternalBmod.g:297:4: (lv_areas_4_0= ruleArea )
-            // InternalBmod.g:298:5: lv_areas_4_0= ruleArea
+            // InternalBmod.g:339:4: (lv_areas_4_0= ruleArea )
+            // InternalBmod.g:340:5: lv_areas_4_0= ruleArea
             {
 
-            					newCompositeNode(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_4_0());
+            					newCompositeNode(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_3_0());
             				
-            pushFollow(FOLLOW_8);
+            pushFollow(FOLLOW_7);
             lv_areas_4_0=ruleArea();
 
             state._fsp--;
@@ -695,35 +802,35 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalBmod.g:315:3: (otherlv_5= 'and' ( (lv_areas_6_0= ruleArea ) ) )*
-            loop2:
+            // InternalBmod.g:357:3: (otherlv_5= 'and' ( (lv_areas_6_0= ruleArea ) ) )*
+            loop3:
             do {
-                int alt2=2;
-                int LA2_0 = input.LA(1);
+                int alt3=2;
+                int LA3_0 = input.LA(1);
 
-                if ( (LA2_0==14) ) {
-                    alt2=1;
+                if ( (LA3_0==14) ) {
+                    alt3=1;
                 }
 
 
-                switch (alt2) {
+                switch (alt3) {
             	case 1 :
-            	    // InternalBmod.g:316:4: otherlv_5= 'and' ( (lv_areas_6_0= ruleArea ) )
+            	    // InternalBmod.g:358:4: otherlv_5= 'and' ( (lv_areas_6_0= ruleArea ) )
             	    {
-            	    otherlv_5=(Token)match(input,14,FOLLOW_7); 
+            	    otherlv_5=(Token)match(input,14,FOLLOW_5); 
 
-            	    				newLeafNode(otherlv_5, grammarAccess.getRoomAccess().getAndKeyword_5_0());
+            	    				newLeafNode(otherlv_5, grammarAccess.getRoomAccess().getAndKeyword_4_0());
             	    			
-            	    // InternalBmod.g:320:4: ( (lv_areas_6_0= ruleArea ) )
-            	    // InternalBmod.g:321:5: (lv_areas_6_0= ruleArea )
+            	    // InternalBmod.g:362:4: ( (lv_areas_6_0= ruleArea ) )
+            	    // InternalBmod.g:363:5: (lv_areas_6_0= ruleArea )
             	    {
-            	    // InternalBmod.g:321:5: (lv_areas_6_0= ruleArea )
-            	    // InternalBmod.g:322:6: lv_areas_6_0= ruleArea
+            	    // InternalBmod.g:363:5: (lv_areas_6_0= ruleArea )
+            	    // InternalBmod.g:364:6: lv_areas_6_0= ruleArea
             	    {
 
-            	    						newCompositeNode(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_5_1_0());
+            	    						newCompositeNode(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_4_1_0());
             	    					
-            	    pushFollow(FOLLOW_8);
+            	    pushFollow(FOLLOW_7);
             	    lv_areas_6_0=ruleArea();
 
             	    state._fsp--;
@@ -750,7 +857,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop2;
+            	    break loop3;
                 }
             } while (true);
 
@@ -777,7 +884,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDoor"
-    // InternalBmod.g:344:1: entryRuleDoor returns [EObject current=null] : iv_ruleDoor= ruleDoor EOF ;
+    // InternalBmod.g:386:1: entryRuleDoor returns [EObject current=null] : iv_ruleDoor= ruleDoor EOF ;
     public final EObject entryRuleDoor() throws RecognitionException {
         EObject current = null;
 
@@ -785,8 +892,8 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBmod.g:344:45: (iv_ruleDoor= ruleDoor EOF )
-            // InternalBmod.g:345:2: iv_ruleDoor= ruleDoor EOF
+            // InternalBmod.g:386:45: (iv_ruleDoor= ruleDoor EOF )
+            // InternalBmod.g:387:2: iv_ruleDoor= ruleDoor EOF
             {
              newCompositeNode(grammarAccess.getDoorRule()); 
             pushFollow(FOLLOW_1);
@@ -813,7 +920,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDoor"
-    // InternalBmod.g:351:1: ruleDoor returns [EObject current=null] : (otherlv_0= 'Door' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'from' ( (lv_from_3_0= ruleCoordinate ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleCoordinate ) ) ) ;
+    // InternalBmod.g:393:1: ruleDoor returns [EObject current=null] : (otherlv_0= 'Door' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'from' ( (lv_from_3_0= ruleCoordinate ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleCoordinate ) ) ) ;
     public final EObject ruleDoor() throws RecognitionException {
         EObject current = null;
 
@@ -830,23 +937,23 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBmod.g:357:2: ( (otherlv_0= 'Door' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'from' ( (lv_from_3_0= ruleCoordinate ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleCoordinate ) ) ) )
-            // InternalBmod.g:358:2: (otherlv_0= 'Door' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'from' ( (lv_from_3_0= ruleCoordinate ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleCoordinate ) ) )
+            // InternalBmod.g:399:2: ( (otherlv_0= 'Door' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'from' ( (lv_from_3_0= ruleCoordinate ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleCoordinate ) ) ) )
+            // InternalBmod.g:400:2: (otherlv_0= 'Door' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'from' ( (lv_from_3_0= ruleCoordinate ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleCoordinate ) ) )
             {
-            // InternalBmod.g:358:2: (otherlv_0= 'Door' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'from' ( (lv_from_3_0= ruleCoordinate ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleCoordinate ) ) )
-            // InternalBmod.g:359:3: otherlv_0= 'Door' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'from' ( (lv_from_3_0= ruleCoordinate ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleCoordinate ) )
+            // InternalBmod.g:400:2: (otherlv_0= 'Door' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'from' ( (lv_from_3_0= ruleCoordinate ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleCoordinate ) ) )
+            // InternalBmod.g:401:3: otherlv_0= 'Door' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'from' ( (lv_from_3_0= ruleCoordinate ) ) otherlv_4= 'to' ( (lv_to_5_0= ruleCoordinate ) )
             {
             otherlv_0=(Token)match(input,15,FOLLOW_4); 
 
             			newLeafNode(otherlv_0, grammarAccess.getDoorAccess().getDoorKeyword_0());
             		
-            // InternalBmod.g:363:3: ( (lv_name_1_0= RULE_VARNAME ) )
-            // InternalBmod.g:364:4: (lv_name_1_0= RULE_VARNAME )
+            // InternalBmod.g:405:3: ( (lv_name_1_0= RULE_VARNAME ) )
+            // InternalBmod.g:406:4: (lv_name_1_0= RULE_VARNAME )
             {
-            // InternalBmod.g:364:4: (lv_name_1_0= RULE_VARNAME )
-            // InternalBmod.g:365:5: lv_name_1_0= RULE_VARNAME
+            // InternalBmod.g:406:4: (lv_name_1_0= RULE_VARNAME )
+            // InternalBmod.g:407:5: lv_name_1_0= RULE_VARNAME
             {
-            lv_name_1_0=(Token)match(input,RULE_VARNAME,FOLLOW_7); 
+            lv_name_1_0=(Token)match(input,RULE_VARNAME,FOLLOW_8); 
 
             					newLeafNode(lv_name_1_0, grammarAccess.getDoorAccess().getNameVARNAMETerminalRuleCall_1_0());
             				
@@ -870,11 +977,11 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_2, grammarAccess.getDoorAccess().getFromKeyword_2());
             		
-            // InternalBmod.g:385:3: ( (lv_from_3_0= ruleCoordinate ) )
-            // InternalBmod.g:386:4: (lv_from_3_0= ruleCoordinate )
+            // InternalBmod.g:427:3: ( (lv_from_3_0= ruleCoordinate ) )
+            // InternalBmod.g:428:4: (lv_from_3_0= ruleCoordinate )
             {
-            // InternalBmod.g:386:4: (lv_from_3_0= ruleCoordinate )
-            // InternalBmod.g:387:5: lv_from_3_0= ruleCoordinate
+            // InternalBmod.g:428:4: (lv_from_3_0= ruleCoordinate )
+            // InternalBmod.g:429:5: lv_from_3_0= ruleCoordinate
             {
 
             					newCompositeNode(grammarAccess.getDoorAccess().getFromCoordinateParserRuleCall_3_0());
@@ -905,11 +1012,11 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_4, grammarAccess.getDoorAccess().getToKeyword_4());
             		
-            // InternalBmod.g:408:3: ( (lv_to_5_0= ruleCoordinate ) )
-            // InternalBmod.g:409:4: (lv_to_5_0= ruleCoordinate )
+            // InternalBmod.g:450:3: ( (lv_to_5_0= ruleCoordinate ) )
+            // InternalBmod.g:451:4: (lv_to_5_0= ruleCoordinate )
             {
-            // InternalBmod.g:409:4: (lv_to_5_0= ruleCoordinate )
-            // InternalBmod.g:410:5: lv_to_5_0= ruleCoordinate
+            // InternalBmod.g:451:4: (lv_to_5_0= ruleCoordinate )
+            // InternalBmod.g:452:5: lv_to_5_0= ruleCoordinate
             {
 
             					newCompositeNode(grammarAccess.getDoorAccess().getToCoordinateParserRuleCall_5_0());
@@ -958,8 +1065,530 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleDoor"
 
 
+    // $ANTLR start "entryRulePerceptionLevel"
+    // InternalBmod.g:473:1: entryRulePerceptionLevel returns [EObject current=null] : iv_rulePerceptionLevel= rulePerceptionLevel EOF ;
+    public final EObject entryRulePerceptionLevel() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_rulePerceptionLevel = null;
+
+
+        try {
+            // InternalBmod.g:473:56: (iv_rulePerceptionLevel= rulePerceptionLevel EOF )
+            // InternalBmod.g:474:2: iv_rulePerceptionLevel= rulePerceptionLevel EOF
+            {
+             newCompositeNode(grammarAccess.getPerceptionLevelRule()); 
+            pushFollow(FOLLOW_1);
+            iv_rulePerceptionLevel=rulePerceptionLevel();
+
+            state._fsp--;
+
+             current =iv_rulePerceptionLevel; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRulePerceptionLevel"
+
+
+    // $ANTLR start "rulePerceptionLevel"
+    // InternalBmod.g:480:1: rulePerceptionLevel returns [EObject current=null] : (otherlv_0= 'PerceptionLevel' ( (lv_name_1_0= RULE_VARNAME ) ) ) ;
+    public final EObject rulePerceptionLevel() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token lv_name_1_0=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalBmod.g:486:2: ( (otherlv_0= 'PerceptionLevel' ( (lv_name_1_0= RULE_VARNAME ) ) ) )
+            // InternalBmod.g:487:2: (otherlv_0= 'PerceptionLevel' ( (lv_name_1_0= RULE_VARNAME ) ) )
+            {
+            // InternalBmod.g:487:2: (otherlv_0= 'PerceptionLevel' ( (lv_name_1_0= RULE_VARNAME ) ) )
+            // InternalBmod.g:488:3: otherlv_0= 'PerceptionLevel' ( (lv_name_1_0= RULE_VARNAME ) )
+            {
+            otherlv_0=(Token)match(input,18,FOLLOW_4); 
+
+            			newLeafNode(otherlv_0, grammarAccess.getPerceptionLevelAccess().getPerceptionLevelKeyword_0());
+            		
+            // InternalBmod.g:492:3: ( (lv_name_1_0= RULE_VARNAME ) )
+            // InternalBmod.g:493:4: (lv_name_1_0= RULE_VARNAME )
+            {
+            // InternalBmod.g:493:4: (lv_name_1_0= RULE_VARNAME )
+            // InternalBmod.g:494:5: lv_name_1_0= RULE_VARNAME
+            {
+            lv_name_1_0=(Token)match(input,RULE_VARNAME,FOLLOW_2); 
+
+            					newLeafNode(lv_name_1_0, grammarAccess.getPerceptionLevelAccess().getNameVARNAMETerminalRuleCall_1_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getPerceptionLevelRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.xtext.bmod.Bmod.VARNAME");
+            				
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "rulePerceptionLevel"
+
+
+    // $ANTLR start "entryRuleActionProfile"
+    // InternalBmod.g:514:1: entryRuleActionProfile returns [EObject current=null] : iv_ruleActionProfile= ruleActionProfile EOF ;
+    public final EObject entryRuleActionProfile() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleActionProfile = null;
+
+
+        try {
+            // InternalBmod.g:514:54: (iv_ruleActionProfile= ruleActionProfile EOF )
+            // InternalBmod.g:515:2: iv_ruleActionProfile= ruleActionProfile EOF
+            {
+             newCompositeNode(grammarAccess.getActionProfileRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleActionProfile=ruleActionProfile();
+
+            state._fsp--;
+
+             current =iv_ruleActionProfile; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleActionProfile"
+
+
+    // $ANTLR start "ruleActionProfile"
+    // InternalBmod.g:521:1: ruleActionProfile returns [EObject current=null] : (otherlv_0= 'ActionProfile' ( (lv_name_1_0= RULE_VARNAME ) ) ) ;
+    public final EObject ruleActionProfile() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token lv_name_1_0=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalBmod.g:527:2: ( (otherlv_0= 'ActionProfile' ( (lv_name_1_0= RULE_VARNAME ) ) ) )
+            // InternalBmod.g:528:2: (otherlv_0= 'ActionProfile' ( (lv_name_1_0= RULE_VARNAME ) ) )
+            {
+            // InternalBmod.g:528:2: (otherlv_0= 'ActionProfile' ( (lv_name_1_0= RULE_VARNAME ) ) )
+            // InternalBmod.g:529:3: otherlv_0= 'ActionProfile' ( (lv_name_1_0= RULE_VARNAME ) )
+            {
+            otherlv_0=(Token)match(input,19,FOLLOW_4); 
+
+            			newLeafNode(otherlv_0, grammarAccess.getActionProfileAccess().getActionProfileKeyword_0());
+            		
+            // InternalBmod.g:533:3: ( (lv_name_1_0= RULE_VARNAME ) )
+            // InternalBmod.g:534:4: (lv_name_1_0= RULE_VARNAME )
+            {
+            // InternalBmod.g:534:4: (lv_name_1_0= RULE_VARNAME )
+            // InternalBmod.g:535:5: lv_name_1_0= RULE_VARNAME
+            {
+            lv_name_1_0=(Token)match(input,RULE_VARNAME,FOLLOW_2); 
+
+            					newLeafNode(lv_name_1_0, grammarAccess.getActionProfileAccess().getNameVARNAMETerminalRuleCall_1_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getActionProfileRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.xtext.bmod.Bmod.VARNAME");
+            				
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleActionProfile"
+
+
+    // $ANTLR start "entryRulePerception"
+    // InternalBmod.g:555:1: entryRulePerception returns [EObject current=null] : iv_rulePerception= rulePerception EOF ;
+    public final EObject entryRulePerception() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_rulePerception = null;
+
+
+        try {
+            // InternalBmod.g:555:51: (iv_rulePerception= rulePerception EOF )
+            // InternalBmod.g:556:2: iv_rulePerception= rulePerception EOF
+            {
+             newCompositeNode(grammarAccess.getPerceptionRule()); 
+            pushFollow(FOLLOW_1);
+            iv_rulePerception=rulePerception();
+
+            state._fsp--;
+
+             current =iv_rulePerception; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRulePerception"
+
+
+    // $ANTLR start "rulePerception"
+    // InternalBmod.g:562:1: rulePerception returns [EObject current=null] : ( ( (lv_existing_0_0= rulePerceptionEnum ) ) | ( (otherlv_1= RULE_VARNAME ) ) ) ;
+    public final EObject rulePerception() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+        Enumerator lv_existing_0_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalBmod.g:568:2: ( ( ( (lv_existing_0_0= rulePerceptionEnum ) ) | ( (otherlv_1= RULE_VARNAME ) ) ) )
+            // InternalBmod.g:569:2: ( ( (lv_existing_0_0= rulePerceptionEnum ) ) | ( (otherlv_1= RULE_VARNAME ) ) )
+            {
+            // InternalBmod.g:569:2: ( ( (lv_existing_0_0= rulePerceptionEnum ) ) | ( (otherlv_1= RULE_VARNAME ) ) )
+            int alt4=2;
+            int LA4_0 = input.LA(1);
+
+            if ( ((LA4_0>=31 && LA4_0<=34)) ) {
+                alt4=1;
+            }
+            else if ( (LA4_0==RULE_VARNAME) ) {
+                alt4=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 4, 0, input);
+
+                throw nvae;
+            }
+            switch (alt4) {
+                case 1 :
+                    // InternalBmod.g:570:3: ( (lv_existing_0_0= rulePerceptionEnum ) )
+                    {
+                    // InternalBmod.g:570:3: ( (lv_existing_0_0= rulePerceptionEnum ) )
+                    // InternalBmod.g:571:4: (lv_existing_0_0= rulePerceptionEnum )
+                    {
+                    // InternalBmod.g:571:4: (lv_existing_0_0= rulePerceptionEnum )
+                    // InternalBmod.g:572:5: lv_existing_0_0= rulePerceptionEnum
+                    {
+
+                    					newCompositeNode(grammarAccess.getPerceptionAccess().getExistingPerceptionEnumEnumRuleCall_0_0());
+                    				
+                    pushFollow(FOLLOW_2);
+                    lv_existing_0_0=rulePerceptionEnum();
+
+                    state._fsp--;
+
+
+                    					if (current==null) {
+                    						current = createModelElementForParent(grammarAccess.getPerceptionRule());
+                    					}
+                    					set(
+                    						current,
+                    						"existing",
+                    						lv_existing_0_0,
+                    						"org.xtext.bmod.Bmod.PerceptionEnum");
+                    					afterParserOrEnumRuleCall();
+                    				
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalBmod.g:590:3: ( (otherlv_1= RULE_VARNAME ) )
+                    {
+                    // InternalBmod.g:590:3: ( (otherlv_1= RULE_VARNAME ) )
+                    // InternalBmod.g:591:4: (otherlv_1= RULE_VARNAME )
+                    {
+                    // InternalBmod.g:591:4: (otherlv_1= RULE_VARNAME )
+                    // InternalBmod.g:592:5: otherlv_1= RULE_VARNAME
+                    {
+
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getPerceptionRule());
+                    					}
+                    				
+                    otherlv_1=(Token)match(input,RULE_VARNAME,FOLLOW_2); 
+
+                    					newLeafNode(otherlv_1, grammarAccess.getPerceptionAccess().getCustomPerceptionLevelCrossReference_1_0());
+                    				
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "rulePerception"
+
+
+    // $ANTLR start "entryRuleAction"
+    // InternalBmod.g:607:1: entryRuleAction returns [EObject current=null] : iv_ruleAction= ruleAction EOF ;
+    public final EObject entryRuleAction() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleAction = null;
+
+
+        try {
+            // InternalBmod.g:607:47: (iv_ruleAction= ruleAction EOF )
+            // InternalBmod.g:608:2: iv_ruleAction= ruleAction EOF
+            {
+             newCompositeNode(grammarAccess.getActionRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleAction=ruleAction();
+
+            state._fsp--;
+
+             current =iv_ruleAction; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleAction"
+
+
+    // $ANTLR start "ruleAction"
+    // InternalBmod.g:614:1: ruleAction returns [EObject current=null] : ( ( (lv_existing_0_0= ruleActionEnum ) ) | ( (otherlv_1= RULE_VARNAME ) ) ) ;
+    public final EObject ruleAction() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+        Enumerator lv_existing_0_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalBmod.g:620:2: ( ( ( (lv_existing_0_0= ruleActionEnum ) ) | ( (otherlv_1= RULE_VARNAME ) ) ) )
+            // InternalBmod.g:621:2: ( ( (lv_existing_0_0= ruleActionEnum ) ) | ( (otherlv_1= RULE_VARNAME ) ) )
+            {
+            // InternalBmod.g:621:2: ( ( (lv_existing_0_0= ruleActionEnum ) ) | ( (otherlv_1= RULE_VARNAME ) ) )
+            int alt5=2;
+            int LA5_0 = input.LA(1);
+
+            if ( ((LA5_0>=35 && LA5_0<=37)) ) {
+                alt5=1;
+            }
+            else if ( (LA5_0==RULE_VARNAME) ) {
+                alt5=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 5, 0, input);
+
+                throw nvae;
+            }
+            switch (alt5) {
+                case 1 :
+                    // InternalBmod.g:622:3: ( (lv_existing_0_0= ruleActionEnum ) )
+                    {
+                    // InternalBmod.g:622:3: ( (lv_existing_0_0= ruleActionEnum ) )
+                    // InternalBmod.g:623:4: (lv_existing_0_0= ruleActionEnum )
+                    {
+                    // InternalBmod.g:623:4: (lv_existing_0_0= ruleActionEnum )
+                    // InternalBmod.g:624:5: lv_existing_0_0= ruleActionEnum
+                    {
+
+                    					newCompositeNode(grammarAccess.getActionAccess().getExistingActionEnumEnumRuleCall_0_0());
+                    				
+                    pushFollow(FOLLOW_2);
+                    lv_existing_0_0=ruleActionEnum();
+
+                    state._fsp--;
+
+
+                    					if (current==null) {
+                    						current = createModelElementForParent(grammarAccess.getActionRule());
+                    					}
+                    					set(
+                    						current,
+                    						"existing",
+                    						lv_existing_0_0,
+                    						"org.xtext.bmod.Bmod.ActionEnum");
+                    					afterParserOrEnumRuleCall();
+                    				
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalBmod.g:642:3: ( (otherlv_1= RULE_VARNAME ) )
+                    {
+                    // InternalBmod.g:642:3: ( (otherlv_1= RULE_VARNAME ) )
+                    // InternalBmod.g:643:4: (otherlv_1= RULE_VARNAME )
+                    {
+                    // InternalBmod.g:643:4: (otherlv_1= RULE_VARNAME )
+                    // InternalBmod.g:644:5: otherlv_1= RULE_VARNAME
+                    {
+
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getActionRule());
+                    					}
+                    				
+                    otherlv_1=(Token)match(input,RULE_VARNAME,FOLLOW_2); 
+
+                    					newLeafNode(otherlv_1, grammarAccess.getActionAccess().getCustomActionProfileCrossReference_1_0());
+                    				
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleAction"
+
+
     // $ANTLR start "entryRulePerson"
-    // InternalBmod.g:431:1: entryRulePerson returns [EObject current=null] : iv_rulePerson= rulePerson EOF ;
+    // InternalBmod.g:659:1: entryRulePerson returns [EObject current=null] : iv_rulePerson= rulePerson EOF ;
     public final EObject entryRulePerson() throws RecognitionException {
         EObject current = null;
 
@@ -967,8 +1596,8 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBmod.g:431:47: (iv_rulePerson= rulePerson EOF )
-            // InternalBmod.g:432:2: iv_rulePerson= rulePerson EOF
+            // InternalBmod.g:659:47: (iv_rulePerson= rulePerson EOF )
+            // InternalBmod.g:660:2: iv_rulePerson= rulePerson EOF
             {
              newCompositeNode(grammarAccess.getPersonRule()); 
             pushFollow(FOLLOW_1);
@@ -995,7 +1624,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePerson"
-    // InternalBmod.g:438:1: rulePerson returns [EObject current=null] : (otherlv_0= 'Person' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) otherlv_4= 'in' ( (lv_location_5_0= ruleCoordinate ) ) otherlv_6= ':' ( ( ( (lv_perception_7_0= rulePerception ) ) otherlv_8= ',' ( (lv_action_9_0= ruleAction ) ) ) | ( ( (lv_action_10_0= ruleAction ) ) otherlv_11= ',' ( (lv_perception_12_0= rulePerception ) ) ) ) ) ;
+    // InternalBmod.g:666:1: rulePerson returns [EObject current=null] : (otherlv_0= 'Person' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) otherlv_4= 'in' ( (lv_location_5_0= ruleCoordinate ) ) otherlv_6= ':' ( (lv_perception_7_0= rulePerception ) ) otherlv_8= ',' ( (lv_action_9_0= ruleAction ) ) ) ;
     public final EObject rulePerson() throws RecognitionException {
         EObject current = null;
 
@@ -1006,39 +1635,34 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
         Token otherlv_4=null;
         Token otherlv_6=null;
         Token otherlv_8=null;
-        Token otherlv_11=null;
         EObject lv_location_5_0 = null;
 
-        Enumerator lv_perception_7_0 = null;
+        EObject lv_perception_7_0 = null;
 
-        Enumerator lv_action_9_0 = null;
-
-        Enumerator lv_action_10_0 = null;
-
-        Enumerator lv_perception_12_0 = null;
+        EObject lv_action_9_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalBmod.g:444:2: ( (otherlv_0= 'Person' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) otherlv_4= 'in' ( (lv_location_5_0= ruleCoordinate ) ) otherlv_6= ':' ( ( ( (lv_perception_7_0= rulePerception ) ) otherlv_8= ',' ( (lv_action_9_0= ruleAction ) ) ) | ( ( (lv_action_10_0= ruleAction ) ) otherlv_11= ',' ( (lv_perception_12_0= rulePerception ) ) ) ) ) )
-            // InternalBmod.g:445:2: (otherlv_0= 'Person' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) otherlv_4= 'in' ( (lv_location_5_0= ruleCoordinate ) ) otherlv_6= ':' ( ( ( (lv_perception_7_0= rulePerception ) ) otherlv_8= ',' ( (lv_action_9_0= ruleAction ) ) ) | ( ( (lv_action_10_0= ruleAction ) ) otherlv_11= ',' ( (lv_perception_12_0= rulePerception ) ) ) ) )
+            // InternalBmod.g:672:2: ( (otherlv_0= 'Person' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) otherlv_4= 'in' ( (lv_location_5_0= ruleCoordinate ) ) otherlv_6= ':' ( (lv_perception_7_0= rulePerception ) ) otherlv_8= ',' ( (lv_action_9_0= ruleAction ) ) ) )
+            // InternalBmod.g:673:2: (otherlv_0= 'Person' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) otherlv_4= 'in' ( (lv_location_5_0= ruleCoordinate ) ) otherlv_6= ':' ( (lv_perception_7_0= rulePerception ) ) otherlv_8= ',' ( (lv_action_9_0= ruleAction ) ) )
             {
-            // InternalBmod.g:445:2: (otherlv_0= 'Person' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) otherlv_4= 'in' ( (lv_location_5_0= ruleCoordinate ) ) otherlv_6= ':' ( ( ( (lv_perception_7_0= rulePerception ) ) otherlv_8= ',' ( (lv_action_9_0= ruleAction ) ) ) | ( ( (lv_action_10_0= ruleAction ) ) otherlv_11= ',' ( (lv_perception_12_0= rulePerception ) ) ) ) )
-            // InternalBmod.g:446:3: otherlv_0= 'Person' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) otherlv_4= 'in' ( (lv_location_5_0= ruleCoordinate ) ) otherlv_6= ':' ( ( ( (lv_perception_7_0= rulePerception ) ) otherlv_8= ',' ( (lv_action_9_0= ruleAction ) ) ) | ( ( (lv_action_10_0= ruleAction ) ) otherlv_11= ',' ( (lv_perception_12_0= rulePerception ) ) ) )
+            // InternalBmod.g:673:2: (otherlv_0= 'Person' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) otherlv_4= 'in' ( (lv_location_5_0= ruleCoordinate ) ) otherlv_6= ':' ( (lv_perception_7_0= rulePerception ) ) otherlv_8= ',' ( (lv_action_9_0= ruleAction ) ) )
+            // InternalBmod.g:674:3: otherlv_0= 'Person' ( (lv_name_1_0= RULE_VARNAME ) ) otherlv_2= 'named' ( (lv_named_3_0= RULE_STRING ) ) otherlv_4= 'in' ( (lv_location_5_0= ruleCoordinate ) ) otherlv_6= ':' ( (lv_perception_7_0= rulePerception ) ) otherlv_8= ',' ( (lv_action_9_0= ruleAction ) )
             {
-            otherlv_0=(Token)match(input,18,FOLLOW_4); 
+            otherlv_0=(Token)match(input,20,FOLLOW_4); 
 
             			newLeafNode(otherlv_0, grammarAccess.getPersonAccess().getPersonKeyword_0());
             		
-            // InternalBmod.g:450:3: ( (lv_name_1_0= RULE_VARNAME ) )
-            // InternalBmod.g:451:4: (lv_name_1_0= RULE_VARNAME )
+            // InternalBmod.g:678:3: ( (lv_name_1_0= RULE_VARNAME ) )
+            // InternalBmod.g:679:4: (lv_name_1_0= RULE_VARNAME )
             {
-            // InternalBmod.g:451:4: (lv_name_1_0= RULE_VARNAME )
-            // InternalBmod.g:452:5: lv_name_1_0= RULE_VARNAME
+            // InternalBmod.g:679:4: (lv_name_1_0= RULE_VARNAME )
+            // InternalBmod.g:680:5: lv_name_1_0= RULE_VARNAME
             {
-            lv_name_1_0=(Token)match(input,RULE_VARNAME,FOLLOW_5); 
+            lv_name_1_0=(Token)match(input,RULE_VARNAME,FOLLOW_11); 
 
             					newLeafNode(lv_name_1_0, grammarAccess.getPersonAccess().getNameVARNAMETerminalRuleCall_1_0());
             				
@@ -1062,13 +1686,13 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_2, grammarAccess.getPersonAccess().getNamedKeyword_2());
             		
-            // InternalBmod.g:472:3: ( (lv_named_3_0= RULE_STRING ) )
-            // InternalBmod.g:473:4: (lv_named_3_0= RULE_STRING )
+            // InternalBmod.g:700:3: ( (lv_named_3_0= RULE_STRING ) )
+            // InternalBmod.g:701:4: (lv_named_3_0= RULE_STRING )
             {
-            // InternalBmod.g:473:4: (lv_named_3_0= RULE_STRING )
-            // InternalBmod.g:474:5: lv_named_3_0= RULE_STRING
+            // InternalBmod.g:701:4: (lv_named_3_0= RULE_STRING )
+            // InternalBmod.g:702:5: lv_named_3_0= RULE_STRING
             {
-            lv_named_3_0=(Token)match(input,RULE_STRING,FOLLOW_11); 
+            lv_named_3_0=(Token)match(input,RULE_STRING,FOLLOW_12); 
 
             					newLeafNode(lv_named_3_0, grammarAccess.getPersonAccess().getNamedSTRINGTerminalRuleCall_3_0());
             				
@@ -1088,20 +1712,20 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,19,FOLLOW_9); 
+            otherlv_4=(Token)match(input,21,FOLLOW_9); 
 
             			newLeafNode(otherlv_4, grammarAccess.getPersonAccess().getInKeyword_4());
             		
-            // InternalBmod.g:494:3: ( (lv_location_5_0= ruleCoordinate ) )
-            // InternalBmod.g:495:4: (lv_location_5_0= ruleCoordinate )
+            // InternalBmod.g:722:3: ( (lv_location_5_0= ruleCoordinate ) )
+            // InternalBmod.g:723:4: (lv_location_5_0= ruleCoordinate )
             {
-            // InternalBmod.g:495:4: (lv_location_5_0= ruleCoordinate )
-            // InternalBmod.g:496:5: lv_location_5_0= ruleCoordinate
+            // InternalBmod.g:723:4: (lv_location_5_0= ruleCoordinate )
+            // InternalBmod.g:724:5: lv_location_5_0= ruleCoordinate
             {
 
             					newCompositeNode(grammarAccess.getPersonAccess().getLocationCoordinateParserRuleCall_5_0());
             				
-            pushFollow(FOLLOW_12);
+            pushFollow(FOLLOW_13);
             lv_location_5_0=ruleCoordinate();
 
             state._fsp--;
@@ -1123,183 +1747,73 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_6=(Token)match(input,20,FOLLOW_13); 
+            otherlv_6=(Token)match(input,22,FOLLOW_14); 
 
             			newLeafNode(otherlv_6, grammarAccess.getPersonAccess().getColonKeyword_6());
             		
-            // InternalBmod.g:517:3: ( ( ( (lv_perception_7_0= rulePerception ) ) otherlv_8= ',' ( (lv_action_9_0= ruleAction ) ) ) | ( ( (lv_action_10_0= ruleAction ) ) otherlv_11= ',' ( (lv_perception_12_0= rulePerception ) ) ) )
-            int alt3=2;
-            int LA3_0 = input.LA(1);
+            // InternalBmod.g:745:3: ( (lv_perception_7_0= rulePerception ) )
+            // InternalBmod.g:746:4: (lv_perception_7_0= rulePerception )
+            {
+            // InternalBmod.g:746:4: (lv_perception_7_0= rulePerception )
+            // InternalBmod.g:747:5: lv_perception_7_0= rulePerception
+            {
 
-            if ( ((LA3_0>=29 && LA3_0<=32)) ) {
-                alt3=1;
+            					newCompositeNode(grammarAccess.getPersonAccess().getPerceptionPerceptionParserRuleCall_7_0());
+            				
+            pushFollow(FOLLOW_15);
+            lv_perception_7_0=rulePerception();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getPersonRule());
+            					}
+            					set(
+            						current,
+            						"perception",
+            						lv_perception_7_0,
+            						"org.xtext.bmod.Bmod.Perception");
+            					afterParserOrEnumRuleCall();
+            				
+
             }
-            else if ( ((LA3_0>=33 && LA3_0<=35)) ) {
-                alt3=2;
+
+
             }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 3, 0, input);
 
-                throw nvae;
+            otherlv_8=(Token)match(input,23,FOLLOW_16); 
+
+            			newLeafNode(otherlv_8, grammarAccess.getPersonAccess().getCommaKeyword_8());
+            		
+            // InternalBmod.g:768:3: ( (lv_action_9_0= ruleAction ) )
+            // InternalBmod.g:769:4: (lv_action_9_0= ruleAction )
+            {
+            // InternalBmod.g:769:4: (lv_action_9_0= ruleAction )
+            // InternalBmod.g:770:5: lv_action_9_0= ruleAction
+            {
+
+            					newCompositeNode(grammarAccess.getPersonAccess().getActionActionParserRuleCall_9_0());
+            				
+            pushFollow(FOLLOW_2);
+            lv_action_9_0=ruleAction();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getPersonRule());
+            					}
+            					set(
+            						current,
+            						"action",
+            						lv_action_9_0,
+            						"org.xtext.bmod.Bmod.Action");
+            					afterParserOrEnumRuleCall();
+            				
+
             }
-            switch (alt3) {
-                case 1 :
-                    // InternalBmod.g:518:4: ( ( (lv_perception_7_0= rulePerception ) ) otherlv_8= ',' ( (lv_action_9_0= ruleAction ) ) )
-                    {
-                    // InternalBmod.g:518:4: ( ( (lv_perception_7_0= rulePerception ) ) otherlv_8= ',' ( (lv_action_9_0= ruleAction ) ) )
-                    // InternalBmod.g:519:5: ( (lv_perception_7_0= rulePerception ) ) otherlv_8= ',' ( (lv_action_9_0= ruleAction ) )
-                    {
-                    // InternalBmod.g:519:5: ( (lv_perception_7_0= rulePerception ) )
-                    // InternalBmod.g:520:6: (lv_perception_7_0= rulePerception )
-                    {
-                    // InternalBmod.g:520:6: (lv_perception_7_0= rulePerception )
-                    // InternalBmod.g:521:7: lv_perception_7_0= rulePerception
-                    {
 
-                    							newCompositeNode(grammarAccess.getPersonAccess().getPerceptionPerceptionEnumRuleCall_7_0_0_0());
-                    						
-                    pushFollow(FOLLOW_14);
-                    lv_perception_7_0=rulePerception();
-
-                    state._fsp--;
-
-
-                    							if (current==null) {
-                    								current = createModelElementForParent(grammarAccess.getPersonRule());
-                    							}
-                    							set(
-                    								current,
-                    								"perception",
-                    								lv_perception_7_0,
-                    								"org.xtext.bmod.Bmod.Perception");
-                    							afterParserOrEnumRuleCall();
-                    						
-
-                    }
-
-
-                    }
-
-                    otherlv_8=(Token)match(input,21,FOLLOW_13); 
-
-                    					newLeafNode(otherlv_8, grammarAccess.getPersonAccess().getCommaKeyword_7_0_1());
-                    				
-                    // InternalBmod.g:542:5: ( (lv_action_9_0= ruleAction ) )
-                    // InternalBmod.g:543:6: (lv_action_9_0= ruleAction )
-                    {
-                    // InternalBmod.g:543:6: (lv_action_9_0= ruleAction )
-                    // InternalBmod.g:544:7: lv_action_9_0= ruleAction
-                    {
-
-                    							newCompositeNode(grammarAccess.getPersonAccess().getActionActionEnumRuleCall_7_0_2_0());
-                    						
-                    pushFollow(FOLLOW_2);
-                    lv_action_9_0=ruleAction();
-
-                    state._fsp--;
-
-
-                    							if (current==null) {
-                    								current = createModelElementForParent(grammarAccess.getPersonRule());
-                    							}
-                    							set(
-                    								current,
-                    								"action",
-                    								lv_action_9_0,
-                    								"org.xtext.bmod.Bmod.Action");
-                    							afterParserOrEnumRuleCall();
-                    						
-
-                    }
-
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // InternalBmod.g:563:4: ( ( (lv_action_10_0= ruleAction ) ) otherlv_11= ',' ( (lv_perception_12_0= rulePerception ) ) )
-                    {
-                    // InternalBmod.g:563:4: ( ( (lv_action_10_0= ruleAction ) ) otherlv_11= ',' ( (lv_perception_12_0= rulePerception ) ) )
-                    // InternalBmod.g:564:5: ( (lv_action_10_0= ruleAction ) ) otherlv_11= ',' ( (lv_perception_12_0= rulePerception ) )
-                    {
-                    // InternalBmod.g:564:5: ( (lv_action_10_0= ruleAction ) )
-                    // InternalBmod.g:565:6: (lv_action_10_0= ruleAction )
-                    {
-                    // InternalBmod.g:565:6: (lv_action_10_0= ruleAction )
-                    // InternalBmod.g:566:7: lv_action_10_0= ruleAction
-                    {
-
-                    							newCompositeNode(grammarAccess.getPersonAccess().getActionActionEnumRuleCall_7_1_0_0());
-                    						
-                    pushFollow(FOLLOW_14);
-                    lv_action_10_0=ruleAction();
-
-                    state._fsp--;
-
-
-                    							if (current==null) {
-                    								current = createModelElementForParent(grammarAccess.getPersonRule());
-                    							}
-                    							set(
-                    								current,
-                    								"action",
-                    								lv_action_10_0,
-                    								"org.xtext.bmod.Bmod.Action");
-                    							afterParserOrEnumRuleCall();
-                    						
-
-                    }
-
-
-                    }
-
-                    otherlv_11=(Token)match(input,21,FOLLOW_15); 
-
-                    					newLeafNode(otherlv_11, grammarAccess.getPersonAccess().getCommaKeyword_7_1_1());
-                    				
-                    // InternalBmod.g:587:5: ( (lv_perception_12_0= rulePerception ) )
-                    // InternalBmod.g:588:6: (lv_perception_12_0= rulePerception )
-                    {
-                    // InternalBmod.g:588:6: (lv_perception_12_0= rulePerception )
-                    // InternalBmod.g:589:7: lv_perception_12_0= rulePerception
-                    {
-
-                    							newCompositeNode(grammarAccess.getPersonAccess().getPerceptionPerceptionEnumRuleCall_7_1_2_0());
-                    						
-                    pushFollow(FOLLOW_2);
-                    lv_perception_12_0=rulePerception();
-
-                    state._fsp--;
-
-
-                    							if (current==null) {
-                    								current = createModelElementForParent(grammarAccess.getPersonRule());
-                    							}
-                    							set(
-                    								current,
-                    								"perception",
-                    								lv_perception_12_0,
-                    								"org.xtext.bmod.Bmod.Perception");
-                    							afterParserOrEnumRuleCall();
-                    						
-
-                    }
-
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
 
             }
 
@@ -1326,7 +1840,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleExit"
-    // InternalBmod.g:612:1: entryRuleExit returns [EObject current=null] : iv_ruleExit= ruleExit EOF ;
+    // InternalBmod.g:791:1: entryRuleExit returns [EObject current=null] : iv_ruleExit= ruleExit EOF ;
     public final EObject entryRuleExit() throws RecognitionException {
         EObject current = null;
 
@@ -1334,8 +1848,8 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBmod.g:612:45: (iv_ruleExit= ruleExit EOF )
-            // InternalBmod.g:613:2: iv_ruleExit= ruleExit EOF
+            // InternalBmod.g:791:45: (iv_ruleExit= ruleExit EOF )
+            // InternalBmod.g:792:2: iv_ruleExit= ruleExit EOF
             {
              newCompositeNode(grammarAccess.getExitRule()); 
             pushFollow(FOLLOW_1);
@@ -1362,7 +1876,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleExit"
-    // InternalBmod.g:619:1: ruleExit returns [EObject current=null] : (otherlv_0= 'Exit' otherlv_1= 'in' ( (lv_location_2_0= ruleCoordinate ) ) ) ;
+    // InternalBmod.g:798:1: ruleExit returns [EObject current=null] : (otherlv_0= 'Exit' otherlv_1= 'in' ( (lv_location_2_0= ruleCoordinate ) ) ) ;
     public final EObject ruleExit() throws RecognitionException {
         EObject current = null;
 
@@ -1375,25 +1889,25 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBmod.g:625:2: ( (otherlv_0= 'Exit' otherlv_1= 'in' ( (lv_location_2_0= ruleCoordinate ) ) ) )
-            // InternalBmod.g:626:2: (otherlv_0= 'Exit' otherlv_1= 'in' ( (lv_location_2_0= ruleCoordinate ) ) )
+            // InternalBmod.g:804:2: ( (otherlv_0= 'Exit' otherlv_1= 'in' ( (lv_location_2_0= ruleCoordinate ) ) ) )
+            // InternalBmod.g:805:2: (otherlv_0= 'Exit' otherlv_1= 'in' ( (lv_location_2_0= ruleCoordinate ) ) )
             {
-            // InternalBmod.g:626:2: (otherlv_0= 'Exit' otherlv_1= 'in' ( (lv_location_2_0= ruleCoordinate ) ) )
-            // InternalBmod.g:627:3: otherlv_0= 'Exit' otherlv_1= 'in' ( (lv_location_2_0= ruleCoordinate ) )
+            // InternalBmod.g:805:2: (otherlv_0= 'Exit' otherlv_1= 'in' ( (lv_location_2_0= ruleCoordinate ) ) )
+            // InternalBmod.g:806:3: otherlv_0= 'Exit' otherlv_1= 'in' ( (lv_location_2_0= ruleCoordinate ) )
             {
-            otherlv_0=(Token)match(input,22,FOLLOW_11); 
+            otherlv_0=(Token)match(input,24,FOLLOW_12); 
 
             			newLeafNode(otherlv_0, grammarAccess.getExitAccess().getExitKeyword_0());
             		
-            otherlv_1=(Token)match(input,19,FOLLOW_9); 
+            otherlv_1=(Token)match(input,21,FOLLOW_9); 
 
             			newLeafNode(otherlv_1, grammarAccess.getExitAccess().getInKeyword_1());
             		
-            // InternalBmod.g:635:3: ( (lv_location_2_0= ruleCoordinate ) )
-            // InternalBmod.g:636:4: (lv_location_2_0= ruleCoordinate )
+            // InternalBmod.g:814:3: ( (lv_location_2_0= ruleCoordinate ) )
+            // InternalBmod.g:815:4: (lv_location_2_0= ruleCoordinate )
             {
-            // InternalBmod.g:636:4: (lv_location_2_0= ruleCoordinate )
-            // InternalBmod.g:637:5: lv_location_2_0= ruleCoordinate
+            // InternalBmod.g:815:4: (lv_location_2_0= ruleCoordinate )
+            // InternalBmod.g:816:5: lv_location_2_0= ruleCoordinate
             {
 
             					newCompositeNode(grammarAccess.getExitAccess().getLocationCoordinateParserRuleCall_2_0());
@@ -1443,7 +1957,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEmergencySign"
-    // InternalBmod.g:658:1: entryRuleEmergencySign returns [EObject current=null] : iv_ruleEmergencySign= ruleEmergencySign EOF ;
+    // InternalBmod.g:837:1: entryRuleEmergencySign returns [EObject current=null] : iv_ruleEmergencySign= ruleEmergencySign EOF ;
     public final EObject entryRuleEmergencySign() throws RecognitionException {
         EObject current = null;
 
@@ -1451,8 +1965,8 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBmod.g:658:54: (iv_ruleEmergencySign= ruleEmergencySign EOF )
-            // InternalBmod.g:659:2: iv_ruleEmergencySign= ruleEmergencySign EOF
+            // InternalBmod.g:837:54: (iv_ruleEmergencySign= ruleEmergencySign EOF )
+            // InternalBmod.g:838:2: iv_ruleEmergencySign= ruleEmergencySign EOF
             {
              newCompositeNode(grammarAccess.getEmergencySignRule()); 
             pushFollow(FOLLOW_1);
@@ -1479,39 +1993,39 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEmergencySign"
-    // InternalBmod.g:665:1: ruleEmergencySign returns [EObject current=null] : (otherlv_0= 'Sign' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) otherlv_3= 'to' ( (otherlv_4= RULE_VARNAME ) ) ) ;
+    // InternalBmod.g:844:1: ruleEmergencySign returns [EObject current=null] : (otherlv_0= 'Sign' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) ( (lv_to_3_0= ruleDoorRef ) ) ) ;
     public final EObject ruleEmergencySign() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token otherlv_2=null;
-        Token otherlv_3=null;
-        Token otherlv_4=null;
+        EObject lv_to_3_0 = null;
+
 
 
         	enterRule();
 
         try {
-            // InternalBmod.g:671:2: ( (otherlv_0= 'Sign' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) otherlv_3= 'to' ( (otherlv_4= RULE_VARNAME ) ) ) )
-            // InternalBmod.g:672:2: (otherlv_0= 'Sign' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) otherlv_3= 'to' ( (otherlv_4= RULE_VARNAME ) ) )
+            // InternalBmod.g:850:2: ( (otherlv_0= 'Sign' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) ( (lv_to_3_0= ruleDoorRef ) ) ) )
+            // InternalBmod.g:851:2: (otherlv_0= 'Sign' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) ( (lv_to_3_0= ruleDoorRef ) ) )
             {
-            // InternalBmod.g:672:2: (otherlv_0= 'Sign' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) otherlv_3= 'to' ( (otherlv_4= RULE_VARNAME ) ) )
-            // InternalBmod.g:673:3: otherlv_0= 'Sign' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) otherlv_3= 'to' ( (otherlv_4= RULE_VARNAME ) )
+            // InternalBmod.g:851:2: (otherlv_0= 'Sign' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) ( (lv_to_3_0= ruleDoorRef ) ) )
+            // InternalBmod.g:852:3: otherlv_0= 'Sign' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) ( (lv_to_3_0= ruleDoorRef ) )
             {
-            otherlv_0=(Token)match(input,23,FOLLOW_16); 
+            otherlv_0=(Token)match(input,25,FOLLOW_17); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEmergencySignAccess().getSignKeyword_0());
             		
-            otherlv_1=(Token)match(input,24,FOLLOW_4); 
+            otherlv_1=(Token)match(input,26,FOLLOW_4); 
 
             			newLeafNode(otherlv_1, grammarAccess.getEmergencySignAccess().getOnKeyword_1());
             		
-            // InternalBmod.g:681:3: ( (otherlv_2= RULE_VARNAME ) )
-            // InternalBmod.g:682:4: (otherlv_2= RULE_VARNAME )
+            // InternalBmod.g:860:3: ( (otherlv_2= RULE_VARNAME ) )
+            // InternalBmod.g:861:4: (otherlv_2= RULE_VARNAME )
             {
-            // InternalBmod.g:682:4: (otherlv_2= RULE_VARNAME )
-            // InternalBmod.g:683:5: otherlv_2= RULE_VARNAME
+            // InternalBmod.g:861:4: (otherlv_2= RULE_VARNAME )
+            // InternalBmod.g:862:5: otherlv_2= RULE_VARNAME
             {
 
             					if (current==null) {
@@ -1528,24 +2042,30 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,17,FOLLOW_4); 
+            // InternalBmod.g:873:3: ( (lv_to_3_0= ruleDoorRef ) )
+            // InternalBmod.g:874:4: (lv_to_3_0= ruleDoorRef )
+            {
+            // InternalBmod.g:874:4: (lv_to_3_0= ruleDoorRef )
+            // InternalBmod.g:875:5: lv_to_3_0= ruleDoorRef
+            {
 
-            			newLeafNode(otherlv_3, grammarAccess.getEmergencySignAccess().getToKeyword_3());
-            		
-            // InternalBmod.g:698:3: ( (otherlv_4= RULE_VARNAME ) )
-            // InternalBmod.g:699:4: (otherlv_4= RULE_VARNAME )
-            {
-            // InternalBmod.g:699:4: (otherlv_4= RULE_VARNAME )
-            // InternalBmod.g:700:5: otherlv_4= RULE_VARNAME
-            {
+            					newCompositeNode(grammarAccess.getEmergencySignAccess().getToDoorRefParserRuleCall_3_0());
+            				
+            pushFollow(FOLLOW_2);
+            lv_to_3_0=ruleDoorRef();
+
+            state._fsp--;
+
 
             					if (current==null) {
-            						current = createModelElement(grammarAccess.getEmergencySignRule());
+            						current = createModelElementForParent(grammarAccess.getEmergencySignRule());
             					}
-            				
-            otherlv_4=(Token)match(input,RULE_VARNAME,FOLLOW_2); 
-
-            					newLeafNode(otherlv_4, grammarAccess.getEmergencySignAccess().getToDoorCrossReference_4_0());
+            					set(
+            						current,
+            						"to",
+            						lv_to_3_0,
+            						"org.xtext.bmod.Bmod.DoorRef");
+            					afterParserOrEnumRuleCall();
             				
 
             }
@@ -1575,8 +2095,109 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleEmergencySign"
 
 
+    // $ANTLR start "entryRuleDoorRef"
+    // InternalBmod.g:896:1: entryRuleDoorRef returns [EObject current=null] : iv_ruleDoorRef= ruleDoorRef EOF ;
+    public final EObject entryRuleDoorRef() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleDoorRef = null;
+
+
+        try {
+            // InternalBmod.g:896:48: (iv_ruleDoorRef= ruleDoorRef EOF )
+            // InternalBmod.g:897:2: iv_ruleDoorRef= ruleDoorRef EOF
+            {
+             newCompositeNode(grammarAccess.getDoorRefRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleDoorRef=ruleDoorRef();
+
+            state._fsp--;
+
+             current =iv_ruleDoorRef; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleDoorRef"
+
+
+    // $ANTLR start "ruleDoorRef"
+    // InternalBmod.g:903:1: ruleDoorRef returns [EObject current=null] : (otherlv_0= 'to' ( (otherlv_1= RULE_VARNAME ) ) ) ;
+    public final EObject ruleDoorRef() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token otherlv_1=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalBmod.g:909:2: ( (otherlv_0= 'to' ( (otherlv_1= RULE_VARNAME ) ) ) )
+            // InternalBmod.g:910:2: (otherlv_0= 'to' ( (otherlv_1= RULE_VARNAME ) ) )
+            {
+            // InternalBmod.g:910:2: (otherlv_0= 'to' ( (otherlv_1= RULE_VARNAME ) ) )
+            // InternalBmod.g:911:3: otherlv_0= 'to' ( (otherlv_1= RULE_VARNAME ) )
+            {
+            otherlv_0=(Token)match(input,17,FOLLOW_4); 
+
+            			newLeafNode(otherlv_0, grammarAccess.getDoorRefAccess().getToKeyword_0());
+            		
+            // InternalBmod.g:915:3: ( (otherlv_1= RULE_VARNAME ) )
+            // InternalBmod.g:916:4: (otherlv_1= RULE_VARNAME )
+            {
+            // InternalBmod.g:916:4: (otherlv_1= RULE_VARNAME )
+            // InternalBmod.g:917:5: otherlv_1= RULE_VARNAME
+            {
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getDoorRefRule());
+            					}
+            				
+            otherlv_1=(Token)match(input,RULE_VARNAME,FOLLOW_2); 
+
+            					newLeafNode(otherlv_1, grammarAccess.getDoorRefAccess().getRefDoorCrossReference_1_0());
+            				
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleDoorRef"
+
+
     // $ANTLR start "entryRuleDangerousCondition"
-    // InternalBmod.g:715:1: entryRuleDangerousCondition returns [EObject current=null] : iv_ruleDangerousCondition= ruleDangerousCondition EOF ;
+    // InternalBmod.g:932:1: entryRuleDangerousCondition returns [EObject current=null] : iv_ruleDangerousCondition= ruleDangerousCondition EOF ;
     public final EObject entryRuleDangerousCondition() throws RecognitionException {
         EObject current = null;
 
@@ -1584,8 +2205,8 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBmod.g:715:59: (iv_ruleDangerousCondition= ruleDangerousCondition EOF )
-            // InternalBmod.g:716:2: iv_ruleDangerousCondition= ruleDangerousCondition EOF
+            // InternalBmod.g:932:59: (iv_ruleDangerousCondition= ruleDangerousCondition EOF )
+            // InternalBmod.g:933:2: iv_ruleDangerousCondition= ruleDangerousCondition EOF
             {
              newCompositeNode(grammarAccess.getDangerousConditionRule()); 
             pushFollow(FOLLOW_1);
@@ -1612,7 +2233,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDangerousCondition"
-    // InternalBmod.g:722:1: ruleDangerousCondition returns [EObject current=null] : (otherlv_0= 'Condition' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) ( (lv_amount_3_0= RULE_INT ) ) ) ;
+    // InternalBmod.g:939:1: ruleDangerousCondition returns [EObject current=null] : (otherlv_0= 'Condition' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) ( (lv_amount_3_0= RULE_INT ) ) ) ;
     public final EObject ruleDangerousCondition() throws RecognitionException {
         EObject current = null;
 
@@ -1625,32 +2246,32 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBmod.g:728:2: ( (otherlv_0= 'Condition' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) ( (lv_amount_3_0= RULE_INT ) ) ) )
-            // InternalBmod.g:729:2: (otherlv_0= 'Condition' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) ( (lv_amount_3_0= RULE_INT ) ) )
+            // InternalBmod.g:945:2: ( (otherlv_0= 'Condition' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) ( (lv_amount_3_0= RULE_INT ) ) ) )
+            // InternalBmod.g:946:2: (otherlv_0= 'Condition' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) ( (lv_amount_3_0= RULE_INT ) ) )
             {
-            // InternalBmod.g:729:2: (otherlv_0= 'Condition' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) ( (lv_amount_3_0= RULE_INT ) ) )
-            // InternalBmod.g:730:3: otherlv_0= 'Condition' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) ( (lv_amount_3_0= RULE_INT ) )
+            // InternalBmod.g:946:2: (otherlv_0= 'Condition' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) ( (lv_amount_3_0= RULE_INT ) ) )
+            // InternalBmod.g:947:3: otherlv_0= 'Condition' otherlv_1= 'on' ( (otherlv_2= RULE_VARNAME ) ) ( (lv_amount_3_0= RULE_INT ) )
             {
-            otherlv_0=(Token)match(input,25,FOLLOW_16); 
+            otherlv_0=(Token)match(input,27,FOLLOW_17); 
 
             			newLeafNode(otherlv_0, grammarAccess.getDangerousConditionAccess().getConditionKeyword_0());
             		
-            otherlv_1=(Token)match(input,24,FOLLOW_4); 
+            otherlv_1=(Token)match(input,26,FOLLOW_4); 
 
             			newLeafNode(otherlv_1, grammarAccess.getDangerousConditionAccess().getOnKeyword_1());
             		
-            // InternalBmod.g:738:3: ( (otherlv_2= RULE_VARNAME ) )
-            // InternalBmod.g:739:4: (otherlv_2= RULE_VARNAME )
+            // InternalBmod.g:955:3: ( (otherlv_2= RULE_VARNAME ) )
+            // InternalBmod.g:956:4: (otherlv_2= RULE_VARNAME )
             {
-            // InternalBmod.g:739:4: (otherlv_2= RULE_VARNAME )
-            // InternalBmod.g:740:5: otherlv_2= RULE_VARNAME
+            // InternalBmod.g:956:4: (otherlv_2= RULE_VARNAME )
+            // InternalBmod.g:957:5: otherlv_2= RULE_VARNAME
             {
 
             					if (current==null) {
             						current = createModelElement(grammarAccess.getDangerousConditionRule());
             					}
             				
-            otherlv_2=(Token)match(input,RULE_VARNAME,FOLLOW_17); 
+            otherlv_2=(Token)match(input,RULE_VARNAME,FOLLOW_18); 
 
             					newLeafNode(otherlv_2, grammarAccess.getDangerousConditionAccess().getOnRoomCrossReference_2_0());
             				
@@ -1660,11 +2281,11 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalBmod.g:751:3: ( (lv_amount_3_0= RULE_INT ) )
-            // InternalBmod.g:752:4: (lv_amount_3_0= RULE_INT )
+            // InternalBmod.g:968:3: ( (lv_amount_3_0= RULE_INT ) )
+            // InternalBmod.g:969:4: (lv_amount_3_0= RULE_INT )
             {
-            // InternalBmod.g:752:4: (lv_amount_3_0= RULE_INT )
-            // InternalBmod.g:753:5: lv_amount_3_0= RULE_INT
+            // InternalBmod.g:969:4: (lv_amount_3_0= RULE_INT )
+            // InternalBmod.g:970:5: lv_amount_3_0= RULE_INT
             {
             lv_amount_3_0=(Token)match(input,RULE_INT,FOLLOW_2); 
 
@@ -1709,7 +2330,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleCoordinate"
-    // InternalBmod.g:773:1: entryRuleCoordinate returns [EObject current=null] : iv_ruleCoordinate= ruleCoordinate EOF ;
+    // InternalBmod.g:990:1: entryRuleCoordinate returns [EObject current=null] : iv_ruleCoordinate= ruleCoordinate EOF ;
     public final EObject entryRuleCoordinate() throws RecognitionException {
         EObject current = null;
 
@@ -1717,8 +2338,8 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBmod.g:773:51: (iv_ruleCoordinate= ruleCoordinate EOF )
-            // InternalBmod.g:774:2: iv_ruleCoordinate= ruleCoordinate EOF
+            // InternalBmod.g:990:51: (iv_ruleCoordinate= ruleCoordinate EOF )
+            // InternalBmod.g:991:2: iv_ruleCoordinate= ruleCoordinate EOF
             {
              newCompositeNode(grammarAccess.getCoordinateRule()); 
             pushFollow(FOLLOW_1);
@@ -1745,7 +2366,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCoordinate"
-    // InternalBmod.g:780:1: ruleCoordinate returns [EObject current=null] : (otherlv_0= '(' ( (lv_x_1_0= RULE_INT ) ) otherlv_2= ',' ( (lv_y_3_0= RULE_INT ) ) otherlv_4= ')' ) ;
+    // InternalBmod.g:997:1: ruleCoordinate returns [EObject current=null] : (otherlv_0= '(' ( (lv_x_1_0= RULE_INT ) ) otherlv_2= ',' ( (lv_y_3_0= RULE_INT ) ) otherlv_4= ')' ) ;
     public final EObject ruleCoordinate() throws RecognitionException {
         EObject current = null;
 
@@ -1759,23 +2380,23 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBmod.g:786:2: ( (otherlv_0= '(' ( (lv_x_1_0= RULE_INT ) ) otherlv_2= ',' ( (lv_y_3_0= RULE_INT ) ) otherlv_4= ')' ) )
-            // InternalBmod.g:787:2: (otherlv_0= '(' ( (lv_x_1_0= RULE_INT ) ) otherlv_2= ',' ( (lv_y_3_0= RULE_INT ) ) otherlv_4= ')' )
+            // InternalBmod.g:1003:2: ( (otherlv_0= '(' ( (lv_x_1_0= RULE_INT ) ) otherlv_2= ',' ( (lv_y_3_0= RULE_INT ) ) otherlv_4= ')' ) )
+            // InternalBmod.g:1004:2: (otherlv_0= '(' ( (lv_x_1_0= RULE_INT ) ) otherlv_2= ',' ( (lv_y_3_0= RULE_INT ) ) otherlv_4= ')' )
             {
-            // InternalBmod.g:787:2: (otherlv_0= '(' ( (lv_x_1_0= RULE_INT ) ) otherlv_2= ',' ( (lv_y_3_0= RULE_INT ) ) otherlv_4= ')' )
-            // InternalBmod.g:788:3: otherlv_0= '(' ( (lv_x_1_0= RULE_INT ) ) otherlv_2= ',' ( (lv_y_3_0= RULE_INT ) ) otherlv_4= ')'
+            // InternalBmod.g:1004:2: (otherlv_0= '(' ( (lv_x_1_0= RULE_INT ) ) otherlv_2= ',' ( (lv_y_3_0= RULE_INT ) ) otherlv_4= ')' )
+            // InternalBmod.g:1005:3: otherlv_0= '(' ( (lv_x_1_0= RULE_INT ) ) otherlv_2= ',' ( (lv_y_3_0= RULE_INT ) ) otherlv_4= ')'
             {
-            otherlv_0=(Token)match(input,26,FOLLOW_17); 
+            otherlv_0=(Token)match(input,28,FOLLOW_18); 
 
             			newLeafNode(otherlv_0, grammarAccess.getCoordinateAccess().getLeftParenthesisKeyword_0());
             		
-            // InternalBmod.g:792:3: ( (lv_x_1_0= RULE_INT ) )
-            // InternalBmod.g:793:4: (lv_x_1_0= RULE_INT )
+            // InternalBmod.g:1009:3: ( (lv_x_1_0= RULE_INT ) )
+            // InternalBmod.g:1010:4: (lv_x_1_0= RULE_INT )
             {
-            // InternalBmod.g:793:4: (lv_x_1_0= RULE_INT )
-            // InternalBmod.g:794:5: lv_x_1_0= RULE_INT
+            // InternalBmod.g:1010:4: (lv_x_1_0= RULE_INT )
+            // InternalBmod.g:1011:5: lv_x_1_0= RULE_INT
             {
-            lv_x_1_0=(Token)match(input,RULE_INT,FOLLOW_14); 
+            lv_x_1_0=(Token)match(input,RULE_INT,FOLLOW_15); 
 
             					newLeafNode(lv_x_1_0, grammarAccess.getCoordinateAccess().getXINTTerminalRuleCall_1_0());
             				
@@ -1795,17 +2416,17 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,21,FOLLOW_17); 
+            otherlv_2=(Token)match(input,23,FOLLOW_18); 
 
             			newLeafNode(otherlv_2, grammarAccess.getCoordinateAccess().getCommaKeyword_2());
             		
-            // InternalBmod.g:814:3: ( (lv_y_3_0= RULE_INT ) )
-            // InternalBmod.g:815:4: (lv_y_3_0= RULE_INT )
+            // InternalBmod.g:1031:3: ( (lv_y_3_0= RULE_INT ) )
+            // InternalBmod.g:1032:4: (lv_y_3_0= RULE_INT )
             {
-            // InternalBmod.g:815:4: (lv_y_3_0= RULE_INT )
-            // InternalBmod.g:816:5: lv_y_3_0= RULE_INT
+            // InternalBmod.g:1032:4: (lv_y_3_0= RULE_INT )
+            // InternalBmod.g:1033:5: lv_y_3_0= RULE_INT
             {
-            lv_y_3_0=(Token)match(input,RULE_INT,FOLLOW_18); 
+            lv_y_3_0=(Token)match(input,RULE_INT,FOLLOW_19); 
 
             					newLeafNode(lv_y_3_0, grammarAccess.getCoordinateAccess().getYINTTerminalRuleCall_3_0());
             				
@@ -1825,7 +2446,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,27,FOLLOW_2); 
+            otherlv_4=(Token)match(input,29,FOLLOW_2); 
 
             			newLeafNode(otherlv_4, grammarAccess.getCoordinateAccess().getRightParenthesisKeyword_4());
             		
@@ -1852,7 +2473,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleArea"
-    // InternalBmod.g:840:1: entryRuleArea returns [EObject current=null] : iv_ruleArea= ruleArea EOF ;
+    // InternalBmod.g:1057:1: entryRuleArea returns [EObject current=null] : iv_ruleArea= ruleArea EOF ;
     public final EObject entryRuleArea() throws RecognitionException {
         EObject current = null;
 
@@ -1860,8 +2481,8 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBmod.g:840:45: (iv_ruleArea= ruleArea EOF )
-            // InternalBmod.g:841:2: iv_ruleArea= ruleArea EOF
+            // InternalBmod.g:1057:45: (iv_ruleArea= ruleArea EOF )
+            // InternalBmod.g:1058:2: iv_ruleArea= ruleArea EOF
             {
              newCompositeNode(grammarAccess.getAreaRule()); 
             pushFollow(FOLLOW_1);
@@ -1888,7 +2509,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleArea"
-    // InternalBmod.g:847:1: ruleArea returns [EObject current=null] : (otherlv_0= 'from' ( (lv_from_1_0= ruleCoordinate ) ) otherlv_2= 'to' ( (lv_to_3_0= ruleCoordinate ) ) (otherlv_4= 'without' ( (lv_without_5_0= ruleCoordinate ) ) (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )* )? ) ;
+    // InternalBmod.g:1064:1: ruleArea returns [EObject current=null] : (otherlv_0= 'from' ( (lv_from_1_0= ruleCoordinate ) ) otherlv_2= 'to' ( (lv_to_3_0= ruleCoordinate ) ) (otherlv_4= 'without' ( (lv_without_5_0= ruleCoordinate ) ) (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )* )? ) ;
     public final EObject ruleArea() throws RecognitionException {
         EObject current = null;
 
@@ -1909,21 +2530,21 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBmod.g:853:2: ( (otherlv_0= 'from' ( (lv_from_1_0= ruleCoordinate ) ) otherlv_2= 'to' ( (lv_to_3_0= ruleCoordinate ) ) (otherlv_4= 'without' ( (lv_without_5_0= ruleCoordinate ) ) (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )* )? ) )
-            // InternalBmod.g:854:2: (otherlv_0= 'from' ( (lv_from_1_0= ruleCoordinate ) ) otherlv_2= 'to' ( (lv_to_3_0= ruleCoordinate ) ) (otherlv_4= 'without' ( (lv_without_5_0= ruleCoordinate ) ) (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )* )? )
+            // InternalBmod.g:1070:2: ( (otherlv_0= 'from' ( (lv_from_1_0= ruleCoordinate ) ) otherlv_2= 'to' ( (lv_to_3_0= ruleCoordinate ) ) (otherlv_4= 'without' ( (lv_without_5_0= ruleCoordinate ) ) (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )* )? ) )
+            // InternalBmod.g:1071:2: (otherlv_0= 'from' ( (lv_from_1_0= ruleCoordinate ) ) otherlv_2= 'to' ( (lv_to_3_0= ruleCoordinate ) ) (otherlv_4= 'without' ( (lv_without_5_0= ruleCoordinate ) ) (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )* )? )
             {
-            // InternalBmod.g:854:2: (otherlv_0= 'from' ( (lv_from_1_0= ruleCoordinate ) ) otherlv_2= 'to' ( (lv_to_3_0= ruleCoordinate ) ) (otherlv_4= 'without' ( (lv_without_5_0= ruleCoordinate ) ) (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )* )? )
-            // InternalBmod.g:855:3: otherlv_0= 'from' ( (lv_from_1_0= ruleCoordinate ) ) otherlv_2= 'to' ( (lv_to_3_0= ruleCoordinate ) ) (otherlv_4= 'without' ( (lv_without_5_0= ruleCoordinate ) ) (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )* )?
+            // InternalBmod.g:1071:2: (otherlv_0= 'from' ( (lv_from_1_0= ruleCoordinate ) ) otherlv_2= 'to' ( (lv_to_3_0= ruleCoordinate ) ) (otherlv_4= 'without' ( (lv_without_5_0= ruleCoordinate ) ) (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )* )? )
+            // InternalBmod.g:1072:3: otherlv_0= 'from' ( (lv_from_1_0= ruleCoordinate ) ) otherlv_2= 'to' ( (lv_to_3_0= ruleCoordinate ) ) (otherlv_4= 'without' ( (lv_without_5_0= ruleCoordinate ) ) (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )* )?
             {
             otherlv_0=(Token)match(input,16,FOLLOW_9); 
 
             			newLeafNode(otherlv_0, grammarAccess.getAreaAccess().getFromKeyword_0());
             		
-            // InternalBmod.g:859:3: ( (lv_from_1_0= ruleCoordinate ) )
-            // InternalBmod.g:860:4: (lv_from_1_0= ruleCoordinate )
+            // InternalBmod.g:1076:3: ( (lv_from_1_0= ruleCoordinate ) )
+            // InternalBmod.g:1077:4: (lv_from_1_0= ruleCoordinate )
             {
-            // InternalBmod.g:860:4: (lv_from_1_0= ruleCoordinate )
-            // InternalBmod.g:861:5: lv_from_1_0= ruleCoordinate
+            // InternalBmod.g:1077:4: (lv_from_1_0= ruleCoordinate )
+            // InternalBmod.g:1078:5: lv_from_1_0= ruleCoordinate
             {
 
             					newCompositeNode(grammarAccess.getAreaAccess().getFromCoordinateParserRuleCall_1_0());
@@ -1954,16 +2575,16 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_2, grammarAccess.getAreaAccess().getToKeyword_2());
             		
-            // InternalBmod.g:882:3: ( (lv_to_3_0= ruleCoordinate ) )
-            // InternalBmod.g:883:4: (lv_to_3_0= ruleCoordinate )
+            // InternalBmod.g:1099:3: ( (lv_to_3_0= ruleCoordinate ) )
+            // InternalBmod.g:1100:4: (lv_to_3_0= ruleCoordinate )
             {
-            // InternalBmod.g:883:4: (lv_to_3_0= ruleCoordinate )
-            // InternalBmod.g:884:5: lv_to_3_0= ruleCoordinate
+            // InternalBmod.g:1100:4: (lv_to_3_0= ruleCoordinate )
+            // InternalBmod.g:1101:5: lv_to_3_0= ruleCoordinate
             {
 
             					newCompositeNode(grammarAccess.getAreaAccess().getToCoordinateParserRuleCall_3_0());
             				
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_20);
             lv_to_3_0=ruleCoordinate();
 
             state._fsp--;
@@ -1985,31 +2606,31 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalBmod.g:901:3: (otherlv_4= 'without' ( (lv_without_5_0= ruleCoordinate ) ) (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )* )?
-            int alt5=2;
-            int LA5_0 = input.LA(1);
+            // InternalBmod.g:1118:3: (otherlv_4= 'without' ( (lv_without_5_0= ruleCoordinate ) ) (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )* )?
+            int alt7=2;
+            int LA7_0 = input.LA(1);
 
-            if ( (LA5_0==28) ) {
-                alt5=1;
+            if ( (LA7_0==30) ) {
+                alt7=1;
             }
-            switch (alt5) {
+            switch (alt7) {
                 case 1 :
-                    // InternalBmod.g:902:4: otherlv_4= 'without' ( (lv_without_5_0= ruleCoordinate ) ) (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )*
+                    // InternalBmod.g:1119:4: otherlv_4= 'without' ( (lv_without_5_0= ruleCoordinate ) ) (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )*
                     {
-                    otherlv_4=(Token)match(input,28,FOLLOW_9); 
+                    otherlv_4=(Token)match(input,30,FOLLOW_9); 
 
                     				newLeafNode(otherlv_4, grammarAccess.getAreaAccess().getWithoutKeyword_4_0());
                     			
-                    // InternalBmod.g:906:4: ( (lv_without_5_0= ruleCoordinate ) )
-                    // InternalBmod.g:907:5: (lv_without_5_0= ruleCoordinate )
+                    // InternalBmod.g:1123:4: ( (lv_without_5_0= ruleCoordinate ) )
+                    // InternalBmod.g:1124:5: (lv_without_5_0= ruleCoordinate )
                     {
-                    // InternalBmod.g:907:5: (lv_without_5_0= ruleCoordinate )
-                    // InternalBmod.g:908:6: lv_without_5_0= ruleCoordinate
+                    // InternalBmod.g:1124:5: (lv_without_5_0= ruleCoordinate )
+                    // InternalBmod.g:1125:6: lv_without_5_0= ruleCoordinate
                     {
 
                     						newCompositeNode(grammarAccess.getAreaAccess().getWithoutCoordinateParserRuleCall_4_1_0());
                     					
-                    pushFollow(FOLLOW_20);
+                    pushFollow(FOLLOW_21);
                     lv_without_5_0=ruleCoordinate();
 
                     state._fsp--;
@@ -2031,35 +2652,35 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalBmod.g:925:4: (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )*
-                    loop4:
+                    // InternalBmod.g:1142:4: (otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) ) )*
+                    loop6:
                     do {
-                        int alt4=2;
-                        int LA4_0 = input.LA(1);
+                        int alt6=2;
+                        int LA6_0 = input.LA(1);
 
-                        if ( (LA4_0==21) ) {
-                            alt4=1;
+                        if ( (LA6_0==23) ) {
+                            alt6=1;
                         }
 
 
-                        switch (alt4) {
+                        switch (alt6) {
                     	case 1 :
-                    	    // InternalBmod.g:926:5: otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) )
+                    	    // InternalBmod.g:1143:5: otherlv_6= ',' ( (lv_without_7_0= ruleCoordinate ) )
                     	    {
-                    	    otherlv_6=(Token)match(input,21,FOLLOW_9); 
+                    	    otherlv_6=(Token)match(input,23,FOLLOW_9); 
 
                     	    					newLeafNode(otherlv_6, grammarAccess.getAreaAccess().getCommaKeyword_4_2_0());
                     	    				
-                    	    // InternalBmod.g:930:5: ( (lv_without_7_0= ruleCoordinate ) )
-                    	    // InternalBmod.g:931:6: (lv_without_7_0= ruleCoordinate )
+                    	    // InternalBmod.g:1147:5: ( (lv_without_7_0= ruleCoordinate ) )
+                    	    // InternalBmod.g:1148:6: (lv_without_7_0= ruleCoordinate )
                     	    {
-                    	    // InternalBmod.g:931:6: (lv_without_7_0= ruleCoordinate )
-                    	    // InternalBmod.g:932:7: lv_without_7_0= ruleCoordinate
+                    	    // InternalBmod.g:1148:6: (lv_without_7_0= ruleCoordinate )
+                    	    // InternalBmod.g:1149:7: lv_without_7_0= ruleCoordinate
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getAreaAccess().getWithoutCoordinateParserRuleCall_4_2_1_0());
                     	    						
-                    	    pushFollow(FOLLOW_20);
+                    	    pushFollow(FOLLOW_21);
                     	    lv_without_7_0=ruleCoordinate();
 
                     	    state._fsp--;
@@ -2086,7 +2707,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop4;
+                    	    break loop6;
                         }
                     } while (true);
 
@@ -2118,9 +2739,9 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleArea"
 
 
-    // $ANTLR start "rulePerception"
-    // InternalBmod.g:955:1: rulePerception returns [Enumerator current=null] : ( (enumLiteral_0= 'attentive' ) | (enumLiteral_1= 'relaxed' ) | (enumLiteral_2= 'optimistic' ) | (enumLiteral_3= 'sceptic' ) ) ;
-    public final Enumerator rulePerception() throws RecognitionException {
+    // $ANTLR start "rulePerceptionEnum"
+    // InternalBmod.g:1172:1: rulePerceptionEnum returns [Enumerator current=null] : ( (enumLiteral_0= 'attentive' ) | (enumLiteral_1= 'relaxed' ) | (enumLiteral_2= 'optimistic' ) | (enumLiteral_3= 'sceptic' ) ) ;
+    public final Enumerator rulePerceptionEnum() throws RecognitionException {
         Enumerator current = null;
 
         Token enumLiteral_0=null;
@@ -2132,50 +2753,50 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBmod.g:961:2: ( ( (enumLiteral_0= 'attentive' ) | (enumLiteral_1= 'relaxed' ) | (enumLiteral_2= 'optimistic' ) | (enumLiteral_3= 'sceptic' ) ) )
-            // InternalBmod.g:962:2: ( (enumLiteral_0= 'attentive' ) | (enumLiteral_1= 'relaxed' ) | (enumLiteral_2= 'optimistic' ) | (enumLiteral_3= 'sceptic' ) )
+            // InternalBmod.g:1178:2: ( ( (enumLiteral_0= 'attentive' ) | (enumLiteral_1= 'relaxed' ) | (enumLiteral_2= 'optimistic' ) | (enumLiteral_3= 'sceptic' ) ) )
+            // InternalBmod.g:1179:2: ( (enumLiteral_0= 'attentive' ) | (enumLiteral_1= 'relaxed' ) | (enumLiteral_2= 'optimistic' ) | (enumLiteral_3= 'sceptic' ) )
             {
-            // InternalBmod.g:962:2: ( (enumLiteral_0= 'attentive' ) | (enumLiteral_1= 'relaxed' ) | (enumLiteral_2= 'optimistic' ) | (enumLiteral_3= 'sceptic' ) )
-            int alt6=4;
+            // InternalBmod.g:1179:2: ( (enumLiteral_0= 'attentive' ) | (enumLiteral_1= 'relaxed' ) | (enumLiteral_2= 'optimistic' ) | (enumLiteral_3= 'sceptic' ) )
+            int alt8=4;
             switch ( input.LA(1) ) {
-            case 29:
-                {
-                alt6=1;
-                }
-                break;
-            case 30:
-                {
-                alt6=2;
-                }
-                break;
             case 31:
                 {
-                alt6=3;
+                alt8=1;
                 }
                 break;
             case 32:
                 {
-                alt6=4;
+                alt8=2;
+                }
+                break;
+            case 33:
+                {
+                alt8=3;
+                }
+                break;
+            case 34:
+                {
+                alt8=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 6, 0, input);
+                    new NoViableAltException("", 8, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt6) {
+            switch (alt8) {
                 case 1 :
-                    // InternalBmod.g:963:3: (enumLiteral_0= 'attentive' )
+                    // InternalBmod.g:1180:3: (enumLiteral_0= 'attentive' )
                     {
-                    // InternalBmod.g:963:3: (enumLiteral_0= 'attentive' )
-                    // InternalBmod.g:964:4: enumLiteral_0= 'attentive'
+                    // InternalBmod.g:1180:3: (enumLiteral_0= 'attentive' )
+                    // InternalBmod.g:1181:4: enumLiteral_0= 'attentive'
                     {
-                    enumLiteral_0=(Token)match(input,29,FOLLOW_2); 
+                    enumLiteral_0=(Token)match(input,31,FOLLOW_2); 
 
-                    				current = grammarAccess.getPerceptionAccess().getATTENTIVEEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-                    				newLeafNode(enumLiteral_0, grammarAccess.getPerceptionAccess().getATTENTIVEEnumLiteralDeclaration_0());
+                    				current = grammarAccess.getPerceptionEnumAccess().getAttentiveEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_0, grammarAccess.getPerceptionEnumAccess().getAttentiveEnumLiteralDeclaration_0());
                     			
 
                     }
@@ -2184,15 +2805,15 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalBmod.g:971:3: (enumLiteral_1= 'relaxed' )
+                    // InternalBmod.g:1188:3: (enumLiteral_1= 'relaxed' )
                     {
-                    // InternalBmod.g:971:3: (enumLiteral_1= 'relaxed' )
-                    // InternalBmod.g:972:4: enumLiteral_1= 'relaxed'
+                    // InternalBmod.g:1188:3: (enumLiteral_1= 'relaxed' )
+                    // InternalBmod.g:1189:4: enumLiteral_1= 'relaxed'
                     {
-                    enumLiteral_1=(Token)match(input,30,FOLLOW_2); 
+                    enumLiteral_1=(Token)match(input,32,FOLLOW_2); 
 
-                    				current = grammarAccess.getPerceptionAccess().getRELAXEDEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-                    				newLeafNode(enumLiteral_1, grammarAccess.getPerceptionAccess().getRELAXEDEnumLiteralDeclaration_1());
+                    				current = grammarAccess.getPerceptionEnumAccess().getRelaxedEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_1, grammarAccess.getPerceptionEnumAccess().getRelaxedEnumLiteralDeclaration_1());
                     			
 
                     }
@@ -2201,15 +2822,15 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalBmod.g:979:3: (enumLiteral_2= 'optimistic' )
+                    // InternalBmod.g:1196:3: (enumLiteral_2= 'optimistic' )
                     {
-                    // InternalBmod.g:979:3: (enumLiteral_2= 'optimistic' )
-                    // InternalBmod.g:980:4: enumLiteral_2= 'optimistic'
+                    // InternalBmod.g:1196:3: (enumLiteral_2= 'optimistic' )
+                    // InternalBmod.g:1197:4: enumLiteral_2= 'optimistic'
                     {
-                    enumLiteral_2=(Token)match(input,31,FOLLOW_2); 
+                    enumLiteral_2=(Token)match(input,33,FOLLOW_2); 
 
-                    				current = grammarAccess.getPerceptionAccess().getOPTIMISTICEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-                    				newLeafNode(enumLiteral_2, grammarAccess.getPerceptionAccess().getOPTIMISTICEnumLiteralDeclaration_2());
+                    				current = grammarAccess.getPerceptionEnumAccess().getOptimisticEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_2, grammarAccess.getPerceptionEnumAccess().getOptimisticEnumLiteralDeclaration_2());
                     			
 
                     }
@@ -2218,15 +2839,15 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalBmod.g:987:3: (enumLiteral_3= 'sceptic' )
+                    // InternalBmod.g:1204:3: (enumLiteral_3= 'sceptic' )
                     {
-                    // InternalBmod.g:987:3: (enumLiteral_3= 'sceptic' )
-                    // InternalBmod.g:988:4: enumLiteral_3= 'sceptic'
+                    // InternalBmod.g:1204:3: (enumLiteral_3= 'sceptic' )
+                    // InternalBmod.g:1205:4: enumLiteral_3= 'sceptic'
                     {
-                    enumLiteral_3=(Token)match(input,32,FOLLOW_2); 
+                    enumLiteral_3=(Token)match(input,34,FOLLOW_2); 
 
-                    				current = grammarAccess.getPerceptionAccess().getSCEPTICEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
-                    				newLeafNode(enumLiteral_3, grammarAccess.getPerceptionAccess().getSCEPTICEnumLiteralDeclaration_3());
+                    				current = grammarAccess.getPerceptionEnumAccess().getScepticEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_3, grammarAccess.getPerceptionEnumAccess().getScepticEnumLiteralDeclaration_3());
                     			
 
                     }
@@ -2253,12 +2874,12 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "rulePerception"
+    // $ANTLR end "rulePerceptionEnum"
 
 
-    // $ANTLR start "ruleAction"
-    // InternalBmod.g:998:1: ruleAction returns [Enumerator current=null] : ( (enumLiteral_0= 'newcomer' ) | (enumLiteral_1= 'experienced' ) | (enumLiteral_2= 'panic' ) ) ;
-    public final Enumerator ruleAction() throws RecognitionException {
+    // $ANTLR start "ruleActionEnum"
+    // InternalBmod.g:1215:1: ruleActionEnum returns [Enumerator current=null] : ( (enumLiteral_0= 'newcomer' ) | (enumLiteral_1= 'experienced' ) | (enumLiteral_2= 'panic' ) ) ;
+    public final Enumerator ruleActionEnum() throws RecognitionException {
         Enumerator current = null;
 
         Token enumLiteral_0=null;
@@ -2269,45 +2890,45 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBmod.g:1004:2: ( ( (enumLiteral_0= 'newcomer' ) | (enumLiteral_1= 'experienced' ) | (enumLiteral_2= 'panic' ) ) )
-            // InternalBmod.g:1005:2: ( (enumLiteral_0= 'newcomer' ) | (enumLiteral_1= 'experienced' ) | (enumLiteral_2= 'panic' ) )
+            // InternalBmod.g:1221:2: ( ( (enumLiteral_0= 'newcomer' ) | (enumLiteral_1= 'experienced' ) | (enumLiteral_2= 'panic' ) ) )
+            // InternalBmod.g:1222:2: ( (enumLiteral_0= 'newcomer' ) | (enumLiteral_1= 'experienced' ) | (enumLiteral_2= 'panic' ) )
             {
-            // InternalBmod.g:1005:2: ( (enumLiteral_0= 'newcomer' ) | (enumLiteral_1= 'experienced' ) | (enumLiteral_2= 'panic' ) )
-            int alt7=3;
+            // InternalBmod.g:1222:2: ( (enumLiteral_0= 'newcomer' ) | (enumLiteral_1= 'experienced' ) | (enumLiteral_2= 'panic' ) )
+            int alt9=3;
             switch ( input.LA(1) ) {
-            case 33:
-                {
-                alt7=1;
-                }
-                break;
-            case 34:
-                {
-                alt7=2;
-                }
-                break;
             case 35:
                 {
-                alt7=3;
+                alt9=1;
+                }
+                break;
+            case 36:
+                {
+                alt9=2;
+                }
+                break;
+            case 37:
+                {
+                alt9=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 7, 0, input);
+                    new NoViableAltException("", 9, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt7) {
+            switch (alt9) {
                 case 1 :
-                    // InternalBmod.g:1006:3: (enumLiteral_0= 'newcomer' )
+                    // InternalBmod.g:1223:3: (enumLiteral_0= 'newcomer' )
                     {
-                    // InternalBmod.g:1006:3: (enumLiteral_0= 'newcomer' )
-                    // InternalBmod.g:1007:4: enumLiteral_0= 'newcomer'
+                    // InternalBmod.g:1223:3: (enumLiteral_0= 'newcomer' )
+                    // InternalBmod.g:1224:4: enumLiteral_0= 'newcomer'
                     {
-                    enumLiteral_0=(Token)match(input,33,FOLLOW_2); 
+                    enumLiteral_0=(Token)match(input,35,FOLLOW_2); 
 
-                    				current = grammarAccess.getActionAccess().getNEWCOMEREnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-                    				newLeafNode(enumLiteral_0, grammarAccess.getActionAccess().getNEWCOMEREnumLiteralDeclaration_0());
+                    				current = grammarAccess.getActionEnumAccess().getNewcomerEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_0, grammarAccess.getActionEnumAccess().getNewcomerEnumLiteralDeclaration_0());
                     			
 
                     }
@@ -2316,15 +2937,15 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalBmod.g:1014:3: (enumLiteral_1= 'experienced' )
+                    // InternalBmod.g:1231:3: (enumLiteral_1= 'experienced' )
                     {
-                    // InternalBmod.g:1014:3: (enumLiteral_1= 'experienced' )
-                    // InternalBmod.g:1015:4: enumLiteral_1= 'experienced'
+                    // InternalBmod.g:1231:3: (enumLiteral_1= 'experienced' )
+                    // InternalBmod.g:1232:4: enumLiteral_1= 'experienced'
                     {
-                    enumLiteral_1=(Token)match(input,34,FOLLOW_2); 
+                    enumLiteral_1=(Token)match(input,36,FOLLOW_2); 
 
-                    				current = grammarAccess.getActionAccess().getEXPERIENCEDEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-                    				newLeafNode(enumLiteral_1, grammarAccess.getActionAccess().getEXPERIENCEDEnumLiteralDeclaration_1());
+                    				current = grammarAccess.getActionEnumAccess().getExperiencedEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_1, grammarAccess.getActionEnumAccess().getExperiencedEnumLiteralDeclaration_1());
                     			
 
                     }
@@ -2333,15 +2954,15 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalBmod.g:1022:3: (enumLiteral_2= 'panic' )
+                    // InternalBmod.g:1239:3: (enumLiteral_2= 'panic' )
                     {
-                    // InternalBmod.g:1022:3: (enumLiteral_2= 'panic' )
-                    // InternalBmod.g:1023:4: enumLiteral_2= 'panic'
+                    // InternalBmod.g:1239:3: (enumLiteral_2= 'panic' )
+                    // InternalBmod.g:1240:4: enumLiteral_2= 'panic'
                     {
-                    enumLiteral_2=(Token)match(input,35,FOLLOW_2); 
+                    enumLiteral_2=(Token)match(input,37,FOLLOW_2); 
 
-                    				current = grammarAccess.getActionAccess().getPANICEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-                    				newLeafNode(enumLiteral_2, grammarAccess.getActionAccess().getPANICEnumLiteralDeclaration_2());
+                    				current = grammarAccess.getActionEnumAccess().getPanicEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_2, grammarAccess.getActionEnumAccess().getPanicEnumLiteralDeclaration_2());
                     			
 
                     }
@@ -2368,7 +2989,7 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleAction"
+    // $ANTLR end "ruleActionEnum"
 
     // Delegated rules
 
@@ -2377,23 +2998,24 @@ public class InternalBmodParser extends AbstractInternalAntlrParser {
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000002C49002L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x000000000B1C9002L});
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000012000L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000010000000L});
     public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000FE0000000L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x00000001E0000000L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000010000002L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000200002L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000780000010L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000003800000010L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000040000002L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000000800002L});
 
 }

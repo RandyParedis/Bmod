@@ -6,19 +6,21 @@
     copyrightFields="false" runtimeVersion="2.14">
   <genPackages prefix="Bmod" basePackage="org.xtext.bmod" disposableProviderFactory="true"
       fileExtensions="bmod" ecorePackage="Bmod.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bmod.ecore#//Perception">
-      <genEnumLiterals ecoreEnumLiteral="Bmod.ecore#//Perception/ATTENTIVE"/>
-      <genEnumLiterals ecoreEnumLiteral="Bmod.ecore#//Perception/RELAXED"/>
-      <genEnumLiterals ecoreEnumLiteral="Bmod.ecore#//Perception/OPTIMISTIC"/>
-      <genEnumLiterals ecoreEnumLiteral="Bmod.ecore#//Perception/SCEPTIC"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bmod.ecore#//PerceptionEnum">
+      <genEnumLiterals ecoreEnumLiteral="Bmod.ecore#//PerceptionEnum/attentive"/>
+      <genEnumLiterals ecoreEnumLiteral="Bmod.ecore#//PerceptionEnum/relaxed"/>
+      <genEnumLiterals ecoreEnumLiteral="Bmod.ecore#//PerceptionEnum/optimistic"/>
+      <genEnumLiterals ecoreEnumLiteral="Bmod.ecore#//PerceptionEnum/sceptic"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bmod.ecore#//Action">
-      <genEnumLiterals ecoreEnumLiteral="Bmod.ecore#//Action/NEWCOMER"/>
-      <genEnumLiterals ecoreEnumLiteral="Bmod.ecore#//Action/EXPERIENCED"/>
-      <genEnumLiterals ecoreEnumLiteral="Bmod.ecore#//Action/PANIC"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bmod.ecore#//ActionEnum">
+      <genEnumLiterals ecoreEnumLiteral="Bmod.ecore#//ActionEnum/newcomer"/>
+      <genEnumLiterals ecoreEnumLiteral="Bmod.ecore#//ActionEnum/experienced"/>
+      <genEnumLiterals ecoreEnumLiteral="Bmod.ecore#//ActionEnum/panic"/>
     </genEnums>
     <genClasses ecoreClass="Bmod.ecore#//Model"/>
     <genClasses ecoreClass="Bmod.ecore#//Floorplan">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bmod.ecore#//Floorplan/perceptions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bmod.ecore#//Floorplan/actions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bmod.ecore#//Floorplan/rooms"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bmod.ecore#//Floorplan/doors"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bmod.ecore#//Floorplan/persons"/>
@@ -36,19 +38,36 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bmod.ecore#//Door/from"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bmod.ecore#//Door/to"/>
     </genClasses>
+    <genClasses ecoreClass="Bmod.ecore#//PerceptionLevel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bmod.ecore#//PerceptionLevel/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Bmod.ecore#//ActionProfile">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bmod.ecore#//ActionProfile/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Bmod.ecore#//Perception">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bmod.ecore#//Perception/existing"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bmod.ecore#//Perception/custom"/>
+    </genClasses>
+    <genClasses ecoreClass="Bmod.ecore#//Action">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bmod.ecore#//Action/existing"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bmod.ecore#//Action/custom"/>
+    </genClasses>
     <genClasses ecoreClass="Bmod.ecore#//Person">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bmod.ecore#//Person/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bmod.ecore#//Person/named"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bmod.ecore#//Person/location"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bmod.ecore#//Person/perception"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bmod.ecore#//Person/action"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bmod.ecore#//Person/perception"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bmod.ecore#//Person/action"/>
     </genClasses>
     <genClasses ecoreClass="Bmod.ecore#//Exit">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bmod.ecore#//Exit/location"/>
     </genClasses>
     <genClasses ecoreClass="Bmod.ecore#//EmergencySign">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bmod.ecore#//EmergencySign/on"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bmod.ecore#//EmergencySign/to"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bmod.ecore#//EmergencySign/to"/>
+    </genClasses>
+    <genClasses ecoreClass="Bmod.ecore#//DoorRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bmod.ecore#//DoorRef/ref"/>
     </genClasses>
     <genClasses ecoreClass="Bmod.ecore#//DangerousCondition">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bmod.ecore#//DangerousCondition/on"/>

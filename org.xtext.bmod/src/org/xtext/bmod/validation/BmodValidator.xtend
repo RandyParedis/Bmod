@@ -3,13 +3,14 @@
  */
 package org.xtext.bmod.validation
 
+import java.util.ArrayList
 import org.eclipse.xtext.validation.Check
-import org.xtext.bmod.Helper
 import org.xtext.bmod.bmod.Area
+import org.xtext.bmod.bmod.Coordinate
 import org.xtext.bmod.bmod.Door
 import org.xtext.bmod.bmod.Floorplan
 import org.xtext.bmod.bmod.Room
-import java.util.ArrayList
+import org.xtext.bmod.generator.Helper
 
 /**
  * This class contains custom validation rules. 
@@ -112,7 +113,7 @@ class BmodValidator extends AbstractBmodValidator {
 	@Check
 	def void checkNonCyclicSigns(Floorplan fp) {
 		for(sign: fp.signs) {			
-			var set = fp.doors;
+			var set = new ArrayList<Door>();
 			var current = sign;
 			while(current !== null) {
 				var in = false;
@@ -121,12 +122,25 @@ class BmodValidator extends AbstractBmodValidator {
 						in = true;
 					}
 				}
-				if(!in) {
+				if(in) {
 					error("The emergency signs are circular dependant", sign, null);
 					return;
 				}			
-				set.remove(current.on);
-				current = Helper.getDoorSign(current.to, fp);
+				set.add(current.on);
+				current = Helper.getDoorSign(current.to.ref, fp);
+			}
+		}
+	}
+	
+	@Check
+	def void checkPersonsInExistingCell(Floorplan fp) {
+		var cells = new ArrayList<Coordinate>();
+		for(room: fp.rooms) {
+			cells.addAll(Helper.getRoomCoords(room));
+		}
+		for(person: fp.persons) {
+			if(!Helper.isIn(person.location, cells)) {
+				error("The person is not in an existing cell", person, null);
 			}
 		}
 	}

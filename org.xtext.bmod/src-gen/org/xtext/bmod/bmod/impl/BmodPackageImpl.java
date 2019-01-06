@@ -12,17 +12,22 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.xtext.bmod.bmod.Action;
+import org.xtext.bmod.bmod.ActionEnum;
+import org.xtext.bmod.bmod.ActionProfile;
 import org.xtext.bmod.bmod.Area;
 import org.xtext.bmod.bmod.BmodFactory;
 import org.xtext.bmod.bmod.BmodPackage;
 import org.xtext.bmod.bmod.Coordinate;
 import org.xtext.bmod.bmod.DangerousCondition;
 import org.xtext.bmod.bmod.Door;
+import org.xtext.bmod.bmod.DoorRef;
 import org.xtext.bmod.bmod.EmergencySign;
 import org.xtext.bmod.bmod.Exit;
 import org.xtext.bmod.bmod.Floorplan;
 import org.xtext.bmod.bmod.Model;
 import org.xtext.bmod.bmod.Perception;
+import org.xtext.bmod.bmod.PerceptionEnum;
+import org.xtext.bmod.bmod.PerceptionLevel;
 import org.xtext.bmod.bmod.Person;
 import org.xtext.bmod.bmod.Room;
 
@@ -67,6 +72,34 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass perceptionLevelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass actionProfileEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass perceptionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass actionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass personEClass = null;
 
   /**
@@ -82,6 +115,13 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
    * @generated
    */
   private EClass emergencySignEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass doorRefEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -109,14 +149,14 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EEnum perceptionEEnum = null;
+  private EEnum perceptionEnumEEnum = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EEnum actionEEnum = null;
+  private EEnum actionEnumEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -206,7 +246,7 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFloorplan_Rooms()
+  public EReference getFloorplan_Perceptions()
   {
     return (EReference)floorplanEClass.getEStructuralFeatures().get(0);
   }
@@ -216,7 +256,7 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFloorplan_Doors()
+  public EReference getFloorplan_Actions()
   {
     return (EReference)floorplanEClass.getEStructuralFeatures().get(1);
   }
@@ -226,7 +266,7 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFloorplan_Persons()
+  public EReference getFloorplan_Rooms()
   {
     return (EReference)floorplanEClass.getEStructuralFeatures().get(2);
   }
@@ -236,7 +276,7 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFloorplan_Exits()
+  public EReference getFloorplan_Doors()
   {
     return (EReference)floorplanEClass.getEStructuralFeatures().get(3);
   }
@@ -246,7 +286,7 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFloorplan_Signs()
+  public EReference getFloorplan_Persons()
   {
     return (EReference)floorplanEClass.getEStructuralFeatures().get(4);
   }
@@ -256,9 +296,29 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFloorplan_Dancons()
+  public EReference getFloorplan_Exits()
   {
     return (EReference)floorplanEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getFloorplan_Signs()
+  {
+    return (EReference)floorplanEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getFloorplan_Dancons()
+  {
+    return (EReference)floorplanEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -346,6 +406,106 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getPerceptionLevel()
+  {
+    return perceptionLevelEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getPerceptionLevel_Name()
+  {
+    return (EAttribute)perceptionLevelEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getActionProfile()
+  {
+    return actionProfileEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getActionProfile_Name()
+  {
+    return (EAttribute)actionProfileEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPerception()
+  {
+    return perceptionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getPerception_Existing()
+  {
+    return (EAttribute)perceptionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPerception_Custom()
+  {
+    return (EReference)perceptionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAction()
+  {
+    return actionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAction_Existing()
+  {
+    return (EAttribute)actionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAction_Custom()
+  {
+    return (EReference)actionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getPerson()
   {
     return personEClass;
@@ -386,9 +546,9 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPerson_Perception()
+  public EReference getPerson_Perception()
   {
-    return (EAttribute)personEClass.getEStructuralFeatures().get(3);
+    return (EReference)personEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -396,9 +556,9 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPerson_Action()
+  public EReference getPerson_Action()
   {
-    return (EAttribute)personEClass.getEStructuralFeatures().get(4);
+    return (EReference)personEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -449,6 +609,26 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
   public EReference getEmergencySign_To()
   {
     return (EReference)emergencySignEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDoorRef()
+  {
+    return doorRefEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getDoorRef_Ref()
+  {
+    return (EReference)doorRefEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -556,9 +736,9 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EEnum getPerception()
+  public EEnum getPerceptionEnum()
   {
-    return perceptionEEnum;
+    return perceptionEnumEEnum;
   }
 
   /**
@@ -566,9 +746,9 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EEnum getAction()
+  public EEnum getActionEnum()
   {
-    return actionEEnum;
+    return actionEnumEEnum;
   }
 
   /**
@@ -604,6 +784,8 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
     modelEClass = createEClass(MODEL);
 
     floorplanEClass = createEClass(FLOORPLAN);
+    createEReference(floorplanEClass, FLOORPLAN__PERCEPTIONS);
+    createEReference(floorplanEClass, FLOORPLAN__ACTIONS);
     createEReference(floorplanEClass, FLOORPLAN__ROOMS);
     createEReference(floorplanEClass, FLOORPLAN__DOORS);
     createEReference(floorplanEClass, FLOORPLAN__PERSONS);
@@ -621,12 +803,26 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
     createEReference(doorEClass, DOOR__FROM);
     createEReference(doorEClass, DOOR__TO);
 
+    perceptionLevelEClass = createEClass(PERCEPTION_LEVEL);
+    createEAttribute(perceptionLevelEClass, PERCEPTION_LEVEL__NAME);
+
+    actionProfileEClass = createEClass(ACTION_PROFILE);
+    createEAttribute(actionProfileEClass, ACTION_PROFILE__NAME);
+
+    perceptionEClass = createEClass(PERCEPTION);
+    createEAttribute(perceptionEClass, PERCEPTION__EXISTING);
+    createEReference(perceptionEClass, PERCEPTION__CUSTOM);
+
+    actionEClass = createEClass(ACTION);
+    createEAttribute(actionEClass, ACTION__EXISTING);
+    createEReference(actionEClass, ACTION__CUSTOM);
+
     personEClass = createEClass(PERSON);
     createEAttribute(personEClass, PERSON__NAME);
     createEAttribute(personEClass, PERSON__NAMED);
     createEReference(personEClass, PERSON__LOCATION);
-    createEAttribute(personEClass, PERSON__PERCEPTION);
-    createEAttribute(personEClass, PERSON__ACTION);
+    createEReference(personEClass, PERSON__PERCEPTION);
+    createEReference(personEClass, PERSON__ACTION);
 
     exitEClass = createEClass(EXIT);
     createEReference(exitEClass, EXIT__LOCATION);
@@ -634,6 +830,9 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
     emergencySignEClass = createEClass(EMERGENCY_SIGN);
     createEReference(emergencySignEClass, EMERGENCY_SIGN__ON);
     createEReference(emergencySignEClass, EMERGENCY_SIGN__TO);
+
+    doorRefEClass = createEClass(DOOR_REF);
+    createEReference(doorRefEClass, DOOR_REF__REF);
 
     dangerousConditionEClass = createEClass(DANGEROUS_CONDITION);
     createEReference(dangerousConditionEClass, DANGEROUS_CONDITION__ON);
@@ -649,8 +848,8 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
     createEReference(areaEClass, AREA__WITHOUT);
 
     // Create enums
-    perceptionEEnum = createEEnum(PERCEPTION);
-    actionEEnum = createEEnum(ACTION);
+    perceptionEnumEEnum = createEEnum(PERCEPTION_ENUM);
+    actionEnumEEnum = createEEnum(ACTION_ENUM);
   }
 
   /**
@@ -688,6 +887,8 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(floorplanEClass, Floorplan.class, "Floorplan", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getFloorplan_Perceptions(), this.getPerceptionLevel(), null, "perceptions", null, 0, -1, Floorplan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFloorplan_Actions(), this.getActionProfile(), null, "actions", null, 0, -1, Floorplan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFloorplan_Rooms(), this.getRoom(), null, "rooms", null, 0, -1, Floorplan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFloorplan_Doors(), this.getDoor(), null, "doors", null, 0, -1, Floorplan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFloorplan_Persons(), this.getPerson(), null, "persons", null, 0, -1, Floorplan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -705,19 +906,36 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
     initEReference(getDoor_From(), this.getCoordinate(), null, "from", null, 0, 1, Door.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getDoor_To(), this.getCoordinate(), null, "to", null, 0, 1, Door.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(perceptionLevelEClass, PerceptionLevel.class, "PerceptionLevel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getPerceptionLevel_Name(), ecorePackage.getEString(), "name", null, 0, 1, PerceptionLevel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(actionProfileEClass, ActionProfile.class, "ActionProfile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getActionProfile_Name(), ecorePackage.getEString(), "name", null, 0, 1, ActionProfile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(perceptionEClass, Perception.class, "Perception", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getPerception_Existing(), this.getPerceptionEnum(), "existing", null, 0, 1, Perception.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPerception_Custom(), this.getPerceptionLevel(), null, "custom", null, 0, 1, Perception.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(actionEClass, Action.class, "Action", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAction_Existing(), this.getActionEnum(), "existing", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAction_Custom(), this.getActionProfile(), null, "custom", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(personEClass, Person.class, "Person", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPerson_Name(), ecorePackage.getEString(), "name", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPerson_Named(), ecorePackage.getEString(), "named", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getPerson_Location(), this.getCoordinate(), null, "location", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getPerson_Perception(), this.getPerception(), "perception", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getPerson_Action(), this.getAction(), "action", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPerson_Perception(), this.getPerception(), null, "perception", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPerson_Action(), this.getAction(), null, "action", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(exitEClass, Exit.class, "Exit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExit_Location(), this.getCoordinate(), null, "location", null, 0, 1, Exit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(emergencySignEClass, EmergencySign.class, "EmergencySign", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEmergencySign_On(), this.getDoor(), null, "on", null, 0, 1, EmergencySign.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEmergencySign_To(), this.getDoor(), null, "to", null, 0, 1, EmergencySign.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEmergencySign_To(), this.getDoorRef(), null, "to", null, 0, 1, EmergencySign.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(doorRefEClass, DoorRef.class, "DoorRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getDoorRef_Ref(), this.getDoor(), null, "ref", null, 0, 1, DoorRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(dangerousConditionEClass, DangerousCondition.class, "DangerousCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getDangerousCondition_On(), this.getRoom(), null, "on", null, 0, 1, DangerousCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -733,16 +951,16 @@ public class BmodPackageImpl extends EPackageImpl implements BmodPackage
     initEReference(getArea_Without(), this.getCoordinate(), null, "without", null, 0, -1, Area.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
-    initEEnum(perceptionEEnum, Perception.class, "Perception");
-    addEEnumLiteral(perceptionEEnum, Perception.ATTENTIVE);
-    addEEnumLiteral(perceptionEEnum, Perception.RELAXED);
-    addEEnumLiteral(perceptionEEnum, Perception.OPTIMISTIC);
-    addEEnumLiteral(perceptionEEnum, Perception.SCEPTIC);
+    initEEnum(perceptionEnumEEnum, PerceptionEnum.class, "PerceptionEnum");
+    addEEnumLiteral(perceptionEnumEEnum, PerceptionEnum.ATTENTIVE);
+    addEEnumLiteral(perceptionEnumEEnum, PerceptionEnum.RELAXED);
+    addEEnumLiteral(perceptionEnumEEnum, PerceptionEnum.OPTIMISTIC);
+    addEEnumLiteral(perceptionEnumEEnum, PerceptionEnum.SCEPTIC);
 
-    initEEnum(actionEEnum, Action.class, "Action");
-    addEEnumLiteral(actionEEnum, Action.NEWCOMER);
-    addEEnumLiteral(actionEEnum, Action.EXPERIENCED);
-    addEEnumLiteral(actionEEnum, Action.PANIC);
+    initEEnum(actionEnumEEnum, ActionEnum.class, "ActionEnum");
+    addEEnumLiteral(actionEnumEEnum, ActionEnum.NEWCOMER);
+    addEEnumLiteral(actionEnumEEnum, ActionEnum.EXPERIENCED);
+    addEEnumLiteral(actionEnumEEnum, ActionEnum.PANIC);
 
     // Create resource
     createResource(eNS_URI);

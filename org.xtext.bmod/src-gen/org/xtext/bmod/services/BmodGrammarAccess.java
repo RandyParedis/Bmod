@@ -43,69 +43,86 @@ public class BmodGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cFloorplanAction_0 = (Action)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Assignment cRoomsAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
-		private final RuleCall cRoomsRoomParserRuleCall_1_0_0 = (RuleCall)cRoomsAssignment_1_0.eContents().get(0);
-		private final Assignment cDoorsAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
-		private final RuleCall cDoorsDoorParserRuleCall_1_1_0 = (RuleCall)cDoorsAssignment_1_1.eContents().get(0);
-		private final Assignment cPersonsAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
-		private final RuleCall cPersonsPersonParserRuleCall_1_2_0 = (RuleCall)cPersonsAssignment_1_2.eContents().get(0);
-		private final Assignment cExitsAssignment_1_3 = (Assignment)cAlternatives_1.eContents().get(3);
-		private final RuleCall cExitsExitParserRuleCall_1_3_0 = (RuleCall)cExitsAssignment_1_3.eContents().get(0);
-		private final Assignment cSignsAssignment_1_4 = (Assignment)cAlternatives_1.eContents().get(4);
-		private final RuleCall cSignsEmergencySignParserRuleCall_1_4_0 = (RuleCall)cSignsAssignment_1_4.eContents().get(0);
-		private final Assignment cDanconsAssignment_1_5 = (Assignment)cAlternatives_1.eContents().get(5);
-		private final RuleCall cDanconsDangerousConditionParserRuleCall_1_5_0 = (RuleCall)cDanconsAssignment_1_5.eContents().get(0);
+		private final Assignment cPerceptionsAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final RuleCall cPerceptionsPerceptionLevelParserRuleCall_1_0_0 = (RuleCall)cPerceptionsAssignment_1_0.eContents().get(0);
+		private final Assignment cActionsAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final RuleCall cActionsActionProfileParserRuleCall_1_1_0 = (RuleCall)cActionsAssignment_1_1.eContents().get(0);
+		private final Assignment cRoomsAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
+		private final RuleCall cRoomsRoomParserRuleCall_1_2_0 = (RuleCall)cRoomsAssignment_1_2.eContents().get(0);
+		private final Assignment cDoorsAssignment_1_3 = (Assignment)cAlternatives_1.eContents().get(3);
+		private final RuleCall cDoorsDoorParserRuleCall_1_3_0 = (RuleCall)cDoorsAssignment_1_3.eContents().get(0);
+		private final Assignment cPersonsAssignment_1_4 = (Assignment)cAlternatives_1.eContents().get(4);
+		private final RuleCall cPersonsPersonParserRuleCall_1_4_0 = (RuleCall)cPersonsAssignment_1_4.eContents().get(0);
+		private final Assignment cExitsAssignment_1_5 = (Assignment)cAlternatives_1.eContents().get(5);
+		private final RuleCall cExitsExitParserRuleCall_1_5_0 = (RuleCall)cExitsAssignment_1_5.eContents().get(0);
+		private final Assignment cSignsAssignment_1_6 = (Assignment)cAlternatives_1.eContents().get(6);
+		private final RuleCall cSignsEmergencySignParserRuleCall_1_6_0 = (RuleCall)cSignsAssignment_1_6.eContents().get(0);
+		private final Assignment cDanconsAssignment_1_7 = (Assignment)cAlternatives_1.eContents().get(7);
+		private final RuleCall cDanconsDangerousConditionParserRuleCall_1_7_0 = (RuleCall)cDanconsAssignment_1_7.eContents().get(0);
 		
 		//Floorplan:
-		//	{Floorplan} (rooms+=Room | doors+=Door | persons+=Person | exits+=Exit | signs+=EmergencySign |
-		//	dancons+=DangerousCondition)*;
+		//	{Floorplan} (perceptions+=PerceptionLevel | actions+=ActionProfile | rooms+=Room | doors+=Door | persons+=Person |
+		//	exits+=Exit | signs+=EmergencySign | dancons+=DangerousCondition)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Floorplan} (rooms+=Room | doors+=Door | persons+=Person | exits+=Exit | signs+=EmergencySign |
-		//dancons+=DangerousCondition)*
+		//{Floorplan} (perceptions+=PerceptionLevel | actions+=ActionProfile | rooms+=Room | doors+=Door | persons+=Person |
+		//exits+=Exit | signs+=EmergencySign | dancons+=DangerousCondition)*
 		public Group getGroup() { return cGroup; }
 		
 		//{Floorplan}
 		public Action getFloorplanAction_0() { return cFloorplanAction_0; }
 		
-		//(rooms+=Room | doors+=Door | persons+=Person | exits+=Exit | signs+=EmergencySign | dancons+=DangerousCondition)*
+		//(perceptions+=PerceptionLevel | actions+=ActionProfile | rooms+=Room | doors+=Door | persons+=Person | exits+=Exit |
+		//signs+=EmergencySign | dancons+=DangerousCondition)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
+		//perceptions+=PerceptionLevel
+		public Assignment getPerceptionsAssignment_1_0() { return cPerceptionsAssignment_1_0; }
+		
+		//PerceptionLevel
+		public RuleCall getPerceptionsPerceptionLevelParserRuleCall_1_0_0() { return cPerceptionsPerceptionLevelParserRuleCall_1_0_0; }
+		
+		//actions+=ActionProfile
+		public Assignment getActionsAssignment_1_1() { return cActionsAssignment_1_1; }
+		
+		//ActionProfile
+		public RuleCall getActionsActionProfileParserRuleCall_1_1_0() { return cActionsActionProfileParserRuleCall_1_1_0; }
+		
 		//rooms+=Room
-		public Assignment getRoomsAssignment_1_0() { return cRoomsAssignment_1_0; }
+		public Assignment getRoomsAssignment_1_2() { return cRoomsAssignment_1_2; }
 		
 		//Room
-		public RuleCall getRoomsRoomParserRuleCall_1_0_0() { return cRoomsRoomParserRuleCall_1_0_0; }
+		public RuleCall getRoomsRoomParserRuleCall_1_2_0() { return cRoomsRoomParserRuleCall_1_2_0; }
 		
 		//doors+=Door
-		public Assignment getDoorsAssignment_1_1() { return cDoorsAssignment_1_1; }
+		public Assignment getDoorsAssignment_1_3() { return cDoorsAssignment_1_3; }
 		
 		//Door
-		public RuleCall getDoorsDoorParserRuleCall_1_1_0() { return cDoorsDoorParserRuleCall_1_1_0; }
+		public RuleCall getDoorsDoorParserRuleCall_1_3_0() { return cDoorsDoorParserRuleCall_1_3_0; }
 		
 		//persons+=Person
-		public Assignment getPersonsAssignment_1_2() { return cPersonsAssignment_1_2; }
+		public Assignment getPersonsAssignment_1_4() { return cPersonsAssignment_1_4; }
 		
 		//Person
-		public RuleCall getPersonsPersonParserRuleCall_1_2_0() { return cPersonsPersonParserRuleCall_1_2_0; }
+		public RuleCall getPersonsPersonParserRuleCall_1_4_0() { return cPersonsPersonParserRuleCall_1_4_0; }
 		
 		//exits+=Exit
-		public Assignment getExitsAssignment_1_3() { return cExitsAssignment_1_3; }
+		public Assignment getExitsAssignment_1_5() { return cExitsAssignment_1_5; }
 		
 		//Exit
-		public RuleCall getExitsExitParserRuleCall_1_3_0() { return cExitsExitParserRuleCall_1_3_0; }
+		public RuleCall getExitsExitParserRuleCall_1_5_0() { return cExitsExitParserRuleCall_1_5_0; }
 		
 		//signs+=EmergencySign
-		public Assignment getSignsAssignment_1_4() { return cSignsAssignment_1_4; }
+		public Assignment getSignsAssignment_1_6() { return cSignsAssignment_1_6; }
 		
 		//EmergencySign
-		public RuleCall getSignsEmergencySignParserRuleCall_1_4_0() { return cSignsEmergencySignParserRuleCall_1_4_0; }
+		public RuleCall getSignsEmergencySignParserRuleCall_1_6_0() { return cSignsEmergencySignParserRuleCall_1_6_0; }
 		
 		//dancons+=DangerousCondition
-		public Assignment getDanconsAssignment_1_5() { return cDanconsAssignment_1_5; }
+		public Assignment getDanconsAssignment_1_7() { return cDanconsAssignment_1_7; }
 		
 		//DangerousCondition
-		public RuleCall getDanconsDangerousConditionParserRuleCall_1_5_0() { return cDanconsDangerousConditionParserRuleCall_1_5_0; }
+		public RuleCall getDanconsDangerousConditionParserRuleCall_1_7_0() { return cDanconsDangerousConditionParserRuleCall_1_7_0; }
 	}
 	public class RoomElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.bmod.Bmod.Room");
@@ -113,22 +130,23 @@ public class BmodGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRoomKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameVARNAMETerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cNamedKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cNamedAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cNamedSTRINGTerminalRuleCall_3_0 = (RuleCall)cNamedAssignment_3.eContents().get(0);
-		private final Assignment cAreasAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cAreasAreaParserRuleCall_4_0 = (RuleCall)cAreasAssignment_4.eContents().get(0);
-		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cAndKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Assignment cAreasAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final RuleCall cAreasAreaParserRuleCall_5_1_0 = (RuleCall)cAreasAssignment_5_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cNamedKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cNamedAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cNamedSTRINGTerminalRuleCall_2_1_0 = (RuleCall)cNamedAssignment_2_1.eContents().get(0);
+		private final Assignment cAreasAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cAreasAreaParserRuleCall_3_0 = (RuleCall)cAreasAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cAndKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cAreasAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cAreasAreaParserRuleCall_4_1_0 = (RuleCall)cAreasAssignment_4_1.eContents().get(0);
 		
 		//Room:
-		//	'Room' name=VARNAME 'named' named=STRING
+		//	'Room' name=VARNAME ('named' named=STRING)?
 		//	areas+=Area ('and' areas+=Area)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Room' name=VARNAME 'named' named=STRING areas+=Area ('and' areas+=Area)*
+		//'Room' name=VARNAME ('named' named=STRING)? areas+=Area ('and' areas+=Area)*
 		public Group getGroup() { return cGroup; }
 		
 		//'Room'
@@ -140,32 +158,35 @@ public class BmodGrammarAccess extends AbstractGrammarElementFinder {
 		//VARNAME
 		public RuleCall getNameVARNAMETerminalRuleCall_1_0() { return cNameVARNAMETerminalRuleCall_1_0; }
 		
+		//('named' named=STRING)?
+		public Group getGroup_2() { return cGroup_2; }
+		
 		//'named'
-		public Keyword getNamedKeyword_2() { return cNamedKeyword_2; }
+		public Keyword getNamedKeyword_2_0() { return cNamedKeyword_2_0; }
 		
 		//named=STRING
-		public Assignment getNamedAssignment_3() { return cNamedAssignment_3; }
+		public Assignment getNamedAssignment_2_1() { return cNamedAssignment_2_1; }
 		
 		//STRING
-		public RuleCall getNamedSTRINGTerminalRuleCall_3_0() { return cNamedSTRINGTerminalRuleCall_3_0; }
+		public RuleCall getNamedSTRINGTerminalRuleCall_2_1_0() { return cNamedSTRINGTerminalRuleCall_2_1_0; }
 		
 		//areas+=Area
-		public Assignment getAreasAssignment_4() { return cAreasAssignment_4; }
+		public Assignment getAreasAssignment_3() { return cAreasAssignment_3; }
 		
 		//Area
-		public RuleCall getAreasAreaParserRuleCall_4_0() { return cAreasAreaParserRuleCall_4_0; }
+		public RuleCall getAreasAreaParserRuleCall_3_0() { return cAreasAreaParserRuleCall_3_0; }
 		
 		//('and' areas+=Area)*
-		public Group getGroup_5() { return cGroup_5; }
+		public Group getGroup_4() { return cGroup_4; }
 		
 		//'and'
-		public Keyword getAndKeyword_5_0() { return cAndKeyword_5_0; }
+		public Keyword getAndKeyword_4_0() { return cAndKeyword_4_0; }
 		
 		//areas+=Area
-		public Assignment getAreasAssignment_5_1() { return cAreasAssignment_5_1; }
+		public Assignment getAreasAssignment_4_1() { return cAreasAssignment_4_1; }
 		
 		//Area
-		public RuleCall getAreasAreaParserRuleCall_5_1_0() { return cAreasAreaParserRuleCall_5_1_0; }
+		public RuleCall getAreasAreaParserRuleCall_4_1_0() { return cAreasAreaParserRuleCall_4_1_0; }
 	}
 	public class DoorElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.bmod.Bmod.Door");
@@ -214,6 +235,114 @@ public class BmodGrammarAccess extends AbstractGrammarElementFinder {
 		//Coordinate
 		public RuleCall getToCoordinateParserRuleCall_5_0() { return cToCoordinateParserRuleCall_5_0; }
 	}
+	public class PerceptionLevelElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.bmod.Bmod.PerceptionLevel");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cPerceptionLevelKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameVARNAMETerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//PerceptionLevel:
+		//	'PerceptionLevel' name=VARNAME;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'PerceptionLevel' name=VARNAME
+		public Group getGroup() { return cGroup; }
+		
+		//'PerceptionLevel'
+		public Keyword getPerceptionLevelKeyword_0() { return cPerceptionLevelKeyword_0; }
+		
+		//name=VARNAME
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//VARNAME
+		public RuleCall getNameVARNAMETerminalRuleCall_1_0() { return cNameVARNAMETerminalRuleCall_1_0; }
+	}
+	public class ActionProfileElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.bmod.Bmod.ActionProfile");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cActionProfileKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameVARNAMETerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//ActionProfile:
+		//	'ActionProfile' name=VARNAME;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'ActionProfile' name=VARNAME
+		public Group getGroup() { return cGroup; }
+		
+		//'ActionProfile'
+		public Keyword getActionProfileKeyword_0() { return cActionProfileKeyword_0; }
+		
+		//name=VARNAME
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//VARNAME
+		public RuleCall getNameVARNAMETerminalRuleCall_1_0() { return cNameVARNAMETerminalRuleCall_1_0; }
+	}
+	public class PerceptionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.bmod.Bmod.Perception");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Assignment cExistingAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final RuleCall cExistingPerceptionEnumEnumRuleCall_0_0 = (RuleCall)cExistingAssignment_0.eContents().get(0);
+		private final Assignment cCustomAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final CrossReference cCustomPerceptionLevelCrossReference_1_0 = (CrossReference)cCustomAssignment_1.eContents().get(0);
+		private final RuleCall cCustomPerceptionLevelVARNAMETerminalRuleCall_1_0_1 = (RuleCall)cCustomPerceptionLevelCrossReference_1_0.eContents().get(1);
+		
+		//Perception:
+		//	existing=PerceptionEnum | custom=[PerceptionLevel|VARNAME];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//existing=PerceptionEnum | custom=[PerceptionLevel|VARNAME]
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//existing=PerceptionEnum
+		public Assignment getExistingAssignment_0() { return cExistingAssignment_0; }
+		
+		//PerceptionEnum
+		public RuleCall getExistingPerceptionEnumEnumRuleCall_0_0() { return cExistingPerceptionEnumEnumRuleCall_0_0; }
+		
+		//custom=[PerceptionLevel|VARNAME]
+		public Assignment getCustomAssignment_1() { return cCustomAssignment_1; }
+		
+		//[PerceptionLevel|VARNAME]
+		public CrossReference getCustomPerceptionLevelCrossReference_1_0() { return cCustomPerceptionLevelCrossReference_1_0; }
+		
+		//VARNAME
+		public RuleCall getCustomPerceptionLevelVARNAMETerminalRuleCall_1_0_1() { return cCustomPerceptionLevelVARNAMETerminalRuleCall_1_0_1; }
+	}
+	public class ActionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.bmod.Bmod.Action");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Assignment cExistingAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final RuleCall cExistingActionEnumEnumRuleCall_0_0 = (RuleCall)cExistingAssignment_0.eContents().get(0);
+		private final Assignment cCustomAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final CrossReference cCustomActionProfileCrossReference_1_0 = (CrossReference)cCustomAssignment_1.eContents().get(0);
+		private final RuleCall cCustomActionProfileVARNAMETerminalRuleCall_1_0_1 = (RuleCall)cCustomActionProfileCrossReference_1_0.eContents().get(1);
+		
+		//Action:
+		//	existing=ActionEnum | custom=[ActionProfile|VARNAME];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//existing=ActionEnum | custom=[ActionProfile|VARNAME]
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//existing=ActionEnum
+		public Assignment getExistingAssignment_0() { return cExistingAssignment_0; }
+		
+		//ActionEnum
+		public RuleCall getExistingActionEnumEnumRuleCall_0_0() { return cExistingActionEnumEnumRuleCall_0_0; }
+		
+		//custom=[ActionProfile|VARNAME]
+		public Assignment getCustomAssignment_1() { return cCustomAssignment_1; }
+		
+		//[ActionProfile|VARNAME]
+		public CrossReference getCustomActionProfileCrossReference_1_0() { return cCustomActionProfileCrossReference_1_0; }
+		
+		//VARNAME
+		public RuleCall getCustomActionProfileVARNAMETerminalRuleCall_1_0_1() { return cCustomActionProfileVARNAMETerminalRuleCall_1_0_1; }
+	}
 	public class PersonElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.bmod.Bmod.Person");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -227,27 +356,18 @@ public class BmodGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cLocationAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cLocationCoordinateParserRuleCall_5_0 = (RuleCall)cLocationAssignment_5.eContents().get(0);
 		private final Keyword cColonKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Alternatives cAlternatives_7 = (Alternatives)cGroup.eContents().get(7);
-		private final Group cGroup_7_0 = (Group)cAlternatives_7.eContents().get(0);
-		private final Assignment cPerceptionAssignment_7_0_0 = (Assignment)cGroup_7_0.eContents().get(0);
-		private final RuleCall cPerceptionPerceptionEnumRuleCall_7_0_0_0 = (RuleCall)cPerceptionAssignment_7_0_0.eContents().get(0);
-		private final Keyword cCommaKeyword_7_0_1 = (Keyword)cGroup_7_0.eContents().get(1);
-		private final Assignment cActionAssignment_7_0_2 = (Assignment)cGroup_7_0.eContents().get(2);
-		private final RuleCall cActionActionEnumRuleCall_7_0_2_0 = (RuleCall)cActionAssignment_7_0_2.eContents().get(0);
-		private final Group cGroup_7_1 = (Group)cAlternatives_7.eContents().get(1);
-		private final Assignment cActionAssignment_7_1_0 = (Assignment)cGroup_7_1.eContents().get(0);
-		private final RuleCall cActionActionEnumRuleCall_7_1_0_0 = (RuleCall)cActionAssignment_7_1_0.eContents().get(0);
-		private final Keyword cCommaKeyword_7_1_1 = (Keyword)cGroup_7_1.eContents().get(1);
-		private final Assignment cPerceptionAssignment_7_1_2 = (Assignment)cGroup_7_1.eContents().get(2);
-		private final RuleCall cPerceptionPerceptionEnumRuleCall_7_1_2_0 = (RuleCall)cPerceptionAssignment_7_1_2.eContents().get(0);
+		private final Assignment cPerceptionAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cPerceptionPerceptionParserRuleCall_7_0 = (RuleCall)cPerceptionAssignment_7.eContents().get(0);
+		private final Keyword cCommaKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Assignment cActionAssignment_9 = (Assignment)cGroup.eContents().get(9);
+		private final RuleCall cActionActionParserRuleCall_9_0 = (RuleCall)cActionAssignment_9.eContents().get(0);
 		
 		//Person:
-		//	'Person' name=VARNAME 'named' named=STRING 'in' location=Coordinate ':' (perception=Perception ',' action=Action |
-		//	action=Action ',' perception=Perception);
+		//	'Person' name=VARNAME 'named' named=STRING 'in' location=Coordinate ':'
+		//	perception=Perception ',' action=Action;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Person' name=VARNAME 'named' named=STRING 'in' location=Coordinate ':' (perception=Perception ',' action=Action |
-		//action=Action ',' perception=Perception)
+		//'Person' name=VARNAME 'named' named=STRING 'in' location=Coordinate ':' perception=Perception ',' action=Action
 		public Group getGroup() { return cGroup; }
 		
 		//'Person'
@@ -280,44 +400,20 @@ public class BmodGrammarAccess extends AbstractGrammarElementFinder {
 		//':'
 		public Keyword getColonKeyword_6() { return cColonKeyword_6; }
 		
-		//perception=Perception ',' action=Action | action=Action ',' perception=Perception
-		public Alternatives getAlternatives_7() { return cAlternatives_7; }
-		
-		//perception=Perception ',' action=Action
-		public Group getGroup_7_0() { return cGroup_7_0; }
-		
 		//perception=Perception
-		public Assignment getPerceptionAssignment_7_0_0() { return cPerceptionAssignment_7_0_0; }
+		public Assignment getPerceptionAssignment_7() { return cPerceptionAssignment_7; }
 		
 		//Perception
-		public RuleCall getPerceptionPerceptionEnumRuleCall_7_0_0_0() { return cPerceptionPerceptionEnumRuleCall_7_0_0_0; }
+		public RuleCall getPerceptionPerceptionParserRuleCall_7_0() { return cPerceptionPerceptionParserRuleCall_7_0; }
 		
 		//','
-		public Keyword getCommaKeyword_7_0_1() { return cCommaKeyword_7_0_1; }
+		public Keyword getCommaKeyword_8() { return cCommaKeyword_8; }
 		
 		//action=Action
-		public Assignment getActionAssignment_7_0_2() { return cActionAssignment_7_0_2; }
+		public Assignment getActionAssignment_9() { return cActionAssignment_9; }
 		
 		//Action
-		public RuleCall getActionActionEnumRuleCall_7_0_2_0() { return cActionActionEnumRuleCall_7_0_2_0; }
-		
-		//action=Action ',' perception=Perception
-		public Group getGroup_7_1() { return cGroup_7_1; }
-		
-		//action=Action
-		public Assignment getActionAssignment_7_1_0() { return cActionAssignment_7_1_0; }
-		
-		//Action
-		public RuleCall getActionActionEnumRuleCall_7_1_0_0() { return cActionActionEnumRuleCall_7_1_0_0; }
-		
-		//','
-		public Keyword getCommaKeyword_7_1_1() { return cCommaKeyword_7_1_1; }
-		
-		//perception=Perception
-		public Assignment getPerceptionAssignment_7_1_2() { return cPerceptionAssignment_7_1_2; }
-		
-		//Perception
-		public RuleCall getPerceptionPerceptionEnumRuleCall_7_1_2_0() { return cPerceptionPerceptionEnumRuleCall_7_1_2_0; }
+		public RuleCall getActionActionParserRuleCall_9_0() { return cActionActionParserRuleCall_9_0; }
 	}
 	public class ExitElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.bmod.Bmod.Exit");
@@ -354,16 +450,14 @@ public class BmodGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOnAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final CrossReference cOnDoorCrossReference_2_0 = (CrossReference)cOnAssignment_2.eContents().get(0);
 		private final RuleCall cOnDoorVARNAMETerminalRuleCall_2_0_1 = (RuleCall)cOnDoorCrossReference_2_0.eContents().get(1);
-		private final Keyword cToKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cToAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final CrossReference cToDoorCrossReference_4_0 = (CrossReference)cToAssignment_4.eContents().get(0);
-		private final RuleCall cToDoorVARNAMETerminalRuleCall_4_0_1 = (RuleCall)cToDoorCrossReference_4_0.eContents().get(1);
+		private final Assignment cToAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cToDoorRefParserRuleCall_3_0 = (RuleCall)cToAssignment_3.eContents().get(0);
 		
 		//EmergencySign:
-		//	'Sign' 'on' on=[Door|VARNAME] 'to' to=[Door|VARNAME];
+		//	'Sign' 'on' on=[Door|VARNAME] to=DoorRef;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Sign' 'on' on=[Door|VARNAME] 'to' to=[Door|VARNAME]
+		//'Sign' 'on' on=[Door|VARNAME] to=DoorRef
 		public Group getGroup() { return cGroup; }
 		
 		//'Sign'
@@ -381,17 +475,38 @@ public class BmodGrammarAccess extends AbstractGrammarElementFinder {
 		//VARNAME
 		public RuleCall getOnDoorVARNAMETerminalRuleCall_2_0_1() { return cOnDoorVARNAMETerminalRuleCall_2_0_1; }
 		
-		//'to'
-		public Keyword getToKeyword_3() { return cToKeyword_3; }
+		//to=DoorRef
+		public Assignment getToAssignment_3() { return cToAssignment_3; }
 		
-		//to=[Door|VARNAME]
-		public Assignment getToAssignment_4() { return cToAssignment_4; }
+		//DoorRef
+		public RuleCall getToDoorRefParserRuleCall_3_0() { return cToDoorRefParserRuleCall_3_0; }
+	}
+	public class DoorRefElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.bmod.Bmod.DoorRef");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cToKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cRefDoorCrossReference_1_0 = (CrossReference)cRefAssignment_1.eContents().get(0);
+		private final RuleCall cRefDoorVARNAMETerminalRuleCall_1_0_1 = (RuleCall)cRefDoorCrossReference_1_0.eContents().get(1);
+		
+		//DoorRef:
+		//	'to' ref=[Door|VARNAME];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'to' ref=[Door|VARNAME]
+		public Group getGroup() { return cGroup; }
+		
+		//'to'
+		public Keyword getToKeyword_0() { return cToKeyword_0; }
+		
+		//ref=[Door|VARNAME]
+		public Assignment getRefAssignment_1() { return cRefAssignment_1; }
 		
 		//[Door|VARNAME]
-		public CrossReference getToDoorCrossReference_4_0() { return cToDoorCrossReference_4_0; }
+		public CrossReference getRefDoorCrossReference_1_0() { return cRefDoorCrossReference_1_0; }
 		
 		//VARNAME
-		public RuleCall getToDoorVARNAMETerminalRuleCall_4_0_1() { return cToDoorVARNAMETerminalRuleCall_4_0_1; }
+		public RuleCall getRefDoorVARNAMETerminalRuleCall_1_0_1() { return cRefDoorVARNAMETerminalRuleCall_1_0_1; }
 	}
 	public class DangerousConditionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.bmod.Bmod.DangerousCondition");
@@ -539,95 +654,100 @@ public class BmodGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getWithoutCoordinateParserRuleCall_4_2_1_0() { return cWithoutCoordinateParserRuleCall_4_2_1_0; }
 	}
 	
-	public class PerceptionElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.bmod.Bmod.Perception");
+	public class PerceptionEnumElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.bmod.Bmod.PerceptionEnum");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final EnumLiteralDeclaration cATTENTIVEEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cATTENTIVEAttentiveKeyword_0_0 = (Keyword)cATTENTIVEEnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cRELAXEDEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cRELAXEDRelaxedKeyword_1_0 = (Keyword)cRELAXEDEnumLiteralDeclaration_1.eContents().get(0);
-		private final EnumLiteralDeclaration cOPTIMISTICEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
-		private final Keyword cOPTIMISTICOptimisticKeyword_2_0 = (Keyword)cOPTIMISTICEnumLiteralDeclaration_2.eContents().get(0);
-		private final EnumLiteralDeclaration cSCEPTICEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
-		private final Keyword cSCEPTICScepticKeyword_3_0 = (Keyword)cSCEPTICEnumLiteralDeclaration_3.eContents().get(0);
+		private final EnumLiteralDeclaration cAttentiveEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cAttentiveAttentiveKeyword_0_0 = (Keyword)cAttentiveEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cRelaxedEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cRelaxedRelaxedKeyword_1_0 = (Keyword)cRelaxedEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cOptimisticEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cOptimisticOptimisticKeyword_2_0 = (Keyword)cOptimisticEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cScepticEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
+		private final Keyword cScepticScepticKeyword_3_0 = (Keyword)cScepticEnumLiteralDeclaration_3.eContents().get(0);
 		
-		//enum Perception:
-		//	ATTENTIVE='attentive' | RELAXED='relaxed' |
-		//	OPTIMISTIC='optimistic' | SCEPTIC='sceptic';
+		//enum PerceptionEnum:
+		//	attentive | relaxed |
+		//	optimistic | sceptic;
 		public EnumRule getRule() { return rule; }
 		
-		//ATTENTIVE='attentive' | RELAXED='relaxed' | OPTIMISTIC='optimistic' | SCEPTIC='sceptic'
+		//attentive | relaxed | optimistic | sceptic
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//ATTENTIVE='attentive'
-		public EnumLiteralDeclaration getATTENTIVEEnumLiteralDeclaration_0() { return cATTENTIVEEnumLiteralDeclaration_0; }
+		//attentive
+		public EnumLiteralDeclaration getAttentiveEnumLiteralDeclaration_0() { return cAttentiveEnumLiteralDeclaration_0; }
 		
 		//'attentive'
-		public Keyword getATTENTIVEAttentiveKeyword_0_0() { return cATTENTIVEAttentiveKeyword_0_0; }
+		public Keyword getAttentiveAttentiveKeyword_0_0() { return cAttentiveAttentiveKeyword_0_0; }
 		
-		//RELAXED='relaxed'
-		public EnumLiteralDeclaration getRELAXEDEnumLiteralDeclaration_1() { return cRELAXEDEnumLiteralDeclaration_1; }
+		//relaxed
+		public EnumLiteralDeclaration getRelaxedEnumLiteralDeclaration_1() { return cRelaxedEnumLiteralDeclaration_1; }
 		
 		//'relaxed'
-		public Keyword getRELAXEDRelaxedKeyword_1_0() { return cRELAXEDRelaxedKeyword_1_0; }
+		public Keyword getRelaxedRelaxedKeyword_1_0() { return cRelaxedRelaxedKeyword_1_0; }
 		
-		//OPTIMISTIC='optimistic'
-		public EnumLiteralDeclaration getOPTIMISTICEnumLiteralDeclaration_2() { return cOPTIMISTICEnumLiteralDeclaration_2; }
+		//optimistic
+		public EnumLiteralDeclaration getOptimisticEnumLiteralDeclaration_2() { return cOptimisticEnumLiteralDeclaration_2; }
 		
 		//'optimistic'
-		public Keyword getOPTIMISTICOptimisticKeyword_2_0() { return cOPTIMISTICOptimisticKeyword_2_0; }
+		public Keyword getOptimisticOptimisticKeyword_2_0() { return cOptimisticOptimisticKeyword_2_0; }
 		
-		//SCEPTIC='sceptic'
-		public EnumLiteralDeclaration getSCEPTICEnumLiteralDeclaration_3() { return cSCEPTICEnumLiteralDeclaration_3; }
+		//sceptic
+		public EnumLiteralDeclaration getScepticEnumLiteralDeclaration_3() { return cScepticEnumLiteralDeclaration_3; }
 		
 		//'sceptic'
-		public Keyword getSCEPTICScepticKeyword_3_0() { return cSCEPTICScepticKeyword_3_0; }
+		public Keyword getScepticScepticKeyword_3_0() { return cScepticScepticKeyword_3_0; }
 	}
-	public class ActionElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.bmod.Bmod.Action");
+	public class ActionEnumElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.bmod.Bmod.ActionEnum");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final EnumLiteralDeclaration cNEWCOMEREnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cNEWCOMERNewcomerKeyword_0_0 = (Keyword)cNEWCOMEREnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cEXPERIENCEDEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cEXPERIENCEDExperiencedKeyword_1_0 = (Keyword)cEXPERIENCEDEnumLiteralDeclaration_1.eContents().get(0);
-		private final EnumLiteralDeclaration cPANICEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
-		private final Keyword cPANICPanicKeyword_2_0 = (Keyword)cPANICEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cNewcomerEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cNewcomerNewcomerKeyword_0_0 = (Keyword)cNewcomerEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cExperiencedEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cExperiencedExperiencedKeyword_1_0 = (Keyword)cExperiencedEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cPanicEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cPanicPanicKeyword_2_0 = (Keyword)cPanicEnumLiteralDeclaration_2.eContents().get(0);
 		
-		//enum Action:
-		//	NEWCOMER='newcomer' | EXPERIENCED='experienced' | PANIC='panic';
+		//enum ActionEnum:
+		//	newcomer | experienced | panic;
 		public EnumRule getRule() { return rule; }
 		
-		//NEWCOMER='newcomer' | EXPERIENCED='experienced' | PANIC='panic'
+		//newcomer | experienced | panic
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//NEWCOMER='newcomer'
-		public EnumLiteralDeclaration getNEWCOMEREnumLiteralDeclaration_0() { return cNEWCOMEREnumLiteralDeclaration_0; }
+		//newcomer
+		public EnumLiteralDeclaration getNewcomerEnumLiteralDeclaration_0() { return cNewcomerEnumLiteralDeclaration_0; }
 		
 		//'newcomer'
-		public Keyword getNEWCOMERNewcomerKeyword_0_0() { return cNEWCOMERNewcomerKeyword_0_0; }
+		public Keyword getNewcomerNewcomerKeyword_0_0() { return cNewcomerNewcomerKeyword_0_0; }
 		
-		//EXPERIENCED='experienced'
-		public EnumLiteralDeclaration getEXPERIENCEDEnumLiteralDeclaration_1() { return cEXPERIENCEDEnumLiteralDeclaration_1; }
+		//experienced
+		public EnumLiteralDeclaration getExperiencedEnumLiteralDeclaration_1() { return cExperiencedEnumLiteralDeclaration_1; }
 		
 		//'experienced'
-		public Keyword getEXPERIENCEDExperiencedKeyword_1_0() { return cEXPERIENCEDExperiencedKeyword_1_0; }
+		public Keyword getExperiencedExperiencedKeyword_1_0() { return cExperiencedExperiencedKeyword_1_0; }
 		
-		//PANIC='panic'
-		public EnumLiteralDeclaration getPANICEnumLiteralDeclaration_2() { return cPANICEnumLiteralDeclaration_2; }
+		//panic
+		public EnumLiteralDeclaration getPanicEnumLiteralDeclaration_2() { return cPanicEnumLiteralDeclaration_2; }
 		
 		//'panic'
-		public Keyword getPANICPanicKeyword_2_0() { return cPANICPanicKeyword_2_0; }
+		public Keyword getPanicPanicKeyword_2_0() { return cPanicPanicKeyword_2_0; }
 	}
 	
 	private final ModelElements pModel;
 	private final FloorplanElements pFloorplan;
 	private final RoomElements pRoom;
 	private final DoorElements pDoor;
-	private final PerceptionElements ePerception;
-	private final ActionElements eAction;
+	private final PerceptionLevelElements pPerceptionLevel;
+	private final ActionProfileElements pActionProfile;
+	private final PerceptionElements pPerception;
+	private final ActionElements pAction;
+	private final PerceptionEnumElements ePerceptionEnum;
+	private final ActionEnumElements eActionEnum;
 	private final PersonElements pPerson;
 	private final ExitElements pExit;
 	private final EmergencySignElements pEmergencySign;
+	private final DoorRefElements pDoorRef;
 	private final DangerousConditionElements pDangerousCondition;
 	private final CoordinateElements pCoordinate;
 	private final AreaElements pArea;
@@ -646,11 +766,16 @@ public class BmodGrammarAccess extends AbstractGrammarElementFinder {
 		this.pFloorplan = new FloorplanElements();
 		this.pRoom = new RoomElements();
 		this.pDoor = new DoorElements();
-		this.ePerception = new PerceptionElements();
-		this.eAction = new ActionElements();
+		this.pPerceptionLevel = new PerceptionLevelElements();
+		this.pActionProfile = new ActionProfileElements();
+		this.pPerception = new PerceptionElements();
+		this.pAction = new ActionElements();
+		this.ePerceptionEnum = new PerceptionEnumElements();
+		this.eActionEnum = new ActionEnumElements();
 		this.pPerson = new PersonElements();
 		this.pExit = new ExitElements();
 		this.pEmergencySign = new EmergencySignElements();
+		this.pDoorRef = new DoorRefElements();
 		this.pDangerousCondition = new DangerousConditionElements();
 		this.pCoordinate = new CoordinateElements();
 		this.pArea = new AreaElements();
@@ -695,8 +820,8 @@ public class BmodGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Floorplan:
-	//	{Floorplan} (rooms+=Room | doors+=Door | persons+=Person | exits+=Exit | signs+=EmergencySign |
-	//	dancons+=DangerousCondition)*;
+	//	{Floorplan} (perceptions+=PerceptionLevel | actions+=ActionProfile | rooms+=Room | doors+=Door | persons+=Person |
+	//	exits+=Exit | signs+=EmergencySign | dancons+=DangerousCondition)*;
 	public FloorplanElements getFloorplanAccess() {
 		return pFloorplan;
 	}
@@ -706,7 +831,7 @@ public class BmodGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Room:
-	//	'Room' name=VARNAME 'named' named=STRING
+	//	'Room' name=VARNAME ('named' named=STRING)?
 	//	areas+=Area ('and' areas+=Area)*;
 	public RoomElements getRoomAccess() {
 		return pRoom;
@@ -726,30 +851,70 @@ public class BmodGrammarAccess extends AbstractGrammarElementFinder {
 		return getDoorAccess().getRule();
 	}
 	
-	//enum Perception:
-	//	ATTENTIVE='attentive' | RELAXED='relaxed' |
-	//	OPTIMISTIC='optimistic' | SCEPTIC='sceptic';
-	public PerceptionElements getPerceptionAccess() {
-		return ePerception;
+	//PerceptionLevel:
+	//	'PerceptionLevel' name=VARNAME;
+	public PerceptionLevelElements getPerceptionLevelAccess() {
+		return pPerceptionLevel;
 	}
 	
-	public EnumRule getPerceptionRule() {
+	public ParserRule getPerceptionLevelRule() {
+		return getPerceptionLevelAccess().getRule();
+	}
+	
+	//ActionProfile:
+	//	'ActionProfile' name=VARNAME;
+	public ActionProfileElements getActionProfileAccess() {
+		return pActionProfile;
+	}
+	
+	public ParserRule getActionProfileRule() {
+		return getActionProfileAccess().getRule();
+	}
+	
+	//Perception:
+	//	existing=PerceptionEnum | custom=[PerceptionLevel|VARNAME];
+	public PerceptionElements getPerceptionAccess() {
+		return pPerception;
+	}
+	
+	public ParserRule getPerceptionRule() {
 		return getPerceptionAccess().getRule();
 	}
 	
-	//enum Action:
-	//	NEWCOMER='newcomer' | EXPERIENCED='experienced' | PANIC='panic';
+	//Action:
+	//	existing=ActionEnum | custom=[ActionProfile|VARNAME];
 	public ActionElements getActionAccess() {
-		return eAction;
+		return pAction;
 	}
 	
-	public EnumRule getActionRule() {
+	public ParserRule getActionRule() {
 		return getActionAccess().getRule();
 	}
 	
+	//enum PerceptionEnum:
+	//	attentive | relaxed |
+	//	optimistic | sceptic;
+	public PerceptionEnumElements getPerceptionEnumAccess() {
+		return ePerceptionEnum;
+	}
+	
+	public EnumRule getPerceptionEnumRule() {
+		return getPerceptionEnumAccess().getRule();
+	}
+	
+	//enum ActionEnum:
+	//	newcomer | experienced | panic;
+	public ActionEnumElements getActionEnumAccess() {
+		return eActionEnum;
+	}
+	
+	public EnumRule getActionEnumRule() {
+		return getActionEnumAccess().getRule();
+	}
+	
 	//Person:
-	//	'Person' name=VARNAME 'named' named=STRING 'in' location=Coordinate ':' (perception=Perception ',' action=Action |
-	//	action=Action ',' perception=Perception);
+	//	'Person' name=VARNAME 'named' named=STRING 'in' location=Coordinate ':'
+	//	perception=Perception ',' action=Action;
 	public PersonElements getPersonAccess() {
 		return pPerson;
 	}
@@ -769,13 +934,23 @@ public class BmodGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EmergencySign:
-	//	'Sign' 'on' on=[Door|VARNAME] 'to' to=[Door|VARNAME];
+	//	'Sign' 'on' on=[Door|VARNAME] to=DoorRef;
 	public EmergencySignElements getEmergencySignAccess() {
 		return pEmergencySign;
 	}
 	
 	public ParserRule getEmergencySignRule() {
 		return getEmergencySignAccess().getRule();
+	}
+	
+	//DoorRef:
+	//	'to' ref=[Door|VARNAME];
+	public DoorRefElements getDoorRefAccess() {
+		return pDoorRef;
+	}
+	
+	public ParserRule getDoorRefRule() {
+		return getDoorRefAccess().getRule();
 	}
 	
 	//DangerousCondition:
@@ -809,7 +984,7 @@ public class BmodGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//terminal VARNAME:
-	//	ID;
+	//	('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getVARNAMERule() {
 		return tVARNAME;
 	}

@@ -106,58 +106,52 @@ public interface Person extends EObject
   void setLocation(Coordinate value);
 
   /**
-   * Returns the value of the '<em><b>Perception</b></em>' attribute.
-   * The literals are from the enumeration {@link org.xtext.bmod.bmod.Perception}.
+   * Returns the value of the '<em><b>Perception</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Perception</em>' attribute isn't clear,
+   * If the meaning of the '<em>Perception</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Perception</em>' attribute.
-   * @see org.xtext.bmod.bmod.Perception
+   * @return the value of the '<em>Perception</em>' containment reference.
    * @see #setPerception(Perception)
    * @see org.xtext.bmod.bmod.BmodPackage#getPerson_Perception()
-   * @model
+   * @model containment="true"
    * @generated
    */
   Perception getPerception();
 
   /**
-   * Sets the value of the '{@link org.xtext.bmod.bmod.Person#getPerception <em>Perception</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.bmod.bmod.Person#getPerception <em>Perception</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Perception</em>' attribute.
-   * @see org.xtext.bmod.bmod.Perception
+   * @param value the new value of the '<em>Perception</em>' containment reference.
    * @see #getPerception()
    * @generated
    */
   void setPerception(Perception value);
 
   /**
-   * Returns the value of the '<em><b>Action</b></em>' attribute.
-   * The literals are from the enumeration {@link org.xtext.bmod.bmod.Action}.
+   * Returns the value of the '<em><b>Action</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Action</em>' attribute isn't clear,
+   * If the meaning of the '<em>Action</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Action</em>' attribute.
-   * @see org.xtext.bmod.bmod.Action
+   * @return the value of the '<em>Action</em>' containment reference.
    * @see #setAction(Action)
    * @see org.xtext.bmod.bmod.BmodPackage#getPerson_Action()
-   * @model
+   * @model containment="true"
    * @generated
    */
   Action getAction();
 
   /**
-   * Sets the value of the '{@link org.xtext.bmod.bmod.Person#getAction <em>Action</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.bmod.bmod.Person#getAction <em>Action</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Action</em>' attribute.
-   * @see org.xtext.bmod.bmod.Action
+   * @param value the new value of the '<em>Action</em>' containment reference.
    * @see #getAction()
    * @generated
    */

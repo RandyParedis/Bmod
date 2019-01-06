@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.xtext.bmod.Helper;
 import org.xtext.bmod.bmod.Area;
 import org.xtext.bmod.bmod.Coordinate;
 import org.xtext.bmod.bmod.Door;
 import org.xtext.bmod.bmod.EmergencySign;
 import org.xtext.bmod.bmod.Floorplan;
+import org.xtext.bmod.bmod.Person;
 import org.xtext.bmod.bmod.Room;
+import org.xtext.bmod.generator.Helper;
 import org.xtext.bmod.validation.AbstractBmodValidator;
 
 /**
@@ -139,7 +140,7 @@ public class BmodValidator extends AbstractBmodValidator {
     EList<EmergencySign> _signs = fp.getSigns();
     for (final EmergencySign sign : _signs) {
       {
-        EList<Door> set = fp.getDoors();
+        ArrayList<Door> set = new ArrayList<Door>();
         EmergencySign current = sign;
         while ((current != null)) {
           {
@@ -151,14 +152,31 @@ public class BmodValidator extends AbstractBmodValidator {
                 in = true;
               }
             }
-            if ((!in)) {
+            if (in) {
               this.error("The emergency signs are circular dependant", sign, null);
               return;
             }
-            set.remove(current.getOn());
-            current = Helper.getDoorSign(current.getTo(), fp);
+            set.add(current.getOn());
+            current = Helper.getDoorSign(current.getTo().getRef(), fp);
           }
         }
+      }
+    }
+  }
+  
+  @Check
+  public void checkPersonsInExistingCell(final Floorplan fp) {
+    ArrayList<Coordinate> cells = new ArrayList<Coordinate>();
+    EList<Room> _rooms = fp.getRooms();
+    for (final Room room : _rooms) {
+      cells.addAll(Helper.getRoomCoords(room));
+    }
+    EList<Person> _persons = fp.getPersons();
+    for (final Person person : _persons) {
+      boolean _isIn = Helper.isIn(person.getLocation(), cells);
+      boolean _not = (!_isIn);
+      if (_not) {
+        this.error("The person is not in an existing cell", person, null);
       }
     }
   }

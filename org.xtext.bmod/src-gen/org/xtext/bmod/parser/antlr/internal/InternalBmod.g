@@ -113,9 +113,49 @@ ruleFloorplan returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getFloorplanAccess().getRoomsRoomParserRuleCall_1_0_0());
+						newCompositeNode(grammarAccess.getFloorplanAccess().getPerceptionsPerceptionLevelParserRuleCall_1_0_0());
 					}
-					lv_rooms_1_0=ruleRoom
+					lv_perceptions_1_0=rulePerceptionLevel
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getFloorplanRule());
+						}
+						add(
+							$current,
+							"perceptions",
+							lv_perceptions_1_0,
+							"org.xtext.bmod.Bmod.PerceptionLevel");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getFloorplanAccess().getActionsActionProfileParserRuleCall_1_1_0());
+					}
+					lv_actions_2_0=ruleActionProfile
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getFloorplanRule());
+						}
+						add(
+							$current,
+							"actions",
+							lv_actions_2_0,
+							"org.xtext.bmod.Bmod.ActionProfile");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getFloorplanAccess().getRoomsRoomParserRuleCall_1_2_0());
+					}
+					lv_rooms_3_0=ruleRoom
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getFloorplanRule());
@@ -123,7 +163,7 @@ ruleFloorplan returns [EObject current=null]
 						add(
 							$current,
 							"rooms",
-							lv_rooms_1_0,
+							lv_rooms_3_0,
 							"org.xtext.bmod.Bmod.Room");
 						afterParserOrEnumRuleCall();
 					}
@@ -133,9 +173,9 @@ ruleFloorplan returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getFloorplanAccess().getDoorsDoorParserRuleCall_1_1_0());
+						newCompositeNode(grammarAccess.getFloorplanAccess().getDoorsDoorParserRuleCall_1_3_0());
 					}
-					lv_doors_2_0=ruleDoor
+					lv_doors_4_0=ruleDoor
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getFloorplanRule());
@@ -143,7 +183,7 @@ ruleFloorplan returns [EObject current=null]
 						add(
 							$current,
 							"doors",
-							lv_doors_2_0,
+							lv_doors_4_0,
 							"org.xtext.bmod.Bmod.Door");
 						afterParserOrEnumRuleCall();
 					}
@@ -153,9 +193,9 @@ ruleFloorplan returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getFloorplanAccess().getPersonsPersonParserRuleCall_1_2_0());
+						newCompositeNode(grammarAccess.getFloorplanAccess().getPersonsPersonParserRuleCall_1_4_0());
 					}
-					lv_persons_3_0=rulePerson
+					lv_persons_5_0=rulePerson
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getFloorplanRule());
@@ -163,7 +203,7 @@ ruleFloorplan returns [EObject current=null]
 						add(
 							$current,
 							"persons",
-							lv_persons_3_0,
+							lv_persons_5_0,
 							"org.xtext.bmod.Bmod.Person");
 						afterParserOrEnumRuleCall();
 					}
@@ -173,9 +213,9 @@ ruleFloorplan returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getFloorplanAccess().getExitsExitParserRuleCall_1_3_0());
+						newCompositeNode(grammarAccess.getFloorplanAccess().getExitsExitParserRuleCall_1_5_0());
 					}
-					lv_exits_4_0=ruleExit
+					lv_exits_6_0=ruleExit
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getFloorplanRule());
@@ -183,7 +223,7 @@ ruleFloorplan returns [EObject current=null]
 						add(
 							$current,
 							"exits",
-							lv_exits_4_0,
+							lv_exits_6_0,
 							"org.xtext.bmod.Bmod.Exit");
 						afterParserOrEnumRuleCall();
 					}
@@ -193,9 +233,9 @@ ruleFloorplan returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getFloorplanAccess().getSignsEmergencySignParserRuleCall_1_4_0());
+						newCompositeNode(grammarAccess.getFloorplanAccess().getSignsEmergencySignParserRuleCall_1_6_0());
 					}
-					lv_signs_5_0=ruleEmergencySign
+					lv_signs_7_0=ruleEmergencySign
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getFloorplanRule());
@@ -203,7 +243,7 @@ ruleFloorplan returns [EObject current=null]
 						add(
 							$current,
 							"signs",
-							lv_signs_5_0,
+							lv_signs_7_0,
 							"org.xtext.bmod.Bmod.EmergencySign");
 						afterParserOrEnumRuleCall();
 					}
@@ -213,9 +253,9 @@ ruleFloorplan returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getFloorplanAccess().getDanconsDangerousConditionParserRuleCall_1_5_0());
+						newCompositeNode(grammarAccess.getFloorplanAccess().getDanconsDangerousConditionParserRuleCall_1_7_0());
 					}
-					lv_dancons_6_0=ruleDangerousCondition
+					lv_dancons_8_0=ruleDangerousCondition
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getFloorplanRule());
@@ -223,7 +263,7 @@ ruleFloorplan returns [EObject current=null]
 						add(
 							$current,
 							"dancons",
-							lv_dancons_6_0,
+							lv_dancons_8_0,
 							"org.xtext.bmod.Bmod.DangerousCondition");
 						afterParserOrEnumRuleCall();
 					}
@@ -271,32 +311,34 @@ ruleRoom returns [EObject current=null]
 				}
 			)
 		)
-		otherlv_2='named'
-		{
-			newLeafNode(otherlv_2, grammarAccess.getRoomAccess().getNamedKeyword_2());
-		}
 		(
+			otherlv_2='named'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getRoomAccess().getNamedKeyword_2_0());
+			}
 			(
-				lv_named_3_0=RULE_STRING
-				{
-					newLeafNode(lv_named_3_0, grammarAccess.getRoomAccess().getNamedSTRINGTerminalRuleCall_3_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getRoomRule());
+				(
+					lv_named_3_0=RULE_STRING
+					{
+						newLeafNode(lv_named_3_0, grammarAccess.getRoomAccess().getNamedSTRINGTerminalRuleCall_2_1_0());
 					}
-					setWithLastConsumed(
-						$current,
-						"named",
-						lv_named_3_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
-				}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getRoomRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"named",
+							lv_named_3_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
 			)
-		)
+		)?
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_3_0());
 				}
 				lv_areas_4_0=ruleArea
 				{
@@ -315,12 +357,12 @@ ruleRoom returns [EObject current=null]
 		(
 			otherlv_5='and'
 			{
-				newLeafNode(otherlv_5, grammarAccess.getRoomAccess().getAndKeyword_5_0());
+				newLeafNode(otherlv_5, grammarAccess.getRoomAccess().getAndKeyword_4_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_5_1_0());
+						newCompositeNode(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_4_1_0());
 					}
 					lv_areas_6_0=ruleArea
 					{
@@ -427,6 +469,192 @@ ruleDoor returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRulePerceptionLevel
+entryRulePerceptionLevel returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getPerceptionLevelRule()); }
+	iv_rulePerceptionLevel=rulePerceptionLevel
+	{ $current=$iv_rulePerceptionLevel.current; }
+	EOF;
+
+// Rule PerceptionLevel
+rulePerceptionLevel returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='PerceptionLevel'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getPerceptionLevelAccess().getPerceptionLevelKeyword_0());
+		}
+		(
+			(
+				lv_name_1_0=RULE_VARNAME
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getPerceptionLevelAccess().getNameVARNAMETerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getPerceptionLevelRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.xtext.bmod.Bmod.VARNAME");
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleActionProfile
+entryRuleActionProfile returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getActionProfileRule()); }
+	iv_ruleActionProfile=ruleActionProfile
+	{ $current=$iv_ruleActionProfile.current; }
+	EOF;
+
+// Rule ActionProfile
+ruleActionProfile returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='ActionProfile'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getActionProfileAccess().getActionProfileKeyword_0());
+		}
+		(
+			(
+				lv_name_1_0=RULE_VARNAME
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getActionProfileAccess().getNameVARNAMETerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getActionProfileRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.xtext.bmod.Bmod.VARNAME");
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRulePerception
+entryRulePerception returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getPerceptionRule()); }
+	iv_rulePerception=rulePerception
+	{ $current=$iv_rulePerception.current; }
+	EOF;
+
+// Rule Perception
+rulePerception returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getPerceptionAccess().getExistingPerceptionEnumEnumRuleCall_0_0());
+				}
+				lv_existing_0_0=rulePerceptionEnum
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getPerceptionRule());
+					}
+					set(
+						$current,
+						"existing",
+						lv_existing_0_0,
+						"org.xtext.bmod.Bmod.PerceptionEnum");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		    |
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getPerceptionRule());
+					}
+				}
+				otherlv_1=RULE_VARNAME
+				{
+					newLeafNode(otherlv_1, grammarAccess.getPerceptionAccess().getCustomPerceptionLevelCrossReference_1_0());
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleAction
+entryRuleAction returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getActionRule()); }
+	iv_ruleAction=ruleAction
+	{ $current=$iv_ruleAction.current; }
+	EOF;
+
+// Rule Action
+ruleAction returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getActionAccess().getExistingActionEnumEnumRuleCall_0_0());
+				}
+				lv_existing_0_0=ruleActionEnum
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getActionRule());
+					}
+					set(
+						$current,
+						"existing",
+						lv_existing_0_0,
+						"org.xtext.bmod.Bmod.ActionEnum");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		    |
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getActionRule());
+					}
+				}
+				otherlv_1=RULE_VARNAME
+				{
+					newLeafNode(otherlv_1, grammarAccess.getActionAccess().getCustomActionProfileCrossReference_1_0());
+				}
+			)
+		)
+	)
+;
+
 // Entry rule entryRulePerson
 entryRulePerson returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getPersonRule()); }
@@ -516,93 +744,44 @@ rulePerson returns [EObject current=null]
 		}
 		(
 			(
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getPersonAccess().getPerceptionPerceptionEnumRuleCall_7_0_0_0());
-						}
-						lv_perception_7_0=rulePerception
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getPersonRule());
-							}
-							set(
-								$current,
-								"perception",
-								lv_perception_7_0,
-								"org.xtext.bmod.Bmod.Perception");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
-				otherlv_8=','
 				{
-					newLeafNode(otherlv_8, grammarAccess.getPersonAccess().getCommaKeyword_7_0_1());
+					newCompositeNode(grammarAccess.getPersonAccess().getPerceptionPerceptionParserRuleCall_7_0());
 				}
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getPersonAccess().getActionActionEnumRuleCall_7_0_2_0());
-						}
-						lv_action_9_0=ruleAction
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getPersonRule());
-							}
-							set(
-								$current,
-								"action",
-								lv_action_9_0,
-								"org.xtext.bmod.Bmod.Action");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
+				lv_perception_7_0=rulePerception
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getPersonRule());
+					}
+					set(
+						$current,
+						"perception",
+						lv_perception_7_0,
+						"org.xtext.bmod.Bmod.Perception");
+					afterParserOrEnumRuleCall();
+				}
 			)
-			    |
+		)
+		otherlv_8=','
+		{
+			newLeafNode(otherlv_8, grammarAccess.getPersonAccess().getCommaKeyword_8());
+		}
+		(
 			(
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getPersonAccess().getActionActionEnumRuleCall_7_1_0_0());
-						}
-						lv_action_10_0=ruleAction
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getPersonRule());
-							}
-							set(
-								$current,
-								"action",
-								lv_action_10_0,
-								"org.xtext.bmod.Bmod.Action");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
-				otherlv_11=','
 				{
-					newLeafNode(otherlv_11, grammarAccess.getPersonAccess().getCommaKeyword_7_1_1());
+					newCompositeNode(grammarAccess.getPersonAccess().getActionActionParserRuleCall_9_0());
 				}
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getPersonAccess().getPerceptionPerceptionEnumRuleCall_7_1_2_0());
-						}
-						lv_perception_12_0=rulePerception
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getPersonRule());
-							}
-							set(
-								$current,
-								"perception",
-								lv_perception_12_0,
-								"org.xtext.bmod.Bmod.Perception");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
+				lv_action_9_0=ruleAction
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getPersonRule());
+					}
+					set(
+						$current,
+						"action",
+						lv_action_9_0,
+						"org.xtext.bmod.Bmod.Action");
+					afterParserOrEnumRuleCall();
+				}
 			)
 		)
 	)
@@ -691,20 +870,58 @@ ruleEmergencySign returns [EObject current=null]
 				}
 			)
 		)
-		otherlv_3='to'
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEmergencySignAccess().getToDoorRefParserRuleCall_3_0());
+				}
+				lv_to_3_0=ruleDoorRef
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEmergencySignRule());
+					}
+					set(
+						$current,
+						"to",
+						lv_to_3_0,
+						"org.xtext.bmod.Bmod.DoorRef");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleDoorRef
+entryRuleDoorRef returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getDoorRefRule()); }
+	iv_ruleDoorRef=ruleDoorRef
+	{ $current=$iv_ruleDoorRef.current; }
+	EOF;
+
+// Rule DoorRef
+ruleDoorRef returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='to'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getEmergencySignAccess().getToKeyword_3());
+			newLeafNode(otherlv_0, grammarAccess.getDoorRefAccess().getToKeyword_0());
 		}
 		(
 			(
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getEmergencySignRule());
+						$current = createModelElement(grammarAccess.getDoorRefRule());
 					}
 				}
-				otherlv_4=RULE_VARNAME
+				otherlv_1=RULE_VARNAME
 				{
-					newLeafNode(otherlv_4, grammarAccess.getEmergencySignAccess().getToDoorCrossReference_4_0());
+					newLeafNode(otherlv_1, grammarAccess.getDoorRefAccess().getRefDoorCrossReference_1_0());
 				}
 			)
 		)
@@ -951,8 +1168,8 @@ ruleArea returns [EObject current=null]
 	)
 ;
 
-// Rule Perception
-rulePerception returns [Enumerator current=null]
+// Rule PerceptionEnum
+rulePerceptionEnum returns [Enumerator current=null]
 @init {
 	enterRule();
 }
@@ -963,39 +1180,39 @@ rulePerception returns [Enumerator current=null]
 		(
 			enumLiteral_0='attentive'
 			{
-				$current = grammarAccess.getPerceptionAccess().getATTENTIVEEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_0, grammarAccess.getPerceptionAccess().getATTENTIVEEnumLiteralDeclaration_0());
+				$current = grammarAccess.getPerceptionEnumAccess().getAttentiveEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_0, grammarAccess.getPerceptionEnumAccess().getAttentiveEnumLiteralDeclaration_0());
 			}
 		)
 		    |
 		(
 			enumLiteral_1='relaxed'
 			{
-				$current = grammarAccess.getPerceptionAccess().getRELAXEDEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_1, grammarAccess.getPerceptionAccess().getRELAXEDEnumLiteralDeclaration_1());
+				$current = grammarAccess.getPerceptionEnumAccess().getRelaxedEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_1, grammarAccess.getPerceptionEnumAccess().getRelaxedEnumLiteralDeclaration_1());
 			}
 		)
 		    |
 		(
 			enumLiteral_2='optimistic'
 			{
-				$current = grammarAccess.getPerceptionAccess().getOPTIMISTICEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_2, grammarAccess.getPerceptionAccess().getOPTIMISTICEnumLiteralDeclaration_2());
+				$current = grammarAccess.getPerceptionEnumAccess().getOptimisticEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_2, grammarAccess.getPerceptionEnumAccess().getOptimisticEnumLiteralDeclaration_2());
 			}
 		)
 		    |
 		(
 			enumLiteral_3='sceptic'
 			{
-				$current = grammarAccess.getPerceptionAccess().getSCEPTICEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_3, grammarAccess.getPerceptionAccess().getSCEPTICEnumLiteralDeclaration_3());
+				$current = grammarAccess.getPerceptionEnumAccess().getScepticEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_3, grammarAccess.getPerceptionEnumAccess().getScepticEnumLiteralDeclaration_3());
 			}
 		)
 	)
 ;
 
-// Rule Action
-ruleAction returns [Enumerator current=null]
+// Rule ActionEnum
+ruleActionEnum returns [Enumerator current=null]
 @init {
 	enterRule();
 }
@@ -1006,32 +1223,32 @@ ruleAction returns [Enumerator current=null]
 		(
 			enumLiteral_0='newcomer'
 			{
-				$current = grammarAccess.getActionAccess().getNEWCOMEREnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_0, grammarAccess.getActionAccess().getNEWCOMEREnumLiteralDeclaration_0());
+				$current = grammarAccess.getActionEnumAccess().getNewcomerEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_0, grammarAccess.getActionEnumAccess().getNewcomerEnumLiteralDeclaration_0());
 			}
 		)
 		    |
 		(
 			enumLiteral_1='experienced'
 			{
-				$current = grammarAccess.getActionAccess().getEXPERIENCEDEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_1, grammarAccess.getActionAccess().getEXPERIENCEDEnumLiteralDeclaration_1());
+				$current = grammarAccess.getActionEnumAccess().getExperiencedEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_1, grammarAccess.getActionEnumAccess().getExperiencedEnumLiteralDeclaration_1());
 			}
 		)
 		    |
 		(
 			enumLiteral_2='panic'
 			{
-				$current = grammarAccess.getActionAccess().getPANICEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_2, grammarAccess.getActionAccess().getPANICEnumLiteralDeclaration_2());
+				$current = grammarAccess.getActionEnumAccess().getPanicEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_2, grammarAccess.getActionEnumAccess().getPanicEnumLiteralDeclaration_2());
 			}
 		)
 	)
 ;
 
-RULE_VARNAME : RULE_ID;
+RULE_VARNAME : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-fragment RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 

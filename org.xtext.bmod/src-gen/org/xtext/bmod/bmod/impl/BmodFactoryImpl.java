@@ -70,9 +70,14 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
       case BmodPackage.FLOORPLAN: return createFloorplan();
       case BmodPackage.ROOM: return createRoom();
       case BmodPackage.DOOR: return createDoor();
+      case BmodPackage.PERCEPTION_LEVEL: return createPerceptionLevel();
+      case BmodPackage.ACTION_PROFILE: return createActionProfile();
+      case BmodPackage.PERCEPTION: return createPerception();
+      case BmodPackage.ACTION: return createAction();
       case BmodPackage.PERSON: return createPerson();
       case BmodPackage.EXIT: return createExit();
       case BmodPackage.EMERGENCY_SIGN: return createEmergencySign();
+      case BmodPackage.DOOR_REF: return createDoorRef();
       case BmodPackage.DANGEROUS_CONDITION: return createDangerousCondition();
       case BmodPackage.COORDINATE: return createCoordinate();
       case BmodPackage.AREA: return createArea();
@@ -91,10 +96,10 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
   {
     switch (eDataType.getClassifierID())
     {
-      case BmodPackage.PERCEPTION:
-        return createPerceptionFromString(eDataType, initialValue);
-      case BmodPackage.ACTION:
-        return createActionFromString(eDataType, initialValue);
+      case BmodPackage.PERCEPTION_ENUM:
+        return createPerceptionEnumFromString(eDataType, initialValue);
+      case BmodPackage.ACTION_ENUM:
+        return createActionEnumFromString(eDataType, initialValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -110,10 +115,10 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
   {
     switch (eDataType.getClassifierID())
     {
-      case BmodPackage.PERCEPTION:
-        return convertPerceptionToString(eDataType, instanceValue);
-      case BmodPackage.ACTION:
-        return convertActionToString(eDataType, instanceValue);
+      case BmodPackage.PERCEPTION_ENUM:
+        return convertPerceptionEnumToString(eDataType, instanceValue);
+      case BmodPackage.ACTION_ENUM:
+        return convertActionEnumToString(eDataType, instanceValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -168,6 +173,50 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public PerceptionLevel createPerceptionLevel()
+  {
+    PerceptionLevelImpl perceptionLevel = new PerceptionLevelImpl();
+    return perceptionLevel;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ActionProfile createActionProfile()
+  {
+    ActionProfileImpl actionProfile = new ActionProfileImpl();
+    return actionProfile;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Perception createPerception()
+  {
+    PerceptionImpl perception = new PerceptionImpl();
+    return perception;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Action createAction()
+  {
+    ActionImpl action = new ActionImpl();
+    return action;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Person createPerson()
   {
     PersonImpl person = new PersonImpl();
@@ -194,6 +243,17 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
   {
     EmergencySignImpl emergencySign = new EmergencySignImpl();
     return emergencySign;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DoorRef createDoorRef()
+  {
+    DoorRefImpl doorRef = new DoorRefImpl();
+    return doorRef;
   }
 
   /**
@@ -234,9 +294,9 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Perception createPerceptionFromString(EDataType eDataType, String initialValue)
+  public PerceptionEnum createPerceptionEnumFromString(EDataType eDataType, String initialValue)
   {
-    Perception result = Perception.get(initialValue);
+    PerceptionEnum result = PerceptionEnum.get(initialValue);
     if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
     return result;
   }
@@ -246,7 +306,7 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public String convertPerceptionToString(EDataType eDataType, Object instanceValue)
+  public String convertPerceptionEnumToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }
@@ -256,9 +316,9 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Action createActionFromString(EDataType eDataType, String initialValue)
+  public ActionEnum createActionEnumFromString(EDataType eDataType, String initialValue)
   {
-    Action result = Action.get(initialValue);
+    ActionEnum result = ActionEnum.get(initialValue);
     if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
     return result;
   }
@@ -268,7 +328,7 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public String convertActionToString(EDataType eDataType, Object instanceValue)
+  public String convertActionEnumToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

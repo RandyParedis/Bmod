@@ -3,10 +3,31 @@
  */
 package org.xtext.bmod.generator;
 
+import com.google.common.collect.Iterables;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.function.BiConsumer;
+import org.bmod.simulation.GenerationHelper;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.generator.AbstractGenerator;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
+import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.xtext.bmod.bmod.ActionEnum;
+import org.xtext.bmod.bmod.ActionProfile;
+import org.xtext.bmod.bmod.Coordinate;
+import org.xtext.bmod.bmod.Door;
+import org.xtext.bmod.bmod.EmergencySign;
+import org.xtext.bmod.bmod.Exit;
+import org.xtext.bmod.bmod.PerceptionEnum;
+import org.xtext.bmod.bmod.PerceptionLevel;
+import org.xtext.bmod.bmod.Person;
+import org.xtext.bmod.bmod.Room;
+import org.xtext.bmod.generator.Helper;
 
 /**
  * Generates code from your model files on save.
@@ -14,8 +35,397 @@ import org.eclipse.xtext.generator.IGeneratorContext;
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 @SuppressWarnings("all")
-public class BmodGenerator extends AbstractGenerator {
+public class BmodGenerator implements IGenerator2 {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    try {
+      final Map<String, String> files = GenerationHelper.files();
+      final BiConsumer<String, String> _function = (String key, String value) -> {
+        fsa.generateFile(key, value);
+      };
+      files.forEach(_function);
+      final String simpleClassName = resource.getURI().trimFileExtension().lastSegment();
+      EList<EObject> _contents = resource.getContents();
+      EObject _head = null;
+      if (_contents!=null) {
+        _head=IterableExtensions.<EObject>head(_contents);
+      }
+      boolean _tripleEquals = (_head == null);
+      if (_tripleEquals) {
+        return;
+      }
+      final EList<EObject> floorplan = IterableExtensions.<EObject>head(resource.getContents()).eContents();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.bmod.simulation.Cell;");
+      _builder.newLine();
+      _builder.append("import org.bmod.simulation.Door;");
+      _builder.newLine();
+      _builder.append("import org.bmod.simulation.EmergencySign;");
+      _builder.newLine();
+      _builder.append("import org.bmod.simulation.Person;");
+      _builder.newLine();
+      _builder.append("import org.bmod.simulation.Room;");
+      _builder.newLine();
+      _builder.append("import org.bmod.simulation.Simulatable;");
+      _builder.newLine();
+      _builder.append("import org.bmod.simulation.Simulator;");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import java.util.ArrayList;");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("public class ");
+      _builder.append(simpleClassName);
+      _builder.append(" {");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("public static void main(String... args) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("ArrayList<Simulatable> list = new ArrayList<Simulatable>();");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("// Rooms and Cells");
+      _builder.newLine();
+      {
+        Iterable<Room> _filter = Iterables.<Room>filter(floorplan, Room.class);
+        for(final Room room : _filter) {
+          _builder.append("\t\t");
+          _builder.append("Room room_");
+          String _name = room.getName();
+          _builder.append(_name, "\t\t");
+          _builder.append(" = new Room();");
+          _builder.newLineIfNotEmpty();
+          {
+            ArrayList<Coordinate> _roomCoords = Helper.getRoomCoords(room);
+            for(final Coordinate cell : _roomCoords) {
+              _builder.append("\t\t");
+              _builder.append("Cell cell_");
+              int _x = cell.getX();
+              _builder.append(_x, "\t\t");
+              _builder.append("_");
+              int _y = cell.getY();
+              _builder.append(_y, "\t\t");
+              _builder.append(" = new Cell(");
+              int _x_1 = cell.getX();
+              _builder.append(_x_1, "\t\t");
+              _builder.append(", ");
+              int _y_1 = cell.getY();
+              _builder.append(_y_1, "\t\t");
+              _builder.append(");");
+              _builder.newLineIfNotEmpty();
+              {
+                Iterable<Exit> _filter_1 = Iterables.<Exit>filter(floorplan, Exit.class);
+                for(final Exit exit : _filter_1) {
+                  {
+                    if (((exit.getLocation().getX() == cell.getX()) && (exit.getLocation().getY() == cell.getY()))) {
+                      _builder.append("\t\t");
+                      _builder.append("cell_");
+                      int _x_2 = cell.getX();
+                      _builder.append(_x_2, "\t\t");
+                      _builder.append("_");
+                      int _y_2 = cell.getY();
+                      _builder.append(_y_2, "\t\t");
+                      _builder.append(".setExit(true);");
+                      _builder.newLineIfNotEmpty();
+                    }
+                  }
+                }
+              }
+              _builder.append("\t\t");
+              _builder.append("room_");
+              String _name_1 = room.getName();
+              _builder.append(_name_1, "\t\t");
+              _builder.append(".add(cell_");
+              int _x_3 = cell.getX();
+              _builder.append(_x_3, "\t\t");
+              _builder.append("_");
+              int _y_3 = cell.getY();
+              _builder.append(_y_3, "\t\t");
+              _builder.append(");");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("list.add(cell_");
+              int _x_4 = cell.getX();
+              _builder.append(_x_4, "\t\t");
+              _builder.append("_");
+              int _y_4 = cell.getY();
+              _builder.append(_y_4, "\t\t");
+              _builder.append(");");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\t\t");
+          _builder.append("list.add(room_");
+          String _name_2 = room.getName();
+          _builder.append(_name_2, "\t\t");
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("// Doors");
+      _builder.newLine();
+      {
+        Iterable<Door> _filter_2 = Iterables.<Door>filter(floorplan, Door.class);
+        for(final Door door : _filter_2) {
+          _builder.append("\t\t");
+          _builder.append("Door door_");
+          String _name_3 = door.getName();
+          _builder.append(_name_3, "\t\t");
+          _builder.append(" = new Door(");
+          int _x_5 = door.getFrom().getX();
+          _builder.append(_x_5, "\t\t");
+          _builder.append(", ");
+          int _y_5 = door.getFrom().getY();
+          _builder.append(_y_5, "\t\t");
+          _builder.append(", ");
+          int _x_6 = door.getTo().getX();
+          _builder.append(_x_6, "\t\t");
+          _builder.append(", ");
+          int _y_6 = door.getTo().getY();
+          _builder.append(_y_6, "\t\t");
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("door_");
+          String _name_4 = door.getName();
+          _builder.append(_name_4, "\t\t");
+          _builder.append(".setup(list);");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("list.add(door_");
+          String _name_5 = door.getName();
+          _builder.append(_name_5, "\t\t");
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("// Emergency Signs");
+      _builder.newLine();
+      {
+        Iterable<EmergencySign> _filter_3 = Iterables.<EmergencySign>filter(floorplan, EmergencySign.class);
+        for(final EmergencySign sign : _filter_3) {
+          _builder.append("\t\t");
+          _builder.append("EmergencySign sign_");
+          String _name_6 = sign.getOn().getName();
+          _builder.append(_name_6, "\t\t");
+          _builder.append("_");
+          String _name_7 = sign.getTo().getRef().getName();
+          _builder.append(_name_7, "\t\t");
+          _builder.append(" = new EmergencySign(door_");
+          String _name_8 = sign.getOn().getName();
+          _builder.append(_name_8, "\t\t");
+          _builder.append(", door_");
+          String _name_9 = sign.getTo().getRef().getName();
+          _builder.append(_name_9, "\t\t");
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("sign_");
+          String _name_10 = sign.getOn().getName();
+          _builder.append(_name_10, "\t\t");
+          _builder.append("_");
+          String _name_11 = sign.getTo().getRef().getName();
+          _builder.append(_name_11, "\t\t");
+          _builder.append(".setup(list);");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("list.add(sign_");
+          String _name_12 = sign.getOn().getName();
+          _builder.append(_name_12, "\t\t");
+          _builder.append("_");
+          String _name_13 = sign.getTo().getRef().getName();
+          _builder.append(_name_13, "\t\t");
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("// Actions and Perceptions");
+      _builder.newLine();
+      {
+        Iterable<ActionProfile> _filter_4 = Iterables.<ActionProfile>filter(floorplan, ActionProfile.class);
+        for(final ActionProfile action : _filter_4) {
+          _builder.append("\t\t");
+          _builder.append("Person.actions.put(\"");
+          String _name_14 = action.getName();
+          _builder.append(_name_14, "\t\t");
+          _builder.append("\", (Person p, ArrayList<Simulatable> objects) -> BLOCK);");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      {
+        Iterable<PerceptionLevel> _filter_5 = Iterables.<PerceptionLevel>filter(floorplan, PerceptionLevel.class);
+        for(final PerceptionLevel perception : _filter_5) {
+          _builder.append("\t\t");
+          _builder.append("Person.actions.put(\"");
+          String _name_15 = perception.getName();
+          _builder.append(_name_15, "\t\t");
+          _builder.append("\", (Person p, ArrayList<Simulatable> objects) -> BLOCK);");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("// Persons");
+      _builder.newLine();
+      {
+        Iterable<Person> _filter_6 = Iterables.<Person>filter(floorplan, Person.class);
+        for(final Person person : _filter_6) {
+          {
+            ActionEnum _existing = person.getAction().getExisting();
+            boolean _tripleNotEquals = (_existing != null);
+            if (_tripleNotEquals) {
+              {
+                PerceptionEnum _existing_1 = person.getPerception().getExisting();
+                boolean _tripleNotEquals_1 = (_existing_1 != null);
+                if (_tripleNotEquals_1) {
+                  _builder.append("\t\t");
+                  _builder.append("Person person_");
+                  String _name_16 = person.getName();
+                  _builder.append(_name_16, "\t\t");
+                  _builder.append(" = new Person(\"");
+                  String _named = person.getNamed();
+                  _builder.append(_named, "\t\t");
+                  _builder.append("\", ");
+                  int _x_7 = person.getLocation().getX();
+                  _builder.append(_x_7, "\t\t");
+                  _builder.append(", ");
+                  int _y_7 = person.getLocation().getY();
+                  _builder.append(_y_7, "\t\t");
+                  _builder.append(", \"");
+                  String _name_17 = person.getPerception().getExisting().getName();
+                  _builder.append(_name_17, "\t\t");
+                  _builder.append("\", \"");
+                  String _name_18 = person.getAction().getExisting().getName();
+                  _builder.append(_name_18, "\t\t");
+                  _builder.append("\");");
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  _builder.append("\t\t");
+                  _builder.append("Person person_");
+                  String _name_19 = person.getName();
+                  _builder.append(_name_19, "\t\t");
+                  _builder.append(" = new Person(\"");
+                  String _named_1 = person.getNamed();
+                  _builder.append(_named_1, "\t\t");
+                  _builder.append("\", ");
+                  int _x_8 = person.getLocation().getX();
+                  _builder.append(_x_8, "\t\t");
+                  _builder.append(", ");
+                  int _y_8 = person.getLocation().getY();
+                  _builder.append(_y_8, "\t\t");
+                  _builder.append(", \"");
+                  String _string = person.getPerception().getCustom().toString();
+                  _builder.append(_string, "\t\t");
+                  _builder.append("\", \"");
+                  String _name_20 = person.getAction().getExisting().getName();
+                  _builder.append(_name_20, "\t\t");
+                  _builder.append("\");");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+            } else {
+              {
+                PerceptionEnum _existing_2 = person.getPerception().getExisting();
+                boolean _tripleNotEquals_2 = (_existing_2 != null);
+                if (_tripleNotEquals_2) {
+                  _builder.append("\t\t");
+                  _builder.append("Person person_");
+                  String _name_21 = person.getName();
+                  _builder.append(_name_21, "\t\t");
+                  _builder.append(" = new Person(\"");
+                  String _named_2 = person.getNamed();
+                  _builder.append(_named_2, "\t\t");
+                  _builder.append("\", ");
+                  int _x_9 = person.getLocation().getX();
+                  _builder.append(_x_9, "\t\t");
+                  _builder.append(", ");
+                  int _y_9 = person.getLocation().getY();
+                  _builder.append(_y_9, "\t\t");
+                  _builder.append(", \"");
+                  String _name_22 = person.getPerception().getExisting().getName();
+                  _builder.append(_name_22, "\t\t");
+                  _builder.append("\", \"");
+                  String _string_1 = person.getAction().getCustom().toString();
+                  _builder.append(_string_1, "\t\t");
+                  _builder.append("\");");
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  _builder.append("\t\t");
+                  _builder.append("Person person_");
+                  String _name_23 = person.getName();
+                  _builder.append(_name_23, "\t\t");
+                  _builder.append(" = new Person(\"");
+                  String _named_3 = person.getNamed();
+                  _builder.append(_named_3, "\t\t");
+                  _builder.append("\", ");
+                  int _x_10 = person.getLocation().getX();
+                  _builder.append(_x_10, "\t\t");
+                  _builder.append(", ");
+                  int _y_10 = person.getLocation().getY();
+                  _builder.append(_y_10, "\t\t");
+                  _builder.append(", \"");
+                  String _string_2 = person.getPerception().getCustom().toString();
+                  _builder.append(_string_2, "\t\t");
+                  _builder.append("\", \"");
+                  String _string_3 = person.getAction().getCustom().toString();
+                  _builder.append(_string_3, "\t\t");
+                  _builder.append("\");");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+            }
+          }
+          _builder.append("\t\t");
+          _builder.append("list.add(person_");
+          String _name_24 = person.getName();
+          _builder.append(_name_24, "\t\t");
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("// Simulation itself");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Simulator(list);");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      fsa.generateFile((simpleClassName + ".java"), _builder);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
+  public void afterGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+  }
+  
+  @Override
+  public void beforeGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
   }
 }

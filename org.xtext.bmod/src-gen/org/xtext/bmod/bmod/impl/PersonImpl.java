@@ -88,44 +88,24 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
   protected Coordinate location;
 
   /**
-   * The default value of the '{@link #getPerception() <em>Perception</em>}' attribute.
+   * The cached value of the '{@link #getPerception() <em>Perception</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getPerception()
    * @generated
    * @ordered
    */
-  protected static final Perception PERCEPTION_EDEFAULT = Perception.ATTENTIVE;
+  protected Perception perception;
 
   /**
-   * The cached value of the '{@link #getPerception() <em>Perception</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getPerception()
-   * @generated
-   * @ordered
-   */
-  protected Perception perception = PERCEPTION_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getAction() <em>Action</em>}' attribute.
+   * The cached value of the '{@link #getAction() <em>Action</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getAction()
    * @generated
    * @ordered
    */
-  protected static final Action ACTION_EDEFAULT = Action.NEWCOMER;
-
-  /**
-   * The cached value of the '{@link #getAction() <em>Action</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAction()
-   * @generated
-   * @ordered
-   */
-  protected Action action = ACTION_EDEFAULT;
+  protected Action action;
 
   /**
    * <!-- begin-user-doc -->
@@ -257,12 +237,37 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPerception(Perception newPerception)
+  public NotificationChain basicSetPerception(Perception newPerception, NotificationChain msgs)
   {
     Perception oldPerception = perception;
-    perception = newPerception == null ? PERCEPTION_EDEFAULT : newPerception;
+    perception = newPerception;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__PERCEPTION, oldPerception, perception));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__PERCEPTION, oldPerception, newPerception);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setPerception(Perception newPerception)
+  {
+    if (newPerception != perception)
+    {
+      NotificationChain msgs = null;
+      if (perception != null)
+        msgs = ((InternalEObject)perception).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BmodPackage.PERSON__PERCEPTION, null, msgs);
+      if (newPerception != null)
+        msgs = ((InternalEObject)newPerception).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BmodPackage.PERSON__PERCEPTION, null, msgs);
+      msgs = basicSetPerception(newPerception, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__PERCEPTION, newPerception, newPerception));
   }
 
   /**
@@ -280,12 +285,37 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAction(Action newAction)
+  public NotificationChain basicSetAction(Action newAction, NotificationChain msgs)
   {
     Action oldAction = action;
-    action = newAction == null ? ACTION_EDEFAULT : newAction;
+    action = newAction;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__ACTION, oldAction, action));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__ACTION, oldAction, newAction);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setAction(Action newAction)
+  {
+    if (newAction != action)
+    {
+      NotificationChain msgs = null;
+      if (action != null)
+        msgs = ((InternalEObject)action).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BmodPackage.PERSON__ACTION, null, msgs);
+      if (newAction != null)
+        msgs = ((InternalEObject)newAction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BmodPackage.PERSON__ACTION, null, msgs);
+      msgs = basicSetAction(newAction, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__ACTION, newAction, newAction));
   }
 
   /**
@@ -300,6 +330,10 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
     {
       case BmodPackage.PERSON__LOCATION:
         return basicSetLocation(null, msgs);
+      case BmodPackage.PERSON__PERCEPTION:
+        return basicSetPerception(null, msgs);
+      case BmodPackage.PERSON__ACTION:
+        return basicSetAction(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -377,10 +411,10 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
         setLocation((Coordinate)null);
         return;
       case BmodPackage.PERSON__PERCEPTION:
-        setPerception(PERCEPTION_EDEFAULT);
+        setPerception((Perception)null);
         return;
       case BmodPackage.PERSON__ACTION:
-        setAction(ACTION_EDEFAULT);
+        setAction((Action)null);
         return;
     }
     super.eUnset(featureID);
@@ -403,9 +437,9 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
       case BmodPackage.PERSON__LOCATION:
         return location != null;
       case BmodPackage.PERSON__PERCEPTION:
-        return perception != PERCEPTION_EDEFAULT;
+        return perception != null;
       case BmodPackage.PERSON__ACTION:
-        return action != ACTION_EDEFAULT;
+        return action != null;
     }
     return super.eIsSet(featureID);
   }
@@ -425,10 +459,6 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
     result.append(name);
     result.append(", named: ");
     result.append(named);
-    result.append(", perception: ");
-    result.append(perception);
-    result.append(", action: ");
-    result.append(action);
     result.append(')');
     return result.toString();
   }
