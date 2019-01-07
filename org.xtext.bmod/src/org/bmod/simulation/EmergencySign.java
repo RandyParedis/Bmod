@@ -6,8 +6,8 @@ import java.awt.Polygon;
 import java.util.ArrayList;
 
 public class EmergencySign extends Simulatable {
-	private Door door_on;
-	private Door door_to;
+	public final Door door_on;
+	public final Door door_to;
 	
 	private enum Direction {
 		UP, DOWN, LEFT, RIGHT, NONE
@@ -27,8 +27,7 @@ public class EmergencySign extends Simulatable {
 		reinit_after();
 	}
 	
-	@Override
-	public void reinit_after() {
+	private void reinit_after() {
 		// Find cell in common room
 		Cell common = null;
 		Cell other = null;
@@ -75,26 +74,28 @@ public class EmergencySign extends Simulatable {
 		}
 		final int aw = 5;
 		final int cs2 = cellsize / 2;
+		final int x = c.x * cellsize + offset_x;
+		final int y = c.y * cellsize + offset_y;
 		switch(direction) {
 		case DOWN:
-			p.addPoint(c.x + cs2 - aw, c.y + cs2 - aw);
-			p.addPoint(c.x + cs2 + aw, c.y + cs2 - aw);
-			p.addPoint(c.x + cs2, c.y + cs2 + aw);
+			p.addPoint(x + cs2 - aw, y + cs2 - aw);
+			p.addPoint(x + cs2 + aw, y + cs2 - aw);
+			p.addPoint(x + cs2, y + cs2 + aw);
 			break;
 		case LEFT:
-			p.addPoint(c.x + cs2 + aw, c.y + cs2 - aw);
-			p.addPoint(c.x + cs2 + aw, c.y + cs2 + aw);
-			p.addPoint(c.x + cs2 - aw, c.y + cs2);
+			p.addPoint(x + cs2 + aw, y + cs2 - aw);
+			p.addPoint(x + cs2 + aw, y + cs2 + aw);
+			p.addPoint(x + cs2 - aw, y + cs2);
 			break;
 		case RIGHT:
-			p.addPoint(c.x + cs2 - aw, c.y + cs2 - aw);
-			p.addPoint(c.x + cs2 - aw, c.y + cs2 + aw);
-			p.addPoint(c.x + cs2 + aw, c.y + cs2);
+			p.addPoint(x + cs2 - aw, y + cs2 - aw);
+			p.addPoint(x + cs2 - aw, y + cs2 + aw);
+			p.addPoint(x + cs2 + aw, y + cs2);
 			break;
 		case UP:
-			p.addPoint(c.x + cs2 - aw, c.y + cs2 + aw);
-			p.addPoint(c.x + cs2 + aw, c.y + cs2 + aw);
-			p.addPoint(c.x + cs2, c.y + cs2 - aw);
+			p.addPoint(x + cs2 - aw, y + cs2 + aw);
+			p.addPoint(x + cs2 + aw, y + cs2 + aw);
+			p.addPoint(x + cs2, y + cs2 - aw);
 			break;
 		default:
 			break;

@@ -5,7 +5,6 @@ package org.xtext.bmod.ide;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
-import org.eclipse.xtext.ide.DefaultIdeModule;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.FQNPrefixMatcher;
 import org.eclipse.xtext.ide.editor.contentassist.IPrefixMatcher;
@@ -16,6 +15,7 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ide.refactoring.IRenameStrategy2;
 import org.eclipse.xtext.ide.server.rename.IRenameService;
 import org.eclipse.xtext.ide.server.rename.RenameService;
+import org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule;
 import org.xtext.bmod.ide.contentassist.antlr.BmodParser;
 import org.xtext.bmod.ide.contentassist.antlr.internal.InternalBmodLexer;
 
@@ -23,7 +23,7 @@ import org.xtext.bmod.ide.contentassist.antlr.internal.InternalBmodLexer;
  * Manual modifications go to {@link BmodIdeModule}.
  */
 @SuppressWarnings("all")
-public abstract class AbstractBmodIdeModule extends DefaultIdeModule {
+public abstract class AbstractBmodIdeModule extends DefaultXbaseIdeModule {
 
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexer(Binder binder) {

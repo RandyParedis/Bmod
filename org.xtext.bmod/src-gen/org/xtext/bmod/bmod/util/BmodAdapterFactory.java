@@ -126,6 +126,11 @@ public class BmodAdapterFactory extends AdapterFactoryImpl
         return createExitAdapter();
       }
       @Override
+      public Adapter caseFire(Fire object)
+      {
+        return createFireAdapter();
+      }
+      @Override
       public Adapter caseEmergencySign(EmergencySign object)
       {
         return createEmergencySignAdapter();
@@ -318,6 +323,21 @@ public class BmodAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createExitAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.bmod.bmod.Fire <em>Fire</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.bmod.bmod.Fire
+   * @generated
+   */
+  public Adapter createFireAdapter()
   {
     return null;
   }

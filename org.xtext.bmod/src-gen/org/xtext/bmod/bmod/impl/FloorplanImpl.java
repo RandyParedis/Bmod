@@ -21,6 +21,7 @@ import org.xtext.bmod.bmod.DangerousCondition;
 import org.xtext.bmod.bmod.Door;
 import org.xtext.bmod.bmod.EmergencySign;
 import org.xtext.bmod.bmod.Exit;
+import org.xtext.bmod.bmod.Fire;
 import org.xtext.bmod.bmod.Floorplan;
 import org.xtext.bmod.bmod.PerceptionLevel;
 import org.xtext.bmod.bmod.Person;
@@ -40,6 +41,7 @@ import org.xtext.bmod.bmod.Room;
  *   <li>{@link org.xtext.bmod.bmod.impl.FloorplanImpl#getDoors <em>Doors</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.impl.FloorplanImpl#getPersons <em>Persons</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.impl.FloorplanImpl#getExits <em>Exits</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.impl.FloorplanImpl#getFires <em>Fires</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.impl.FloorplanImpl#getSigns <em>Signs</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.impl.FloorplanImpl#getDancons <em>Dancons</em>}</li>
  * </ul>
@@ -107,6 +109,16 @@ public class FloorplanImpl extends ModelImpl implements Floorplan
    * @ordered
    */
   protected EList<Exit> exits;
+
+  /**
+   * The cached value of the '{@link #getFires() <em>Fires</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getFires()
+   * @generated
+   * @ordered
+   */
+  protected EList<Fire> fires;
 
   /**
    * The cached value of the '{@link #getSigns() <em>Signs</em>}' containment reference list.
@@ -238,6 +250,20 @@ public class FloorplanImpl extends ModelImpl implements Floorplan
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Fire> getFires()
+  {
+    if (fires == null)
+    {
+      fires = new EObjectContainmentEList<Fire>(Fire.class, this, BmodPackage.FLOORPLAN__FIRES);
+    }
+    return fires;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<EmergencySign> getSigns()
   {
     if (signs == null)
@@ -283,6 +309,8 @@ public class FloorplanImpl extends ModelImpl implements Floorplan
         return ((InternalEList<?>)getPersons()).basicRemove(otherEnd, msgs);
       case BmodPackage.FLOORPLAN__EXITS:
         return ((InternalEList<?>)getExits()).basicRemove(otherEnd, msgs);
+      case BmodPackage.FLOORPLAN__FIRES:
+        return ((InternalEList<?>)getFires()).basicRemove(otherEnd, msgs);
       case BmodPackage.FLOORPLAN__SIGNS:
         return ((InternalEList<?>)getSigns()).basicRemove(otherEnd, msgs);
       case BmodPackage.FLOORPLAN__DANCONS:
@@ -313,6 +341,8 @@ public class FloorplanImpl extends ModelImpl implements Floorplan
         return getPersons();
       case BmodPackage.FLOORPLAN__EXITS:
         return getExits();
+      case BmodPackage.FLOORPLAN__FIRES:
+        return getFires();
       case BmodPackage.FLOORPLAN__SIGNS:
         return getSigns();
       case BmodPackage.FLOORPLAN__DANCONS:
@@ -356,6 +386,10 @@ public class FloorplanImpl extends ModelImpl implements Floorplan
         getExits().clear();
         getExits().addAll((Collection<? extends Exit>)newValue);
         return;
+      case BmodPackage.FLOORPLAN__FIRES:
+        getFires().clear();
+        getFires().addAll((Collection<? extends Fire>)newValue);
+        return;
       case BmodPackage.FLOORPLAN__SIGNS:
         getSigns().clear();
         getSigns().addAll((Collection<? extends EmergencySign>)newValue);
@@ -396,6 +430,9 @@ public class FloorplanImpl extends ModelImpl implements Floorplan
       case BmodPackage.FLOORPLAN__EXITS:
         getExits().clear();
         return;
+      case BmodPackage.FLOORPLAN__FIRES:
+        getFires().clear();
+        return;
       case BmodPackage.FLOORPLAN__SIGNS:
         getSigns().clear();
         return;
@@ -428,6 +465,8 @@ public class FloorplanImpl extends ModelImpl implements Floorplan
         return persons != null && !persons.isEmpty();
       case BmodPackage.FLOORPLAN__EXITS:
         return exits != null && !exits.isEmpty();
+      case BmodPackage.FLOORPLAN__FIRES:
+        return fires != null && !fires.isEmpty();
       case BmodPackage.FLOORPLAN__SIGNS:
         return signs != null && !signs.isEmpty();
       case BmodPackage.FLOORPLAN__DANCONS:

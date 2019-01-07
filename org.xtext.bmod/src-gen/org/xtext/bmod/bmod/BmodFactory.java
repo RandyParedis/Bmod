@@ -114,6 +114,15 @@ public interface BmodFactory extends EFactory
   Exit createExit();
 
   /**
+   * Returns a new object of class '<em>Fire</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Fire</em>'.
+   * @generated
+   */
+  Fire createFire();
+
+  /**
    * Returns a new object of class '<em>Emergency Sign</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

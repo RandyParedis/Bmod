@@ -132,6 +132,9 @@ class BmodValidator extends AbstractBmodValidator {
 		}
 	}
 	
+	// TODO: emergency signs cannot point away from the exit
+	// TODO: emergency signs must point to doors in same room
+	
 	@Check
 	def void checkPersonsInExistingCell(Floorplan fp) {
 		var cells = new ArrayList<Coordinate>();

@@ -76,6 +76,7 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
       case BmodPackage.ACTION: return createAction();
       case BmodPackage.PERSON: return createPerson();
       case BmodPackage.EXIT: return createExit();
+      case BmodPackage.FIRE: return createFire();
       case BmodPackage.EMERGENCY_SIGN: return createEmergencySign();
       case BmodPackage.DOOR_REF: return createDoorRef();
       case BmodPackage.DANGEROUS_CONDITION: return createDangerousCondition();
@@ -232,6 +233,17 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
   {
     ExitImpl exit = new ExitImpl();
     return exit;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Fire createFire()
+  {
+    FireImpl fire = new FireImpl();
+    return fire;
   }
 
   /**

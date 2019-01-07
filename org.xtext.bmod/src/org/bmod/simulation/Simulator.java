@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,6 +28,9 @@ import javax.swing.event.ChangeListener;
 public class Simulator extends JFrame implements ActionListener, ChangeListener {
 
 	private static final long serialVersionUID = 1L;
+	
+	public static final long seed = 0;
+	public static Random engine = new Random(seed);
 
 	private SimulationPanel panel;
 	private JPanel buttons;
@@ -47,6 +52,7 @@ public class Simulator extends JFrame implements ActionListener, ChangeListener 
 	
 	private void computeArea() {
 		min_x = min_y = max_x = max_y = -1;
+		final int cs = Simulatable.cellsize;
 		for(Simulatable object: objects) {
 			if(object instanceof Cell) {
 				Cell c = (Cell)object;
@@ -56,9 +62,18 @@ public class Simulator extends JFrame implements ActionListener, ChangeListener 
 				if(c.y > max_y) { max_y = c.y; }
 			}
 		}
+		// Rescale
+		min_x *= cs;
+		min_y *= cs;
+		max_x *= cs;
+		max_y *= cs;
+		
+		// Add offsets
+		min_x += Simulatable.offset_x;
+		min_y += Simulatable.offset_y;
 		// Take bottom-right corner
-		max_x += Simulatable.cellsize;
-		max_y += Simulatable.cellsize;
+		max_x += cs + Simulatable.offset_x;
+		max_y += cs + Simulatable.offset_y;
 //		System.out.format("(%d, %d) -> (%d, %d)%n", min_x, min_y, max_x, max_y);
 	}
 
@@ -66,8 +81,62 @@ public class Simulator extends JFrame implements ActionListener, ChangeListener 
 		super("Bmod Simulator");
 		this.objects = objects;
 		computeArea();
-		panel = new SimulationPanel(objects);
+		panel = new SimulationPanel();
 		createWindow();
+	}
+	
+	
+	private void reorder_simulation() {
+		// Reorder objects so there is a logical order of execution:
+		//		- Person
+		//		- Cell (Fire)
+		//		- others
+		objects.sort((Simulatable a, Simulatable b) -> {
+			if(a instanceof Person && b instanceof Cell) {
+				return -1;
+			} else if(a instanceof Cell && b instanceof Person) {
+				return 1;
+			} else {
+				return 0;
+			}
+		});
+	}
+	
+	private void reorder_draw() {
+		// Reorder objects so there is a logical order of drawing:
+		//		- Cell (Fire)
+		//		- Room
+		//		- Door
+		//		- Sign
+		//		- Person
+		objects.sort((Simulatable a, Simulatable b) -> {
+			if(a.getClass() == b.getClass()) {
+				return 0;
+			}
+			if(a instanceof Cell) {
+				return -1;
+			} else if(b instanceof Cell) {
+				return 1;
+			} else if(a instanceof Room) {
+				return -1;
+			} else if(b instanceof Room) {
+				return 1;
+			} else if(a instanceof Door) {
+				return -1;
+			} else if(b instanceof Door) {
+				return 1;
+			} else if(a instanceof EmergencySign) {
+				return -1;
+			} else if(b instanceof EmergencySign) {
+				return 1;
+			} else if(a instanceof Person) {
+				return -1;
+			} else if(b instanceof Person) {
+				return 1;
+			} else {
+				return 0;
+			}
+		});
 	}
 
 	private void createWindow() {
@@ -125,14 +194,7 @@ public class Simulator extends JFrame implements ActionListener, ChangeListener 
 	
 	private void zoom(double factor) {
 		zoom_factor = factor;
-		for(Simulatable s: objects) {
-			s.reinit_before();
-		}
-		computeArea();
 		Simulatable.zoom(factor);
-		for(Simulatable s: objects) {
-			s.reinit_after();
-		}
 		computeArea();
 		resetSize();
 	}
@@ -214,17 +276,16 @@ public class Simulator extends JFrame implements ActionListener, ChangeListener 
 
 	private class SimulationPanel extends JPanel {
 		private static final long serialVersionUID = 1L;
-		private ArrayList<Simulatable> objects;
 		
-		public SimulationPanel(ArrayList<Simulatable> objects) {
-			this.objects = objects;
+		public SimulationPanel() {
+			
 		}
 		
 		@Override
 		public Dimension getPreferredSize() {
 			final int ox = Simulatable.offset_x;
 			final int oy = Simulatable.offset_y;
-			return new Dimension(max_x - min_x + 2 * ox, max_y - min_y + 2 * oy);
+			return new Dimension((max_x - min_x) + 2 * ox, (max_y - min_y) + 2 * oy);
 		}
 		
 		@Override
@@ -243,18 +304,37 @@ public class Simulator extends JFrame implements ActionListener, ChangeListener 
 		}
 
 		public void update() {
+			reorder_simulation();
 			for(Simulatable object: objects) {
 				object.clearMsgs();
 			}
+			boolean must_end = true;
+			boolean burned_down = true;
 			for(Simulatable object: objects) {
 				object.update(objects);
+				if(object instanceof Cell) {
+					if(!((Cell)object).onFire) {
+						burned_down = false;
+					}
+				} else if(object instanceof Person) {
+					if(((Person)object).isAlive() && !((Person)object).escaped) {
+						must_end = false;
+					}
+				}
 			}
 			for(Simulatable object: objects) {
 				object.clean();
 			}
+			if(burned_down || must_end) {
+				running = false;
+				startButton.setText("Finished");
+				startButton.setEnabled(false);
+				stepButton.setEnabled(false);
+			}
 		}
 
 		public void paintComponent(Graphics g) {
+			reorder_draw();
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, getWidth(), getHeight());
 			
@@ -279,9 +359,14 @@ public class Simulator extends JFrame implements ActionListener, ChangeListener 
 			}
 
 			g.setColor(Color.WHITE);
-			g.drawString(String.format("[(%d, %d), (%d, %d)];  Frame: %d;  Zoom: %1.2f", min_x, min_y, max_x, max_y, frames, zoom_factor), 15, 20);
+			g.setFont(new Font("Arial", Font.PLAIN, 15));
+			final int cs = Simulatable.cellsize;
+			g.drawString(String.format("[(%d, %d), (%d, %d)];  Frame: %d;  Zoom: %1.2f",
+					(min_x - ox) / cs, (min_y - oy) / cs, (max_x - ox) / cs, (max_y - oy) / cs,
+					frames, zoom_factor), 15, 20);
 			
 			// Draw messages
+			final int msgY = getHeight() - 10;
 			for(String s: info) {
 				System.out.println(s);
 			}
@@ -297,7 +382,7 @@ public class Simulator extends JFrame implements ActionListener, ChangeListener 
 						res += "; ";
 					}
 				}
-				g.drawString(res, 15, getHeight()-20);
+				g.drawString(res, 15, msgY);
 			} else if(!error.isEmpty()) {
 				g.setColor(Color.RED);
 				String res = "";
@@ -307,7 +392,7 @@ public class Simulator extends JFrame implements ActionListener, ChangeListener 
 						res += "; ";
 					}
 				}
-				g.drawString(res, 15, getHeight() + 100);
+				g.drawString(res, 15, msgY);
 			}
 		}
 	}

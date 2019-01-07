@@ -3,9 +3,11 @@
  */
 package org.xtext.bmod
 
-
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 class BmodRuntimeModule extends AbstractBmodRuntimeModule {
+//	public Class<? extends IGenerator> bindIGenerator() {
+//		return DelegatingGenerator.class;
+//	}
 }

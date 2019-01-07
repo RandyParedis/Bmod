@@ -15,6 +15,8 @@
         eType="#//Person" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exits" upperBound="-1"
         eType="#//Exit" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fires" upperBound="-1"
+        eType="#//Fire" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="signs" upperBound="-1"
         eType="#//EmergencySign" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dancons" upperBound="-1"
@@ -35,9 +37,17 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PerceptionLevel">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="person" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="objects" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActionProfile">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="person" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="objects" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Perception">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="existing" eType="#//PerceptionEnum"/>
@@ -69,6 +79,10 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Exit">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="location" eType="#//Coordinate"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fire">
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" eType="#//Coordinate"
         containment="true"/>
   </eClassifiers>

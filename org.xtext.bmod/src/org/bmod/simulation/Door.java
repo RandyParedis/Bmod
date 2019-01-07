@@ -32,7 +32,11 @@ public class Door extends Simulatable {
 	@Override
 	public void paint(Graphics g) {
 		g.setColor(Color.BLUE);
+		final int x1 = c1.x * cellsize + offset_x;
+		final int y1 = c1.y * cellsize + offset_y;
+		final int x2 = c2.x * cellsize + offset_x;
+		final int y2 = c2.y * cellsize + offset_y;
 		final int cs2 = cellsize/2;
-		g.drawLine(c1.x + cs2, c1.y + cs2, c2.x + cs2, c2.y + cs2);
+		g.drawLine(x1 + cs2, y1 + cs2, x2 + cs2, y2 + cs2);
 	}
 }

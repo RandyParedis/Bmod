@@ -3,7 +3,7 @@
  */
 package org.xtext.bmod.scoping;
 
-import org.eclipse.xtext.scoping.impl.DelegatingScopeProvider;
+import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 
-public abstract class AbstractBmodScopeProvider extends DelegatingScopeProvider {
+public abstract class AbstractBmodScopeProvider extends XbaseBatchScopeProvider {
 }

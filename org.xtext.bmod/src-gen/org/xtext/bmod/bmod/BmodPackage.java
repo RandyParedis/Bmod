@@ -142,13 +142,22 @@ public interface BmodPackage extends EPackage
   int FLOORPLAN__EXITS = MODEL_FEATURE_COUNT + 5;
 
   /**
+   * The feature id for the '<em><b>Fires</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FLOORPLAN__FIRES = MODEL_FEATURE_COUNT + 6;
+
+  /**
    * The feature id for the '<em><b>Signs</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FLOORPLAN__SIGNS = MODEL_FEATURE_COUNT + 6;
+  int FLOORPLAN__SIGNS = MODEL_FEATURE_COUNT + 7;
 
   /**
    * The feature id for the '<em><b>Dancons</b></em>' containment reference list.
@@ -157,7 +166,7 @@ public interface BmodPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FLOORPLAN__DANCONS = MODEL_FEATURE_COUNT + 7;
+  int FLOORPLAN__DANCONS = MODEL_FEATURE_COUNT + 8;
 
   /**
    * The number of structural features of the '<em>Floorplan</em>' class.
@@ -166,7 +175,7 @@ public interface BmodPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FLOORPLAN_FEATURE_COUNT = MODEL_FEATURE_COUNT + 8;
+  int FLOORPLAN_FEATURE_COUNT = MODEL_FEATURE_COUNT + 9;
 
   /**
    * The meta object id for the '{@link org.xtext.bmod.bmod.impl.RoomImpl <em>Room</em>}' class.
@@ -280,13 +289,40 @@ public interface BmodPackage extends EPackage
   int PERCEPTION_LEVEL__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Person</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PERCEPTION_LEVEL__PERSON = 1;
+
+  /**
+   * The feature id for the '<em><b>Objects</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PERCEPTION_LEVEL__OBJECTS = 2;
+
+  /**
+   * The feature id for the '<em><b>Body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PERCEPTION_LEVEL__BODY = 3;
+
+  /**
    * The number of structural features of the '<em>Perception Level</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PERCEPTION_LEVEL_FEATURE_COUNT = 1;
+  int PERCEPTION_LEVEL_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.xtext.bmod.bmod.impl.ActionProfileImpl <em>Action Profile</em>}' class.
@@ -308,13 +344,40 @@ public interface BmodPackage extends EPackage
   int ACTION_PROFILE__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Person</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION_PROFILE__PERSON = 1;
+
+  /**
+   * The feature id for the '<em><b>Objects</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION_PROFILE__OBJECTS = 2;
+
+  /**
+   * The feature id for the '<em><b>Body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION_PROFILE__BODY = 3;
+
+  /**
    * The number of structural features of the '<em>Action Profile</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTION_PROFILE_FEATURE_COUNT = 1;
+  int ACTION_PROFILE_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.xtext.bmod.bmod.impl.PerceptionImpl <em>Perception</em>}' class.
@@ -483,6 +546,34 @@ public interface BmodPackage extends EPackage
   int EXIT_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.xtext.bmod.bmod.impl.FireImpl <em>Fire</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.bmod.bmod.impl.FireImpl
+   * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getFire()
+   * @generated
+   */
+  int FIRE = 10;
+
+  /**
+   * The feature id for the '<em><b>Location</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FIRE__LOCATION = 0;
+
+  /**
+   * The number of structural features of the '<em>Fire</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FIRE_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.xtext.bmod.bmod.impl.EmergencySignImpl <em>Emergency Sign</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -490,7 +581,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getEmergencySign()
    * @generated
    */
-  int EMERGENCY_SIGN = 10;
+  int EMERGENCY_SIGN = 11;
 
   /**
    * The feature id for the '<em><b>On</b></em>' reference.
@@ -527,7 +618,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getDoorRef()
    * @generated
    */
-  int DOOR_REF = 11;
+  int DOOR_REF = 12;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -555,7 +646,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getDangerousCondition()
    * @generated
    */
-  int DANGEROUS_CONDITION = 12;
+  int DANGEROUS_CONDITION = 13;
 
   /**
    * The feature id for the '<em><b>On</b></em>' reference.
@@ -592,7 +683,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getCoordinate()
    * @generated
    */
-  int COORDINATE = 13;
+  int COORDINATE = 14;
 
   /**
    * The feature id for the '<em><b>X</b></em>' attribute.
@@ -629,7 +720,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getArea()
    * @generated
    */
-  int AREA = 14;
+  int AREA = 15;
 
   /**
    * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -675,7 +766,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getPerceptionEnum()
    * @generated
    */
-  int PERCEPTION_ENUM = 15;
+  int PERCEPTION_ENUM = 16;
 
   /**
    * The meta object id for the '{@link org.xtext.bmod.bmod.ActionEnum <em>Action Enum</em>}' enum.
@@ -685,7 +776,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getActionEnum()
    * @generated
    */
-  int ACTION_ENUM = 16;
+  int ACTION_ENUM = 17;
 
 
   /**
@@ -773,6 +864,17 @@ public interface BmodPackage extends EPackage
    * @generated
    */
   EReference getFloorplan_Exits();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.bmod.bmod.Floorplan#getFires <em>Fires</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Fires</em>'.
+   * @see org.xtext.bmod.bmod.Floorplan#getFires()
+   * @see #getFloorplan()
+   * @generated
+   */
+  EReference getFloorplan_Fires();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.xtext.bmod.bmod.Floorplan#getSigns <em>Signs</em>}'.
@@ -904,6 +1006,39 @@ public interface BmodPackage extends EPackage
   EAttribute getPerceptionLevel_Name();
 
   /**
+   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.PerceptionLevel#getPerson <em>Person</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Person</em>'.
+   * @see org.xtext.bmod.bmod.PerceptionLevel#getPerson()
+   * @see #getPerceptionLevel()
+   * @generated
+   */
+  EAttribute getPerceptionLevel_Person();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.PerceptionLevel#getObjects <em>Objects</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Objects</em>'.
+   * @see org.xtext.bmod.bmod.PerceptionLevel#getObjects()
+   * @see #getPerceptionLevel()
+   * @generated
+   */
+  EAttribute getPerceptionLevel_Objects();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.bmod.bmod.PerceptionLevel#getBody <em>Body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Body</em>'.
+   * @see org.xtext.bmod.bmod.PerceptionLevel#getBody()
+   * @see #getPerceptionLevel()
+   * @generated
+   */
+  EReference getPerceptionLevel_Body();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.bmod.bmod.ActionProfile <em>Action Profile</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -923,6 +1058,39 @@ public interface BmodPackage extends EPackage
    * @generated
    */
   EAttribute getActionProfile_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.ActionProfile#getPerson <em>Person</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Person</em>'.
+   * @see org.xtext.bmod.bmod.ActionProfile#getPerson()
+   * @see #getActionProfile()
+   * @generated
+   */
+  EAttribute getActionProfile_Person();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.ActionProfile#getObjects <em>Objects</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Objects</em>'.
+   * @see org.xtext.bmod.bmod.ActionProfile#getObjects()
+   * @see #getActionProfile()
+   * @generated
+   */
+  EAttribute getActionProfile_Objects();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.bmod.bmod.ActionProfile#getBody <em>Body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Body</em>'.
+   * @see org.xtext.bmod.bmod.ActionProfile#getBody()
+   * @see #getActionProfile()
+   * @generated
+   */
+  EReference getActionProfile_Body();
 
   /**
    * Returns the meta object for class '{@link org.xtext.bmod.bmod.Perception <em>Perception</em>}'.
@@ -1073,6 +1241,27 @@ public interface BmodPackage extends EPackage
    * @generated
    */
   EReference getExit_Location();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.bmod.bmod.Fire <em>Fire</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Fire</em>'.
+   * @see org.xtext.bmod.bmod.Fire
+   * @generated
+   */
+  EClass getFire();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.bmod.bmod.Fire#getLocation <em>Location</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Location</em>'.
+   * @see org.xtext.bmod.bmod.Fire#getLocation()
+   * @see #getFire()
+   * @generated
+   */
+  EReference getFire_Location();
 
   /**
    * Returns the meta object for class '{@link org.xtext.bmod.bmod.EmergencySign <em>Emergency Sign</em>}'.
@@ -1346,6 +1535,14 @@ public interface BmodPackage extends EPackage
     EReference FLOORPLAN__EXITS = eINSTANCE.getFloorplan_Exits();
 
     /**
+     * The meta object literal for the '<em><b>Fires</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FLOORPLAN__FIRES = eINSTANCE.getFloorplan_Fires();
+
+    /**
      * The meta object literal for the '<em><b>Signs</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1448,6 +1645,30 @@ public interface BmodPackage extends EPackage
     EAttribute PERCEPTION_LEVEL__NAME = eINSTANCE.getPerceptionLevel_Name();
 
     /**
+     * The meta object literal for the '<em><b>Person</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PERCEPTION_LEVEL__PERSON = eINSTANCE.getPerceptionLevel_Person();
+
+    /**
+     * The meta object literal for the '<em><b>Objects</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PERCEPTION_LEVEL__OBJECTS = eINSTANCE.getPerceptionLevel_Objects();
+
+    /**
+     * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PERCEPTION_LEVEL__BODY = eINSTANCE.getPerceptionLevel_Body();
+
+    /**
      * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.ActionProfileImpl <em>Action Profile</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1464,6 +1685,30 @@ public interface BmodPackage extends EPackage
      * @generated
      */
     EAttribute ACTION_PROFILE__NAME = eINSTANCE.getActionProfile_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Person</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ACTION_PROFILE__PERSON = eINSTANCE.getActionProfile_Person();
+
+    /**
+     * The meta object literal for the '<em><b>Objects</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ACTION_PROFILE__OBJECTS = eINSTANCE.getActionProfile_Objects();
+
+    /**
+     * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTION_PROFILE__BODY = eINSTANCE.getActionProfile_Body();
 
     /**
      * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.PerceptionImpl <em>Perception</em>}' class.
@@ -1584,6 +1829,24 @@ public interface BmodPackage extends EPackage
      * @generated
      */
     EReference EXIT__LOCATION = eINSTANCE.getExit_Location();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.FireImpl <em>Fire</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.bmod.bmod.impl.FireImpl
+     * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getFire()
+     * @generated
+     */
+    EClass FIRE = eINSTANCE.getFire();
+
+    /**
+     * The meta object literal for the '<em><b>Location</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FIRE__LOCATION = eINSTANCE.getFire_Location();
 
     /**
      * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.EmergencySignImpl <em>Emergency Sign</em>}' class.

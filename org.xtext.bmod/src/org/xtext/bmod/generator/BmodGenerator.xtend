@@ -5,25 +5,25 @@ package org.xtext.bmod.generator
 
 import org.bmod.simulation.GenerationHelper
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IFileSystemAccess2
-import org.eclipse.xtext.generator.IGenerator2
-import org.eclipse.xtext.generator.IGeneratorContext
+import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.IGenerator
 import org.xtext.bmod.bmod.ActionProfile
 import org.xtext.bmod.bmod.Door
 import org.xtext.bmod.bmod.EmergencySign
 import org.xtext.bmod.bmod.Exit
+import org.xtext.bmod.bmod.Fire
+import org.xtext.bmod.bmod.PerceptionLevel
 import org.xtext.bmod.bmod.Person
 import org.xtext.bmod.bmod.Room
-import org.xtext.bmod.bmod.PerceptionLevel
 
 /**
  * Generates code from your model files on save.
  * 
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
-class BmodGenerator implements IGenerator2 {
+class BmodGenerator implements IGenerator {
 
-	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		// Generate simulation package
 		val files = GenerationHelper.files;
 		files.forEach[key, value| fsa.generateFile(key, value);];
@@ -59,6 +59,11 @@ class BmodGenerator implements IGenerator2 {
 									cell_«cell.x»_«cell.y».setExit(true);
 								«ENDIF»
 							«ENDFOR»
+							«FOR fire: floorplan.filter(Fire)»
+								«IF fire.location.x == cell.x && fire.location.y == cell.y»
+									cell_«cell.x»_«cell.y».ignite();
+								«ENDIF»
+							«ENDFOR»
 							room_«room.name».add(cell_«cell.x»_«cell.y»);
 							list.add(cell_«cell.x»_«cell.y»);
 						«ENDFOR»
@@ -84,10 +89,10 @@ class BmodGenerator implements IGenerator2 {
 					
 					// Actions and Perceptions
 					«FOR action: floorplan.filter(ActionProfile)»
-						Person.actions.put("«action.name»", (Person p, ArrayList<Simulatable> objects) -> BLOCK);
+						Person.actions.put("«action.name»", (Person p, ArrayList<Simulatable> objects) -> {});
 					«ENDFOR»
 					«FOR perception: floorplan.filter(PerceptionLevel)»
-						Person.actions.put("«perception.name»", (Person p, ArrayList<Simulatable> objects) -> BLOCK);
+						Person.perceptions.put("«perception.name»", (Person p, ArrayList<Simulatable> objects) -> { return false; });
 					«ENDFOR»
 					
 					// Persons
@@ -113,14 +118,7 @@ class BmodGenerator implements IGenerator2 {
 				}
 			}
 		''');
-	}
-	
-	override afterGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
-//		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
-	override beforeGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
-//		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		
 	}
 	
 }

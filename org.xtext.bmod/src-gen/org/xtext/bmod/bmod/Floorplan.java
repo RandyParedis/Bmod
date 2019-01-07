@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getDoors <em>Doors</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getPersons <em>Persons</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getExits <em>Exits</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.Floorplan#getFires <em>Fires</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getSigns <em>Signs</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getDancons <em>Dancons</em>}</li>
  * </ul>
@@ -125,6 +126,22 @@ public interface Floorplan extends Model
    * @generated
    */
   EList<Exit> getExits();
+
+  /**
+   * Returns the value of the '<em><b>Fires</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.bmod.bmod.Fire}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Fires</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Fires</em>' containment reference list.
+   * @see org.xtext.bmod.bmod.BmodPackage#getFloorplan_Fires()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Fire> getFires();
 
   /**
    * Returns the value of the '<em><b>Signs</b></em>' containment reference list.

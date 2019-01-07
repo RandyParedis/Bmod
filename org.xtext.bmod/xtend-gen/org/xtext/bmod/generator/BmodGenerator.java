@@ -12,9 +12,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.IFileSystemAccess2;
-import org.eclipse.xtext.generator.IGenerator2;
-import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.generator.IFileSystemAccess;
+import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.xtext.bmod.bmod.ActionEnum;
@@ -23,6 +22,7 @@ import org.xtext.bmod.bmod.Coordinate;
 import org.xtext.bmod.bmod.Door;
 import org.xtext.bmod.bmod.EmergencySign;
 import org.xtext.bmod.bmod.Exit;
+import org.xtext.bmod.bmod.Fire;
 import org.xtext.bmod.bmod.PerceptionEnum;
 import org.xtext.bmod.bmod.PerceptionLevel;
 import org.xtext.bmod.bmod.Person;
@@ -35,9 +35,9 @@ import org.xtext.bmod.generator.Helper;
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 @SuppressWarnings("all")
-public class BmodGenerator implements IGenerator2 {
+public class BmodGenerator implements IGenerator {
   @Override
-  public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+  public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
     try {
       final Map<String, String> files = GenerationHelper.files();
       final BiConsumer<String, String> _function = (String key, String value) -> {
@@ -134,25 +134,43 @@ public class BmodGenerator implements IGenerator2 {
                   }
                 }
               }
+              {
+                Iterable<Fire> _filter_2 = Iterables.<Fire>filter(floorplan, Fire.class);
+                for(final Fire fire : _filter_2) {
+                  {
+                    if (((fire.getLocation().getX() == cell.getX()) && (fire.getLocation().getY() == cell.getY()))) {
+                      _builder.append("\t\t");
+                      _builder.append("cell_");
+                      int _x_3 = cell.getX();
+                      _builder.append(_x_3, "\t\t");
+                      _builder.append("_");
+                      int _y_3 = cell.getY();
+                      _builder.append(_y_3, "\t\t");
+                      _builder.append(".ignite();");
+                      _builder.newLineIfNotEmpty();
+                    }
+                  }
+                }
+              }
               _builder.append("\t\t");
               _builder.append("room_");
               String _name_1 = room.getName();
               _builder.append(_name_1, "\t\t");
               _builder.append(".add(cell_");
-              int _x_3 = cell.getX();
-              _builder.append(_x_3, "\t\t");
-              _builder.append("_");
-              int _y_3 = cell.getY();
-              _builder.append(_y_3, "\t\t");
-              _builder.append(");");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t\t");
-              _builder.append("list.add(cell_");
               int _x_4 = cell.getX();
               _builder.append(_x_4, "\t\t");
               _builder.append("_");
               int _y_4 = cell.getY();
               _builder.append(_y_4, "\t\t");
+              _builder.append(");");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("list.add(cell_");
+              int _x_5 = cell.getX();
+              _builder.append(_x_5, "\t\t");
+              _builder.append("_");
+              int _y_5 = cell.getY();
+              _builder.append(_y_5, "\t\t");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
             }
@@ -173,24 +191,24 @@ public class BmodGenerator implements IGenerator2 {
       _builder.append("// Doors");
       _builder.newLine();
       {
-        Iterable<Door> _filter_2 = Iterables.<Door>filter(floorplan, Door.class);
-        for(final Door door : _filter_2) {
+        Iterable<Door> _filter_3 = Iterables.<Door>filter(floorplan, Door.class);
+        for(final Door door : _filter_3) {
           _builder.append("\t\t");
           _builder.append("Door door_");
           String _name_3 = door.getName();
           _builder.append(_name_3, "\t\t");
           _builder.append(" = new Door(");
-          int _x_5 = door.getFrom().getX();
-          _builder.append(_x_5, "\t\t");
-          _builder.append(", ");
-          int _y_5 = door.getFrom().getY();
-          _builder.append(_y_5, "\t\t");
-          _builder.append(", ");
-          int _x_6 = door.getTo().getX();
+          int _x_6 = door.getFrom().getX();
           _builder.append(_x_6, "\t\t");
           _builder.append(", ");
-          int _y_6 = door.getTo().getY();
+          int _y_6 = door.getFrom().getY();
           _builder.append(_y_6, "\t\t");
+          _builder.append(", ");
+          int _x_7 = door.getTo().getX();
+          _builder.append(_x_7, "\t\t");
+          _builder.append(", ");
+          int _y_7 = door.getTo().getY();
+          _builder.append(_y_7, "\t\t");
           _builder.append(");");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
@@ -215,8 +233,8 @@ public class BmodGenerator implements IGenerator2 {
       _builder.append("// Emergency Signs");
       _builder.newLine();
       {
-        Iterable<EmergencySign> _filter_3 = Iterables.<EmergencySign>filter(floorplan, EmergencySign.class);
-        for(final EmergencySign sign : _filter_3) {
+        Iterable<EmergencySign> _filter_4 = Iterables.<EmergencySign>filter(floorplan, EmergencySign.class);
+        for(final EmergencySign sign : _filter_4) {
           _builder.append("\t\t");
           _builder.append("EmergencySign sign_");
           String _name_6 = sign.getOn().getName();
@@ -260,24 +278,24 @@ public class BmodGenerator implements IGenerator2 {
       _builder.append("// Actions and Perceptions");
       _builder.newLine();
       {
-        Iterable<ActionProfile> _filter_4 = Iterables.<ActionProfile>filter(floorplan, ActionProfile.class);
-        for(final ActionProfile action : _filter_4) {
+        Iterable<ActionProfile> _filter_5 = Iterables.<ActionProfile>filter(floorplan, ActionProfile.class);
+        for(final ActionProfile action : _filter_5) {
           _builder.append("\t\t");
           _builder.append("Person.actions.put(\"");
           String _name_14 = action.getName();
           _builder.append(_name_14, "\t\t");
-          _builder.append("\", (Person p, ArrayList<Simulatable> objects) -> BLOCK);");
+          _builder.append("\", (Person p, ArrayList<Simulatable> objects) -> {});");
           _builder.newLineIfNotEmpty();
         }
       }
       {
-        Iterable<PerceptionLevel> _filter_5 = Iterables.<PerceptionLevel>filter(floorplan, PerceptionLevel.class);
-        for(final PerceptionLevel perception : _filter_5) {
+        Iterable<PerceptionLevel> _filter_6 = Iterables.<PerceptionLevel>filter(floorplan, PerceptionLevel.class);
+        for(final PerceptionLevel perception : _filter_6) {
           _builder.append("\t\t");
-          _builder.append("Person.actions.put(\"");
+          _builder.append("Person.perceptions.put(\"");
           String _name_15 = perception.getName();
           _builder.append(_name_15, "\t\t");
-          _builder.append("\", (Person p, ArrayList<Simulatable> objects) -> BLOCK);");
+          _builder.append("\", (Person p, ArrayList<Simulatable> objects) -> { return false; });");
           _builder.newLineIfNotEmpty();
         }
       }
@@ -287,8 +305,8 @@ public class BmodGenerator implements IGenerator2 {
       _builder.append("// Persons");
       _builder.newLine();
       {
-        Iterable<Person> _filter_6 = Iterables.<Person>filter(floorplan, Person.class);
-        for(final Person person : _filter_6) {
+        Iterable<Person> _filter_7 = Iterables.<Person>filter(floorplan, Person.class);
+        for(final Person person : _filter_7) {
           {
             ActionEnum _existing = person.getAction().getExisting();
             boolean _tripleNotEquals = (_existing != null);
@@ -305,11 +323,11 @@ public class BmodGenerator implements IGenerator2 {
                   String _named = person.getNamed();
                   _builder.append(_named, "\t\t");
                   _builder.append("\", ");
-                  int _x_7 = person.getLocation().getX();
-                  _builder.append(_x_7, "\t\t");
+                  int _x_8 = person.getLocation().getX();
+                  _builder.append(_x_8, "\t\t");
                   _builder.append(", ");
-                  int _y_7 = person.getLocation().getY();
-                  _builder.append(_y_7, "\t\t");
+                  int _y_8 = person.getLocation().getY();
+                  _builder.append(_y_8, "\t\t");
                   _builder.append(", \"");
                   String _name_17 = person.getPerception().getExisting().getName();
                   _builder.append(_name_17, "\t\t");
@@ -327,11 +345,11 @@ public class BmodGenerator implements IGenerator2 {
                   String _named_1 = person.getNamed();
                   _builder.append(_named_1, "\t\t");
                   _builder.append("\", ");
-                  int _x_8 = person.getLocation().getX();
-                  _builder.append(_x_8, "\t\t");
+                  int _x_9 = person.getLocation().getX();
+                  _builder.append(_x_9, "\t\t");
                   _builder.append(", ");
-                  int _y_8 = person.getLocation().getY();
-                  _builder.append(_y_8, "\t\t");
+                  int _y_9 = person.getLocation().getY();
+                  _builder.append(_y_9, "\t\t");
                   _builder.append(", \"");
                   String _string = person.getPerception().getCustom().toString();
                   _builder.append(_string, "\t\t");
@@ -355,11 +373,11 @@ public class BmodGenerator implements IGenerator2 {
                   String _named_2 = person.getNamed();
                   _builder.append(_named_2, "\t\t");
                   _builder.append("\", ");
-                  int _x_9 = person.getLocation().getX();
-                  _builder.append(_x_9, "\t\t");
+                  int _x_10 = person.getLocation().getX();
+                  _builder.append(_x_10, "\t\t");
                   _builder.append(", ");
-                  int _y_9 = person.getLocation().getY();
-                  _builder.append(_y_9, "\t\t");
+                  int _y_10 = person.getLocation().getY();
+                  _builder.append(_y_10, "\t\t");
                   _builder.append(", \"");
                   String _name_22 = person.getPerception().getExisting().getName();
                   _builder.append(_name_22, "\t\t");
@@ -377,11 +395,11 @@ public class BmodGenerator implements IGenerator2 {
                   String _named_3 = person.getNamed();
                   _builder.append(_named_3, "\t\t");
                   _builder.append("\", ");
-                  int _x_10 = person.getLocation().getX();
-                  _builder.append(_x_10, "\t\t");
+                  int _x_11 = person.getLocation().getX();
+                  _builder.append(_x_11, "\t\t");
                   _builder.append(", ");
-                  int _y_10 = person.getLocation().getY();
-                  _builder.append(_y_10, "\t\t");
+                  int _y_11 = person.getLocation().getY();
+                  _builder.append(_y_11, "\t\t");
                   _builder.append(", \"");
                   String _string_2 = person.getPerception().getCustom().toString();
                   _builder.append(_string_2, "\t\t");
@@ -419,13 +437,5 @@ public class BmodGenerator implements IGenerator2 {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  @Override
-  public void afterGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
-  }
-  
-  @Override
-  public void beforeGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
   }
 }

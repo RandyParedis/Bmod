@@ -5,6 +5,8 @@ package org.xtext.bmod.bmod;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.xbase.XExpression;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Perception Level</b></em>'.
@@ -15,6 +17,9 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.bmod.bmod.PerceptionLevel#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.PerceptionLevel#getPerson <em>Person</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.PerceptionLevel#getObjects <em>Objects</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.PerceptionLevel#getBody <em>Body</em>}</li>
  * </ul>
  *
  * @see org.xtext.bmod.bmod.BmodPackage#getPerceptionLevel()
@@ -48,5 +53,83 @@ public interface PerceptionLevel extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Person</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Person</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Person</em>' attribute.
+   * @see #setPerson(String)
+   * @see org.xtext.bmod.bmod.BmodPackage#getPerceptionLevel_Person()
+   * @model
+   * @generated
+   */
+  String getPerson();
+
+  /**
+   * Sets the value of the '{@link org.xtext.bmod.bmod.PerceptionLevel#getPerson <em>Person</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Person</em>' attribute.
+   * @see #getPerson()
+   * @generated
+   */
+  void setPerson(String value);
+
+  /**
+   * Returns the value of the '<em><b>Objects</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Objects</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Objects</em>' attribute.
+   * @see #setObjects(String)
+   * @see org.xtext.bmod.bmod.BmodPackage#getPerceptionLevel_Objects()
+   * @model
+   * @generated
+   */
+  String getObjects();
+
+  /**
+   * Sets the value of the '{@link org.xtext.bmod.bmod.PerceptionLevel#getObjects <em>Objects</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Objects</em>' attribute.
+   * @see #getObjects()
+   * @generated
+   */
+  void setObjects(String value);
+
+  /**
+   * Returns the value of the '<em><b>Body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Body</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Body</em>' containment reference.
+   * @see #setBody(XExpression)
+   * @see org.xtext.bmod.bmod.BmodPackage#getPerceptionLevel_Body()
+   * @model containment="true"
+   * @generated
+   */
+  XExpression getBody();
+
+  /**
+   * Sets the value of the '{@link org.xtext.bmod.bmod.PerceptionLevel#getBody <em>Body</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Body</em>' containment reference.
+   * @see #getBody()
+   * @generated
+   */
+  void setBody(XExpression value);
 
 } // PerceptionLevel

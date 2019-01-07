@@ -28,5 +28,6 @@ Export-Package: org.xtext.bmod.parser.antlr.internal,
  org.xtext.bmod.serializer,
  org.xtext.bmod,
  org.xtext.bmod.services,
- org.xtext.bmod.bmod.util
+ org.xtext.bmod.bmod.util,
+ org.xtext.bmod.jvmmodel
 Import-Package: org.apache.log4j
