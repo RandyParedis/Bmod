@@ -25,6 +25,5 @@ Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.xtext.bmod.ui.quickfix,
  org.xtext.bmod.ui.contentassist,
- org.xtext.bmod.ui.internal,
- org.xtext.bmod.ui.editor
+ org.xtext.bmod.ui.internal
 Bundle-Activator: org.xtext.bmod.ui.internal.BmodActivator

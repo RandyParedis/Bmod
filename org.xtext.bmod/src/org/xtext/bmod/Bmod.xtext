@@ -1,5 +1,5 @@
-grammar org.xtext.bmod.Bmod with org.eclipse.xtext.xbase.Xbase
-//grammar org.xtext.bmod.Bmod with org.eclipse.xtext.common.Terminals
+grammar org.xtext.bmod.Bmod with org.eclipse.xtext.common.Terminals
+//grammar org.xtext.bmod.Bmod with org.eclipse.xtext.xbase.Xbase
 
 generate bmod "http://www.xtext.org/bmod/Bmod"
 
@@ -18,22 +18,12 @@ Floorplan:
 ;
 
 Room:
-	'Room' name=VARNAME ('named' named=STRING)?
+	'Room' name=VARNAME
 		areas += Area ('and' areas += Area)*
 ;
 
 Door:
 	'Door' name=VARNAME 'from' from=Coordinate 'to' to=Coordinate
-;
-
-PerceptionLevel:
-	'PerceptionLevel' name=VARNAME '(' person=VARNAME ',' objects=VARNAME ')'
-		body=XBlockExpression
-;
-
-ActionProfile:
-	'ActionProfile' name=VARNAME '(' person=VARNAME ',' objects=VARNAME ')'
-		body=XBlockExpression
 ;
 
 Perception:
@@ -55,8 +45,16 @@ enum ActionEnum:
 	newcomer = 'newcomer' | experienced = 'experienced' | panic = 'panic'
 ;
 
+PerceptionLevel:
+	'PerceptionLevel' name=VARNAME
+;
+
+ActionProfile:
+	'ActionProfile' name=VARNAME
+;
+
 Person:
-	'Person' name=VARNAME 'named' named=STRING 'in' location=Coordinate ':'
+	'Person' name=VARNAME 'in' location=Coordinate ':'
 	perception=Perception ',' action=Action
 ;
 

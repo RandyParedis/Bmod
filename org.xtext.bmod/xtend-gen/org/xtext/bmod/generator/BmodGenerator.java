@@ -5,28 +5,28 @@ package org.xtext.bmod.generator;
 
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
-import java.util.function.BiConsumer;
-import org.bmod.simulation.GenerationHelper;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.IFileSystemAccess;
-import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.IFileSystemAccess2;
+import org.eclipse.xtext.generator.IGenerator2;
+import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.xtext.bmod.bmod.ActionEnum;
-import org.xtext.bmod.bmod.ActionProfile;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.xtext.bmod.bmod.Coordinate;
 import org.xtext.bmod.bmod.Door;
-import org.xtext.bmod.bmod.EmergencySign;
 import org.xtext.bmod.bmod.Exit;
 import org.xtext.bmod.bmod.Fire;
-import org.xtext.bmod.bmod.PerceptionEnum;
-import org.xtext.bmod.bmod.PerceptionLevel;
+import org.xtext.bmod.bmod.Floorplan;
 import org.xtext.bmod.bmod.Person;
 import org.xtext.bmod.bmod.Room;
+import org.xtext.bmod.generator.CppGenerationHelper;
 import org.xtext.bmod.generator.Helper;
 
 /**
@@ -35,407 +35,755 @@ import org.xtext.bmod.generator.Helper;
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 @SuppressWarnings("all")
-public class BmodGenerator implements IGenerator {
-  @Override
-  public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
+public class BmodGenerator implements IGenerator2 {
+  private void generateCMakeLists(final String project_name, final IFileSystemAccess2 fsa) {
+    final String pedsim_lib = "/usr/include/libpedsim";
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(project_name);
+    _builder.append("/CMakeLists.txt");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("cmake_minimum_required(VERSION 3.1)");
+    _builder_1.newLine();
+    _builder_1.append("set(PROJECT_NAME sim");
+    _builder_1.append(project_name);
+    _builder_1.append(")");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("project(${PROJECT_NAME})");
+    _builder_1.newLine();
+    _builder_1.append("set(CMAKE_CXX_STANDARD 11)");
+    _builder_1.newLine();
+    _builder_1.append("set(PEDSIM_LIB ");
+    _builder_1.append(pedsim_lib);
+    _builder_1.append(")");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.newLine();
+    _builder_1.append("file(GLOB_RECURSE SRC ../simulation/*)");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("add_executable(${PROJECT_NAME} main.cpp ${SRC})");
+    _builder_1.newLine();
+    _builder_1.append("target_include_directories(${PROJECT_NAME} PUBLIC ${PEDSIM_LIB})");
+    _builder_1.newLine();
+    _builder_1.append("target_include_directories(${PROJECT_NAME} PUBLIC ../)");
+    _builder_1.newLine();
+    _builder_1.append("target_link_libraries(${PROJECT_NAME} ${PEDSIM_LIB}/libpedsim.so)");
+    _builder_1.newLine();
+    fsa.generateFile(_builder.toString(), _builder_1);
+  }
+  
+  private void generateSimulationLibrary(final IFileSystemAccess2 fsa) {
     try {
-      final Map<String, String> files = GenerationHelper.files();
-      final BiConsumer<String, String> _function = (String key, String value) -> {
-        fsa.generateFile(key, value);
-      };
-      files.forEach(_function);
-      final String simpleClassName = resource.getURI().trimFileExtension().lastSegment();
-      EList<EObject> _contents = resource.getContents();
-      EObject _head = null;
-      if (_contents!=null) {
-        _head=IterableExtensions.<EObject>head(_contents);
-      }
-      boolean _tripleEquals = (_head == null);
-      if (_tripleEquals) {
-        return;
-      }
-      final EList<EObject> floorplan = IterableExtensions.<EObject>head(resource.getContents()).eContents();
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.bmod.simulation.Cell;");
-      _builder.newLine();
-      _builder.append("import org.bmod.simulation.Door;");
-      _builder.newLine();
-      _builder.append("import org.bmod.simulation.EmergencySign;");
-      _builder.newLine();
-      _builder.append("import org.bmod.simulation.Person;");
-      _builder.newLine();
-      _builder.append("import org.bmod.simulation.Room;");
-      _builder.newLine();
-      _builder.append("import org.bmod.simulation.Simulatable;");
-      _builder.newLine();
-      _builder.append("import org.bmod.simulation.Simulator;");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("import java.util.ArrayList;");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("public class ");
-      _builder.append(simpleClassName);
-      _builder.append(" {");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.append("public static void main(String... args) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("ArrayList<Simulatable> list = new ArrayList<Simulatable>();");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("// Rooms and Cells");
-      _builder.newLine();
-      {
-        Iterable<Room> _filter = Iterables.<Room>filter(floorplan, Room.class);
-        for(final Room room : _filter) {
-          _builder.append("\t\t");
-          _builder.append("Room room_");
-          String _name = room.getName();
-          _builder.append(_name, "\t\t");
-          _builder.append(" = new Room();");
-          _builder.newLineIfNotEmpty();
-          {
-            ArrayList<Coordinate> _roomCoords = Helper.getRoomCoords(room);
-            for(final Coordinate cell : _roomCoords) {
-              _builder.append("\t\t");
-              _builder.append("Cell cell_");
-              int _x = cell.getX();
-              _builder.append(_x, "\t\t");
-              _builder.append("_");
-              int _y = cell.getY();
-              _builder.append(_y, "\t\t");
-              _builder.append(" = new Cell(");
-              int _x_1 = cell.getX();
-              _builder.append(_x_1, "\t\t");
-              _builder.append(", ");
-              int _y_1 = cell.getY();
-              _builder.append(_y_1, "\t\t");
-              _builder.append(");");
-              _builder.newLineIfNotEmpty();
-              {
-                Iterable<Exit> _filter_1 = Iterables.<Exit>filter(floorplan, Exit.class);
-                for(final Exit exit : _filter_1) {
-                  {
-                    if (((exit.getLocation().getX() == cell.getX()) && (exit.getLocation().getY() == cell.getY()))) {
-                      _builder.append("\t\t");
-                      _builder.append("cell_");
-                      int _x_2 = cell.getX();
-                      _builder.append(_x_2, "\t\t");
-                      _builder.append("_");
-                      int _y_2 = cell.getY();
-                      _builder.append(_y_2, "\t\t");
-                      _builder.append(".setExit(true);");
-                      _builder.newLineIfNotEmpty();
-                    }
-                  }
-                }
-              }
-              {
-                Iterable<Fire> _filter_2 = Iterables.<Fire>filter(floorplan, Fire.class);
-                for(final Fire fire : _filter_2) {
-                  {
-                    if (((fire.getLocation().getX() == cell.getX()) && (fire.getLocation().getY() == cell.getY()))) {
-                      _builder.append("\t\t");
-                      _builder.append("cell_");
-                      int _x_3 = cell.getX();
-                      _builder.append(_x_3, "\t\t");
-                      _builder.append("_");
-                      int _y_3 = cell.getY();
-                      _builder.append(_y_3, "\t\t");
-                      _builder.append(".ignite();");
-                      _builder.newLineIfNotEmpty();
-                    }
-                  }
-                }
-              }
-              _builder.append("\t\t");
-              _builder.append("room_");
-              String _name_1 = room.getName();
-              _builder.append(_name_1, "\t\t");
-              _builder.append(".add(cell_");
-              int _x_4 = cell.getX();
-              _builder.append(_x_4, "\t\t");
-              _builder.append("_");
-              int _y_4 = cell.getY();
-              _builder.append(_y_4, "\t\t");
-              _builder.append(");");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t\t");
-              _builder.append("list.add(cell_");
-              int _x_5 = cell.getX();
-              _builder.append(_x_5, "\t\t");
-              _builder.append("_");
-              int _y_5 = cell.getY();
-              _builder.append(_y_5, "\t\t");
-              _builder.append(");");
-              _builder.newLineIfNotEmpty();
-            }
-          }
-          _builder.append("\t\t");
-          _builder.append("list.add(room_");
-          String _name_2 = room.getName();
-          _builder.append(_name_2, "\t\t");
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.newLine();
+      ArrayList<String> lst = CollectionLiterals.<String>newArrayList();
+      final String dir = "simulation";
+      final Map<String, String> files = CppGenerationHelper.files();
+      Iterator<Map.Entry<String, String>> iter = files.entrySet().iterator();
+      while (iter.hasNext()) {
+        {
+          Map.Entry<String, String> pair = iter.next();
+          String _key = pair.getKey();
+          String _plus = ((dir + "/") + _key);
+          lst.add(_plus);
+          fsa.generateFile(IterableExtensions.<String>last(lst), pair.getValue());
         }
       }
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("// Doors");
-      _builder.newLine();
-      {
-        Iterable<Door> _filter_3 = Iterables.<Door>filter(floorplan, Door.class);
-        for(final Door door : _filter_3) {
-          _builder.append("\t\t");
-          _builder.append("Door door_");
-          String _name_3 = door.getName();
-          _builder.append(_name_3, "\t\t");
-          _builder.append(" = new Door(");
-          int _x_6 = door.getFrom().getX();
-          _builder.append(_x_6, "\t\t");
-          _builder.append(", ");
-          int _y_6 = door.getFrom().getY();
-          _builder.append(_y_6, "\t\t");
-          _builder.append(", ");
-          int _x_7 = door.getTo().getX();
-          _builder.append(_x_7, "\t\t");
-          _builder.append(", ");
-          int _y_7 = door.getTo().getY();
-          _builder.append(_y_7, "\t\t");
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("door_");
-          String _name_4 = door.getName();
-          _builder.append(_name_4, "\t\t");
-          _builder.append(".setup(list);");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("list.add(door_");
-          String _name_5 = door.getName();
-          _builder.append(_name_5, "\t\t");
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.newLine();
-        }
+      for (int i = 0; (i < lst.size()); i++) {
+        String _get = lst.get(i);
+        String _plus = ("../" + _get);
+        lst.set(i, _plus);
       }
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("// Emergency Signs");
-      _builder.newLine();
-      {
-        Iterable<EmergencySign> _filter_4 = Iterables.<EmergencySign>filter(floorplan, EmergencySign.class);
-        for(final EmergencySign sign : _filter_4) {
-          _builder.append("\t\t");
-          _builder.append("EmergencySign sign_");
-          String _name_6 = sign.getOn().getName();
-          _builder.append(_name_6, "\t\t");
-          _builder.append("_");
-          String _name_7 = sign.getTo().getRef().getName();
-          _builder.append(_name_7, "\t\t");
-          _builder.append(" = new EmergencySign(door_");
-          String _name_8 = sign.getOn().getName();
-          _builder.append(_name_8, "\t\t");
-          _builder.append(", door_");
-          String _name_9 = sign.getTo().getRef().getName();
-          _builder.append(_name_9, "\t\t");
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("sign_");
-          String _name_10 = sign.getOn().getName();
-          _builder.append(_name_10, "\t\t");
-          _builder.append("_");
-          String _name_11 = sign.getTo().getRef().getName();
-          _builder.append(_name_11, "\t\t");
-          _builder.append(".setup(list);");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("list.add(sign_");
-          String _name_12 = sign.getOn().getName();
-          _builder.append(_name_12, "\t\t");
-          _builder.append("_");
-          String _name_13 = sign.getTo().getRef().getName();
-          _builder.append(_name_13, "\t\t");
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.newLine();
-        }
-      }
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("// Actions and Perceptions");
-      _builder.newLine();
-      {
-        Iterable<ActionProfile> _filter_5 = Iterables.<ActionProfile>filter(floorplan, ActionProfile.class);
-        for(final ActionProfile action : _filter_5) {
-          _builder.append("\t\t");
-          _builder.append("Person.actions.put(\"");
-          String _name_14 = action.getName();
-          _builder.append(_name_14, "\t\t");
-          _builder.append("\", (Person p, ArrayList<Simulatable> objects) -> {});");
-          _builder.newLineIfNotEmpty();
-        }
-      }
-      {
-        Iterable<PerceptionLevel> _filter_6 = Iterables.<PerceptionLevel>filter(floorplan, PerceptionLevel.class);
-        for(final PerceptionLevel perception : _filter_6) {
-          _builder.append("\t\t");
-          _builder.append("Person.perceptions.put(\"");
-          String _name_15 = perception.getName();
-          _builder.append(_name_15, "\t\t");
-          _builder.append("\", (Person p, ArrayList<Simulatable> objects) -> { return false; });");
-          _builder.newLineIfNotEmpty();
-        }
-      }
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("// Persons");
-      _builder.newLine();
-      {
-        Iterable<Person> _filter_7 = Iterables.<Person>filter(floorplan, Person.class);
-        for(final Person person : _filter_7) {
-          {
-            ActionEnum _existing = person.getAction().getExisting();
-            boolean _tripleNotEquals = (_existing != null);
-            if (_tripleNotEquals) {
-              {
-                PerceptionEnum _existing_1 = person.getPerception().getExisting();
-                boolean _tripleNotEquals_1 = (_existing_1 != null);
-                if (_tripleNotEquals_1) {
-                  _builder.append("\t\t");
-                  _builder.append("Person person_");
-                  String _name_16 = person.getName();
-                  _builder.append(_name_16, "\t\t");
-                  _builder.append(" = new Person(\"");
-                  String _named = person.getNamed();
-                  _builder.append(_named, "\t\t");
-                  _builder.append("\", ");
-                  int _x_8 = person.getLocation().getX();
-                  _builder.append(_x_8, "\t\t");
-                  _builder.append(", ");
-                  int _y_8 = person.getLocation().getY();
-                  _builder.append(_y_8, "\t\t");
-                  _builder.append(", \"");
-                  String _name_17 = person.getPerception().getExisting().getName();
-                  _builder.append(_name_17, "\t\t");
-                  _builder.append("\", \"");
-                  String _name_18 = person.getAction().getExisting().getName();
-                  _builder.append(_name_18, "\t\t");
-                  _builder.append("\");");
-                  _builder.newLineIfNotEmpty();
-                } else {
-                  _builder.append("\t\t");
-                  _builder.append("Person person_");
-                  String _name_19 = person.getName();
-                  _builder.append(_name_19, "\t\t");
-                  _builder.append(" = new Person(\"");
-                  String _named_1 = person.getNamed();
-                  _builder.append(_named_1, "\t\t");
-                  _builder.append("\", ");
-                  int _x_9 = person.getLocation().getX();
-                  _builder.append(_x_9, "\t\t");
-                  _builder.append(", ");
-                  int _y_9 = person.getLocation().getY();
-                  _builder.append(_y_9, "\t\t");
-                  _builder.append(", \"");
-                  String _string = person.getPerception().getCustom().toString();
-                  _builder.append(_string, "\t\t");
-                  _builder.append("\", \"");
-                  String _name_20 = person.getAction().getExisting().getName();
-                  _builder.append(_name_20, "\t\t");
-                  _builder.append("\");");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-            } else {
-              {
-                PerceptionEnum _existing_2 = person.getPerception().getExisting();
-                boolean _tripleNotEquals_2 = (_existing_2 != null);
-                if (_tripleNotEquals_2) {
-                  _builder.append("\t\t");
-                  _builder.append("Person person_");
-                  String _name_21 = person.getName();
-                  _builder.append(_name_21, "\t\t");
-                  _builder.append(" = new Person(\"");
-                  String _named_2 = person.getNamed();
-                  _builder.append(_named_2, "\t\t");
-                  _builder.append("\", ");
-                  int _x_10 = person.getLocation().getX();
-                  _builder.append(_x_10, "\t\t");
-                  _builder.append(", ");
-                  int _y_10 = person.getLocation().getY();
-                  _builder.append(_y_10, "\t\t");
-                  _builder.append(", \"");
-                  String _name_22 = person.getPerception().getExisting().getName();
-                  _builder.append(_name_22, "\t\t");
-                  _builder.append("\", \"");
-                  String _string_1 = person.getAction().getCustom().toString();
-                  _builder.append(_string_1, "\t\t");
-                  _builder.append("\");");
-                  _builder.newLineIfNotEmpty();
-                } else {
-                  _builder.append("\t\t");
-                  _builder.append("Person person_");
-                  String _name_23 = person.getName();
-                  _builder.append(_name_23, "\t\t");
-                  _builder.append(" = new Person(\"");
-                  String _named_3 = person.getNamed();
-                  _builder.append(_named_3, "\t\t");
-                  _builder.append("\", ");
-                  int _x_11 = person.getLocation().getX();
-                  _builder.append(_x_11, "\t\t");
-                  _builder.append(", ");
-                  int _y_11 = person.getLocation().getY();
-                  _builder.append(_y_11, "\t\t");
-                  _builder.append(", \"");
-                  String _string_2 = person.getPerception().getCustom().toString();
-                  _builder.append(_string_2, "\t\t");
-                  _builder.append("\", \"");
-                  String _string_3 = person.getAction().getCustom().toString();
-                  _builder.append(_string_3, "\t\t");
-                  _builder.append("\");");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-            }
-          }
-          _builder.append("\t\t");
-          _builder.append("list.add(person_");
-          String _name_24 = person.getName();
-          _builder.append(_name_24, "\t\t");
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
-        }
-      }
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("// Simulation itself");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("new Simulator(list);");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      fsa.generateFile((simpleClassName + ".java"), _builder);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  private double compX(final Pair<Coordinate, Coordinate> bounds, final double x) {
+    int _x = bounds.getValue().getX();
+    int _x_1 = bounds.getKey().getX();
+    int _minus = (_x - _x_1);
+    final int middleX = (_minus / 2);
+    return (x - middleX);
+  }
+  
+  private double compY(final Pair<Coordinate, Coordinate> bounds, final double y) {
+    int _y = bounds.getValue().getY();
+    int _y_1 = bounds.getKey().getY();
+    int _minus = (_y - _y_1);
+    final int middleY = (_minus / 2);
+    return (y - middleY);
+  }
+  
+  @Override
+  public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    final String simpleClassName = resource.getURI().trimFileExtension().lastSegment();
+    EList<EObject> _contents = resource.getContents();
+    EObject _head = null;
+    if (_contents!=null) {
+      _head=IterableExtensions.<EObject>head(_contents);
+    }
+    boolean _tripleEquals = (_head == null);
+    if (_tripleEquals) {
+      return;
+    }
+    final EList<EObject> floorplan = IterableExtensions.<EObject>head(resource.getContents()).eContents();
+    final double scale = 1.0;
+    final Floorplan floor = ((Floorplan[])Conversions.unwrapArray(Iterables.<Floorplan>filter(resource.getContents(), Floorplan.class), Floorplan.class))[0];
+    final Pair<Coordinate, Coordinate> bounds = Helper.getFloorplanBoundaries(floor);
+    int floorcells = 0;
+    EList<Room> _rooms = floor.getRooms();
+    for (final Room room : _rooms) {
+      int _floorcells = floorcells;
+      int _size = Helper.getRoomCoords(room).size();
+      floorcells = (_floorcells + _size);
+    }
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("#include \"ped_includes.h\"");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("#include <iostream>");
+    _builder.newLine();
+    _builder.append("#include <sstream>");
+    _builder.newLine();
+    _builder.append("#include <unistd.h>");
+    _builder.newLine();
+    _builder.append("#include <utility>");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("#include \"simulation/cell.h\"");
+    _builder.newLine();
+    _builder.append("#include \"simulation/door.h\"");
+    _builder.newLine();
+    _builder.append("#include \"simulation/floor.h\"");
+    _builder.newLine();
+    _builder.append("#include \"simulation/person.h\"");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("#include \"simulation/targetters/experienced.h\"");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("using namespace std;");
+    _builder.newLine();
+    _builder.append("using namespace simulation;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("Person* newAgent(Ped::Tscene* scene, double x, double y, const Floor& floor) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Person* p = new Person(x, y, ");
+    _builder.append((scale / 2), "\t");
+    _builder.append(", floor);");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("p->registerTargetter(targetters::action_experienced);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("scene->addAgent(p->get());");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return p;");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("void fireObstacle(Cell* cell, Ped::Tscene* scene, Ped::OutputWriter* ow) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("if(!cell->drawn) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("scene->addObstacle(new Ped::Tobstacle(cell->x, cell->y, cell->x + ");
+    _builder.append(scale, "\t\t");
+    _builder.append(", cell->y));");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("scene->addObstacle(new Ped::Tobstacle(cell->x, cell->y, cell->x, cell->y + ");
+    _builder.append(scale, "\t\t");
+    _builder.append("));");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("scene->addObstacle(new Ped::Tobstacle(cell->x + ");
+    _builder.append(scale, "\t\t");
+    _builder.append(", cell->y, cell->x + ");
+    _builder.append(scale, "\t\t");
+    _builder.append(", cell->y + ");
+    _builder.append(scale, "\t\t");
+    _builder.append("));");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("scene->addObstacle(new Ped::Tobstacle(cell->x, cell->y + ");
+    _builder.append(scale, "\t\t");
+    _builder.append(", cell->x + ");
+    _builder.append(scale, "\t\t");
+    _builder.append(", cell->y + ");
+    _builder.append(scale, "\t\t");
+    _builder.append("));");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("// prevent creating too much obstacles");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("cell->drawn = true;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// Draw cross");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Ped::Tvector c1(cell->x, cell->y);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Ped::Tvector c2(cell->x + ");
+    _builder.append(scale, "\t");
+    _builder.append(", cell->y + ");
+    _builder.append(scale, "\t");
+    _builder.append(");");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("Ped::Tvector c3(cell->x, cell->y + ");
+    _builder.append(scale, "\t");
+    _builder.append(");");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("Ped::Tvector c4(cell->x + ");
+    _builder.append(scale, "\t");
+    _builder.append(", cell->y);");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("ow->drawLine(c1, c2, 1, 1, 0, 0);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("ow->drawLine(c3, c4, 1, 1, 0, 0);");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("int main(int argc, char *argv[]) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("cout << \"# PedSim Example using libpedsim version \" << Ped::LIBPEDSIM_VERSION << endl;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// Setup");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Ped::Tscene *pedscene = new Ped::Tscene();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// create an output writer which will send output to a visualizer");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Ped::OutputWriter *ow = new Ped::UDPOutputWriter();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("ow->setScenarioName(\"");
+    _builder.append(simpleClassName, "\t");
+    _builder.append("\");");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("pedscene->setOutputWriter(ow);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// Create floorplan");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("vector<pair<Cell*, Cell*>> obstacles;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Floor floor;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("vector<Cell*> room;");
+    _builder.newLine();
+    {
+      Iterable<Room> _filter = Iterables.<Room>filter(floorplan, Room.class);
+      for(final Room room_1 : _filter) {
+        {
+          ArrayList<Pair<Coordinate, Coordinate>> _roomObstacles = Helper.getRoomObstacles(room_1, floor);
+          for(final Pair<Coordinate, Coordinate> ob : _roomObstacles) {
+            _builder.append("\t");
+            _builder.append("obstacles.emplace_back(make_pair<Cell*, Cell*>(new Cell(");
+            double _compX = this.compX(bounds, ob.getKey().getX());
+            double _multiply = (_compX * scale);
+            _builder.append(_multiply, "\t");
+            _builder.append(", ");
+            double _compY = this.compY(bounds, ob.getKey().getY());
+            double _multiply_1 = (_compY * scale);
+            _builder.append(_multiply_1, "\t");
+            _builder.append("), new Cell(");
+            double _compX_1 = this.compX(bounds, ob.getValue().getX());
+            double _multiply_2 = (_compX_1 * scale);
+            _builder.append(_multiply_2, "\t");
+            _builder.append(", ");
+            double _compY_1 = this.compY(bounds, ob.getValue().getY());
+            double _multiply_3 = (_compY_1 * scale);
+            _builder.append(_multiply_3, "\t");
+            _builder.append(")));");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t");
+        _builder.append("room = {};");
+        _builder.newLine();
+        {
+          ArrayList<Coordinate> _roomCoords = Helper.getRoomCoords(room_1);
+          for(final Coordinate cell : _roomCoords) {
+            _builder.append("\t");
+            _builder.append("room.emplace_back(new Cell(");
+            double _compX_2 = this.compX(bounds, cell.getX());
+            double _multiply_4 = (_compX_2 * scale);
+            _builder.append(_multiply_4, "\t");
+            _builder.append(", ");
+            double _compY_2 = this.compY(bounds, cell.getY());
+            double _multiply_5 = (_compY_2 * scale);
+            _builder.append(_multiply_5, "\t");
+            _builder.append("));");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t");
+        _builder.append("floor.rooms.emplace_back(room);");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t");
+    _builder.append("room = {};");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for(const auto& obstacle: obstacles) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("pedscene->addObstacle(new Ped::Tobstacle(obstacle.first->x, obstacle.first->y, obstacle.second->x, obstacle.second->y));");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// Set exits");
+    _builder.newLine();
+    {
+      Iterable<Exit> _filter_1 = Iterables.<Exit>filter(floorplan, Exit.class);
+      for(final Exit exit : _filter_1) {
+        _builder.append("\t");
+        _builder.append("floor.setExit(");
+        int _x = exit.getLocation().getX();
+        _builder.append(_x, "\t");
+        _builder.append(", ");
+        int _y = exit.getLocation().getY();
+        _builder.append(_y, "\t");
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// Draw doors");
+    _builder.newLine();
+    {
+      Iterable<Door> _filter_2 = Iterables.<Door>filter(floorplan, Door.class);
+      for(final Door door : _filter_2) {
+        _builder.append("\t");
+        _builder.append("floor.doors.emplace_back(new Door(");
+        double _compX_3 = this.compX(bounds, door.getFrom().getX());
+        _builder.append(_compX_3, "\t");
+        _builder.append(", ");
+        double _compY_3 = this.compY(bounds, door.getFrom().getY());
+        _builder.append(_compY_3, "\t");
+        _builder.append(", ");
+        double _compX_4 = this.compX(bounds, door.getTo().getX());
+        _builder.append(_compX_4, "\t");
+        _builder.append(", ");
+        double _compY_4 = this.compY(bounds, door.getTo().getY());
+        _builder.append(_compY_4, "\t");
+        _builder.append("));");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("\t");
+    _builder.append("for(Door* door: floor.doors) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("door->draw(ow, ");
+    _builder.append(scale, "\t\t");
+    _builder.append(");");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// Fire");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("vector<Cell*> fire;");
+    _builder.newLine();
+    {
+      Iterable<Fire> _filter_3 = Iterables.<Fire>filter(floorplan, Fire.class);
+      for(final Fire fire : _filter_3) {
+        _builder.append("\t");
+        _builder.append("fire.emplace_back(new Cell(");
+        double _compX_5 = this.compX(bounds, fire.getLocation().getX());
+        double _multiply_6 = (_compX_5 * scale);
+        _builder.append(_multiply_6, "\t");
+        _builder.append(", ");
+        double _compY_5 = this.compY(bounds, fire.getLocation().getY());
+        double _multiply_7 = (_compY_5 * scale);
+        _builder.append(_multiply_7, "\t");
+        _builder.append("));");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("\t");
+    _builder.append("for(auto f: fire) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("fireObstacle(f, pedscene, ow);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// Create people (TODO: complicated logic needed for behaviour)");
+    _builder.newLine();
+    {
+      Iterable<Person> _filter_4 = Iterables.<Person>filter(floorplan, Person.class);
+      for(final Person person : _filter_4) {
+        _builder.append("\t");
+        _builder.append("floor.people.emplace_back(newAgent(pedscene, ");
+        double _compX_6 = this.compX(bounds, person.getLocation().getX());
+        double _multiply_8 = (_compX_6 * scale);
+        _builder.append(_multiply_8, "\t");
+        _builder.append(", ");
+        double _compY_6 = this.compY(bounds, person.getLocation().getY());
+        double _multiply_9 = (_compY_6 * scale);
+        _builder.append(_multiply_9, "\t");
+        _builder.append(", floor));");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// convenience");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("const vector<Ped::Tagent*>& myagents = pedscene->getAllAgents();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("const vector<Ped::Tobstacle*>& myobstacles = pedscene->getAllObstacles();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// Metrics");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("ow->writeMetrics({");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("{\"Timestep\", \"0\"},");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("{\"Ignited Cells\", \"0\"},");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("{\"Burning (Percentage)\", \"0\"},");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("{\"Escaped People\", \"0\"},");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("{\"Escaped (Percentage)\", \"0\"}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("});");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// simulation loop");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("pedscene->moveAgents(0.4);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("long int time = 0;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("while(fire.size() < ");
+    _builder.append(floorcells, "\t");
+    _builder.append(") {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("++time;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("ow->writeTimeStep(time);");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("// Delay for next step");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("char c;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("cin >> c;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("// usleep(500*1000);");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("// Compute agent movement (TODO)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(Person* person: floor.people) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("person->target();");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("// Move all agents");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("long int timestep = 0;");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("int notreached = myagents.size();");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("pedscene->moveAgents(1);");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("// Spread Fire");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("vector<Cell*> to_add;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(auto f: fire) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("Cell* right = new Cell(f->x + ");
+    _builder.append(scale, "\t\t\t");
+    _builder.append(", f->y);");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("if(f->canSpread(right, floor, fire, to_add)) {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("to_add.emplace_back(right);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("Cell* left = new Cell(f->x - ");
+    _builder.append(scale, "\t\t\t");
+    _builder.append(", f->y);");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("if(f->canSpread(left, floor, fire, to_add)) {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("to_add.emplace_back(left);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("Cell* top = new Cell(f->x, f->y - ");
+    _builder.append(scale, "\t\t\t");
+    _builder.append("); ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("if(f->canSpread(top, floor, fire, to_add)) {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("to_add.emplace_back(top);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("Cell* bottom = new Cell(f->x, f->y + ");
+    _builder.append(scale, "\t\t\t");
+    _builder.append(");");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("if(f->canSpread(bottom, floor, fire, to_add)) {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("to_add.emplace_back(bottom);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(auto f: to_add) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("// Ensure 1 tick per timestep");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fire.emplace_back(f);");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(auto f: fire) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fireObstacle(f, pedscene, ow);");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(Door* door: floor.doors) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("door->draw(ow, ");
+    _builder.append(scale, "\t\t\t");
+    _builder.append(");");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("pedscene->moveAgents(0); //< Somehow this is necessary to draw all the obstacles correctly.");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("// Metrics");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("ow->writeMetrics({");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("{\"Timestep\", std::to_string(time)},");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("{\"Ignited Cells\", std::to_string(fire.size())},");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("{\"Burning (Percentage)\", std::to_string((double)fire.size() / (double)");
+    _builder.append(floorcells, "\t\t\t");
+    _builder.append(")},");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("{\"Escaped People\", \"0\"},");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("{\"Escaped (Percentage)\", \"0\"}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("});");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("// Clear escaped persons");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(Person* p: floor.people) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("if(p->hasEscaped()) {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("pedscene->removeAgent(p->get());");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// cleanup");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for (auto a : pedscene->getAllAgents()) { delete a; };");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for (auto w : pedscene->getAllWaypoints()) { delete w; };");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for (auto o : pedscene->getAllObstacles()) { delete o; };");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for (auto c : fire) { delete c; }");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for (auto p : floor.people) { delete p; }");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for (auto d : floor.doors) { delete d; }");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("delete pedscene;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return EXIT_SUCCESS;");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    fsa.generateFile((simpleClassName + "/main.cpp"), _builder);
+    this.generateSimulationLibrary(fsa);
+    this.generateCMakeLists(simpleClassName, fsa);
+  }
+  
+  @Override
+  public void afterGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+  }
+  
+  @Override
+  public void beforeGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
   }
 }

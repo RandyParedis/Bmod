@@ -32,7 +32,6 @@ import org.xtext.bmod.bmod.Room;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.bmod.bmod.impl.RoomImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.impl.RoomImpl#getNamed <em>Named</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.impl.RoomImpl#getAreas <em>Areas</em>}</li>
  * </ul>
  *
@@ -59,26 +58,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getNamed() <em>Named</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getNamed()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAMED_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getNamed() <em>Named</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getNamed()
-   * @generated
-   * @ordered
-   */
-  protected String named = NAMED_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getAreas() <em>Areas</em>}' containment reference list.
@@ -139,29 +118,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getNamed()
-  {
-    return named;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setNamed(String newNamed)
-  {
-    String oldNamed = named;
-    named = newNamed;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.ROOM__NAMED, oldNamed, named));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EList<Area> getAreas()
   {
     if (areas == null)
@@ -199,8 +155,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
     {
       case BmodPackage.ROOM__NAME:
         return getName();
-      case BmodPackage.ROOM__NAMED:
-        return getNamed();
       case BmodPackage.ROOM__AREAS:
         return getAreas();
     }
@@ -220,9 +174,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
     {
       case BmodPackage.ROOM__NAME:
         setName((String)newValue);
-        return;
-      case BmodPackage.ROOM__NAMED:
-        setNamed((String)newValue);
         return;
       case BmodPackage.ROOM__AREAS:
         getAreas().clear();
@@ -245,9 +196,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
       case BmodPackage.ROOM__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case BmodPackage.ROOM__NAMED:
-        setNamed(NAMED_EDEFAULT);
-        return;
       case BmodPackage.ROOM__AREAS:
         getAreas().clear();
         return;
@@ -267,8 +215,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
     {
       case BmodPackage.ROOM__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case BmodPackage.ROOM__NAMED:
-        return NAMED_EDEFAULT == null ? named != null : !NAMED_EDEFAULT.equals(named);
       case BmodPackage.ROOM__AREAS:
         return areas != null && !areas.isEmpty();
     }
@@ -288,8 +234,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", named: ");
-    result.append(named);
     result.append(')');
     return result.toString();
   }

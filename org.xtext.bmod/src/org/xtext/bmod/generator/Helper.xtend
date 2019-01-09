@@ -10,13 +10,18 @@ import org.xtext.bmod.bmod.Floorplan
 import org.xtext.bmod.bmod.Room
 
 class Helper {
+	static def Coordinate newCoordinate(int x, int y) {
+		var c = BmodFactory.eINSTANCE.createCoordinate;
+		c.x = x;
+		c.y = y;
+		return c;
+	}
+	
 	static def ArrayList<Coordinate> getAreaCoords(Area area) {
 		var coords = newArrayList(area.from);
 		for(var x = area.from.x; x <= area.to.x; x++) {
 			for(var y = area.from.y; y <= area.to.y; y++) {
-				var c = BmodFactory.eINSTANCE.createCoordinate;
-				c.x = x;
-				c.y = y;
+				var c = newCoordinate(x, y);
 				if(!isIn(c, coords)) {
 					coords.add(c);
 				}
@@ -100,5 +105,95 @@ class Helper {
 			}
 		}
 		return null;
+	}
+	
+	static def Pair<Coordinate, Coordinate> getFloorplanBoundaries(Floorplan fp) {
+		var min = null as Coordinate;
+		var max = null as Coordinate;
+		for(room: fp.rooms) {
+			for(cell: room.getRoomCoords) {
+				if(min === null) {
+					min = newCoordinate(cell.x, cell.y);
+				}
+				if(max === null) {
+					max = newCoordinate(cell.x, cell.y);
+				}
+				if(cell.x < min.x) {
+					min.x = cell.x;
+				} else if(cell.y < min.y) {
+					min.y = cell.y;
+				}
+				if(cell.x > max.x) {
+					max.x = cell.x;
+				} else if(cell.y > max.y) {
+					max.y = cell.y;
+				}
+			}
+		}
+		return min -> max;
+	}
+	
+	static def ArrayList<Pair<Coordinate, Coordinate>> getRoomObstacles(Room room, Floorplan fp) {
+		var result = <Pair<Coordinate, Coordinate>>newArrayList();
+		var cells = getRoomCoords(room);
+		var subset = <Coordinate>newArrayList;
+		subset.addAll(cells);
+		for(r: fp.rooms) {
+			if(r != room) {
+				val c = getRoomCoords(r);
+				for(door: fp.doors) {
+					if(isIn(door.from, c)) {
+						subset.add(door.from);
+					} else if(isIn(door.to, c)) {
+						subset.add(door.to);
+					}
+				}
+			}
+		}
+		for(cell: cells) {
+			var top = true;
+			var bottom = true;
+			var left = true;
+			var right = true;			
+			for(n: subset) {
+				if(cell.y == n.y && cell.x + 1 == n.x) {
+					right = false;
+				}
+				if(cell.y == n.y && cell.x - 1 == n.x) {
+					left = false;
+				}
+				if(cell.x == n.x && cell.y + 1 == n.y) {
+					bottom = false;
+				}
+				if(cell.x == n.x && cell.y - 1 == n.y) {
+					top = false;
+				}
+			}
+			if(top) {
+				val c1 = newCoordinate(cell.x, cell.y);
+				val c2 = newCoordinate(cell.x + 1, cell.y);
+				val pair = c1 -> c2;
+				result.add(pair);
+			}
+			if(left) {
+				val c1 = newCoordinate(cell.x, cell.y);
+				val c2 = newCoordinate(cell.x, cell.y + 1);
+				val pair = c1 -> c2;
+				result.add(pair);
+			}
+			if(right) {
+				val c1 = newCoordinate(cell.x + 1, cell.y);
+				val c2 = newCoordinate(cell.x + 1, cell.y + 1);
+				val pair = c1 -> c2;
+				result.add(pair);
+			}
+			if(bottom) {
+				val c1 = newCoordinate(cell.x, cell.y + 1);
+				val c2 = newCoordinate(cell.x + 1, cell.y + 1);
+				val pair = c1 -> c2;
+				result.add(pair);
+			}
+		}
+		return result;
 	}
 }

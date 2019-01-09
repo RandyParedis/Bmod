@@ -96,16 +96,6 @@ public class BmodAdapterFactory extends AdapterFactoryImpl
         return createDoorAdapter();
       }
       @Override
-      public Adapter casePerceptionLevel(PerceptionLevel object)
-      {
-        return createPerceptionLevelAdapter();
-      }
-      @Override
-      public Adapter caseActionProfile(ActionProfile object)
-      {
-        return createActionProfileAdapter();
-      }
-      @Override
       public Adapter casePerception(Perception object)
       {
         return createPerceptionAdapter();
@@ -114,6 +104,16 @@ public class BmodAdapterFactory extends AdapterFactoryImpl
       public Adapter caseAction(Action object)
       {
         return createActionAdapter();
+      }
+      @Override
+      public Adapter casePerceptionLevel(PerceptionLevel object)
+      {
+        return createPerceptionLevelAdapter();
+      }
+      @Override
+      public Adapter caseActionProfile(ActionProfile object)
+      {
+        return createActionProfileAdapter();
       }
       @Override
       public Adapter casePerson(Person object)
@@ -238,36 +238,6 @@ public class BmodAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.bmod.bmod.PerceptionLevel <em>Perception Level</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.bmod.bmod.PerceptionLevel
-   * @generated
-   */
-  public Adapter createPerceptionLevelAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.bmod.bmod.ActionProfile <em>Action Profile</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.bmod.bmod.ActionProfile
-   * @generated
-   */
-  public Adapter createActionProfileAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.xtext.bmod.bmod.Perception <em>Perception</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -293,6 +263,36 @@ public class BmodAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createActionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.bmod.bmod.PerceptionLevel <em>Perception Level</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.bmod.bmod.PerceptionLevel
+   * @generated
+   */
+  public Adapter createPerceptionLevelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.bmod.bmod.ActionProfile <em>Action Profile</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.bmod.bmod.ActionProfile
+   * @generated
+   */
+  public Adapter createActionProfileAdapter()
   {
     return null;
   }

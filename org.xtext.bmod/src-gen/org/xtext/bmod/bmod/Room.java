@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.bmod.bmod.Room#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.Room#getNamed <em>Named</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Room#getAreas <em>Areas</em>}</li>
  * </ul>
  *
@@ -52,32 +51,6 @@ public interface Room extends EObject
    * @generated
    */
   void setName(String value);
-
-  /**
-   * Returns the value of the '<em><b>Named</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Named</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Named</em>' attribute.
-   * @see #setNamed(String)
-   * @see org.xtext.bmod.bmod.BmodPackage#getRoom_Named()
-   * @model
-   * @generated
-   */
-  String getNamed();
-
-  /**
-   * Sets the value of the '{@link org.xtext.bmod.bmod.Room#getNamed <em>Named</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Named</em>' attribute.
-   * @see #getNamed()
-   * @generated
-   */
-  void setNamed(String value);
 
   /**
    * Returns the value of the '<em><b>Areas</b></em>' containment reference list.

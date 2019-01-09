@@ -27,7 +27,6 @@ import org.xtext.bmod.bmod.Person;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getNamed <em>Named</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getLocation <em>Location</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getPerception <em>Perception</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getAction <em>Action</em>}</li>
@@ -56,26 +55,6 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getNamed() <em>Named</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getNamed()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAMED_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getNamed() <em>Named</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getNamed()
-   * @generated
-   * @ordered
-   */
-  protected String named = NAMED_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getLocation() <em>Location</em>}' containment reference.
@@ -149,29 +128,6 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
     name = newName;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__NAME, oldName, name));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getNamed()
-  {
-    return named;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setNamed(String newNamed)
-  {
-    String oldNamed = named;
-    named = newNamed;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__NAMED, oldNamed, named));
   }
 
   /**
@@ -350,8 +306,6 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
     {
       case BmodPackage.PERSON__NAME:
         return getName();
-      case BmodPackage.PERSON__NAMED:
-        return getNamed();
       case BmodPackage.PERSON__LOCATION:
         return getLocation();
       case BmodPackage.PERSON__PERCEPTION:
@@ -374,9 +328,6 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
     {
       case BmodPackage.PERSON__NAME:
         setName((String)newValue);
-        return;
-      case BmodPackage.PERSON__NAMED:
-        setNamed((String)newValue);
         return;
       case BmodPackage.PERSON__LOCATION:
         setLocation((Coordinate)newValue);
@@ -404,9 +355,6 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
       case BmodPackage.PERSON__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case BmodPackage.PERSON__NAMED:
-        setNamed(NAMED_EDEFAULT);
-        return;
       case BmodPackage.PERSON__LOCATION:
         setLocation((Coordinate)null);
         return;
@@ -432,8 +380,6 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
     {
       case BmodPackage.PERSON__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case BmodPackage.PERSON__NAMED:
-        return NAMED_EDEFAULT == null ? named != null : !NAMED_EDEFAULT.equals(named);
       case BmodPackage.PERSON__LOCATION:
         return location != null;
       case BmodPackage.PERSON__PERCEPTION:
@@ -457,8 +403,6 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", named: ");
-    result.append(named);
     result.append(')');
     return result.toString();
   }

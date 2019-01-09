@@ -102,20 +102,6 @@ public class BmodSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case BmodPackage.PERCEPTION_LEVEL:
-      {
-        PerceptionLevel perceptionLevel = (PerceptionLevel)theEObject;
-        T result = casePerceptionLevel(perceptionLevel);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case BmodPackage.ACTION_PROFILE:
-      {
-        ActionProfile actionProfile = (ActionProfile)theEObject;
-        T result = caseActionProfile(actionProfile);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case BmodPackage.PERCEPTION:
       {
         Perception perception = (Perception)theEObject;
@@ -127,6 +113,20 @@ public class BmodSwitch<T> extends Switch<T>
       {
         Action action = (Action)theEObject;
         T result = caseAction(action);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BmodPackage.PERCEPTION_LEVEL:
+      {
+        PerceptionLevel perceptionLevel = (PerceptionLevel)theEObject;
+        T result = casePerceptionLevel(perceptionLevel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BmodPackage.ACTION_PROFILE:
+      {
+        ActionProfile actionProfile = (ActionProfile)theEObject;
+        T result = caseActionProfile(actionProfile);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -255,38 +255,6 @@ public class BmodSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Perception Level</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Perception Level</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T casePerceptionLevel(PerceptionLevel object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Action Profile</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Action Profile</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseActionProfile(ActionProfile object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Perception</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -314,6 +282,38 @@ public class BmodSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseAction(Action object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Perception Level</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Perception Level</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePerceptionLevel(PerceptionLevel object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Action Profile</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Action Profile</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseActionProfile(ActionProfile object)
   {
     return null;
   }

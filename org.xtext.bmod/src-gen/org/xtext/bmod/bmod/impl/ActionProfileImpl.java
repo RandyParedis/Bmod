@@ -4,15 +4,11 @@
 package org.xtext.bmod.bmod.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.xtext.xbase.XExpression;
 
 import org.xtext.bmod.bmod.ActionProfile;
 import org.xtext.bmod.bmod.BmodPackage;
@@ -26,9 +22,6 @@ import org.xtext.bmod.bmod.BmodPackage;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.bmod.bmod.impl.ActionProfileImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.impl.ActionProfileImpl#getPerson <em>Person</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.impl.ActionProfileImpl#getObjects <em>Objects</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.impl.ActionProfileImpl#getBody <em>Body</em>}</li>
  * </ul>
  *
  * @generated
@@ -54,56 +47,6 @@ public class ActionProfileImpl extends MinimalEObjectImpl.Container implements A
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getPerson() <em>Person</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getPerson()
-   * @generated
-   * @ordered
-   */
-  protected static final String PERSON_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getPerson() <em>Person</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getPerson()
-   * @generated
-   * @ordered
-   */
-  protected String person = PERSON_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getObjects() <em>Objects</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getObjects()
-   * @generated
-   * @ordered
-   */
-  protected static final String OBJECTS_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getObjects() <em>Objects</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getObjects()
-   * @generated
-   * @ordered
-   */
-  protected String objects = OBJECTS_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getBody()
-   * @generated
-   * @ordered
-   */
-  protected XExpression body;
 
   /**
    * <!-- begin-user-doc -->
@@ -154,116 +97,6 @@ public class ActionProfileImpl extends MinimalEObjectImpl.Container implements A
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getPerson()
-  {
-    return person;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setPerson(String newPerson)
-  {
-    String oldPerson = person;
-    person = newPerson;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.ACTION_PROFILE__PERSON, oldPerson, person));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getObjects()
-  {
-    return objects;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setObjects(String newObjects)
-  {
-    String oldObjects = objects;
-    objects = newObjects;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.ACTION_PROFILE__OBJECTS, oldObjects, objects));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public XExpression getBody()
-  {
-    return body;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetBody(XExpression newBody, NotificationChain msgs)
-  {
-    XExpression oldBody = body;
-    body = newBody;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BmodPackage.ACTION_PROFILE__BODY, oldBody, newBody);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setBody(XExpression newBody)
-  {
-    if (newBody != body)
-    {
-      NotificationChain msgs = null;
-      if (body != null)
-        msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BmodPackage.ACTION_PROFILE__BODY, null, msgs);
-      if (newBody != null)
-        msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BmodPackage.ACTION_PROFILE__BODY, null, msgs);
-      msgs = basicSetBody(newBody, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.ACTION_PROFILE__BODY, newBody, newBody));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case BmodPackage.ACTION_PROFILE__BODY:
-        return basicSetBody(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -271,12 +104,6 @@ public class ActionProfileImpl extends MinimalEObjectImpl.Container implements A
     {
       case BmodPackage.ACTION_PROFILE__NAME:
         return getName();
-      case BmodPackage.ACTION_PROFILE__PERSON:
-        return getPerson();
-      case BmodPackage.ACTION_PROFILE__OBJECTS:
-        return getObjects();
-      case BmodPackage.ACTION_PROFILE__BODY:
-        return getBody();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -293,15 +120,6 @@ public class ActionProfileImpl extends MinimalEObjectImpl.Container implements A
     {
       case BmodPackage.ACTION_PROFILE__NAME:
         setName((String)newValue);
-        return;
-      case BmodPackage.ACTION_PROFILE__PERSON:
-        setPerson((String)newValue);
-        return;
-      case BmodPackage.ACTION_PROFILE__OBJECTS:
-        setObjects((String)newValue);
-        return;
-      case BmodPackage.ACTION_PROFILE__BODY:
-        setBody((XExpression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -320,15 +138,6 @@ public class ActionProfileImpl extends MinimalEObjectImpl.Container implements A
       case BmodPackage.ACTION_PROFILE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case BmodPackage.ACTION_PROFILE__PERSON:
-        setPerson(PERSON_EDEFAULT);
-        return;
-      case BmodPackage.ACTION_PROFILE__OBJECTS:
-        setObjects(OBJECTS_EDEFAULT);
-        return;
-      case BmodPackage.ACTION_PROFILE__BODY:
-        setBody((XExpression)null);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -345,12 +154,6 @@ public class ActionProfileImpl extends MinimalEObjectImpl.Container implements A
     {
       case BmodPackage.ACTION_PROFILE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case BmodPackage.ACTION_PROFILE__PERSON:
-        return PERSON_EDEFAULT == null ? person != null : !PERSON_EDEFAULT.equals(person);
-      case BmodPackage.ACTION_PROFILE__OBJECTS:
-        return OBJECTS_EDEFAULT == null ? objects != null : !OBJECTS_EDEFAULT.equals(objects);
-      case BmodPackage.ACTION_PROFILE__BODY:
-        return body != null;
     }
     return super.eIsSet(featureID);
   }
@@ -368,10 +171,6 @@ public class ActionProfileImpl extends MinimalEObjectImpl.Container implements A
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", person: ");
-    result.append(person);
-    result.append(", objects: ");
-    result.append(objects);
     result.append(')');
     return result.toString();
   }

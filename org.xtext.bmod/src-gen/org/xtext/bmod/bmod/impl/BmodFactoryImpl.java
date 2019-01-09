@@ -70,10 +70,10 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
       case BmodPackage.FLOORPLAN: return createFloorplan();
       case BmodPackage.ROOM: return createRoom();
       case BmodPackage.DOOR: return createDoor();
-      case BmodPackage.PERCEPTION_LEVEL: return createPerceptionLevel();
-      case BmodPackage.ACTION_PROFILE: return createActionProfile();
       case BmodPackage.PERCEPTION: return createPerception();
       case BmodPackage.ACTION: return createAction();
+      case BmodPackage.PERCEPTION_LEVEL: return createPerceptionLevel();
+      case BmodPackage.ACTION_PROFILE: return createActionProfile();
       case BmodPackage.PERSON: return createPerson();
       case BmodPackage.EXIT: return createExit();
       case BmodPackage.FIRE: return createFire();
@@ -174,28 +174,6 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public PerceptionLevel createPerceptionLevel()
-  {
-    PerceptionLevelImpl perceptionLevel = new PerceptionLevelImpl();
-    return perceptionLevel;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ActionProfile createActionProfile()
-  {
-    ActionProfileImpl actionProfile = new ActionProfileImpl();
-    return actionProfile;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public Perception createPerception()
   {
     PerceptionImpl perception = new PerceptionImpl();
@@ -211,6 +189,28 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
   {
     ActionImpl action = new ActionImpl();
     return action;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PerceptionLevel createPerceptionLevel()
+  {
+    PerceptionLevelImpl perceptionLevel = new PerceptionLevelImpl();
+    return perceptionLevel;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ActionProfile createActionProfile()
+  {
+    ActionProfileImpl actionProfile = new ActionProfileImpl();
+    return actionProfile;
   }
 
   /**

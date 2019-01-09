@@ -197,22 +197,13 @@ public interface BmodPackage extends EPackage
   int ROOM__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Named</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROOM__NAMED = 1;
-
-  /**
    * The feature id for the '<em><b>Areas</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ROOM__AREAS = 2;
+  int ROOM__AREAS = 1;
 
   /**
    * The number of structural features of the '<em>Room</em>' class.
@@ -221,7 +212,7 @@ public interface BmodPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROOM_FEATURE_COUNT = 3;
+  int ROOM_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.xtext.bmod.bmod.impl.DoorImpl <em>Door</em>}' class.
@@ -270,116 +261,6 @@ public interface BmodPackage extends EPackage
   int DOOR_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link org.xtext.bmod.bmod.impl.PerceptionLevelImpl <em>Perception Level</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.bmod.bmod.impl.PerceptionLevelImpl
-   * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getPerceptionLevel()
-   * @generated
-   */
-  int PERCEPTION_LEVEL = 4;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PERCEPTION_LEVEL__NAME = 0;
-
-  /**
-   * The feature id for the '<em><b>Person</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PERCEPTION_LEVEL__PERSON = 1;
-
-  /**
-   * The feature id for the '<em><b>Objects</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PERCEPTION_LEVEL__OBJECTS = 2;
-
-  /**
-   * The feature id for the '<em><b>Body</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PERCEPTION_LEVEL__BODY = 3;
-
-  /**
-   * The number of structural features of the '<em>Perception Level</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PERCEPTION_LEVEL_FEATURE_COUNT = 4;
-
-  /**
-   * The meta object id for the '{@link org.xtext.bmod.bmod.impl.ActionProfileImpl <em>Action Profile</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.bmod.bmod.impl.ActionProfileImpl
-   * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getActionProfile()
-   * @generated
-   */
-  int ACTION_PROFILE = 5;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTION_PROFILE__NAME = 0;
-
-  /**
-   * The feature id for the '<em><b>Person</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTION_PROFILE__PERSON = 1;
-
-  /**
-   * The feature id for the '<em><b>Objects</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTION_PROFILE__OBJECTS = 2;
-
-  /**
-   * The feature id for the '<em><b>Body</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTION_PROFILE__BODY = 3;
-
-  /**
-   * The number of structural features of the '<em>Action Profile</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTION_PROFILE_FEATURE_COUNT = 4;
-
-  /**
    * The meta object id for the '{@link org.xtext.bmod.bmod.impl.PerceptionImpl <em>Perception</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -387,7 +268,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getPerception()
    * @generated
    */
-  int PERCEPTION = 6;
+  int PERCEPTION = 4;
 
   /**
    * The feature id for the '<em><b>Existing</b></em>' attribute.
@@ -424,7 +305,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getAction()
    * @generated
    */
-  int ACTION = 7;
+  int ACTION = 5;
 
   /**
    * The feature id for the '<em><b>Existing</b></em>' attribute.
@@ -454,6 +335,62 @@ public interface BmodPackage extends EPackage
   int ACTION_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.xtext.bmod.bmod.impl.PerceptionLevelImpl <em>Perception Level</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.bmod.bmod.impl.PerceptionLevelImpl
+   * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getPerceptionLevel()
+   * @generated
+   */
+  int PERCEPTION_LEVEL = 6;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PERCEPTION_LEVEL__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Perception Level</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PERCEPTION_LEVEL_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.xtext.bmod.bmod.impl.ActionProfileImpl <em>Action Profile</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.bmod.bmod.impl.ActionProfileImpl
+   * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getActionProfile()
+   * @generated
+   */
+  int ACTION_PROFILE = 7;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION_PROFILE__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Action Profile</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION_PROFILE_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.xtext.bmod.bmod.impl.PersonImpl <em>Person</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -473,22 +410,13 @@ public interface BmodPackage extends EPackage
   int PERSON__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Named</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PERSON__NAMED = 1;
-
-  /**
    * The feature id for the '<em><b>Location</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PERSON__LOCATION = 2;
+  int PERSON__LOCATION = 1;
 
   /**
    * The feature id for the '<em><b>Perception</b></em>' containment reference.
@@ -497,7 +425,7 @@ public interface BmodPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PERSON__PERCEPTION = 3;
+  int PERSON__PERCEPTION = 2;
 
   /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
@@ -506,7 +434,7 @@ public interface BmodPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PERSON__ACTION = 4;
+  int PERSON__ACTION = 3;
 
   /**
    * The number of structural features of the '<em>Person</em>' class.
@@ -515,7 +443,7 @@ public interface BmodPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PERSON_FEATURE_COUNT = 5;
+  int PERSON_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.xtext.bmod.bmod.impl.ExitImpl <em>Exit</em>}' class.
@@ -920,17 +848,6 @@ public interface BmodPackage extends EPackage
   EAttribute getRoom_Name();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.Room#getNamed <em>Named</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Named</em>'.
-   * @see org.xtext.bmod.bmod.Room#getNamed()
-   * @see #getRoom()
-   * @generated
-   */
-  EAttribute getRoom_Named();
-
-  /**
    * Returns the meta object for the containment reference list '{@link org.xtext.bmod.bmod.Room#getAreas <em>Areas</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -983,114 +900,6 @@ public interface BmodPackage extends EPackage
    * @generated
    */
   EReference getDoor_To();
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.bmod.bmod.PerceptionLevel <em>Perception Level</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Perception Level</em>'.
-   * @see org.xtext.bmod.bmod.PerceptionLevel
-   * @generated
-   */
-  EClass getPerceptionLevel();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.PerceptionLevel#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.xtext.bmod.bmod.PerceptionLevel#getName()
-   * @see #getPerceptionLevel()
-   * @generated
-   */
-  EAttribute getPerceptionLevel_Name();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.PerceptionLevel#getPerson <em>Person</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Person</em>'.
-   * @see org.xtext.bmod.bmod.PerceptionLevel#getPerson()
-   * @see #getPerceptionLevel()
-   * @generated
-   */
-  EAttribute getPerceptionLevel_Person();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.PerceptionLevel#getObjects <em>Objects</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Objects</em>'.
-   * @see org.xtext.bmod.bmod.PerceptionLevel#getObjects()
-   * @see #getPerceptionLevel()
-   * @generated
-   */
-  EAttribute getPerceptionLevel_Objects();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.xtext.bmod.bmod.PerceptionLevel#getBody <em>Body</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Body</em>'.
-   * @see org.xtext.bmod.bmod.PerceptionLevel#getBody()
-   * @see #getPerceptionLevel()
-   * @generated
-   */
-  EReference getPerceptionLevel_Body();
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.bmod.bmod.ActionProfile <em>Action Profile</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Action Profile</em>'.
-   * @see org.xtext.bmod.bmod.ActionProfile
-   * @generated
-   */
-  EClass getActionProfile();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.ActionProfile#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.xtext.bmod.bmod.ActionProfile#getName()
-   * @see #getActionProfile()
-   * @generated
-   */
-  EAttribute getActionProfile_Name();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.ActionProfile#getPerson <em>Person</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Person</em>'.
-   * @see org.xtext.bmod.bmod.ActionProfile#getPerson()
-   * @see #getActionProfile()
-   * @generated
-   */
-  EAttribute getActionProfile_Person();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.ActionProfile#getObjects <em>Objects</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Objects</em>'.
-   * @see org.xtext.bmod.bmod.ActionProfile#getObjects()
-   * @see #getActionProfile()
-   * @generated
-   */
-  EAttribute getActionProfile_Objects();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.xtext.bmod.bmod.ActionProfile#getBody <em>Body</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Body</em>'.
-   * @see org.xtext.bmod.bmod.ActionProfile#getBody()
-   * @see #getActionProfile()
-   * @generated
-   */
-  EReference getActionProfile_Body();
 
   /**
    * Returns the meta object for class '{@link org.xtext.bmod.bmod.Perception <em>Perception</em>}'.
@@ -1157,6 +966,48 @@ public interface BmodPackage extends EPackage
   EReference getAction_Custom();
 
   /**
+   * Returns the meta object for class '{@link org.xtext.bmod.bmod.PerceptionLevel <em>Perception Level</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Perception Level</em>'.
+   * @see org.xtext.bmod.bmod.PerceptionLevel
+   * @generated
+   */
+  EClass getPerceptionLevel();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.PerceptionLevel#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.bmod.bmod.PerceptionLevel#getName()
+   * @see #getPerceptionLevel()
+   * @generated
+   */
+  EAttribute getPerceptionLevel_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.bmod.bmod.ActionProfile <em>Action Profile</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Action Profile</em>'.
+   * @see org.xtext.bmod.bmod.ActionProfile
+   * @generated
+   */
+  EClass getActionProfile();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.ActionProfile#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.bmod.bmod.ActionProfile#getName()
+   * @see #getActionProfile()
+   * @generated
+   */
+  EAttribute getActionProfile_Name();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.bmod.bmod.Person <em>Person</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1176,17 +1027,6 @@ public interface BmodPackage extends EPackage
    * @generated
    */
   EAttribute getPerson_Name();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.Person#getNamed <em>Named</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Named</em>'.
-   * @see org.xtext.bmod.bmod.Person#getNamed()
-   * @see #getPerson()
-   * @generated
-   */
-  EAttribute getPerson_Named();
 
   /**
    * Returns the meta object for the containment reference '{@link org.xtext.bmod.bmod.Person#getLocation <em>Location</em>}'.
@@ -1577,14 +1417,6 @@ public interface BmodPackage extends EPackage
     EAttribute ROOM__NAME = eINSTANCE.getRoom_Name();
 
     /**
-     * The meta object literal for the '<em><b>Named</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ROOM__NAMED = eINSTANCE.getRoom_Named();
-
-    /**
      * The meta object literal for the '<em><b>Areas</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1625,90 +1457,6 @@ public interface BmodPackage extends EPackage
      * @generated
      */
     EReference DOOR__TO = eINSTANCE.getDoor_To();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.PerceptionLevelImpl <em>Perception Level</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.bmod.bmod.impl.PerceptionLevelImpl
-     * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getPerceptionLevel()
-     * @generated
-     */
-    EClass PERCEPTION_LEVEL = eINSTANCE.getPerceptionLevel();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute PERCEPTION_LEVEL__NAME = eINSTANCE.getPerceptionLevel_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Person</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute PERCEPTION_LEVEL__PERSON = eINSTANCE.getPerceptionLevel_Person();
-
-    /**
-     * The meta object literal for the '<em><b>Objects</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute PERCEPTION_LEVEL__OBJECTS = eINSTANCE.getPerceptionLevel_Objects();
-
-    /**
-     * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference PERCEPTION_LEVEL__BODY = eINSTANCE.getPerceptionLevel_Body();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.ActionProfileImpl <em>Action Profile</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.bmod.bmod.impl.ActionProfileImpl
-     * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getActionProfile()
-     * @generated
-     */
-    EClass ACTION_PROFILE = eINSTANCE.getActionProfile();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ACTION_PROFILE__NAME = eINSTANCE.getActionProfile_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Person</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ACTION_PROFILE__PERSON = eINSTANCE.getActionProfile_Person();
-
-    /**
-     * The meta object literal for the '<em><b>Objects</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ACTION_PROFILE__OBJECTS = eINSTANCE.getActionProfile_Objects();
-
-    /**
-     * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ACTION_PROFILE__BODY = eINSTANCE.getActionProfile_Body();
 
     /**
      * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.PerceptionImpl <em>Perception</em>}' class.
@@ -1763,6 +1511,42 @@ public interface BmodPackage extends EPackage
     EReference ACTION__CUSTOM = eINSTANCE.getAction_Custom();
 
     /**
+     * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.PerceptionLevelImpl <em>Perception Level</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.bmod.bmod.impl.PerceptionLevelImpl
+     * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getPerceptionLevel()
+     * @generated
+     */
+    EClass PERCEPTION_LEVEL = eINSTANCE.getPerceptionLevel();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PERCEPTION_LEVEL__NAME = eINSTANCE.getPerceptionLevel_Name();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.ActionProfileImpl <em>Action Profile</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.bmod.bmod.impl.ActionProfileImpl
+     * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getActionProfile()
+     * @generated
+     */
+    EClass ACTION_PROFILE = eINSTANCE.getActionProfile();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ACTION_PROFILE__NAME = eINSTANCE.getActionProfile_Name();
+
+    /**
      * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.PersonImpl <em>Person</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1779,14 +1563,6 @@ public interface BmodPackage extends EPackage
      * @generated
      */
     EAttribute PERSON__NAME = eINSTANCE.getPerson_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Named</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute PERSON__NAMED = eINSTANCE.getPerson_Named();
 
     /**
      * The meta object literal for the '<em><b>Location</b></em>' containment reference feature.

@@ -60,24 +60,6 @@ public interface BmodFactory extends EFactory
   Door createDoor();
 
   /**
-   * Returns a new object of class '<em>Perception Level</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Perception Level</em>'.
-   * @generated
-   */
-  PerceptionLevel createPerceptionLevel();
-
-  /**
-   * Returns a new object of class '<em>Action Profile</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Action Profile</em>'.
-   * @generated
-   */
-  ActionProfile createActionProfile();
-
-  /**
    * Returns a new object of class '<em>Perception</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -94,6 +76,24 @@ public interface BmodFactory extends EFactory
    * @generated
    */
   Action createAction();
+
+  /**
+   * Returns a new object of class '<em>Perception Level</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Perception Level</em>'.
+   * @generated
+   */
+  PerceptionLevel createPerceptionLevel();
+
+  /**
+   * Returns a new object of class '<em>Action Profile</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Action Profile</em>'.
+   * @generated
+   */
+  ActionProfile createActionProfile();
 
   /**
    * Returns a new object of class '<em>Person</em>'.

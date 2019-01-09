@@ -3,16 +3,15 @@
  */
 package org.xtext.bmod.generator
 
-import org.bmod.simulation.GenerationHelper
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.generator.IGenerator
-import org.xtext.bmod.bmod.ActionProfile
+import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.generator.IGenerator2
+import org.eclipse.xtext.generator.IGeneratorContext
+import org.xtext.bmod.bmod.Coordinate
 import org.xtext.bmod.bmod.Door
-import org.xtext.bmod.bmod.EmergencySign
 import org.xtext.bmod.bmod.Exit
 import org.xtext.bmod.bmod.Fire
-import org.xtext.bmod.bmod.PerceptionLevel
+import org.xtext.bmod.bmod.Floorplan
 import org.xtext.bmod.bmod.Person
 import org.xtext.bmod.bmod.Room
 
@@ -21,104 +20,381 @@ import org.xtext.bmod.bmod.Room
  * 
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
-class BmodGenerator implements IGenerator {
-
-	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-		// Generate simulation package
-		val files = GenerationHelper.files;
-		files.forEach[key, value| fsa.generateFile(key, value);];
+class BmodGenerator implements IGenerator2 {
+	
+	private def void generateCMakeLists(String project_name, IFileSystemAccess2 fsa) {
+		val pedsim_lib = "/usr/include/libpedsim";
+		fsa.generateFile('''«project_name»/CMakeLists.txt''', '''
+			cmake_minimum_required(VERSION 3.1)
+			set(PROJECT_NAME sim«project_name»)
+			project(${PROJECT_NAME})
+			set(CMAKE_CXX_STANDARD 11)
+			set(PEDSIM_LIB «pedsim_lib»)
+			
+			file(GLOB_RECURSE SRC ../simulation/*)
+			
+			add_executable(${PROJECT_NAME} main.cpp ${SRC})
+			target_include_directories(${PROJECT_NAME} PUBLIC ${PEDSIM_LIB})
+			target_include_directories(${PROJECT_NAME} PUBLIC ../)
+			target_link_libraries(${PROJECT_NAME} ${PEDSIM_LIB}/libpedsim.so)
+		''');
+	}
+	
+	private def void generateSimulationLibrary(IFileSystemAccess2 fsa) {
+		var lst = <String>newArrayList();
+		val dir = "simulation";
+		val files = CppGenerationHelper.files;
 		
+		var iter = files.entrySet.iterator;
+		while(iter.hasNext) {
+			var pair = iter.next
+			lst.add(dir + "/" + pair.key);
+			fsa.generateFile(lst.last, pair.value);
+		}
+		
+		for(var i = 0; i < lst.size; i++) {
+			lst.set(i, "../" + lst.get(i));
+		}
+	}
+	
+	private def double compX(Pair<Coordinate, Coordinate> bounds, double x) {
+		val middleX = (bounds.value.x - bounds.key.x) / 2;
+		return x - middleX;
+	}
+	
+	private def double compY(Pair<Coordinate, Coordinate> bounds, double y) {
+		val middleY = (bounds.value.y - bounds.key.y) / 2;
+		return y - middleY;
+	}
+	
+	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {	
 		val simpleClassName = resource.getURI.trimFileExtension.lastSegment
 		if(resource.contents?.head === null) {
 			return;
 		}
 		val floorplan = resource.contents.head.eContents;
+		val scale = 1.0;
+		val floor = resource.contents.filter(Floorplan).get(0);
+		val bounds = Helper.getFloorplanBoundaries(floor);
 		
-		fsa.generateFile(simpleClassName + '.java', '''
-			import org.bmod.simulation.Cell;
-			import org.bmod.simulation.Door;
-			import org.bmod.simulation.EmergencySign;
-			import org.bmod.simulation.Person;
-			import org.bmod.simulation.Room;
-			import org.bmod.simulation.Simulatable;
-			import org.bmod.simulation.Simulator;
+		var floorcells = 0;
+		for(room: floor.rooms) {
+			floorcells += Helper.getRoomCoords(room).size;
+		}
+		
+		fsa.generateFile(simpleClassName + '/main.cpp', '''
+			#include "ped_includes.h"
 			
-			import java.util.ArrayList;
+			#include <iostream>
+			#include <sstream>
+			#include <unistd.h>
+			#include <utility>
 			
-			public class «simpleClassName» {
-				public static void main(String... args) {
-					ArrayList<Simulatable> list = new ArrayList<Simulatable>();
+			#include "simulation/cell.h"
+			#include "simulation/door.h"
+			#include "simulation/floor.h"
+			#include "simulation/person.h"
+			
+			#include "simulation/targetters/experienced.h"
+			
+			using namespace std;
+			using namespace simulation;
+			
+			Person* newAgent(Ped::Tscene* scene, double x, double y, const Floor& floor) {
+				Person* p = new Person(x, y, «scale / 2», floor);
+				p->registerTargetter(targetters::action_experienced);
+				scene->addAgent(p->get());
+				return p;
+			}
+			
+			void fireObstacle(Cell* cell, Ped::Tscene* scene, Ped::OutputWriter* ow) {
+				if(!cell->drawn) {
+					scene->addObstacle(new Ped::Tobstacle(cell->x, cell->y, cell->x + «scale», cell->y));
+					scene->addObstacle(new Ped::Tobstacle(cell->x, cell->y, cell->x, cell->y + «scale»));
+					scene->addObstacle(new Ped::Tobstacle(cell->x + «scale», cell->y, cell->x + «scale», cell->y + «scale»));
+					scene->addObstacle(new Ped::Tobstacle(cell->x, cell->y + «scale», cell->x + «scale», cell->y + «scale»));
 					
-					// Rooms and Cells
-					«FOR room: floorplan.filter(Room)»
-						Room room_«room.name» = new Room();
-						«FOR cell: Helper.getRoomCoords(room)»
-							Cell cell_«cell.x»_«cell.y» = new Cell(«cell.x», «cell.y»);
-							«FOR exit: floorplan.filter(Exit)»
-								«IF exit.location.x == cell.x && exit.location.y == cell.y»
-									cell_«cell.x»_«cell.y».setExit(true);
-								«ENDIF»
-							«ENDFOR»
-							«FOR fire: floorplan.filter(Fire)»
-								«IF fire.location.x == cell.x && fire.location.y == cell.y»
-									cell_«cell.x»_«cell.y».ignite();
-								«ENDIF»
-							«ENDFOR»
-							room_«room.name».add(cell_«cell.x»_«cell.y»);
-							list.add(cell_«cell.x»_«cell.y»);
-						«ENDFOR»
-						list.add(room_«room.name»);
-						
-					«ENDFOR»
-					
-					// Doors
-					«FOR door: floorplan.filter(Door)»
-						Door door_«door.name» = new Door(«door.from.x», «door.from.y», «door.to.x», «door.to.y»);
-						door_«door.name».setup(list);
-						list.add(door_«door.name»);
-						
-					«ENDFOR»
-					
-					// Emergency Signs
-					«FOR sign: floorplan.filter(EmergencySign)»
-						EmergencySign sign_«sign.on.name»_«sign.to.ref.name» = new EmergencySign(door_«sign.on.name», door_«sign.to.ref.name»);
-						sign_«sign.on.name»_«sign.to.ref.name».setup(list);
-						list.add(sign_«sign.on.name»_«sign.to.ref.name»);
-						
-					«ENDFOR»
-					
-					// Actions and Perceptions
-					«FOR action: floorplan.filter(ActionProfile)»
-						Person.actions.put("«action.name»", (Person p, ArrayList<Simulatable> objects) -> {});
-					«ENDFOR»
-					«FOR perception: floorplan.filter(PerceptionLevel)»
-						Person.perceptions.put("«perception.name»", (Person p, ArrayList<Simulatable> objects) -> { return false; });
-					«ENDFOR»
-					
-					// Persons
-					«FOR person: floorplan.filter(Person)»
-						«IF person.action.existing !== null»
-							«IF person.perception.existing !== null»
-							Person person_«person.name» = new Person("«person.named»", «person.location.x», «person.location.y», "«person.perception.existing.getName»", "«person.action.existing.getName»");
-							«ELSE»
-							Person person_«person.name» = new Person("«person.named»", «person.location.x», «person.location.y», "«person.perception.custom.toString»", "«person.action.existing.getName»");
-							«ENDIF»
-						«ELSE»
-							«IF person.perception.existing !== null»
-							Person person_«person.name» = new Person("«person.named»", «person.location.x», «person.location.y», "«person.perception.existing.getName»", "«person.action.custom.toString»");
-							«ELSE»
-							Person person_«person.name» = new Person("«person.named»", «person.location.x», «person.location.y», "«person.perception.custom.toString»", "«person.action.custom.toString»");
-							«ENDIF»
-						«ENDIF»
-						list.add(person_«person.name»);
-					«ENDFOR»
-					
-					// Simulation itself
-					new Simulator(list);
+					// prevent creating too much obstacles
+					cell->drawn = true;
 				}
+				// Draw cross
+				Ped::Tvector c1(cell->x, cell->y);
+				Ped::Tvector c2(cell->x + «scale», cell->y + «scale»);
+				Ped::Tvector c3(cell->x, cell->y + «scale»);
+				Ped::Tvector c4(cell->x + «scale», cell->y);
+				ow->drawLine(c1, c2, 1, 1, 0, 0);
+				ow->drawLine(c3, c4, 1, 1, 0, 0);
+			}
+			
+			
+			int main(int argc, char *argv[]) {
+				
+				cout << "# PedSim Example using libpedsim version " << Ped::LIBPEDSIM_VERSION << endl;
+				
+				// Setup
+				Ped::Tscene *pedscene = new Ped::Tscene();
+				
+				// create an output writer which will send output to a visualizer
+				Ped::OutputWriter *ow = new Ped::UDPOutputWriter();
+				ow->setScenarioName("«simpleClassName»");
+				pedscene->setOutputWriter(ow);
+				
+				// Create floorplan
+				vector<pair<Cell*, Cell*>> obstacles;
+				Floor floor;
+				vector<Cell*> room;
+				«FOR room: floorplan.filter(Room)»
+					«FOR ob: Helper.getRoomObstacles(room, floor)»
+						obstacles.emplace_back(make_pair<Cell*, Cell*>(new Cell(«bounds.compX(ob.key.x) * scale», «bounds.compY(ob.key.y) * scale»), new Cell(«bounds.compX(ob.value.x) * scale», «bounds.compY(ob.value.y) * scale»)));
+					«ENDFOR»
+					room = {};
+					«FOR cell: Helper.getRoomCoords(room)»
+						room.emplace_back(new Cell(«bounds.compX(cell.x) * scale», «bounds.compY(cell.y) * scale»));
+					«ENDFOR»
+					floor.rooms.emplace_back(room);
+				«ENDFOR»
+				room = {};
+				for(const auto& obstacle: obstacles) {
+					pedscene->addObstacle(new Ped::Tobstacle(obstacle.first->x, obstacle.first->y, obstacle.second->x, obstacle.second->y));
+				}
+				
+				// Set exits
+				«FOR exit: floorplan.filter(Exit)»
+					floor.setExit(«exit.location.x», «exit.location.y»);
+				«ENDFOR»
+				
+				// Draw doors
+				«FOR door: floorplan.filter(Door)»
+					floor.doors.emplace_back(new Door(«bounds.compX(door.from.x)», «bounds.compY(door.from.y)», «bounds.compX(door.to.x)», «bounds.compY(door.to.y)»));
+				«ENDFOR»
+				for(Door* door: floor.doors) {
+					door->draw(ow, «scale»);
+				}
+				
+				// Fire
+				vector<Cell*> fire;
+				«FOR fire: floorplan.filter(Fire)»
+					fire.emplace_back(new Cell(«bounds.compX(fire.location.x) * scale», «bounds.compY(fire.location.y) * scale»));
+				«ENDFOR»
+				for(auto f: fire) {
+					fireObstacle(f, pedscene, ow);
+				}
+				
+				// Create people (TODO: complicated logic needed for behaviour)
+				«FOR person: floorplan.filter(Person)»
+					floor.people.emplace_back(newAgent(pedscene, «bounds.compX(person.location.x) * scale», «bounds.compY(person.location.y) * scale», floor));
+				«ENDFOR»
+				
+				// convenience
+				const vector<Ped::Tagent*>& myagents = pedscene->getAllAgents();
+				const vector<Ped::Tobstacle*>& myobstacles = pedscene->getAllObstacles();
+				
+				// Metrics
+				ow->writeMetrics({
+					{"Timestep", "0"},
+					{"Ignited Cells", "0"},
+					{"Burning (Percentage)", "0"},
+					{"Escaped People", "0"},
+					{"Escaped (Percentage)", "0"}
+				});
+				
+				// simulation loop
+				pedscene->moveAgents(0.4);
+				long int time = 0;
+				while(fire.size() < «floorcells») {
+					++time;
+					ow->writeTimeStep(time);
+					// Delay for next step
+					char c;
+					cin >> c;
+					// usleep(500*1000);
+					
+					// Compute agent movement (TODO)
+					for(Person* person: floor.people) {
+						person->target();
+					}
+					// Move all agents
+				    long int timestep = 0;
+				    int notreached = myagents.size();
+				    pedscene->moveAgents(1);
+				    
+				    // Spread Fire
+				    vector<Cell*> to_add;
+					for(auto f: fire) {
+						Cell* right = new Cell(f->x + «scale», f->y);
+						if(f->canSpread(right, floor, fire, to_add)) {
+							to_add.emplace_back(right);
+						}
+						
+						Cell* left = new Cell(f->x - «scale», f->y);
+						if(f->canSpread(left, floor, fire, to_add)) {
+							to_add.emplace_back(left);
+						}
+						
+						Cell* top = new Cell(f->x, f->y - «scale»); 
+						if(f->canSpread(top, floor, fire, to_add)) {
+							to_add.emplace_back(top);
+						}
+						
+						Cell* bottom = new Cell(f->x, f->y + «scale»);
+						if(f->canSpread(bottom, floor, fire, to_add)) {
+							to_add.emplace_back(bottom);
+						}
+					}
+					for(auto f: to_add) {
+						// Ensure 1 tick per timestep
+						fire.emplace_back(f);
+					}
+					for(auto f: fire) {
+						fireObstacle(f, pedscene, ow);
+					}
+					
+					for(Door* door: floor.doors) {
+						door->draw(ow, «scale»);
+					}
+					
+					pedscene->moveAgents(0); //< Somehow this is necessary to draw all the obstacles correctly.
+					
+					// Metrics
+					ow->writeMetrics({
+						{"Timestep", std::to_string(time)},
+						{"Ignited Cells", std::to_string(fire.size())},
+						{"Burning (Percentage)", std::to_string((double)fire.size() / (double)«floorcells»)},
+						{"Escaped People", "0"},
+						{"Escaped (Percentage)", "0"}
+					});
+					
+					// Clear escaped persons
+					for(Person* p: floor.people) {
+						if(p->hasEscaped()) {
+							pedscene->removeAgent(p->get());
+						}
+					}
+				}
+				
+				// cleanup
+				for (auto a : pedscene->getAllAgents()) { delete a; };
+				for (auto w : pedscene->getAllWaypoints()) { delete w; };
+				for (auto o : pedscene->getAllObstacles()) { delete o; };
+				for (auto c : fire) { delete c; }
+				for (auto p : floor.people) { delete p; }
+				for (auto d : floor.doors) { delete d; }
+				delete pedscene;
+				
+				return EXIT_SUCCESS;
 			}
 		''');
 		
+		generateSimulationLibrary(fsa);
+		generateCMakeLists(simpleClassName, fsa);
+	}
+
+//	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+//		// Generate simulation package
+//		val files = GenerationHelper.files;
+//		files.forEach[key, value| fsa.generateFile(key, value);];
+//		
+//		val simpleClassName = resource.getURI.trimFileExtension.lastSegment
+//		if(resource.contents?.head === null) {
+//			return;
+//		}
+//		val floorplan = resource.contents.head.eContents;
+//		
+//		fsa.generateFile(simpleClassName + '.java', '''
+//			import org.bmod.helper.Operations;
+//			
+//			import org.bmod.simulation.Cell;
+//			import org.bmod.simulation.Door;
+//			import org.bmod.simulation.EmergencySign;
+//			import org.bmod.simulation.Person;
+//			import org.bmod.simulation.Room;
+//			import org.bmod.simulation.Simulatable;
+//			import org.bmod.simulation.Simulator;
+//			
+//			import java.util.ArrayList;
+//			
+//			public class «simpleClassName» {
+//				public static void main(String... args) {
+//					ArrayList<Simulatable> list = new ArrayList<Simulatable>();
+//					
+//					// Rooms and Cells
+//					«FOR room: floorplan.filter(Room)»
+//						Room room_«room.name» = new Room();
+//						«FOR cell: Helper.getRoomCoords(room)»
+//							Cell cell_«cell.x»_«cell.y» = new Cell(«cell.x», «cell.y»);
+//							«FOR exit: floorplan.filter(Exit)»
+//								«IF exit.location.x == cell.x && exit.location.y == cell.y»
+//									cell_«cell.x»_«cell.y».setExit(true);
+//								«ENDIF»
+//							«ENDFOR»
+//							«FOR fire: floorplan.filter(Fire)»
+//								«IF fire.location.x == cell.x && fire.location.y == cell.y»
+//									cell_«cell.x»_«cell.y».ignite();
+//								«ENDIF»
+//							«ENDFOR»
+//							room_«room.name».add(cell_«cell.x»_«cell.y»);
+//							list.add(cell_«cell.x»_«cell.y»);
+//						«ENDFOR»
+//						list.add(room_«room.name»);
+//						
+//					«ENDFOR»
+//					
+//					// Doors
+//					«FOR door: floorplan.filter(Door)»
+//						Door door_«door.name» = new Door(«door.from.x», «door.from.y», «door.to.x», «door.to.y»);
+//						door_«door.name».setup(list);
+//						list.add(door_«door.name»);
+//						
+//					«ENDFOR»
+//					
+//					// Emergency Signs
+//					«FOR sign: floorplan.filter(EmergencySign)»
+//						EmergencySign sign_«sign.on.name»_«sign.to.ref.name» = new EmergencySign(door_«sign.on.name», door_«sign.to.ref.name»);
+//						sign_«sign.on.name»_«sign.to.ref.name».setup(list);
+//						list.add(sign_«sign.on.name»_«sign.to.ref.name»);
+//						
+//					«ENDFOR»
+//					
+//					// Actions and Perceptions
+//					«FOR action: floorplan.filter(ActionProfile)»
+//						Person.actions.put("«action.name»", (Person p, ArrayList<Simulatable> o) -> { Operations.action_«action.name»(p, o); });
+//					«ENDFOR»
+//					«FOR perception: floorplan.filter(PerceptionLevel)»
+//						Person.perceptions.put("«perception.name»", (Person p, ArrayList<Simulatable> o) -> { return Operations.perception_«perception.name»(p, o); });
+//					«ENDFOR»
+//					
+//					// Persons
+//					«FOR person: floorplan.filter(Person)»
+//						«IF person.action.existing !== null»
+//							«IF person.perception.existing !== null»
+//							Person person_«person.name» = new Person("«person.named»", «person.location.x», «person.location.y», "«person.perception.existing.getName»", "«person.action.existing.getName»");
+//							«ELSE»
+//							Person person_«person.name» = new Person("«person.named»", «person.location.x», «person.location.y», "«person.perception.custom.toString»", "«person.action.existing.getName»");
+//							«ENDIF»
+//						«ELSE»
+//							«IF person.perception.existing !== null»
+//							Person person_«person.name» = new Person("«person.named»", «person.location.x», «person.location.y», "«person.perception.existing.getName»", "«person.action.custom.toString»");
+//							«ELSE»
+//							Person person_«person.name» = new Person("«person.named»", «person.location.x», «person.location.y», "«person.perception.custom.toString»", "«person.action.custom.toString»");
+//							«ENDIF»
+//						«ENDIF»
+//						list.add(person_«person.name»);
+//					«ENDFOR»
+//					
+//					// Simulation itself
+//					new Simulator(list);
+//				}
+//			}
+//		''');
+//		
+//	}
+	
+	override afterGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
+//		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override beforeGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
+//		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 }
