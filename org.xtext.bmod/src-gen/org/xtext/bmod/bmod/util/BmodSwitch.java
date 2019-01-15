@@ -88,6 +88,13 @@ public class BmodSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case BmodPackage.IMPORT:
+      {
+        Import import_ = (Import)theEObject;
+        T result = caseImport(import_);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case BmodPackage.ROOM:
       {
         Room room = (Room)theEObject;
@@ -99,34 +106,6 @@ public class BmodSwitch<T> extends Switch<T>
       {
         Door door = (Door)theEObject;
         T result = caseDoor(door);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case BmodPackage.PERCEPTION:
-      {
-        Perception perception = (Perception)theEObject;
-        T result = casePerception(perception);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case BmodPackage.ACTION:
-      {
-        Action action = (Action)theEObject;
-        T result = caseAction(action);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case BmodPackage.PERCEPTION_LEVEL:
-      {
-        PerceptionLevel perceptionLevel = (PerceptionLevel)theEObject;
-        T result = casePerceptionLevel(perceptionLevel);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case BmodPackage.ACTION_PROFILE:
-      {
-        ActionProfile actionProfile = (ActionProfile)theEObject;
-        T result = caseActionProfile(actionProfile);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -162,13 +141,6 @@ public class BmodSwitch<T> extends Switch<T>
       {
         DoorRef doorRef = (DoorRef)theEObject;
         T result = caseDoorRef(doorRef);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case BmodPackage.DANGEROUS_CONDITION:
-      {
-        DangerousCondition dangerousCondition = (DangerousCondition)theEObject;
-        T result = caseDangerousCondition(dangerousCondition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -223,6 +195,22 @@ public class BmodSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Import</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Import</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseImport(Import object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Room</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -250,70 +238,6 @@ public class BmodSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseDoor(Door object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Perception</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Perception</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T casePerception(Perception object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Action</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Action</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAction(Action object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Perception Level</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Perception Level</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T casePerceptionLevel(PerceptionLevel object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Action Profile</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Action Profile</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseActionProfile(ActionProfile object)
   {
     return null;
   }
@@ -394,22 +318,6 @@ public class BmodSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseDoorRef(DoorRef object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Dangerous Condition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Dangerous Condition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseDangerousCondition(DangerousCondition object)
   {
     return null;
   }

@@ -12,4 +12,5 @@ Require-Bundle: org.xtext.bmod,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.xtext.bmod.ide.contentassist.antlr,
- org.xtext.bmod.ide.contentassist.antlr.internal
+ org.xtext.bmod.ide.contentassist.antlr.internal,
+ org.xtext.bmod.ide.contentassist.antlr.lexer

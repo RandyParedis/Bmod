@@ -4,6 +4,11 @@
 package org.xtext.bmod.ui.quickfix
 
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
+import org.eclipse.xtext.ui.editor.quickfix.Fix
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
+import org.eclipse.xtext.validation.Issue
+import org.xtext.bmod.validation.BmodValidator
+import org.eclipse.jface.text.FindReplaceDocumentAdapter
 
 /**
  * Custom quickfixes.
@@ -21,4 +26,19 @@ class BmodQuickfixProvider extends DefaultQuickfixProvider {
 //			xtextDocument.replace(issue.offset, 1, firstLetter.toUpperCase)
 //		]
 //	}
+
+	@Fix(BmodValidator.BR_TL)
+	def swapAreaCoords(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, 'Swap coordinates', 'Swap coordinates.', 'upcase.png') [
+			context |
+			val doc = context.xtextDocument;
+			val frda = new FindReplaceDocumentAdapter(doc);
+			val to = frda.find(issue.offset, "to", true, true, true, false);
+			val fromcoord = doc.get(issue.offset, to.offset - issue.offset - 1);
+			val eol = frda.find(to.offset, ")", true, true, false, false);
+			val tocoord = doc.get(to.offset + 3, eol.offset - to.offset - 2);
+			doc.replace(to.offset + 3, tocoord.length, fromcoord);
+			doc.replace(issue.offset, fromcoord.length, tocoord);
+		]
+	}
 }

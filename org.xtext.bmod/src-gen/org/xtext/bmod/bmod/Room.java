@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.bmod.bmod.Room#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.Room#isHasCapacity <em>Has Capacity</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.Room#getCapacity <em>Capacity</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Room#getAreas <em>Areas</em>}</li>
  * </ul>
  *
@@ -51,6 +53,58 @@ public interface Room extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Has Capacity</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Has Capacity</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Has Capacity</em>' attribute.
+   * @see #setHasCapacity(boolean)
+   * @see org.xtext.bmod.bmod.BmodPackage#getRoom_HasCapacity()
+   * @model
+   * @generated
+   */
+  boolean isHasCapacity();
+
+  /**
+   * Sets the value of the '{@link org.xtext.bmod.bmod.Room#isHasCapacity <em>Has Capacity</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Has Capacity</em>' attribute.
+   * @see #isHasCapacity()
+   * @generated
+   */
+  void setHasCapacity(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Capacity</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Capacity</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Capacity</em>' attribute.
+   * @see #setCapacity(int)
+   * @see org.xtext.bmod.bmod.BmodPackage#getRoom_Capacity()
+   * @model
+   * @generated
+   */
+  int getCapacity();
+
+  /**
+   * Sets the value of the '{@link org.xtext.bmod.bmod.Room#getCapacity <em>Capacity</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Capacity</em>' attribute.
+   * @see #getCapacity()
+   * @generated
+   */
+  void setCapacity(int value);
 
   /**
    * Returns the value of the '<em><b>Areas</b></em>' containment reference list.

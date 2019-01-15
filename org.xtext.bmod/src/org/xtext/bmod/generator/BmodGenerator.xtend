@@ -3,6 +3,7 @@
  */
 package org.xtext.bmod.generator
 
+import java.util.List
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGenerator2
@@ -12,6 +13,7 @@ import org.xtext.bmod.bmod.Door
 import org.xtext.bmod.bmod.Exit
 import org.xtext.bmod.bmod.Fire
 import org.xtext.bmod.bmod.Floorplan
+import org.xtext.bmod.bmod.Import
 import org.xtext.bmod.bmod.Person
 import org.xtext.bmod.bmod.Room
 
@@ -22,7 +24,28 @@ import org.xtext.bmod.bmod.Room
  */
 class BmodGenerator implements IGenerator2 {
 	
-	private def void generateCMakeLists(String project_name, IFileSystemAccess2 fsa) {
+	private static def String removeExtension(String s) {
+	
+	    val separator = System.getProperty("file.separator");
+	    var filename = "";
+	
+	    // Remove the path upto the filename.
+	    var lastSeparatorIndex = s.lastIndexOf(separator);
+	    if (lastSeparatorIndex == -1) {
+	        filename = s;
+	    } else {
+	        filename = s.substring(lastSeparatorIndex + 1);
+	    }
+	
+	    // Remove the extension.
+	    var extensionIndex = filename.lastIndexOf(".");
+	    if (extensionIndex == -1)
+	        return filename;
+	
+	    return filename.substring(0, extensionIndex);
+	}
+	
+	private def void generateCMakeLists(String project_name, List<String> lst, IFileSystemAccess2 fsa) {
 		val pedsim_lib = "/usr/include/libpedsim";
 		fsa.generateFile('''«project_name»/CMakeLists.txt''', '''
 			cmake_minimum_required(VERSION 3.1)
@@ -32,6 +55,13 @@ class BmodGenerator implements IGenerator2 {
 			set(PEDSIM_LIB «pedsim_lib»)
 			
 			file(GLOB_RECURSE SRC ../simulation/*)
+			«IF !lst.empty»
+				list(APPEND SRC
+				«FOR elm: lst»
+					"«elm»"
+				«ENDFOR»
+				)
+			«ENDIF»
 			
 			add_executable(${PROJECT_NAME} main.cpp ${SRC})
 			target_include_directories(${PROJECT_NAME} PUBLIC ${PEDSIM_LIB})
@@ -95,41 +125,34 @@ class BmodGenerator implements IGenerator2 {
 			#include "simulation/floor.h"
 			#include "simulation/person.h"
 			
-			#include "simulation/targetters/experienced.h"
+			«FOR imp: floorplan.filter(Import)»
+				#include "«removeExtension(imp.importURI)»/targetters.h"
+			«ENDFOR»
 			
 			using namespace std;
 			using namespace simulation;
 			
 			Person* newAgent(Ped::Tscene* scene, double x, double y, const Floor& floor) {
 				Person* p = new Person(x, y, «scale / 2», floor);
-				p->registerTargetter(targetters::action_experienced);
 				scene->addAgent(p->get());
 				return p;
 			}
 			
-			void fireObstacle(Cell* cell, Ped::Tscene* scene, Ped::OutputWriter* ow) {
-				if(!cell->drawn) {
-					scene->addObstacle(new Ped::Tobstacle(cell->x, cell->y, cell->x + «scale», cell->y));
-					scene->addObstacle(new Ped::Tobstacle(cell->x, cell->y, cell->x, cell->y + «scale»));
-					scene->addObstacle(new Ped::Tobstacle(cell->x + «scale», cell->y, cell->x + «scale», cell->y + «scale»));
-					scene->addObstacle(new Ped::Tobstacle(cell->x, cell->y + «scale», cell->x + «scale», cell->y + «scale»));
-					
-					// prevent creating too much obstacles
-					cell->drawn = true;
-				}
-				// Draw cross
+			void drawLocation(Cell* cell, Ped::OutputWriter* ow, double red, double green, double blue) {
 				Ped::Tvector c1(cell->x, cell->y);
 				Ped::Tvector c2(cell->x + «scale», cell->y + «scale»);
 				Ped::Tvector c3(cell->x, cell->y + «scale»);
 				Ped::Tvector c4(cell->x + «scale», cell->y);
-				ow->drawLine(c1, c2, 1, 1, 0, 0);
-				ow->drawLine(c3, c4, 1, 1, 0, 0);
+				
+				// Draw cross
+				ow->drawLine(c1, c2, 1, red, green, blue);
+				ow->drawLine(c3, c4, 1, red, green, blue);
 			}
 			
 			
 			int main(int argc, char *argv[]) {
 				
-				cout << "# PedSim Example using libpedsim version " << Ped::LIBPEDSIM_VERSION << endl;
+				cout << "# PedSim Simulation of '«simpleClassName»' using libpedsim version " << Ped::LIBPEDSIM_VERSION << endl;
 				
 				// Setup
 				Ped::Tscene *pedscene = new Ped::Tscene();
@@ -142,6 +165,7 @@ class BmodGenerator implements IGenerator2 {
 				// Create floorplan
 				vector<pair<Cell*, Cell*>> obstacles;
 				Floor floor;
+				floor.scale = «scale»;
 				vector<Cell*> room;
 				«FOR room: floorplan.filter(Room)»
 					«FOR ob: Helper.getRoomObstacles(room, floor)»
@@ -152,6 +176,9 @@ class BmodGenerator implements IGenerator2 {
 						room.emplace_back(new Cell(«bounds.compX(cell.x) * scale», «bounds.compY(cell.y) * scale»));
 					«ENDFOR»
 					floor.rooms.emplace_back(room);
+					«IF room.hasCapacity»
+						floor.capacities.insert(std::make_pair<unsigned long, unsigned long>(«floorplan.filter(Room).toList.indexOf(room)», «room.capacity»));
+					«ENDIF»
 				«ENDFOR»
 				room = {};
 				for(const auto& obstacle: obstacles) {
@@ -160,29 +187,36 @@ class BmodGenerator implements IGenerator2 {
 				
 				// Set exits
 				«FOR exit: floorplan.filter(Exit)»
-					floor.setExit(«exit.location.x», «exit.location.y»);
+					floor.setExit(«bounds.compX(exit.location.x) * scale», «bounds.compY(exit.location.y) * scale»);
 				«ENDFOR»
 				
 				// Draw doors
-				«FOR door: floorplan.filter(Door)»
-					floor.doors.emplace_back(new Door(«bounds.compX(door.from.x)», «bounds.compY(door.from.y)», «bounds.compX(door.to.x)», «bounds.compY(door.to.y)»));
+				«FOR door: Helper.sortDoors(floor)»
+					floor.doors.emplace_back(new Door(«bounds.compX(door.from.x) * scale», «bounds.compY(door.from.y) * scale», «bounds.compX(door.to.x) * scale», «bounds.compY(door.to.y) * scale»));
 				«ENDFOR»
 				for(Door* door: floor.doors) {
 					door->draw(ow, «scale»);
 				}
 				
 				// Fire
-				vector<Cell*> fire;
 				«FOR fire: floorplan.filter(Fire)»
-					fire.emplace_back(new Cell(«bounds.compX(fire.location.x) * scale», «bounds.compY(fire.location.y) * scale»));
+					floor.at(«bounds.compX(fire.location.x) * scale», «bounds.compY(fire.location.y) * scale»)->onfire = true;
 				«ENDFOR»
-				for(auto f: fire) {
-					fireObstacle(f, pedscene, ow);
+				
+				for(const std::vector<Cell*>& room: floor.rooms) {
+					for(Cell* cell: room) {
+						if(cell->onfire) {
+							drawLocation(cell, ow, 1, 0, 0);
+						} else if(cell->exit) {
+							drawLocation(cell, ow, 0, 1, 0);
+						}
+					}
 				}
 				
-				// Create people (TODO: complicated logic needed for behaviour)
+				// Create people
 				«FOR person: floorplan.filter(Person)»
 					floor.people.emplace_back(newAgent(pedscene, «bounds.compX(person.location.x) * scale», «bounds.compY(person.location.y) * scale», floor));
+					floor.people.back()->registerTargetter(targetters::action_«person.action.name», targetters::action_«person.action.name»_shared);
 				«ENDFOR»
 				
 				// convenience
@@ -195,21 +229,23 @@ class BmodGenerator implements IGenerator2 {
 					{"Ignited Cells", "0"},
 					{"Burning (Percentage)", "0"},
 					{"Escaped People", "0"},
-					{"Escaped (Percentage)", "0"}
+					{"Death People", "0"},
+					{"Room Capacities Violated", "0"}
 				});
 				
 				// simulation loop
 				pedscene->moveAgents(0.4);
 				long int time = 0;
-				while(fire.size() < «floorcells») {
+				vector<Cell*> fire = floor.find([](const Cell* c) { return c->onfire; });
+				while(fire.size() < «floorcells» && floor.find([](const Person* p) { return p->isAlive() && !p->hasEscaped(); }).size() > 0) {
 					++time;
 					ow->writeTimeStep(time);
 					// Delay for next step
-					char c;
-					cin >> c;
-					// usleep(500*1000);
+					// char c;
+					// cin >> c;
+					usleep(500*1000);
 					
-					// Compute agent movement (TODO)
+					// Compute agent movement
 					for(Person* person: floor.people) {
 						person->target();
 					}
@@ -242,11 +278,18 @@ class BmodGenerator implements IGenerator2 {
 						}
 					}
 					for(auto f: to_add) {
-						// Ensure 1 tick per timestep
-						fire.emplace_back(f);
+						Cell* loc = floor.at(f->x, f->y);
+						loc->onfire = true;
+						fire.emplace_back(loc);
 					}
-					for(auto f: fire) {
-						fireObstacle(f, pedscene, ow);
+					for(const std::vector<Cell*>& room: floor.rooms) {
+						for(Cell* cell: room) {
+							if(cell->onfire) {
+								drawLocation(cell, ow, 1, 0, 0);
+							} else if(cell->exit) {
+								drawLocation(cell, ow, 0, 1, 0);
+							}
+						}
 					}
 					
 					for(Door* door: floor.doors) {
@@ -255,21 +298,30 @@ class BmodGenerator implements IGenerator2 {
 					
 					pedscene->moveAgents(0); //< Somehow this is necessary to draw all the obstacles correctly.
 					
-					// Metrics
-					ow->writeMetrics({
-						{"Timestep", std::to_string(time)},
-						{"Ignited Cells", std::to_string(fire.size())},
-						{"Burning (Percentage)", std::to_string((double)fire.size() / (double)«floorcells»)},
-						{"Escaped People", "0"},
-						{"Escaped (Percentage)", "0"}
-					});
-					
 					// Clear escaped persons
 					for(Person* p: floor.people) {
 						if(p->hasEscaped()) {
 							pedscene->removeAgent(p->get());
 						}
 					}
+					
+					// Check Capacities
+					int caps = 0;
+					for(const auto& cap: floor.capacities) {
+						if(floor.find([](const Person* p) { return p->isAlive() && !p->hasEscaped(); }, floor.rooms.at(cap.first).front()).size() > cap.second) {
+							++caps;
+						}
+					}
+					
+					// Metrics
+					ow->writeMetrics({
+						{"Timestep", std::to_string(time)},
+						{"Ignited Cells", std::to_string(fire.size())},
+						{"Burning (Percentage)", std::to_string((double)fire.size() / (double)«floorcells»)},
+						{"Escaped People", std::to_string(floor.people.size() - myagents.size())},
+						{"Death People", std::to_string(floor.people.size() - floor.find([](const Person* p) { return p->isAlive(); }).size())},
+						{"Room Capacities Violated", std::to_string(caps)}
+					});
 				}
 				
 				// cleanup
@@ -286,7 +338,12 @@ class BmodGenerator implements IGenerator2 {
 		''');
 		
 		generateSimulationLibrary(fsa);
-		generateCMakeLists(simpleClassName, fsa);
+		var lst = newArrayList();
+		for(imp: floorplan.filter(Import)) {
+			lst.add('''../«removeExtension(imp.importURI)»/targetters.h''');
+			lst.add('''../«removeExtension(imp.importURI)»/targetters.cpp''');
+		}
+		generateCMakeLists(simpleClassName, lst, fsa);
 	}
 
 //	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {

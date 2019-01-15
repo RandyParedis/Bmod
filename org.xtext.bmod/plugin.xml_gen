@@ -3,9 +3,9 @@
 <plugin>
 	<extension point="org.eclipse.emf.ecore.generated_package">
 		<package 
-			uri = "http://www.xtext.org/bmod/BmodXbase"
-			class = "org.xtext.bmod.bmodXbase.BmodXbasePackage"
-			genModel = "model/generated/BmodXbase.genmodel" />
+			uri = "http://www.xtext.org/bmod/BReact"
+			class = "org.xtext.bmod.breact.BreactPackage"
+			genModel = "model/generated/BReact.genmodel" />
 	</extension>
 	<extension point="org.eclipse.emf.ecore.generated_package">
 		<package 

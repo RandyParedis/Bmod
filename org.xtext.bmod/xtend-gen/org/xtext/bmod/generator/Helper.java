@@ -2,6 +2,7 @@ package org.xtext.bmod.generator;
 
 import com.google.common.base.Objects;
 import java.util.ArrayList;
+import java.util.Comparator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -120,10 +121,80 @@ public class Helper {
   public static EmergencySign getDoorSign(final Door door, final Floorplan fp) {
     EList<EmergencySign> _signs = fp.getSigns();
     for (final EmergencySign sign : _signs) {
-      Door _on = sign.getOn();
-      boolean _equals = Objects.equal(_on, door);
+      Door _from = sign.getFrom();
+      boolean _equals = Objects.equal(_from, door);
       if (_equals) {
         return sign;
+      }
+    }
+    return null;
+  }
+  
+  public static ArrayList<EmergencySign> getDoorSigns(final Door door, final Floorplan fp) {
+    ArrayList<EmergencySign> set = new ArrayList<EmergencySign>();
+    EList<EmergencySign> _signs = fp.getSigns();
+    for (final EmergencySign sign : _signs) {
+      Door _from = sign.getFrom();
+      boolean _equals = Objects.equal(_from, door);
+      if (_equals) {
+        set.add(sign);
+      }
+    }
+    return set;
+  }
+  
+  public static ArrayList<Door> chainDoors(final Door door, final Floorplan fp) {
+    ArrayList<Door> set = new ArrayList<Door>();
+    ArrayList<EmergencySign> queue = new ArrayList<EmergencySign>();
+    ArrayList<EmergencySign> _doorSigns = Helper.getDoorSigns(door, fp);
+    for (final EmergencySign s : _doorSigns) {
+      queue.add(s);
+    }
+    while ((!queue.isEmpty())) {
+      {
+        final EmergencySign current = queue.get(0);
+        queue.remove(0);
+        set.add(current.getRef().getTo());
+        ArrayList<EmergencySign> _doorSigns_1 = Helper.getDoorSigns(current.getRef().getTo(), fp);
+        for (final EmergencySign s_1 : _doorSigns_1) {
+          queue.add(s_1);
+        }
+      }
+    }
+    return set;
+  }
+  
+  public static ArrayList<Door> sortDoors(final Floorplan fp) {
+    final ArrayList<Door> doors = CollectionLiterals.<Door>newArrayList();
+    EList<Door> _doors = fp.getDoors();
+    for (final Door d : _doors) {
+      doors.add(d);
+    }
+    final Comparator<Door> _function = (Door a, Door b) -> {
+      final ArrayList<Door> chainA = Helper.chainDoors(a, fp);
+      final ArrayList<Door> chainB = Helper.chainDoors(b, fp);
+      boolean _contains = chainA.contains(b);
+      if (_contains) {
+        return (-1);
+      }
+      boolean _contains_1 = chainB.contains(a);
+      if (_contains_1) {
+        return 1;
+      }
+      return 0;
+    };
+    doors.sort(_function);
+    return doors;
+  }
+  
+  public static Room commonRoom(final Door d1, final Door d2, final Floorplan fp) {
+    EList<Room> _rooms = fp.getRooms();
+    for (final Room room : _rooms) {
+      {
+        final ArrayList<Coordinate> rc = Helper.getRoomCoords(room);
+        if (((((Helper.isIn(d1.getFrom(), rc) && Helper.isIn(d2.getFrom(), rc)) || (Helper.isIn(d1.getFrom(), rc) && Helper.isIn(d2.getTo(), rc))) || (Helper.isIn(d1.getTo(), rc) && Helper.isIn(d2.getFrom(), rc))) || (Helper.isIn(d1.getTo(), rc) && Helper.isIn(d2.getTo(), rc)))) {
+          return room;
+        }
       }
     }
     return null;

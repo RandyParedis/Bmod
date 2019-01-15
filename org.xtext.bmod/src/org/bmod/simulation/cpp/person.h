@@ -23,9 +23,10 @@ namespace simulation {
 		double getX() const { return m_x; }
 		double getY() const { return m_y; }
 		
-		bool hasEscaped() const { return m_escaped; } 
+		bool hasEscaped() const { return m_escaped; }
+		bool isAlive() const { return m_alive; }
 		
-		void registerTargetter(const TargetterFunc& func) { m_targetter = func; }
+		void registerTargetter(const TargetterFunc& func, bool shared = false) { m_targetter = func; m_shared = shared; }
 		void target();
 		
 	private:
@@ -34,11 +35,13 @@ namespace simulation {
 		double m_offset;
 		
 		bool m_escaped;
+		bool m_alive;
 		
 		Ped::Tagent* m_agent;
 		
 		TargetterFunc m_targetter;
 		Cell* m_target;
+		bool m_shared;
 		
 		const Floor& m_floor;
 	};

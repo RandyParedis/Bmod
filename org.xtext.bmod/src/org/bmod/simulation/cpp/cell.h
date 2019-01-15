@@ -15,11 +15,10 @@ namespace simulation {
 		int x;
 		int y;
 		bool onfire;
-		bool drawn;
 		
 		bool exit;
 		
-		Cell(int x, int y): x(x), y(y), onfire(false), drawn(false), exit(false) {}
+		Cell(int x, int y): x(x), y(y), onfire(false), exit(false) {}
 		
 		bool canSpread(Cell* target, const Floor& floor, const std::vector<Cell*>& fire, const std::vector<Cell*>& to_add);
 	};

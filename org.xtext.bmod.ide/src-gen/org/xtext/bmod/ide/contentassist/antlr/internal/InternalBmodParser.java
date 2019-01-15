@@ -1,4 +1,6 @@
 package org.xtext.bmod.ide.contentassist.antlr.internal;
+import java.util.Map;
+import java.util.HashMap;
 
 import java.io.InputStream;
 import org.eclipse.xtext.*;
@@ -22,43 +24,35 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBmodParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_VARNAME", "RULE_INT", "RULE_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'attentive'", "'relaxed'", "'optimistic'", "'sceptic'", "'newcomer'", "'experienced'", "'panic'", "'Room'", "'and'", "'Door'", "'from'", "'to'", "'PerceptionLevel'", "'ActionProfile'", "'Person'", "'in'", "':'", "','", "'Exit'", "'Fire'", "'Sign'", "'on'", "'Condition'", "'('", "')'", "'without'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "EmergencySign", "Without", "Person", "Import", "Door", "Exit", "Fire", "Room", "From", "And", "In", "To", "LeftParenthesis", "RightParenthesis", "Comma", "Colon", "LeftSquareBracket", "RightSquareBracket", "RULE_VARNAME", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
-    public static final int RULE_STRING=7;
-    public static final int RULE_SL_COMMENT=9;
-    public static final int T__19=19;
-    public static final int T__15=15;
-    public static final int T__37=37;
-    public static final int T__16=16;
-    public static final int T__17=17;
-    public static final int T__18=18;
-    public static final int T__33=33;
-    public static final int T__12=12;
-    public static final int T__34=34;
-    public static final int T__13=13;
-    public static final int T__35=35;
-    public static final int T__14=14;
-    public static final int T__36=36;
+    public static final int Import=7;
+    public static final int In=14;
+    public static final int RULE_STRING=25;
+    public static final int RULE_SL_COMMENT=27;
+    public static final int Comma=18;
+    public static final int LeftParenthesis=16;
+    public static final int Without=5;
+    public static final int To=15;
+    public static final int Colon=19;
     public static final int EOF=-1;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
-    public static final int RULE_VARNAME=4;
-    public static final int RULE_ID=6;
-    public static final int RULE_WS=10;
-    public static final int RULE_ANY_OTHER=11;
-    public static final int T__26=26;
-    public static final int T__27=27;
-    public static final int T__28=28;
-    public static final int RULE_INT=5;
-    public static final int T__29=29;
-    public static final int T__22=22;
-    public static final int RULE_ML_COMMENT=8;
-    public static final int T__23=23;
-    public static final int T__24=24;
-    public static final int T__25=25;
-    public static final int T__20=20;
-    public static final int T__21=21;
+    public static final int Room=11;
+    public static final int RightSquareBracket=21;
+    public static final int Exit=9;
+    public static final int RULE_VARNAME=22;
+    public static final int RULE_ID=23;
+    public static final int RULE_WS=28;
+    public static final int RightParenthesis=17;
+    public static final int From=12;
+    public static final int RULE_ANY_OTHER=29;
+    public static final int Door=8;
+    public static final int And=13;
+    public static final int RULE_INT=24;
+    public static final int Fire=10;
+    public static final int RULE_ML_COMMENT=26;
+    public static final int LeftSquareBracket=20;
+    public static final int Person=6;
+    public static final int EmergencySign=4;
 
     // delegates
     // delegators
@@ -74,10 +68,32 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         
 
     public String[] getTokenNames() { return InternalBmodParser.tokenNames; }
-    public String getGrammarFileName() { return "InternalBmod.g"; }
+    public String getGrammarFileName() { return "InternalBmodParser.g"; }
 
 
     	private BmodGrammarAccess grammarAccess;
+    	private final Map<String, String> tokenNameToValue = new HashMap<String, String>();
+    	
+    	{
+    		tokenNameToValue.put("LeftParenthesis", "'('");
+    		tokenNameToValue.put("RightParenthesis", "')'");
+    		tokenNameToValue.put("Comma", "','");
+    		tokenNameToValue.put("Colon", "':'");
+    		tokenNameToValue.put("LeftSquareBracket", "'['");
+    		tokenNameToValue.put("RightSquareBracket", "']'");
+    		tokenNameToValue.put("In", "'in'");
+    		tokenNameToValue.put("To", "'to'");
+    		tokenNameToValue.put("And", "'and'");
+    		tokenNameToValue.put("Door", "'Door'");
+    		tokenNameToValue.put("Exit", "'Exit'");
+    		tokenNameToValue.put("Fire", "'Fire'");
+    		tokenNameToValue.put("Room", "'Room'");
+    		tokenNameToValue.put("From", "'from'");
+    		tokenNameToValue.put("Person", "'Person'");
+    		tokenNameToValue.put("Import", "'import'");
+    		tokenNameToValue.put("Without", "'without'");
+    		tokenNameToValue.put("EmergencySign", "'EmergencySign'");
+    	}
 
     	public void setGrammarAccess(BmodGrammarAccess grammarAccess) {
     		this.grammarAccess = grammarAccess;
@@ -90,17 +106,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
     	@Override
     	protected String getValueForTokenName(String tokenName) {
-    		return tokenName;
+    		String result = tokenNameToValue.get(tokenName);
+    		if (result == null)
+    			result = tokenName;
+    		return result;
     	}
 
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalBmod.g:53:1: entryRuleModel : ruleModel EOF ;
+    // InternalBmodParser.g:73:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // InternalBmod.g:54:1: ( ruleModel EOF )
-            // InternalBmod.g:55:1: ruleModel EOF
+            // InternalBmodParser.g:74:1: ( ruleModel EOF )
+            // InternalBmodParser.g:75:1: ruleModel EOF
             {
              before(grammarAccess.getModelRule()); 
             pushFollow(FOLLOW_1);
@@ -126,17 +145,17 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleModel"
-    // InternalBmod.g:62:1: ruleModel : ( ruleFloorplan ) ;
+    // InternalBmodParser.g:82:1: ruleModel : ( ruleFloorplan ) ;
     public final void ruleModel() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:66:2: ( ( ruleFloorplan ) )
-            // InternalBmod.g:67:2: ( ruleFloorplan )
+            // InternalBmodParser.g:86:2: ( ( ruleFloorplan ) )
+            // InternalBmodParser.g:87:2: ( ruleFloorplan )
             {
-            // InternalBmod.g:67:2: ( ruleFloorplan )
-            // InternalBmod.g:68:3: ruleFloorplan
+            // InternalBmodParser.g:87:2: ( ruleFloorplan )
+            // InternalBmodParser.g:88:3: ruleFloorplan
             {
              before(grammarAccess.getModelAccess().getFloorplanParserRuleCall()); 
             pushFollow(FOLLOW_2);
@@ -167,11 +186,11 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleFloorplan"
-    // InternalBmod.g:78:1: entryRuleFloorplan : ruleFloorplan EOF ;
+    // InternalBmodParser.g:98:1: entryRuleFloorplan : ruleFloorplan EOF ;
     public final void entryRuleFloorplan() throws RecognitionException {
         try {
-            // InternalBmod.g:79:1: ( ruleFloorplan EOF )
-            // InternalBmod.g:80:1: ruleFloorplan EOF
+            // InternalBmodParser.g:99:1: ( ruleFloorplan EOF )
+            // InternalBmodParser.g:100:1: ruleFloorplan EOF
             {
              before(grammarAccess.getFloorplanRule()); 
             pushFollow(FOLLOW_1);
@@ -197,21 +216,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleFloorplan"
-    // InternalBmod.g:87:1: ruleFloorplan : ( ( rule__Floorplan__Group__0 ) ) ;
+    // InternalBmodParser.g:107:1: ruleFloorplan : ( ( rule__Floorplan__Group__0 ) ) ;
     public final void ruleFloorplan() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:91:2: ( ( ( rule__Floorplan__Group__0 ) ) )
-            // InternalBmod.g:92:2: ( ( rule__Floorplan__Group__0 ) )
+            // InternalBmodParser.g:111:2: ( ( ( rule__Floorplan__Group__0 ) ) )
+            // InternalBmodParser.g:112:2: ( ( rule__Floorplan__Group__0 ) )
             {
-            // InternalBmod.g:92:2: ( ( rule__Floorplan__Group__0 ) )
-            // InternalBmod.g:93:3: ( rule__Floorplan__Group__0 )
+            // InternalBmodParser.g:112:2: ( ( rule__Floorplan__Group__0 ) )
+            // InternalBmodParser.g:113:3: ( rule__Floorplan__Group__0 )
             {
              before(grammarAccess.getFloorplanAccess().getGroup()); 
-            // InternalBmod.g:94:3: ( rule__Floorplan__Group__0 )
-            // InternalBmod.g:94:4: rule__Floorplan__Group__0
+            // InternalBmodParser.g:114:3: ( rule__Floorplan__Group__0 )
+            // InternalBmodParser.g:114:4: rule__Floorplan__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__Floorplan__Group__0();
@@ -243,12 +262,89 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleFloorplan"
 
 
+    // $ANTLR start "entryRuleImport"
+    // InternalBmodParser.g:123:1: entryRuleImport : ruleImport EOF ;
+    public final void entryRuleImport() throws RecognitionException {
+        try {
+            // InternalBmodParser.g:124:1: ( ruleImport EOF )
+            // InternalBmodParser.g:125:1: ruleImport EOF
+            {
+             before(grammarAccess.getImportRule()); 
+            pushFollow(FOLLOW_1);
+            ruleImport();
+
+            state._fsp--;
+
+             after(grammarAccess.getImportRule()); 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "entryRuleImport"
+
+
+    // $ANTLR start "ruleImport"
+    // InternalBmodParser.g:132:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
+    public final void ruleImport() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:136:2: ( ( ( rule__Import__Group__0 ) ) )
+            // InternalBmodParser.g:137:2: ( ( rule__Import__Group__0 ) )
+            {
+            // InternalBmodParser.g:137:2: ( ( rule__Import__Group__0 ) )
+            // InternalBmodParser.g:138:3: ( rule__Import__Group__0 )
+            {
+             before(grammarAccess.getImportAccess().getGroup()); 
+            // InternalBmodParser.g:139:3: ( rule__Import__Group__0 )
+            // InternalBmodParser.g:139:4: rule__Import__Group__0
+            {
+            pushFollow(FOLLOW_2);
+            rule__Import__Group__0();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getImportAccess().getGroup()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "ruleImport"
+
+
     // $ANTLR start "entryRuleRoom"
-    // InternalBmod.g:103:1: entryRuleRoom : ruleRoom EOF ;
+    // InternalBmodParser.g:148:1: entryRuleRoom : ruleRoom EOF ;
     public final void entryRuleRoom() throws RecognitionException {
         try {
-            // InternalBmod.g:104:1: ( ruleRoom EOF )
-            // InternalBmod.g:105:1: ruleRoom EOF
+            // InternalBmodParser.g:149:1: ( ruleRoom EOF )
+            // InternalBmodParser.g:150:1: ruleRoom EOF
             {
              before(grammarAccess.getRoomRule()); 
             pushFollow(FOLLOW_1);
@@ -274,21 +370,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleRoom"
-    // InternalBmod.g:112:1: ruleRoom : ( ( rule__Room__Group__0 ) ) ;
+    // InternalBmodParser.g:157:1: ruleRoom : ( ( rule__Room__Group__0 ) ) ;
     public final void ruleRoom() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:116:2: ( ( ( rule__Room__Group__0 ) ) )
-            // InternalBmod.g:117:2: ( ( rule__Room__Group__0 ) )
+            // InternalBmodParser.g:161:2: ( ( ( rule__Room__Group__0 ) ) )
+            // InternalBmodParser.g:162:2: ( ( rule__Room__Group__0 ) )
             {
-            // InternalBmod.g:117:2: ( ( rule__Room__Group__0 ) )
-            // InternalBmod.g:118:3: ( rule__Room__Group__0 )
+            // InternalBmodParser.g:162:2: ( ( rule__Room__Group__0 ) )
+            // InternalBmodParser.g:163:3: ( rule__Room__Group__0 )
             {
              before(grammarAccess.getRoomAccess().getGroup()); 
-            // InternalBmod.g:119:3: ( rule__Room__Group__0 )
-            // InternalBmod.g:119:4: rule__Room__Group__0
+            // InternalBmodParser.g:164:3: ( rule__Room__Group__0 )
+            // InternalBmodParser.g:164:4: rule__Room__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__Room__Group__0();
@@ -321,11 +417,11 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleDoor"
-    // InternalBmod.g:128:1: entryRuleDoor : ruleDoor EOF ;
+    // InternalBmodParser.g:173:1: entryRuleDoor : ruleDoor EOF ;
     public final void entryRuleDoor() throws RecognitionException {
         try {
-            // InternalBmod.g:129:1: ( ruleDoor EOF )
-            // InternalBmod.g:130:1: ruleDoor EOF
+            // InternalBmodParser.g:174:1: ( ruleDoor EOF )
+            // InternalBmodParser.g:175:1: ruleDoor EOF
             {
              before(grammarAccess.getDoorRule()); 
             pushFollow(FOLLOW_1);
@@ -351,21 +447,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleDoor"
-    // InternalBmod.g:137:1: ruleDoor : ( ( rule__Door__Group__0 ) ) ;
+    // InternalBmodParser.g:182:1: ruleDoor : ( ( rule__Door__Group__0 ) ) ;
     public final void ruleDoor() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:141:2: ( ( ( rule__Door__Group__0 ) ) )
-            // InternalBmod.g:142:2: ( ( rule__Door__Group__0 ) )
+            // InternalBmodParser.g:186:2: ( ( ( rule__Door__Group__0 ) ) )
+            // InternalBmodParser.g:187:2: ( ( rule__Door__Group__0 ) )
             {
-            // InternalBmod.g:142:2: ( ( rule__Door__Group__0 ) )
-            // InternalBmod.g:143:3: ( rule__Door__Group__0 )
+            // InternalBmodParser.g:187:2: ( ( rule__Door__Group__0 ) )
+            // InternalBmodParser.g:188:3: ( rule__Door__Group__0 )
             {
              before(grammarAccess.getDoorAccess().getGroup()); 
-            // InternalBmod.g:144:3: ( rule__Door__Group__0 )
-            // InternalBmod.g:144:4: rule__Door__Group__0
+            // InternalBmodParser.g:189:3: ( rule__Door__Group__0 )
+            // InternalBmodParser.g:189:4: rule__Door__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__Door__Group__0();
@@ -397,320 +493,12 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleDoor"
 
 
-    // $ANTLR start "entryRulePerception"
-    // InternalBmod.g:153:1: entryRulePerception : rulePerception EOF ;
-    public final void entryRulePerception() throws RecognitionException {
-        try {
-            // InternalBmod.g:154:1: ( rulePerception EOF )
-            // InternalBmod.g:155:1: rulePerception EOF
-            {
-             before(grammarAccess.getPerceptionRule()); 
-            pushFollow(FOLLOW_1);
-            rulePerception();
-
-            state._fsp--;
-
-             after(grammarAccess.getPerceptionRule()); 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end "entryRulePerception"
-
-
-    // $ANTLR start "rulePerception"
-    // InternalBmod.g:162:1: rulePerception : ( ( rule__Perception__Alternatives ) ) ;
-    public final void rulePerception() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:166:2: ( ( ( rule__Perception__Alternatives ) ) )
-            // InternalBmod.g:167:2: ( ( rule__Perception__Alternatives ) )
-            {
-            // InternalBmod.g:167:2: ( ( rule__Perception__Alternatives ) )
-            // InternalBmod.g:168:3: ( rule__Perception__Alternatives )
-            {
-             before(grammarAccess.getPerceptionAccess().getAlternatives()); 
-            // InternalBmod.g:169:3: ( rule__Perception__Alternatives )
-            // InternalBmod.g:169:4: rule__Perception__Alternatives
-            {
-            pushFollow(FOLLOW_2);
-            rule__Perception__Alternatives();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getPerceptionAccess().getAlternatives()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rulePerception"
-
-
-    // $ANTLR start "entryRuleAction"
-    // InternalBmod.g:178:1: entryRuleAction : ruleAction EOF ;
-    public final void entryRuleAction() throws RecognitionException {
-        try {
-            // InternalBmod.g:179:1: ( ruleAction EOF )
-            // InternalBmod.g:180:1: ruleAction EOF
-            {
-             before(grammarAccess.getActionRule()); 
-            pushFollow(FOLLOW_1);
-            ruleAction();
-
-            state._fsp--;
-
-             after(grammarAccess.getActionRule()); 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end "entryRuleAction"
-
-
-    // $ANTLR start "ruleAction"
-    // InternalBmod.g:187:1: ruleAction : ( ( rule__Action__Alternatives ) ) ;
-    public final void ruleAction() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:191:2: ( ( ( rule__Action__Alternatives ) ) )
-            // InternalBmod.g:192:2: ( ( rule__Action__Alternatives ) )
-            {
-            // InternalBmod.g:192:2: ( ( rule__Action__Alternatives ) )
-            // InternalBmod.g:193:3: ( rule__Action__Alternatives )
-            {
-             before(grammarAccess.getActionAccess().getAlternatives()); 
-            // InternalBmod.g:194:3: ( rule__Action__Alternatives )
-            // InternalBmod.g:194:4: rule__Action__Alternatives
-            {
-            pushFollow(FOLLOW_2);
-            rule__Action__Alternatives();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getActionAccess().getAlternatives()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "ruleAction"
-
-
-    // $ANTLR start "entryRulePerceptionLevel"
-    // InternalBmod.g:203:1: entryRulePerceptionLevel : rulePerceptionLevel EOF ;
-    public final void entryRulePerceptionLevel() throws RecognitionException {
-        try {
-            // InternalBmod.g:204:1: ( rulePerceptionLevel EOF )
-            // InternalBmod.g:205:1: rulePerceptionLevel EOF
-            {
-             before(grammarAccess.getPerceptionLevelRule()); 
-            pushFollow(FOLLOW_1);
-            rulePerceptionLevel();
-
-            state._fsp--;
-
-             after(grammarAccess.getPerceptionLevelRule()); 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end "entryRulePerceptionLevel"
-
-
-    // $ANTLR start "rulePerceptionLevel"
-    // InternalBmod.g:212:1: rulePerceptionLevel : ( ( rule__PerceptionLevel__Group__0 ) ) ;
-    public final void rulePerceptionLevel() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:216:2: ( ( ( rule__PerceptionLevel__Group__0 ) ) )
-            // InternalBmod.g:217:2: ( ( rule__PerceptionLevel__Group__0 ) )
-            {
-            // InternalBmod.g:217:2: ( ( rule__PerceptionLevel__Group__0 ) )
-            // InternalBmod.g:218:3: ( rule__PerceptionLevel__Group__0 )
-            {
-             before(grammarAccess.getPerceptionLevelAccess().getGroup()); 
-            // InternalBmod.g:219:3: ( rule__PerceptionLevel__Group__0 )
-            // InternalBmod.g:219:4: rule__PerceptionLevel__Group__0
-            {
-            pushFollow(FOLLOW_2);
-            rule__PerceptionLevel__Group__0();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getPerceptionLevelAccess().getGroup()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rulePerceptionLevel"
-
-
-    // $ANTLR start "entryRuleActionProfile"
-    // InternalBmod.g:228:1: entryRuleActionProfile : ruleActionProfile EOF ;
-    public final void entryRuleActionProfile() throws RecognitionException {
-        try {
-            // InternalBmod.g:229:1: ( ruleActionProfile EOF )
-            // InternalBmod.g:230:1: ruleActionProfile EOF
-            {
-             before(grammarAccess.getActionProfileRule()); 
-            pushFollow(FOLLOW_1);
-            ruleActionProfile();
-
-            state._fsp--;
-
-             after(grammarAccess.getActionProfileRule()); 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end "entryRuleActionProfile"
-
-
-    // $ANTLR start "ruleActionProfile"
-    // InternalBmod.g:237:1: ruleActionProfile : ( ( rule__ActionProfile__Group__0 ) ) ;
-    public final void ruleActionProfile() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:241:2: ( ( ( rule__ActionProfile__Group__0 ) ) )
-            // InternalBmod.g:242:2: ( ( rule__ActionProfile__Group__0 ) )
-            {
-            // InternalBmod.g:242:2: ( ( rule__ActionProfile__Group__0 ) )
-            // InternalBmod.g:243:3: ( rule__ActionProfile__Group__0 )
-            {
-             before(grammarAccess.getActionProfileAccess().getGroup()); 
-            // InternalBmod.g:244:3: ( rule__ActionProfile__Group__0 )
-            // InternalBmod.g:244:4: rule__ActionProfile__Group__0
-            {
-            pushFollow(FOLLOW_2);
-            rule__ActionProfile__Group__0();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getActionProfileAccess().getGroup()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "ruleActionProfile"
-
-
     // $ANTLR start "entryRulePerson"
-    // InternalBmod.g:253:1: entryRulePerson : rulePerson EOF ;
+    // InternalBmodParser.g:198:1: entryRulePerson : rulePerson EOF ;
     public final void entryRulePerson() throws RecognitionException {
         try {
-            // InternalBmod.g:254:1: ( rulePerson EOF )
-            // InternalBmod.g:255:1: rulePerson EOF
+            // InternalBmodParser.g:199:1: ( rulePerson EOF )
+            // InternalBmodParser.g:200:1: rulePerson EOF
             {
              before(grammarAccess.getPersonRule()); 
             pushFollow(FOLLOW_1);
@@ -736,21 +524,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rulePerson"
-    // InternalBmod.g:262:1: rulePerson : ( ( rule__Person__Group__0 ) ) ;
+    // InternalBmodParser.g:207:1: rulePerson : ( ( rule__Person__Group__0 ) ) ;
     public final void rulePerson() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:266:2: ( ( ( rule__Person__Group__0 ) ) )
-            // InternalBmod.g:267:2: ( ( rule__Person__Group__0 ) )
+            // InternalBmodParser.g:211:2: ( ( ( rule__Person__Group__0 ) ) )
+            // InternalBmodParser.g:212:2: ( ( rule__Person__Group__0 ) )
             {
-            // InternalBmod.g:267:2: ( ( rule__Person__Group__0 ) )
-            // InternalBmod.g:268:3: ( rule__Person__Group__0 )
+            // InternalBmodParser.g:212:2: ( ( rule__Person__Group__0 ) )
+            // InternalBmodParser.g:213:3: ( rule__Person__Group__0 )
             {
              before(grammarAccess.getPersonAccess().getGroup()); 
-            // InternalBmod.g:269:3: ( rule__Person__Group__0 )
-            // InternalBmod.g:269:4: rule__Person__Group__0
+            // InternalBmodParser.g:214:3: ( rule__Person__Group__0 )
+            // InternalBmodParser.g:214:4: rule__Person__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__Person__Group__0();
@@ -783,11 +571,11 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleExit"
-    // InternalBmod.g:278:1: entryRuleExit : ruleExit EOF ;
+    // InternalBmodParser.g:223:1: entryRuleExit : ruleExit EOF ;
     public final void entryRuleExit() throws RecognitionException {
         try {
-            // InternalBmod.g:279:1: ( ruleExit EOF )
-            // InternalBmod.g:280:1: ruleExit EOF
+            // InternalBmodParser.g:224:1: ( ruleExit EOF )
+            // InternalBmodParser.g:225:1: ruleExit EOF
             {
              before(grammarAccess.getExitRule()); 
             pushFollow(FOLLOW_1);
@@ -813,21 +601,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleExit"
-    // InternalBmod.g:287:1: ruleExit : ( ( rule__Exit__Group__0 ) ) ;
+    // InternalBmodParser.g:232:1: ruleExit : ( ( rule__Exit__Group__0 ) ) ;
     public final void ruleExit() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:291:2: ( ( ( rule__Exit__Group__0 ) ) )
-            // InternalBmod.g:292:2: ( ( rule__Exit__Group__0 ) )
+            // InternalBmodParser.g:236:2: ( ( ( rule__Exit__Group__0 ) ) )
+            // InternalBmodParser.g:237:2: ( ( rule__Exit__Group__0 ) )
             {
-            // InternalBmod.g:292:2: ( ( rule__Exit__Group__0 ) )
-            // InternalBmod.g:293:3: ( rule__Exit__Group__0 )
+            // InternalBmodParser.g:237:2: ( ( rule__Exit__Group__0 ) )
+            // InternalBmodParser.g:238:3: ( rule__Exit__Group__0 )
             {
              before(grammarAccess.getExitAccess().getGroup()); 
-            // InternalBmod.g:294:3: ( rule__Exit__Group__0 )
-            // InternalBmod.g:294:4: rule__Exit__Group__0
+            // InternalBmodParser.g:239:3: ( rule__Exit__Group__0 )
+            // InternalBmodParser.g:239:4: rule__Exit__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__Exit__Group__0();
@@ -860,11 +648,11 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleFire"
-    // InternalBmod.g:303:1: entryRuleFire : ruleFire EOF ;
+    // InternalBmodParser.g:248:1: entryRuleFire : ruleFire EOF ;
     public final void entryRuleFire() throws RecognitionException {
         try {
-            // InternalBmod.g:304:1: ( ruleFire EOF )
-            // InternalBmod.g:305:1: ruleFire EOF
+            // InternalBmodParser.g:249:1: ( ruleFire EOF )
+            // InternalBmodParser.g:250:1: ruleFire EOF
             {
              before(grammarAccess.getFireRule()); 
             pushFollow(FOLLOW_1);
@@ -890,21 +678,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleFire"
-    // InternalBmod.g:312:1: ruleFire : ( ( rule__Fire__Group__0 ) ) ;
+    // InternalBmodParser.g:257:1: ruleFire : ( ( rule__Fire__Group__0 ) ) ;
     public final void ruleFire() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:316:2: ( ( ( rule__Fire__Group__0 ) ) )
-            // InternalBmod.g:317:2: ( ( rule__Fire__Group__0 ) )
+            // InternalBmodParser.g:261:2: ( ( ( rule__Fire__Group__0 ) ) )
+            // InternalBmodParser.g:262:2: ( ( rule__Fire__Group__0 ) )
             {
-            // InternalBmod.g:317:2: ( ( rule__Fire__Group__0 ) )
-            // InternalBmod.g:318:3: ( rule__Fire__Group__0 )
+            // InternalBmodParser.g:262:2: ( ( rule__Fire__Group__0 ) )
+            // InternalBmodParser.g:263:3: ( rule__Fire__Group__0 )
             {
              before(grammarAccess.getFireAccess().getGroup()); 
-            // InternalBmod.g:319:3: ( rule__Fire__Group__0 )
-            // InternalBmod.g:319:4: rule__Fire__Group__0
+            // InternalBmodParser.g:264:3: ( rule__Fire__Group__0 )
+            // InternalBmodParser.g:264:4: rule__Fire__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__Fire__Group__0();
@@ -937,11 +725,11 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleEmergencySign"
-    // InternalBmod.g:328:1: entryRuleEmergencySign : ruleEmergencySign EOF ;
+    // InternalBmodParser.g:273:1: entryRuleEmergencySign : ruleEmergencySign EOF ;
     public final void entryRuleEmergencySign() throws RecognitionException {
         try {
-            // InternalBmod.g:329:1: ( ruleEmergencySign EOF )
-            // InternalBmod.g:330:1: ruleEmergencySign EOF
+            // InternalBmodParser.g:274:1: ( ruleEmergencySign EOF )
+            // InternalBmodParser.g:275:1: ruleEmergencySign EOF
             {
              before(grammarAccess.getEmergencySignRule()); 
             pushFollow(FOLLOW_1);
@@ -967,21 +755,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleEmergencySign"
-    // InternalBmod.g:337:1: ruleEmergencySign : ( ( rule__EmergencySign__Group__0 ) ) ;
+    // InternalBmodParser.g:282:1: ruleEmergencySign : ( ( rule__EmergencySign__Group__0 ) ) ;
     public final void ruleEmergencySign() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:341:2: ( ( ( rule__EmergencySign__Group__0 ) ) )
-            // InternalBmod.g:342:2: ( ( rule__EmergencySign__Group__0 ) )
+            // InternalBmodParser.g:286:2: ( ( ( rule__EmergencySign__Group__0 ) ) )
+            // InternalBmodParser.g:287:2: ( ( rule__EmergencySign__Group__0 ) )
             {
-            // InternalBmod.g:342:2: ( ( rule__EmergencySign__Group__0 ) )
-            // InternalBmod.g:343:3: ( rule__EmergencySign__Group__0 )
+            // InternalBmodParser.g:287:2: ( ( rule__EmergencySign__Group__0 ) )
+            // InternalBmodParser.g:288:3: ( rule__EmergencySign__Group__0 )
             {
              before(grammarAccess.getEmergencySignAccess().getGroup()); 
-            // InternalBmod.g:344:3: ( rule__EmergencySign__Group__0 )
-            // InternalBmod.g:344:4: rule__EmergencySign__Group__0
+            // InternalBmodParser.g:289:3: ( rule__EmergencySign__Group__0 )
+            // InternalBmodParser.g:289:4: rule__EmergencySign__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__EmergencySign__Group__0();
@@ -1014,11 +802,11 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleDoorRef"
-    // InternalBmod.g:353:1: entryRuleDoorRef : ruleDoorRef EOF ;
+    // InternalBmodParser.g:298:1: entryRuleDoorRef : ruleDoorRef EOF ;
     public final void entryRuleDoorRef() throws RecognitionException {
         try {
-            // InternalBmod.g:354:1: ( ruleDoorRef EOF )
-            // InternalBmod.g:355:1: ruleDoorRef EOF
+            // InternalBmodParser.g:299:1: ( ruleDoorRef EOF )
+            // InternalBmodParser.g:300:1: ruleDoorRef EOF
             {
              before(grammarAccess.getDoorRefRule()); 
             pushFollow(FOLLOW_1);
@@ -1044,21 +832,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleDoorRef"
-    // InternalBmod.g:362:1: ruleDoorRef : ( ( rule__DoorRef__Group__0 ) ) ;
+    // InternalBmodParser.g:307:1: ruleDoorRef : ( ( rule__DoorRef__Group__0 ) ) ;
     public final void ruleDoorRef() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:366:2: ( ( ( rule__DoorRef__Group__0 ) ) )
-            // InternalBmod.g:367:2: ( ( rule__DoorRef__Group__0 ) )
+            // InternalBmodParser.g:311:2: ( ( ( rule__DoorRef__Group__0 ) ) )
+            // InternalBmodParser.g:312:2: ( ( rule__DoorRef__Group__0 ) )
             {
-            // InternalBmod.g:367:2: ( ( rule__DoorRef__Group__0 ) )
-            // InternalBmod.g:368:3: ( rule__DoorRef__Group__0 )
+            // InternalBmodParser.g:312:2: ( ( rule__DoorRef__Group__0 ) )
+            // InternalBmodParser.g:313:3: ( rule__DoorRef__Group__0 )
             {
              before(grammarAccess.getDoorRefAccess().getGroup()); 
-            // InternalBmod.g:369:3: ( rule__DoorRef__Group__0 )
-            // InternalBmod.g:369:4: rule__DoorRef__Group__0
+            // InternalBmodParser.g:314:3: ( rule__DoorRef__Group__0 )
+            // InternalBmodParser.g:314:4: rule__DoorRef__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__DoorRef__Group__0();
@@ -1090,89 +878,12 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleDoorRef"
 
 
-    // $ANTLR start "entryRuleDangerousCondition"
-    // InternalBmod.g:378:1: entryRuleDangerousCondition : ruleDangerousCondition EOF ;
-    public final void entryRuleDangerousCondition() throws RecognitionException {
-        try {
-            // InternalBmod.g:379:1: ( ruleDangerousCondition EOF )
-            // InternalBmod.g:380:1: ruleDangerousCondition EOF
-            {
-             before(grammarAccess.getDangerousConditionRule()); 
-            pushFollow(FOLLOW_1);
-            ruleDangerousCondition();
-
-            state._fsp--;
-
-             after(grammarAccess.getDangerousConditionRule()); 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end "entryRuleDangerousCondition"
-
-
-    // $ANTLR start "ruleDangerousCondition"
-    // InternalBmod.g:387:1: ruleDangerousCondition : ( ( rule__DangerousCondition__Group__0 ) ) ;
-    public final void ruleDangerousCondition() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:391:2: ( ( ( rule__DangerousCondition__Group__0 ) ) )
-            // InternalBmod.g:392:2: ( ( rule__DangerousCondition__Group__0 ) )
-            {
-            // InternalBmod.g:392:2: ( ( rule__DangerousCondition__Group__0 ) )
-            // InternalBmod.g:393:3: ( rule__DangerousCondition__Group__0 )
-            {
-             before(grammarAccess.getDangerousConditionAccess().getGroup()); 
-            // InternalBmod.g:394:3: ( rule__DangerousCondition__Group__0 )
-            // InternalBmod.g:394:4: rule__DangerousCondition__Group__0
-            {
-            pushFollow(FOLLOW_2);
-            rule__DangerousCondition__Group__0();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getDangerousConditionAccess().getGroup()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "ruleDangerousCondition"
-
-
     // $ANTLR start "entryRuleCoordinate"
-    // InternalBmod.g:403:1: entryRuleCoordinate : ruleCoordinate EOF ;
+    // InternalBmodParser.g:323:1: entryRuleCoordinate : ruleCoordinate EOF ;
     public final void entryRuleCoordinate() throws RecognitionException {
         try {
-            // InternalBmod.g:404:1: ( ruleCoordinate EOF )
-            // InternalBmod.g:405:1: ruleCoordinate EOF
+            // InternalBmodParser.g:324:1: ( ruleCoordinate EOF )
+            // InternalBmodParser.g:325:1: ruleCoordinate EOF
             {
              before(grammarAccess.getCoordinateRule()); 
             pushFollow(FOLLOW_1);
@@ -1198,21 +909,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleCoordinate"
-    // InternalBmod.g:412:1: ruleCoordinate : ( ( rule__Coordinate__Group__0 ) ) ;
+    // InternalBmodParser.g:332:1: ruleCoordinate : ( ( rule__Coordinate__Group__0 ) ) ;
     public final void ruleCoordinate() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:416:2: ( ( ( rule__Coordinate__Group__0 ) ) )
-            // InternalBmod.g:417:2: ( ( rule__Coordinate__Group__0 ) )
+            // InternalBmodParser.g:336:2: ( ( ( rule__Coordinate__Group__0 ) ) )
+            // InternalBmodParser.g:337:2: ( ( rule__Coordinate__Group__0 ) )
             {
-            // InternalBmod.g:417:2: ( ( rule__Coordinate__Group__0 ) )
-            // InternalBmod.g:418:3: ( rule__Coordinate__Group__0 )
+            // InternalBmodParser.g:337:2: ( ( rule__Coordinate__Group__0 ) )
+            // InternalBmodParser.g:338:3: ( rule__Coordinate__Group__0 )
             {
              before(grammarAccess.getCoordinateAccess().getGroup()); 
-            // InternalBmod.g:419:3: ( rule__Coordinate__Group__0 )
-            // InternalBmod.g:419:4: rule__Coordinate__Group__0
+            // InternalBmodParser.g:339:3: ( rule__Coordinate__Group__0 )
+            // InternalBmodParser.g:339:4: rule__Coordinate__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__Coordinate__Group__0();
@@ -1245,11 +956,11 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleArea"
-    // InternalBmod.g:428:1: entryRuleArea : ruleArea EOF ;
+    // InternalBmodParser.g:348:1: entryRuleArea : ruleArea EOF ;
     public final void entryRuleArea() throws RecognitionException {
         try {
-            // InternalBmod.g:429:1: ( ruleArea EOF )
-            // InternalBmod.g:430:1: ruleArea EOF
+            // InternalBmodParser.g:349:1: ( ruleArea EOF )
+            // InternalBmodParser.g:350:1: ruleArea EOF
             {
              before(grammarAccess.getAreaRule()); 
             pushFollow(FOLLOW_1);
@@ -1275,21 +986,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleArea"
-    // InternalBmod.g:437:1: ruleArea : ( ( rule__Area__Group__0 ) ) ;
+    // InternalBmodParser.g:357:1: ruleArea : ( ( rule__Area__Group__0 ) ) ;
     public final void ruleArea() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:441:2: ( ( ( rule__Area__Group__0 ) ) )
-            // InternalBmod.g:442:2: ( ( rule__Area__Group__0 ) )
+            // InternalBmodParser.g:361:2: ( ( ( rule__Area__Group__0 ) ) )
+            // InternalBmodParser.g:362:2: ( ( rule__Area__Group__0 ) )
             {
-            // InternalBmod.g:442:2: ( ( rule__Area__Group__0 ) )
-            // InternalBmod.g:443:3: ( rule__Area__Group__0 )
+            // InternalBmodParser.g:362:2: ( ( rule__Area__Group__0 ) )
+            // InternalBmodParser.g:363:3: ( rule__Area__Group__0 )
             {
              before(grammarAccess.getAreaAccess().getGroup()); 
-            // InternalBmod.g:444:3: ( rule__Area__Group__0 )
-            // InternalBmod.g:444:4: rule__Area__Group__0
+            // InternalBmodParser.g:364:3: ( rule__Area__Group__0 )
+            // InternalBmodParser.g:364:4: rule__Area__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__Area__Group__0();
@@ -1321,153 +1032,44 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleArea"
 
 
-    // $ANTLR start "rulePerceptionEnum"
-    // InternalBmod.g:453:1: rulePerceptionEnum : ( ( rule__PerceptionEnum__Alternatives ) ) ;
-    public final void rulePerceptionEnum() throws RecognitionException {
+    // $ANTLR start "rule__Floorplan__Alternatives_2"
+    // InternalBmodParser.g:372:1: rule__Floorplan__Alternatives_2 : ( ( ( rule__Floorplan__RoomsAssignment_2_0 ) ) | ( ( rule__Floorplan__DoorsAssignment_2_1 ) ) | ( ( rule__Floorplan__PersonsAssignment_2_2 ) ) | ( ( rule__Floorplan__ExitsAssignment_2_3 ) ) | ( ( rule__Floorplan__FiresAssignment_2_4 ) ) | ( ( rule__Floorplan__SignsAssignment_2_5 ) ) );
+    public final void rule__Floorplan__Alternatives_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:457:1: ( ( ( rule__PerceptionEnum__Alternatives ) ) )
-            // InternalBmod.g:458:2: ( ( rule__PerceptionEnum__Alternatives ) )
-            {
-            // InternalBmod.g:458:2: ( ( rule__PerceptionEnum__Alternatives ) )
-            // InternalBmod.g:459:3: ( rule__PerceptionEnum__Alternatives )
-            {
-             before(grammarAccess.getPerceptionEnumAccess().getAlternatives()); 
-            // InternalBmod.g:460:3: ( rule__PerceptionEnum__Alternatives )
-            // InternalBmod.g:460:4: rule__PerceptionEnum__Alternatives
-            {
-            pushFollow(FOLLOW_2);
-            rule__PerceptionEnum__Alternatives();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getPerceptionEnumAccess().getAlternatives()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rulePerceptionEnum"
-
-
-    // $ANTLR start "ruleActionEnum"
-    // InternalBmod.g:469:1: ruleActionEnum : ( ( rule__ActionEnum__Alternatives ) ) ;
-    public final void ruleActionEnum() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:473:1: ( ( ( rule__ActionEnum__Alternatives ) ) )
-            // InternalBmod.g:474:2: ( ( rule__ActionEnum__Alternatives ) )
-            {
-            // InternalBmod.g:474:2: ( ( rule__ActionEnum__Alternatives ) )
-            // InternalBmod.g:475:3: ( rule__ActionEnum__Alternatives )
-            {
-             before(grammarAccess.getActionEnumAccess().getAlternatives()); 
-            // InternalBmod.g:476:3: ( rule__ActionEnum__Alternatives )
-            // InternalBmod.g:476:4: rule__ActionEnum__Alternatives
-            {
-            pushFollow(FOLLOW_2);
-            rule__ActionEnum__Alternatives();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getActionEnumAccess().getAlternatives()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "ruleActionEnum"
-
-
-    // $ANTLR start "rule__Floorplan__Alternatives_1"
-    // InternalBmod.g:484:1: rule__Floorplan__Alternatives_1 : ( ( ( rule__Floorplan__PerceptionsAssignment_1_0 ) ) | ( ( rule__Floorplan__ActionsAssignment_1_1 ) ) | ( ( rule__Floorplan__RoomsAssignment_1_2 ) ) | ( ( rule__Floorplan__DoorsAssignment_1_3 ) ) | ( ( rule__Floorplan__PersonsAssignment_1_4 ) ) | ( ( rule__Floorplan__ExitsAssignment_1_5 ) ) | ( ( rule__Floorplan__FiresAssignment_1_6 ) ) | ( ( rule__Floorplan__SignsAssignment_1_7 ) ) | ( ( rule__Floorplan__DanconsAssignment_1_8 ) ) );
-    public final void rule__Floorplan__Alternatives_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:488:1: ( ( ( rule__Floorplan__PerceptionsAssignment_1_0 ) ) | ( ( rule__Floorplan__ActionsAssignment_1_1 ) ) | ( ( rule__Floorplan__RoomsAssignment_1_2 ) ) | ( ( rule__Floorplan__DoorsAssignment_1_3 ) ) | ( ( rule__Floorplan__PersonsAssignment_1_4 ) ) | ( ( rule__Floorplan__ExitsAssignment_1_5 ) ) | ( ( rule__Floorplan__FiresAssignment_1_6 ) ) | ( ( rule__Floorplan__SignsAssignment_1_7 ) ) | ( ( rule__Floorplan__DanconsAssignment_1_8 ) ) )
-            int alt1=9;
+            // InternalBmodParser.g:376:1: ( ( ( rule__Floorplan__RoomsAssignment_2_0 ) ) | ( ( rule__Floorplan__DoorsAssignment_2_1 ) ) | ( ( rule__Floorplan__PersonsAssignment_2_2 ) ) | ( ( rule__Floorplan__ExitsAssignment_2_3 ) ) | ( ( rule__Floorplan__FiresAssignment_2_4 ) ) | ( ( rule__Floorplan__SignsAssignment_2_5 ) ) )
+            int alt1=6;
             switch ( input.LA(1) ) {
-            case 24:
+            case Room:
                 {
                 alt1=1;
                 }
                 break;
-            case 25:
+            case Door:
                 {
                 alt1=2;
                 }
                 break;
-            case 19:
+            case Person:
                 {
                 alt1=3;
                 }
                 break;
-            case 21:
+            case Exit:
                 {
                 alt1=4;
                 }
                 break;
-            case 26:
+            case Fire:
                 {
                 alt1=5;
                 }
                 break;
-            case 30:
+            case EmergencySign:
                 {
                 alt1=6;
-                }
-                break;
-            case 31:
-                {
-                alt1=7;
-                }
-                break;
-            case 32:
-                {
-                alt1=8;
-                }
-                break;
-            case 34:
-                {
-                alt1=9;
                 }
                 break;
             default:
@@ -1479,24 +1081,24 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
             switch (alt1) {
                 case 1 :
-                    // InternalBmod.g:489:2: ( ( rule__Floorplan__PerceptionsAssignment_1_0 ) )
+                    // InternalBmodParser.g:377:2: ( ( rule__Floorplan__RoomsAssignment_2_0 ) )
                     {
-                    // InternalBmod.g:489:2: ( ( rule__Floorplan__PerceptionsAssignment_1_0 ) )
-                    // InternalBmod.g:490:3: ( rule__Floorplan__PerceptionsAssignment_1_0 )
+                    // InternalBmodParser.g:377:2: ( ( rule__Floorplan__RoomsAssignment_2_0 ) )
+                    // InternalBmodParser.g:378:3: ( rule__Floorplan__RoomsAssignment_2_0 )
                     {
-                     before(grammarAccess.getFloorplanAccess().getPerceptionsAssignment_1_0()); 
-                    // InternalBmod.g:491:3: ( rule__Floorplan__PerceptionsAssignment_1_0 )
-                    // InternalBmod.g:491:4: rule__Floorplan__PerceptionsAssignment_1_0
+                     before(grammarAccess.getFloorplanAccess().getRoomsAssignment_2_0()); 
+                    // InternalBmodParser.g:379:3: ( rule__Floorplan__RoomsAssignment_2_0 )
+                    // InternalBmodParser.g:379:4: rule__Floorplan__RoomsAssignment_2_0
                     {
                     pushFollow(FOLLOW_2);
-                    rule__Floorplan__PerceptionsAssignment_1_0();
+                    rule__Floorplan__RoomsAssignment_2_0();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getFloorplanAccess().getPerceptionsAssignment_1_0()); 
+                     after(grammarAccess.getFloorplanAccess().getRoomsAssignment_2_0()); 
 
                     }
 
@@ -1504,24 +1106,24 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalBmod.g:495:2: ( ( rule__Floorplan__ActionsAssignment_1_1 ) )
+                    // InternalBmodParser.g:383:2: ( ( rule__Floorplan__DoorsAssignment_2_1 ) )
                     {
-                    // InternalBmod.g:495:2: ( ( rule__Floorplan__ActionsAssignment_1_1 ) )
-                    // InternalBmod.g:496:3: ( rule__Floorplan__ActionsAssignment_1_1 )
+                    // InternalBmodParser.g:383:2: ( ( rule__Floorplan__DoorsAssignment_2_1 ) )
+                    // InternalBmodParser.g:384:3: ( rule__Floorplan__DoorsAssignment_2_1 )
                     {
-                     before(grammarAccess.getFloorplanAccess().getActionsAssignment_1_1()); 
-                    // InternalBmod.g:497:3: ( rule__Floorplan__ActionsAssignment_1_1 )
-                    // InternalBmod.g:497:4: rule__Floorplan__ActionsAssignment_1_1
+                     before(grammarAccess.getFloorplanAccess().getDoorsAssignment_2_1()); 
+                    // InternalBmodParser.g:385:3: ( rule__Floorplan__DoorsAssignment_2_1 )
+                    // InternalBmodParser.g:385:4: rule__Floorplan__DoorsAssignment_2_1
                     {
                     pushFollow(FOLLOW_2);
-                    rule__Floorplan__ActionsAssignment_1_1();
+                    rule__Floorplan__DoorsAssignment_2_1();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getFloorplanAccess().getActionsAssignment_1_1()); 
+                     after(grammarAccess.getFloorplanAccess().getDoorsAssignment_2_1()); 
 
                     }
 
@@ -1529,24 +1131,24 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // InternalBmod.g:501:2: ( ( rule__Floorplan__RoomsAssignment_1_2 ) )
+                    // InternalBmodParser.g:389:2: ( ( rule__Floorplan__PersonsAssignment_2_2 ) )
                     {
-                    // InternalBmod.g:501:2: ( ( rule__Floorplan__RoomsAssignment_1_2 ) )
-                    // InternalBmod.g:502:3: ( rule__Floorplan__RoomsAssignment_1_2 )
+                    // InternalBmodParser.g:389:2: ( ( rule__Floorplan__PersonsAssignment_2_2 ) )
+                    // InternalBmodParser.g:390:3: ( rule__Floorplan__PersonsAssignment_2_2 )
                     {
-                     before(grammarAccess.getFloorplanAccess().getRoomsAssignment_1_2()); 
-                    // InternalBmod.g:503:3: ( rule__Floorplan__RoomsAssignment_1_2 )
-                    // InternalBmod.g:503:4: rule__Floorplan__RoomsAssignment_1_2
+                     before(grammarAccess.getFloorplanAccess().getPersonsAssignment_2_2()); 
+                    // InternalBmodParser.g:391:3: ( rule__Floorplan__PersonsAssignment_2_2 )
+                    // InternalBmodParser.g:391:4: rule__Floorplan__PersonsAssignment_2_2
                     {
                     pushFollow(FOLLOW_2);
-                    rule__Floorplan__RoomsAssignment_1_2();
+                    rule__Floorplan__PersonsAssignment_2_2();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getFloorplanAccess().getRoomsAssignment_1_2()); 
+                     after(grammarAccess.getFloorplanAccess().getPersonsAssignment_2_2()); 
 
                     }
 
@@ -1554,24 +1156,24 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 4 :
-                    // InternalBmod.g:507:2: ( ( rule__Floorplan__DoorsAssignment_1_3 ) )
+                    // InternalBmodParser.g:395:2: ( ( rule__Floorplan__ExitsAssignment_2_3 ) )
                     {
-                    // InternalBmod.g:507:2: ( ( rule__Floorplan__DoorsAssignment_1_3 ) )
-                    // InternalBmod.g:508:3: ( rule__Floorplan__DoorsAssignment_1_3 )
+                    // InternalBmodParser.g:395:2: ( ( rule__Floorplan__ExitsAssignment_2_3 ) )
+                    // InternalBmodParser.g:396:3: ( rule__Floorplan__ExitsAssignment_2_3 )
                     {
-                     before(grammarAccess.getFloorplanAccess().getDoorsAssignment_1_3()); 
-                    // InternalBmod.g:509:3: ( rule__Floorplan__DoorsAssignment_1_3 )
-                    // InternalBmod.g:509:4: rule__Floorplan__DoorsAssignment_1_3
+                     before(grammarAccess.getFloorplanAccess().getExitsAssignment_2_3()); 
+                    // InternalBmodParser.g:397:3: ( rule__Floorplan__ExitsAssignment_2_3 )
+                    // InternalBmodParser.g:397:4: rule__Floorplan__ExitsAssignment_2_3
                     {
                     pushFollow(FOLLOW_2);
-                    rule__Floorplan__DoorsAssignment_1_3();
+                    rule__Floorplan__ExitsAssignment_2_3();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getFloorplanAccess().getDoorsAssignment_1_3()); 
+                     after(grammarAccess.getFloorplanAccess().getExitsAssignment_2_3()); 
 
                     }
 
@@ -1579,24 +1181,24 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 5 :
-                    // InternalBmod.g:513:2: ( ( rule__Floorplan__PersonsAssignment_1_4 ) )
+                    // InternalBmodParser.g:401:2: ( ( rule__Floorplan__FiresAssignment_2_4 ) )
                     {
-                    // InternalBmod.g:513:2: ( ( rule__Floorplan__PersonsAssignment_1_4 ) )
-                    // InternalBmod.g:514:3: ( rule__Floorplan__PersonsAssignment_1_4 )
+                    // InternalBmodParser.g:401:2: ( ( rule__Floorplan__FiresAssignment_2_4 ) )
+                    // InternalBmodParser.g:402:3: ( rule__Floorplan__FiresAssignment_2_4 )
                     {
-                     before(grammarAccess.getFloorplanAccess().getPersonsAssignment_1_4()); 
-                    // InternalBmod.g:515:3: ( rule__Floorplan__PersonsAssignment_1_4 )
-                    // InternalBmod.g:515:4: rule__Floorplan__PersonsAssignment_1_4
+                     before(grammarAccess.getFloorplanAccess().getFiresAssignment_2_4()); 
+                    // InternalBmodParser.g:403:3: ( rule__Floorplan__FiresAssignment_2_4 )
+                    // InternalBmodParser.g:403:4: rule__Floorplan__FiresAssignment_2_4
                     {
                     pushFollow(FOLLOW_2);
-                    rule__Floorplan__PersonsAssignment_1_4();
+                    rule__Floorplan__FiresAssignment_2_4();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getFloorplanAccess().getPersonsAssignment_1_4()); 
+                     after(grammarAccess.getFloorplanAccess().getFiresAssignment_2_4()); 
 
                     }
 
@@ -1604,99 +1206,24 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 6 :
-                    // InternalBmod.g:519:2: ( ( rule__Floorplan__ExitsAssignment_1_5 ) )
+                    // InternalBmodParser.g:407:2: ( ( rule__Floorplan__SignsAssignment_2_5 ) )
                     {
-                    // InternalBmod.g:519:2: ( ( rule__Floorplan__ExitsAssignment_1_5 ) )
-                    // InternalBmod.g:520:3: ( rule__Floorplan__ExitsAssignment_1_5 )
+                    // InternalBmodParser.g:407:2: ( ( rule__Floorplan__SignsAssignment_2_5 ) )
+                    // InternalBmodParser.g:408:3: ( rule__Floorplan__SignsAssignment_2_5 )
                     {
-                     before(grammarAccess.getFloorplanAccess().getExitsAssignment_1_5()); 
-                    // InternalBmod.g:521:3: ( rule__Floorplan__ExitsAssignment_1_5 )
-                    // InternalBmod.g:521:4: rule__Floorplan__ExitsAssignment_1_5
+                     before(grammarAccess.getFloorplanAccess().getSignsAssignment_2_5()); 
+                    // InternalBmodParser.g:409:3: ( rule__Floorplan__SignsAssignment_2_5 )
+                    // InternalBmodParser.g:409:4: rule__Floorplan__SignsAssignment_2_5
                     {
                     pushFollow(FOLLOW_2);
-                    rule__Floorplan__ExitsAssignment_1_5();
+                    rule__Floorplan__SignsAssignment_2_5();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getFloorplanAccess().getExitsAssignment_1_5()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 7 :
-                    // InternalBmod.g:525:2: ( ( rule__Floorplan__FiresAssignment_1_6 ) )
-                    {
-                    // InternalBmod.g:525:2: ( ( rule__Floorplan__FiresAssignment_1_6 ) )
-                    // InternalBmod.g:526:3: ( rule__Floorplan__FiresAssignment_1_6 )
-                    {
-                     before(grammarAccess.getFloorplanAccess().getFiresAssignment_1_6()); 
-                    // InternalBmod.g:527:3: ( rule__Floorplan__FiresAssignment_1_6 )
-                    // InternalBmod.g:527:4: rule__Floorplan__FiresAssignment_1_6
-                    {
-                    pushFollow(FOLLOW_2);
-                    rule__Floorplan__FiresAssignment_1_6();
-
-                    state._fsp--;
-
-
-                    }
-
-                     after(grammarAccess.getFloorplanAccess().getFiresAssignment_1_6()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 8 :
-                    // InternalBmod.g:531:2: ( ( rule__Floorplan__SignsAssignment_1_7 ) )
-                    {
-                    // InternalBmod.g:531:2: ( ( rule__Floorplan__SignsAssignment_1_7 ) )
-                    // InternalBmod.g:532:3: ( rule__Floorplan__SignsAssignment_1_7 )
-                    {
-                     before(grammarAccess.getFloorplanAccess().getSignsAssignment_1_7()); 
-                    // InternalBmod.g:533:3: ( rule__Floorplan__SignsAssignment_1_7 )
-                    // InternalBmod.g:533:4: rule__Floorplan__SignsAssignment_1_7
-                    {
-                    pushFollow(FOLLOW_2);
-                    rule__Floorplan__SignsAssignment_1_7();
-
-                    state._fsp--;
-
-
-                    }
-
-                     after(grammarAccess.getFloorplanAccess().getSignsAssignment_1_7()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 9 :
-                    // InternalBmod.g:537:2: ( ( rule__Floorplan__DanconsAssignment_1_8 ) )
-                    {
-                    // InternalBmod.g:537:2: ( ( rule__Floorplan__DanconsAssignment_1_8 ) )
-                    // InternalBmod.g:538:3: ( rule__Floorplan__DanconsAssignment_1_8 )
-                    {
-                     before(grammarAccess.getFloorplanAccess().getDanconsAssignment_1_8()); 
-                    // InternalBmod.g:539:3: ( rule__Floorplan__DanconsAssignment_1_8 )
-                    // InternalBmod.g:539:4: rule__Floorplan__DanconsAssignment_1_8
-                    {
-                    pushFollow(FOLLOW_2);
-                    rule__Floorplan__DanconsAssignment_1_8();
-
-                    state._fsp--;
-
-
-                    }
-
-                     after(grammarAccess.getFloorplanAccess().getDanconsAssignment_1_8()); 
+                     after(grammarAccess.getFloorplanAccess().getSignsAssignment_2_5()); 
 
                     }
 
@@ -1717,452 +1244,18 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Floorplan__Alternatives_1"
-
-
-    // $ANTLR start "rule__Perception__Alternatives"
-    // InternalBmod.g:547:1: rule__Perception__Alternatives : ( ( ( rule__Perception__ExistingAssignment_0 ) ) | ( ( rule__Perception__CustomAssignment_1 ) ) );
-    public final void rule__Perception__Alternatives() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:551:1: ( ( ( rule__Perception__ExistingAssignment_0 ) ) | ( ( rule__Perception__CustomAssignment_1 ) ) )
-            int alt2=2;
-            int LA2_0 = input.LA(1);
-
-            if ( ((LA2_0>=12 && LA2_0<=15)) ) {
-                alt2=1;
-            }
-            else if ( (LA2_0==RULE_VARNAME) ) {
-                alt2=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 2, 0, input);
-
-                throw nvae;
-            }
-            switch (alt2) {
-                case 1 :
-                    // InternalBmod.g:552:2: ( ( rule__Perception__ExistingAssignment_0 ) )
-                    {
-                    // InternalBmod.g:552:2: ( ( rule__Perception__ExistingAssignment_0 ) )
-                    // InternalBmod.g:553:3: ( rule__Perception__ExistingAssignment_0 )
-                    {
-                     before(grammarAccess.getPerceptionAccess().getExistingAssignment_0()); 
-                    // InternalBmod.g:554:3: ( rule__Perception__ExistingAssignment_0 )
-                    // InternalBmod.g:554:4: rule__Perception__ExistingAssignment_0
-                    {
-                    pushFollow(FOLLOW_2);
-                    rule__Perception__ExistingAssignment_0();
-
-                    state._fsp--;
-
-
-                    }
-
-                     after(grammarAccess.getPerceptionAccess().getExistingAssignment_0()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // InternalBmod.g:558:2: ( ( rule__Perception__CustomAssignment_1 ) )
-                    {
-                    // InternalBmod.g:558:2: ( ( rule__Perception__CustomAssignment_1 ) )
-                    // InternalBmod.g:559:3: ( rule__Perception__CustomAssignment_1 )
-                    {
-                     before(grammarAccess.getPerceptionAccess().getCustomAssignment_1()); 
-                    // InternalBmod.g:560:3: ( rule__Perception__CustomAssignment_1 )
-                    // InternalBmod.g:560:4: rule__Perception__CustomAssignment_1
-                    {
-                    pushFollow(FOLLOW_2);
-                    rule__Perception__CustomAssignment_1();
-
-                    state._fsp--;
-
-
-                    }
-
-                     after(grammarAccess.getPerceptionAccess().getCustomAssignment_1()); 
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Perception__Alternatives"
-
-
-    // $ANTLR start "rule__Action__Alternatives"
-    // InternalBmod.g:568:1: rule__Action__Alternatives : ( ( ( rule__Action__ExistingAssignment_0 ) ) | ( ( rule__Action__CustomAssignment_1 ) ) );
-    public final void rule__Action__Alternatives() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:572:1: ( ( ( rule__Action__ExistingAssignment_0 ) ) | ( ( rule__Action__CustomAssignment_1 ) ) )
-            int alt3=2;
-            int LA3_0 = input.LA(1);
-
-            if ( ((LA3_0>=16 && LA3_0<=18)) ) {
-                alt3=1;
-            }
-            else if ( (LA3_0==RULE_VARNAME) ) {
-                alt3=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 3, 0, input);
-
-                throw nvae;
-            }
-            switch (alt3) {
-                case 1 :
-                    // InternalBmod.g:573:2: ( ( rule__Action__ExistingAssignment_0 ) )
-                    {
-                    // InternalBmod.g:573:2: ( ( rule__Action__ExistingAssignment_0 ) )
-                    // InternalBmod.g:574:3: ( rule__Action__ExistingAssignment_0 )
-                    {
-                     before(grammarAccess.getActionAccess().getExistingAssignment_0()); 
-                    // InternalBmod.g:575:3: ( rule__Action__ExistingAssignment_0 )
-                    // InternalBmod.g:575:4: rule__Action__ExistingAssignment_0
-                    {
-                    pushFollow(FOLLOW_2);
-                    rule__Action__ExistingAssignment_0();
-
-                    state._fsp--;
-
-
-                    }
-
-                     after(grammarAccess.getActionAccess().getExistingAssignment_0()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // InternalBmod.g:579:2: ( ( rule__Action__CustomAssignment_1 ) )
-                    {
-                    // InternalBmod.g:579:2: ( ( rule__Action__CustomAssignment_1 ) )
-                    // InternalBmod.g:580:3: ( rule__Action__CustomAssignment_1 )
-                    {
-                     before(grammarAccess.getActionAccess().getCustomAssignment_1()); 
-                    // InternalBmod.g:581:3: ( rule__Action__CustomAssignment_1 )
-                    // InternalBmod.g:581:4: rule__Action__CustomAssignment_1
-                    {
-                    pushFollow(FOLLOW_2);
-                    rule__Action__CustomAssignment_1();
-
-                    state._fsp--;
-
-
-                    }
-
-                     after(grammarAccess.getActionAccess().getCustomAssignment_1()); 
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Action__Alternatives"
-
-
-    // $ANTLR start "rule__PerceptionEnum__Alternatives"
-    // InternalBmod.g:589:1: rule__PerceptionEnum__Alternatives : ( ( ( 'attentive' ) ) | ( ( 'relaxed' ) ) | ( ( 'optimistic' ) ) | ( ( 'sceptic' ) ) );
-    public final void rule__PerceptionEnum__Alternatives() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:593:1: ( ( ( 'attentive' ) ) | ( ( 'relaxed' ) ) | ( ( 'optimistic' ) ) | ( ( 'sceptic' ) ) )
-            int alt4=4;
-            switch ( input.LA(1) ) {
-            case 12:
-                {
-                alt4=1;
-                }
-                break;
-            case 13:
-                {
-                alt4=2;
-                }
-                break;
-            case 14:
-                {
-                alt4=3;
-                }
-                break;
-            case 15:
-                {
-                alt4=4;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 4, 0, input);
-
-                throw nvae;
-            }
-
-            switch (alt4) {
-                case 1 :
-                    // InternalBmod.g:594:2: ( ( 'attentive' ) )
-                    {
-                    // InternalBmod.g:594:2: ( ( 'attentive' ) )
-                    // InternalBmod.g:595:3: ( 'attentive' )
-                    {
-                     before(grammarAccess.getPerceptionEnumAccess().getAttentiveEnumLiteralDeclaration_0()); 
-                    // InternalBmod.g:596:3: ( 'attentive' )
-                    // InternalBmod.g:596:4: 'attentive'
-                    {
-                    match(input,12,FOLLOW_2); 
-
-                    }
-
-                     after(grammarAccess.getPerceptionEnumAccess().getAttentiveEnumLiteralDeclaration_0()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // InternalBmod.g:600:2: ( ( 'relaxed' ) )
-                    {
-                    // InternalBmod.g:600:2: ( ( 'relaxed' ) )
-                    // InternalBmod.g:601:3: ( 'relaxed' )
-                    {
-                     before(grammarAccess.getPerceptionEnumAccess().getRelaxedEnumLiteralDeclaration_1()); 
-                    // InternalBmod.g:602:3: ( 'relaxed' )
-                    // InternalBmod.g:602:4: 'relaxed'
-                    {
-                    match(input,13,FOLLOW_2); 
-
-                    }
-
-                     after(grammarAccess.getPerceptionEnumAccess().getRelaxedEnumLiteralDeclaration_1()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 3 :
-                    // InternalBmod.g:606:2: ( ( 'optimistic' ) )
-                    {
-                    // InternalBmod.g:606:2: ( ( 'optimistic' ) )
-                    // InternalBmod.g:607:3: ( 'optimistic' )
-                    {
-                     before(grammarAccess.getPerceptionEnumAccess().getOptimisticEnumLiteralDeclaration_2()); 
-                    // InternalBmod.g:608:3: ( 'optimistic' )
-                    // InternalBmod.g:608:4: 'optimistic'
-                    {
-                    match(input,14,FOLLOW_2); 
-
-                    }
-
-                     after(grammarAccess.getPerceptionEnumAccess().getOptimisticEnumLiteralDeclaration_2()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 4 :
-                    // InternalBmod.g:612:2: ( ( 'sceptic' ) )
-                    {
-                    // InternalBmod.g:612:2: ( ( 'sceptic' ) )
-                    // InternalBmod.g:613:3: ( 'sceptic' )
-                    {
-                     before(grammarAccess.getPerceptionEnumAccess().getScepticEnumLiteralDeclaration_3()); 
-                    // InternalBmod.g:614:3: ( 'sceptic' )
-                    // InternalBmod.g:614:4: 'sceptic'
-                    {
-                    match(input,15,FOLLOW_2); 
-
-                    }
-
-                     after(grammarAccess.getPerceptionEnumAccess().getScepticEnumLiteralDeclaration_3()); 
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__PerceptionEnum__Alternatives"
-
-
-    // $ANTLR start "rule__ActionEnum__Alternatives"
-    // InternalBmod.g:622:1: rule__ActionEnum__Alternatives : ( ( ( 'newcomer' ) ) | ( ( 'experienced' ) ) | ( ( 'panic' ) ) );
-    public final void rule__ActionEnum__Alternatives() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:626:1: ( ( ( 'newcomer' ) ) | ( ( 'experienced' ) ) | ( ( 'panic' ) ) )
-            int alt5=3;
-            switch ( input.LA(1) ) {
-            case 16:
-                {
-                alt5=1;
-                }
-                break;
-            case 17:
-                {
-                alt5=2;
-                }
-                break;
-            case 18:
-                {
-                alt5=3;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 5, 0, input);
-
-                throw nvae;
-            }
-
-            switch (alt5) {
-                case 1 :
-                    // InternalBmod.g:627:2: ( ( 'newcomer' ) )
-                    {
-                    // InternalBmod.g:627:2: ( ( 'newcomer' ) )
-                    // InternalBmod.g:628:3: ( 'newcomer' )
-                    {
-                     before(grammarAccess.getActionEnumAccess().getNewcomerEnumLiteralDeclaration_0()); 
-                    // InternalBmod.g:629:3: ( 'newcomer' )
-                    // InternalBmod.g:629:4: 'newcomer'
-                    {
-                    match(input,16,FOLLOW_2); 
-
-                    }
-
-                     after(grammarAccess.getActionEnumAccess().getNewcomerEnumLiteralDeclaration_0()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // InternalBmod.g:633:2: ( ( 'experienced' ) )
-                    {
-                    // InternalBmod.g:633:2: ( ( 'experienced' ) )
-                    // InternalBmod.g:634:3: ( 'experienced' )
-                    {
-                     before(grammarAccess.getActionEnumAccess().getExperiencedEnumLiteralDeclaration_1()); 
-                    // InternalBmod.g:635:3: ( 'experienced' )
-                    // InternalBmod.g:635:4: 'experienced'
-                    {
-                    match(input,17,FOLLOW_2); 
-
-                    }
-
-                     after(grammarAccess.getActionEnumAccess().getExperiencedEnumLiteralDeclaration_1()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 3 :
-                    // InternalBmod.g:639:2: ( ( 'panic' ) )
-                    {
-                    // InternalBmod.g:639:2: ( ( 'panic' ) )
-                    // InternalBmod.g:640:3: ( 'panic' )
-                    {
-                     before(grammarAccess.getActionEnumAccess().getPanicEnumLiteralDeclaration_2()); 
-                    // InternalBmod.g:641:3: ( 'panic' )
-                    // InternalBmod.g:641:4: 'panic'
-                    {
-                    match(input,18,FOLLOW_2); 
-
-                    }
-
-                     after(grammarAccess.getActionEnumAccess().getPanicEnumLiteralDeclaration_2()); 
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ActionEnum__Alternatives"
+    // $ANTLR end "rule__Floorplan__Alternatives_2"
 
 
     // $ANTLR start "rule__Floorplan__Group__0"
-    // InternalBmod.g:649:1: rule__Floorplan__Group__0 : rule__Floorplan__Group__0__Impl rule__Floorplan__Group__1 ;
+    // InternalBmodParser.g:417:1: rule__Floorplan__Group__0 : rule__Floorplan__Group__0__Impl rule__Floorplan__Group__1 ;
     public final void rule__Floorplan__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:653:1: ( rule__Floorplan__Group__0__Impl rule__Floorplan__Group__1 )
-            // InternalBmod.g:654:2: rule__Floorplan__Group__0__Impl rule__Floorplan__Group__1
+            // InternalBmodParser.g:421:1: ( rule__Floorplan__Group__0__Impl rule__Floorplan__Group__1 )
+            // InternalBmodParser.g:422:2: rule__Floorplan__Group__0__Impl rule__Floorplan__Group__1
             {
             pushFollow(FOLLOW_3);
             rule__Floorplan__Group__0__Impl();
@@ -2193,21 +1286,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Floorplan__Group__0__Impl"
-    // InternalBmod.g:661:1: rule__Floorplan__Group__0__Impl : ( () ) ;
+    // InternalBmodParser.g:429:1: rule__Floorplan__Group__0__Impl : ( () ) ;
     public final void rule__Floorplan__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:665:1: ( ( () ) )
-            // InternalBmod.g:666:1: ( () )
+            // InternalBmodParser.g:433:1: ( ( () ) )
+            // InternalBmodParser.g:434:1: ( () )
             {
-            // InternalBmod.g:666:1: ( () )
-            // InternalBmod.g:667:2: ()
+            // InternalBmodParser.g:434:1: ( () )
+            // InternalBmodParser.g:435:2: ()
             {
              before(grammarAccess.getFloorplanAccess().getFloorplanAction_0()); 
-            // InternalBmod.g:668:2: ()
-            // InternalBmod.g:668:3: 
+            // InternalBmodParser.g:436:2: ()
+            // InternalBmodParser.g:436:3: 
             {
             }
 
@@ -2230,17 +1323,22 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Floorplan__Group__1"
-    // InternalBmod.g:676:1: rule__Floorplan__Group__1 : rule__Floorplan__Group__1__Impl ;
+    // InternalBmodParser.g:444:1: rule__Floorplan__Group__1 : rule__Floorplan__Group__1__Impl rule__Floorplan__Group__2 ;
     public final void rule__Floorplan__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:680:1: ( rule__Floorplan__Group__1__Impl )
-            // InternalBmod.g:681:2: rule__Floorplan__Group__1__Impl
+            // InternalBmodParser.g:448:1: ( rule__Floorplan__Group__1__Impl rule__Floorplan__Group__2 )
+            // InternalBmodParser.g:449:2: rule__Floorplan__Group__1__Impl rule__Floorplan__Group__2
             {
-            pushFollow(FOLLOW_2);
+            pushFollow(FOLLOW_3);
             rule__Floorplan__Group__1__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__Floorplan__Group__2();
 
             state._fsp--;
 
@@ -2263,36 +1361,36 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Floorplan__Group__1__Impl"
-    // InternalBmod.g:687:1: rule__Floorplan__Group__1__Impl : ( ( rule__Floorplan__Alternatives_1 )* ) ;
+    // InternalBmodParser.g:456:1: rule__Floorplan__Group__1__Impl : ( ( rule__Floorplan__ImportsAssignment_1 )* ) ;
     public final void rule__Floorplan__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:691:1: ( ( ( rule__Floorplan__Alternatives_1 )* ) )
-            // InternalBmod.g:692:1: ( ( rule__Floorplan__Alternatives_1 )* )
+            // InternalBmodParser.g:460:1: ( ( ( rule__Floorplan__ImportsAssignment_1 )* ) )
+            // InternalBmodParser.g:461:1: ( ( rule__Floorplan__ImportsAssignment_1 )* )
             {
-            // InternalBmod.g:692:1: ( ( rule__Floorplan__Alternatives_1 )* )
-            // InternalBmod.g:693:2: ( rule__Floorplan__Alternatives_1 )*
+            // InternalBmodParser.g:461:1: ( ( rule__Floorplan__ImportsAssignment_1 )* )
+            // InternalBmodParser.g:462:2: ( rule__Floorplan__ImportsAssignment_1 )*
             {
-             before(grammarAccess.getFloorplanAccess().getAlternatives_1()); 
-            // InternalBmod.g:694:2: ( rule__Floorplan__Alternatives_1 )*
-            loop6:
+             before(grammarAccess.getFloorplanAccess().getImportsAssignment_1()); 
+            // InternalBmodParser.g:463:2: ( rule__Floorplan__ImportsAssignment_1 )*
+            loop2:
             do {
-                int alt6=2;
-                int LA6_0 = input.LA(1);
+                int alt2=2;
+                int LA2_0 = input.LA(1);
 
-                if ( (LA6_0==19||LA6_0==21||(LA6_0>=24 && LA6_0<=26)||(LA6_0>=30 && LA6_0<=32)||LA6_0==34) ) {
-                    alt6=1;
+                if ( (LA2_0==Import) ) {
+                    alt2=1;
                 }
 
 
-                switch (alt6) {
+                switch (alt2) {
             	case 1 :
-            	    // InternalBmod.g:694:3: rule__Floorplan__Alternatives_1
+            	    // InternalBmodParser.g:463:3: rule__Floorplan__ImportsAssignment_1
             	    {
             	    pushFollow(FOLLOW_4);
-            	    rule__Floorplan__Alternatives_1();
+            	    rule__Floorplan__ImportsAssignment_1();
 
             	    state._fsp--;
 
@@ -2301,11 +1399,11 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop6;
+            	    break loop2;
                 }
             } while (true);
 
-             after(grammarAccess.getFloorplanAccess().getAlternatives_1()); 
+             after(grammarAccess.getFloorplanAccess().getImportsAssignment_1()); 
 
             }
 
@@ -2327,17 +1425,270 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Floorplan__Group__1__Impl"
 
 
+    // $ANTLR start "rule__Floorplan__Group__2"
+    // InternalBmodParser.g:471:1: rule__Floorplan__Group__2 : rule__Floorplan__Group__2__Impl ;
+    public final void rule__Floorplan__Group__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:475:1: ( rule__Floorplan__Group__2__Impl )
+            // InternalBmodParser.g:476:2: rule__Floorplan__Group__2__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__Floorplan__Group__2__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Floorplan__Group__2"
+
+
+    // $ANTLR start "rule__Floorplan__Group__2__Impl"
+    // InternalBmodParser.g:482:1: rule__Floorplan__Group__2__Impl : ( ( rule__Floorplan__Alternatives_2 )* ) ;
+    public final void rule__Floorplan__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:486:1: ( ( ( rule__Floorplan__Alternatives_2 )* ) )
+            // InternalBmodParser.g:487:1: ( ( rule__Floorplan__Alternatives_2 )* )
+            {
+            // InternalBmodParser.g:487:1: ( ( rule__Floorplan__Alternatives_2 )* )
+            // InternalBmodParser.g:488:2: ( rule__Floorplan__Alternatives_2 )*
+            {
+             before(grammarAccess.getFloorplanAccess().getAlternatives_2()); 
+            // InternalBmodParser.g:489:2: ( rule__Floorplan__Alternatives_2 )*
+            loop3:
+            do {
+                int alt3=2;
+                int LA3_0 = input.LA(1);
+
+                if ( (LA3_0==EmergencySign||LA3_0==Person||(LA3_0>=Door && LA3_0<=Room)) ) {
+                    alt3=1;
+                }
+
+
+                switch (alt3) {
+            	case 1 :
+            	    // InternalBmodParser.g:489:3: rule__Floorplan__Alternatives_2
+            	    {
+            	    pushFollow(FOLLOW_5);
+            	    rule__Floorplan__Alternatives_2();
+
+            	    state._fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop3;
+                }
+            } while (true);
+
+             after(grammarAccess.getFloorplanAccess().getAlternatives_2()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Floorplan__Group__2__Impl"
+
+
+    // $ANTLR start "rule__Import__Group__0"
+    // InternalBmodParser.g:498:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
+    public final void rule__Import__Group__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:502:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
+            // InternalBmodParser.g:503:2: rule__Import__Group__0__Impl rule__Import__Group__1
+            {
+            pushFollow(FOLLOW_6);
+            rule__Import__Group__0__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__Import__Group__1();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group__0"
+
+
+    // $ANTLR start "rule__Import__Group__0__Impl"
+    // InternalBmodParser.g:510:1: rule__Import__Group__0__Impl : ( Import ) ;
+    public final void rule__Import__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:514:1: ( ( Import ) )
+            // InternalBmodParser.g:515:1: ( Import )
+            {
+            // InternalBmodParser.g:515:1: ( Import )
+            // InternalBmodParser.g:516:2: Import
+            {
+             before(grammarAccess.getImportAccess().getImportKeyword_0()); 
+            match(input,Import,FOLLOW_2); 
+             after(grammarAccess.getImportAccess().getImportKeyword_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group__0__Impl"
+
+
+    // $ANTLR start "rule__Import__Group__1"
+    // InternalBmodParser.g:525:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
+    public final void rule__Import__Group__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:529:1: ( rule__Import__Group__1__Impl )
+            // InternalBmodParser.g:530:2: rule__Import__Group__1__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__Import__Group__1__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group__1"
+
+
+    // $ANTLR start "rule__Import__Group__1__Impl"
+    // InternalBmodParser.g:536:1: rule__Import__Group__1__Impl : ( ( rule__Import__ImportURIAssignment_1 ) ) ;
+    public final void rule__Import__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:540:1: ( ( ( rule__Import__ImportURIAssignment_1 ) ) )
+            // InternalBmodParser.g:541:1: ( ( rule__Import__ImportURIAssignment_1 ) )
+            {
+            // InternalBmodParser.g:541:1: ( ( rule__Import__ImportURIAssignment_1 ) )
+            // InternalBmodParser.g:542:2: ( rule__Import__ImportURIAssignment_1 )
+            {
+             before(grammarAccess.getImportAccess().getImportURIAssignment_1()); 
+            // InternalBmodParser.g:543:2: ( rule__Import__ImportURIAssignment_1 )
+            // InternalBmodParser.g:543:3: rule__Import__ImportURIAssignment_1
+            {
+            pushFollow(FOLLOW_2);
+            rule__Import__ImportURIAssignment_1();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getImportAccess().getImportURIAssignment_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group__1__Impl"
+
+
     // $ANTLR start "rule__Room__Group__0"
-    // InternalBmod.g:703:1: rule__Room__Group__0 : rule__Room__Group__0__Impl rule__Room__Group__1 ;
+    // InternalBmodParser.g:552:1: rule__Room__Group__0 : rule__Room__Group__0__Impl rule__Room__Group__1 ;
     public final void rule__Room__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:707:1: ( rule__Room__Group__0__Impl rule__Room__Group__1 )
-            // InternalBmod.g:708:2: rule__Room__Group__0__Impl rule__Room__Group__1
+            // InternalBmodParser.g:556:1: ( rule__Room__Group__0__Impl rule__Room__Group__1 )
+            // InternalBmodParser.g:557:2: rule__Room__Group__0__Impl rule__Room__Group__1
             {
-            pushFollow(FOLLOW_5);
+            pushFollow(FOLLOW_7);
             rule__Room__Group__0__Impl();
 
             state._fsp--;
@@ -2366,20 +1717,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Room__Group__0__Impl"
-    // InternalBmod.g:715:1: rule__Room__Group__0__Impl : ( 'Room' ) ;
+    // InternalBmodParser.g:564:1: rule__Room__Group__0__Impl : ( Room ) ;
     public final void rule__Room__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:719:1: ( ( 'Room' ) )
-            // InternalBmod.g:720:1: ( 'Room' )
+            // InternalBmodParser.g:568:1: ( ( Room ) )
+            // InternalBmodParser.g:569:1: ( Room )
             {
-            // InternalBmod.g:720:1: ( 'Room' )
-            // InternalBmod.g:721:2: 'Room'
+            // InternalBmodParser.g:569:1: ( Room )
+            // InternalBmodParser.g:570:2: Room
             {
              before(grammarAccess.getRoomAccess().getRoomKeyword_0()); 
-            match(input,19,FOLLOW_2); 
+            match(input,Room,FOLLOW_2); 
              after(grammarAccess.getRoomAccess().getRoomKeyword_0()); 
 
             }
@@ -2403,16 +1754,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Room__Group__1"
-    // InternalBmod.g:730:1: rule__Room__Group__1 : rule__Room__Group__1__Impl rule__Room__Group__2 ;
+    // InternalBmodParser.g:579:1: rule__Room__Group__1 : rule__Room__Group__1__Impl rule__Room__Group__2 ;
     public final void rule__Room__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:734:1: ( rule__Room__Group__1__Impl rule__Room__Group__2 )
-            // InternalBmod.g:735:2: rule__Room__Group__1__Impl rule__Room__Group__2
+            // InternalBmodParser.g:583:1: ( rule__Room__Group__1__Impl rule__Room__Group__2 )
+            // InternalBmodParser.g:584:2: rule__Room__Group__1__Impl rule__Room__Group__2
             {
-            pushFollow(FOLLOW_6);
+            pushFollow(FOLLOW_8);
             rule__Room__Group__1__Impl();
 
             state._fsp--;
@@ -2441,21 +1792,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Room__Group__1__Impl"
-    // InternalBmod.g:742:1: rule__Room__Group__1__Impl : ( ( rule__Room__NameAssignment_1 ) ) ;
+    // InternalBmodParser.g:591:1: rule__Room__Group__1__Impl : ( ( rule__Room__NameAssignment_1 ) ) ;
     public final void rule__Room__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:746:1: ( ( ( rule__Room__NameAssignment_1 ) ) )
-            // InternalBmod.g:747:1: ( ( rule__Room__NameAssignment_1 ) )
+            // InternalBmodParser.g:595:1: ( ( ( rule__Room__NameAssignment_1 ) ) )
+            // InternalBmodParser.g:596:1: ( ( rule__Room__NameAssignment_1 ) )
             {
-            // InternalBmod.g:747:1: ( ( rule__Room__NameAssignment_1 ) )
-            // InternalBmod.g:748:2: ( rule__Room__NameAssignment_1 )
+            // InternalBmodParser.g:596:1: ( ( rule__Room__NameAssignment_1 ) )
+            // InternalBmodParser.g:597:2: ( rule__Room__NameAssignment_1 )
             {
              before(grammarAccess.getRoomAccess().getNameAssignment_1()); 
-            // InternalBmod.g:749:2: ( rule__Room__NameAssignment_1 )
-            // InternalBmod.g:749:3: rule__Room__NameAssignment_1
+            // InternalBmodParser.g:598:2: ( rule__Room__NameAssignment_1 )
+            // InternalBmodParser.g:598:3: rule__Room__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__Room__NameAssignment_1();
@@ -2488,16 +1839,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Room__Group__2"
-    // InternalBmod.g:757:1: rule__Room__Group__2 : rule__Room__Group__2__Impl rule__Room__Group__3 ;
+    // InternalBmodParser.g:606:1: rule__Room__Group__2 : rule__Room__Group__2__Impl rule__Room__Group__3 ;
     public final void rule__Room__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:761:1: ( rule__Room__Group__2__Impl rule__Room__Group__3 )
-            // InternalBmod.g:762:2: rule__Room__Group__2__Impl rule__Room__Group__3
+            // InternalBmodParser.g:610:1: ( rule__Room__Group__2__Impl rule__Room__Group__3 )
+            // InternalBmodParser.g:611:2: rule__Room__Group__2__Impl rule__Room__Group__3
             {
-            pushFollow(FOLLOW_7);
+            pushFollow(FOLLOW_8);
             rule__Room__Group__2__Impl();
 
             state._fsp--;
@@ -2526,31 +1877,42 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Room__Group__2__Impl"
-    // InternalBmod.g:769:1: rule__Room__Group__2__Impl : ( ( rule__Room__AreasAssignment_2 ) ) ;
+    // InternalBmodParser.g:618:1: rule__Room__Group__2__Impl : ( ( rule__Room__Group_2__0 )? ) ;
     public final void rule__Room__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:773:1: ( ( ( rule__Room__AreasAssignment_2 ) ) )
-            // InternalBmod.g:774:1: ( ( rule__Room__AreasAssignment_2 ) )
+            // InternalBmodParser.g:622:1: ( ( ( rule__Room__Group_2__0 )? ) )
+            // InternalBmodParser.g:623:1: ( ( rule__Room__Group_2__0 )? )
             {
-            // InternalBmod.g:774:1: ( ( rule__Room__AreasAssignment_2 ) )
-            // InternalBmod.g:775:2: ( rule__Room__AreasAssignment_2 )
+            // InternalBmodParser.g:623:1: ( ( rule__Room__Group_2__0 )? )
+            // InternalBmodParser.g:624:2: ( rule__Room__Group_2__0 )?
             {
-             before(grammarAccess.getRoomAccess().getAreasAssignment_2()); 
-            // InternalBmod.g:776:2: ( rule__Room__AreasAssignment_2 )
-            // InternalBmod.g:776:3: rule__Room__AreasAssignment_2
-            {
-            pushFollow(FOLLOW_2);
-            rule__Room__AreasAssignment_2();
+             before(grammarAccess.getRoomAccess().getGroup_2()); 
+            // InternalBmodParser.g:625:2: ( rule__Room__Group_2__0 )?
+            int alt4=2;
+            int LA4_0 = input.LA(1);
 
-            state._fsp--;
+            if ( (LA4_0==LeftSquareBracket) ) {
+                alt4=1;
+            }
+            switch (alt4) {
+                case 1 :
+                    // InternalBmodParser.g:625:3: rule__Room__Group_2__0
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__Room__Group_2__0();
 
+                    state._fsp--;
+
+
+                    }
+                    break;
 
             }
 
-             after(grammarAccess.getRoomAccess().getAreasAssignment_2()); 
+             after(grammarAccess.getRoomAccess().getGroup_2()); 
 
             }
 
@@ -2573,17 +1935,22 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Room__Group__3"
-    // InternalBmod.g:784:1: rule__Room__Group__3 : rule__Room__Group__3__Impl ;
+    // InternalBmodParser.g:633:1: rule__Room__Group__3 : rule__Room__Group__3__Impl rule__Room__Group__4 ;
     public final void rule__Room__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:788:1: ( rule__Room__Group__3__Impl )
-            // InternalBmod.g:789:2: rule__Room__Group__3__Impl
+            // InternalBmodParser.g:637:1: ( rule__Room__Group__3__Impl rule__Room__Group__4 )
+            // InternalBmodParser.g:638:2: rule__Room__Group__3__Impl rule__Room__Group__4
             {
-            pushFollow(FOLLOW_2);
+            pushFollow(FOLLOW_9);
             rule__Room__Group__3__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__Room__Group__4();
 
             state._fsp--;
 
@@ -2606,49 +1973,31 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Room__Group__3__Impl"
-    // InternalBmod.g:795:1: rule__Room__Group__3__Impl : ( ( rule__Room__Group_3__0 )* ) ;
+    // InternalBmodParser.g:645:1: rule__Room__Group__3__Impl : ( ( rule__Room__AreasAssignment_3 ) ) ;
     public final void rule__Room__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:799:1: ( ( ( rule__Room__Group_3__0 )* ) )
-            // InternalBmod.g:800:1: ( ( rule__Room__Group_3__0 )* )
+            // InternalBmodParser.g:649:1: ( ( ( rule__Room__AreasAssignment_3 ) ) )
+            // InternalBmodParser.g:650:1: ( ( rule__Room__AreasAssignment_3 ) )
             {
-            // InternalBmod.g:800:1: ( ( rule__Room__Group_3__0 )* )
-            // InternalBmod.g:801:2: ( rule__Room__Group_3__0 )*
+            // InternalBmodParser.g:650:1: ( ( rule__Room__AreasAssignment_3 ) )
+            // InternalBmodParser.g:651:2: ( rule__Room__AreasAssignment_3 )
             {
-             before(grammarAccess.getRoomAccess().getGroup_3()); 
-            // InternalBmod.g:802:2: ( rule__Room__Group_3__0 )*
-            loop7:
-            do {
-                int alt7=2;
-                int LA7_0 = input.LA(1);
+             before(grammarAccess.getRoomAccess().getAreasAssignment_3()); 
+            // InternalBmodParser.g:652:2: ( rule__Room__AreasAssignment_3 )
+            // InternalBmodParser.g:652:3: rule__Room__AreasAssignment_3
+            {
+            pushFollow(FOLLOW_2);
+            rule__Room__AreasAssignment_3();
 
-                if ( (LA7_0==20) ) {
-                    alt7=1;
-                }
+            state._fsp--;
 
 
-                switch (alt7) {
-            	case 1 :
-            	    // InternalBmod.g:802:3: rule__Room__Group_3__0
-            	    {
-            	    pushFollow(FOLLOW_8);
-            	    rule__Room__Group_3__0();
+            }
 
-            	    state._fsp--;
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop7;
-                }
-            } while (true);
-
-             after(grammarAccess.getRoomAccess().getGroup_3()); 
+             after(grammarAccess.getRoomAccess().getAreasAssignment_3()); 
 
             }
 
@@ -2670,23 +2019,121 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Room__Group__3__Impl"
 
 
-    // $ANTLR start "rule__Room__Group_3__0"
-    // InternalBmod.g:811:1: rule__Room__Group_3__0 : rule__Room__Group_3__0__Impl rule__Room__Group_3__1 ;
-    public final void rule__Room__Group_3__0() throws RecognitionException {
+    // $ANTLR start "rule__Room__Group__4"
+    // InternalBmodParser.g:660:1: rule__Room__Group__4 : rule__Room__Group__4__Impl ;
+    public final void rule__Room__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:815:1: ( rule__Room__Group_3__0__Impl rule__Room__Group_3__1 )
-            // InternalBmod.g:816:2: rule__Room__Group_3__0__Impl rule__Room__Group_3__1
+            // InternalBmodParser.g:664:1: ( rule__Room__Group__4__Impl )
+            // InternalBmodParser.g:665:2: rule__Room__Group__4__Impl
             {
-            pushFollow(FOLLOW_6);
-            rule__Room__Group_3__0__Impl();
+            pushFollow(FOLLOW_2);
+            rule__Room__Group__4__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Room__Group__4"
+
+
+    // $ANTLR start "rule__Room__Group__4__Impl"
+    // InternalBmodParser.g:671:1: rule__Room__Group__4__Impl : ( ( rule__Room__Group_4__0 )* ) ;
+    public final void rule__Room__Group__4__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:675:1: ( ( ( rule__Room__Group_4__0 )* ) )
+            // InternalBmodParser.g:676:1: ( ( rule__Room__Group_4__0 )* )
+            {
+            // InternalBmodParser.g:676:1: ( ( rule__Room__Group_4__0 )* )
+            // InternalBmodParser.g:677:2: ( rule__Room__Group_4__0 )*
+            {
+             before(grammarAccess.getRoomAccess().getGroup_4()); 
+            // InternalBmodParser.g:678:2: ( rule__Room__Group_4__0 )*
+            loop5:
+            do {
+                int alt5=2;
+                int LA5_0 = input.LA(1);
+
+                if ( (LA5_0==And) ) {
+                    alt5=1;
+                }
+
+
+                switch (alt5) {
+            	case 1 :
+            	    // InternalBmodParser.g:678:3: rule__Room__Group_4__0
+            	    {
+            	    pushFollow(FOLLOW_10);
+            	    rule__Room__Group_4__0();
+
+            	    state._fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop5;
+                }
+            } while (true);
+
+             after(grammarAccess.getRoomAccess().getGroup_4()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Room__Group__4__Impl"
+
+
+    // $ANTLR start "rule__Room__Group_2__0"
+    // InternalBmodParser.g:687:1: rule__Room__Group_2__0 : rule__Room__Group_2__0__Impl rule__Room__Group_2__1 ;
+    public final void rule__Room__Group_2__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:691:1: ( rule__Room__Group_2__0__Impl rule__Room__Group_2__1 )
+            // InternalBmodParser.g:692:2: rule__Room__Group_2__0__Impl rule__Room__Group_2__1
+            {
+            pushFollow(FOLLOW_11);
+            rule__Room__Group_2__0__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__Room__Group_3__1();
+            rule__Room__Group_2__1();
 
             state._fsp--;
 
@@ -2705,60 +2152,37 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Room__Group_3__0"
+    // $ANTLR end "rule__Room__Group_2__0"
 
 
-    // $ANTLR start "rule__Room__Group_3__0__Impl"
-    // InternalBmod.g:823:1: rule__Room__Group_3__0__Impl : ( 'and' ) ;
-    public final void rule__Room__Group_3__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:827:1: ( ( 'and' ) )
-            // InternalBmod.g:828:1: ( 'and' )
-            {
-            // InternalBmod.g:828:1: ( 'and' )
-            // InternalBmod.g:829:2: 'and'
-            {
-             before(grammarAccess.getRoomAccess().getAndKeyword_3_0()); 
-            match(input,20,FOLLOW_2); 
-             after(grammarAccess.getRoomAccess().getAndKeyword_3_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Room__Group_3__0__Impl"
-
-
-    // $ANTLR start "rule__Room__Group_3__1"
-    // InternalBmod.g:838:1: rule__Room__Group_3__1 : rule__Room__Group_3__1__Impl ;
-    public final void rule__Room__Group_3__1() throws RecognitionException {
+    // $ANTLR start "rule__Room__Group_2__0__Impl"
+    // InternalBmodParser.g:699:1: rule__Room__Group_2__0__Impl : ( ( rule__Room__HasCapacityAssignment_2_0 ) ) ;
+    public final void rule__Room__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:842:1: ( rule__Room__Group_3__1__Impl )
-            // InternalBmod.g:843:2: rule__Room__Group_3__1__Impl
+            // InternalBmodParser.g:703:1: ( ( ( rule__Room__HasCapacityAssignment_2_0 ) ) )
+            // InternalBmodParser.g:704:1: ( ( rule__Room__HasCapacityAssignment_2_0 ) )
+            {
+            // InternalBmodParser.g:704:1: ( ( rule__Room__HasCapacityAssignment_2_0 ) )
+            // InternalBmodParser.g:705:2: ( rule__Room__HasCapacityAssignment_2_0 )
+            {
+             before(grammarAccess.getRoomAccess().getHasCapacityAssignment_2_0()); 
+            // InternalBmodParser.g:706:2: ( rule__Room__HasCapacityAssignment_2_0 )
+            // InternalBmodParser.g:706:3: rule__Room__HasCapacityAssignment_2_0
             {
             pushFollow(FOLLOW_2);
-            rule__Room__Group_3__1__Impl();
+            rule__Room__HasCapacityAssignment_2_0();
 
             state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getRoomAccess().getHasCapacityAssignment_2_0()); 
+
+            }
 
 
             }
@@ -2775,35 +2199,73 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Room__Group_3__1"
+    // $ANTLR end "rule__Room__Group_2__0__Impl"
 
 
-    // $ANTLR start "rule__Room__Group_3__1__Impl"
-    // InternalBmod.g:849:1: rule__Room__Group_3__1__Impl : ( ( rule__Room__AreasAssignment_3_1 ) ) ;
-    public final void rule__Room__Group_3__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__Room__Group_2__1"
+    // InternalBmodParser.g:714:1: rule__Room__Group_2__1 : rule__Room__Group_2__1__Impl rule__Room__Group_2__2 ;
+    public final void rule__Room__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:853:1: ( ( ( rule__Room__AreasAssignment_3_1 ) ) )
-            // InternalBmod.g:854:1: ( ( rule__Room__AreasAssignment_3_1 ) )
+            // InternalBmodParser.g:718:1: ( rule__Room__Group_2__1__Impl rule__Room__Group_2__2 )
+            // InternalBmodParser.g:719:2: rule__Room__Group_2__1__Impl rule__Room__Group_2__2
             {
-            // InternalBmod.g:854:1: ( ( rule__Room__AreasAssignment_3_1 ) )
-            // InternalBmod.g:855:2: ( rule__Room__AreasAssignment_3_1 )
-            {
-             before(grammarAccess.getRoomAccess().getAreasAssignment_3_1()); 
-            // InternalBmod.g:856:2: ( rule__Room__AreasAssignment_3_1 )
-            // InternalBmod.g:856:3: rule__Room__AreasAssignment_3_1
-            {
+            pushFollow(FOLLOW_12);
+            rule__Room__Group_2__1__Impl();
+
+            state._fsp--;
+
             pushFollow(FOLLOW_2);
-            rule__Room__AreasAssignment_3_1();
+            rule__Room__Group_2__2();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getRoomAccess().getAreasAssignment_3_1()); 
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Room__Group_2__1"
+
+
+    // $ANTLR start "rule__Room__Group_2__1__Impl"
+    // InternalBmodParser.g:726:1: rule__Room__Group_2__1__Impl : ( ( rule__Room__CapacityAssignment_2_1 ) ) ;
+    public final void rule__Room__Group_2__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:730:1: ( ( ( rule__Room__CapacityAssignment_2_1 ) ) )
+            // InternalBmodParser.g:731:1: ( ( rule__Room__CapacityAssignment_2_1 ) )
+            {
+            // InternalBmodParser.g:731:1: ( ( rule__Room__CapacityAssignment_2_1 ) )
+            // InternalBmodParser.g:732:2: ( rule__Room__CapacityAssignment_2_1 )
+            {
+             before(grammarAccess.getRoomAccess().getCapacityAssignment_2_1()); 
+            // InternalBmodParser.g:733:2: ( rule__Room__CapacityAssignment_2_1 )
+            // InternalBmodParser.g:733:3: rule__Room__CapacityAssignment_2_1
+            {
+            pushFollow(FOLLOW_2);
+            rule__Room__CapacityAssignment_2_1();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getRoomAccess().getCapacityAssignment_2_1()); 
 
             }
 
@@ -2822,20 +2284,245 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Room__Group_3__1__Impl"
+    // $ANTLR end "rule__Room__Group_2__1__Impl"
+
+
+    // $ANTLR start "rule__Room__Group_2__2"
+    // InternalBmodParser.g:741:1: rule__Room__Group_2__2 : rule__Room__Group_2__2__Impl ;
+    public final void rule__Room__Group_2__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:745:1: ( rule__Room__Group_2__2__Impl )
+            // InternalBmodParser.g:746:2: rule__Room__Group_2__2__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__Room__Group_2__2__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Room__Group_2__2"
+
+
+    // $ANTLR start "rule__Room__Group_2__2__Impl"
+    // InternalBmodParser.g:752:1: rule__Room__Group_2__2__Impl : ( RightSquareBracket ) ;
+    public final void rule__Room__Group_2__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:756:1: ( ( RightSquareBracket ) )
+            // InternalBmodParser.g:757:1: ( RightSquareBracket )
+            {
+            // InternalBmodParser.g:757:1: ( RightSquareBracket )
+            // InternalBmodParser.g:758:2: RightSquareBracket
+            {
+             before(grammarAccess.getRoomAccess().getRightSquareBracketKeyword_2_2()); 
+            match(input,RightSquareBracket,FOLLOW_2); 
+             after(grammarAccess.getRoomAccess().getRightSquareBracketKeyword_2_2()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Room__Group_2__2__Impl"
+
+
+    // $ANTLR start "rule__Room__Group_4__0"
+    // InternalBmodParser.g:768:1: rule__Room__Group_4__0 : rule__Room__Group_4__0__Impl rule__Room__Group_4__1 ;
+    public final void rule__Room__Group_4__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:772:1: ( rule__Room__Group_4__0__Impl rule__Room__Group_4__1 )
+            // InternalBmodParser.g:773:2: rule__Room__Group_4__0__Impl rule__Room__Group_4__1
+            {
+            pushFollow(FOLLOW_8);
+            rule__Room__Group_4__0__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__Room__Group_4__1();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Room__Group_4__0"
+
+
+    // $ANTLR start "rule__Room__Group_4__0__Impl"
+    // InternalBmodParser.g:780:1: rule__Room__Group_4__0__Impl : ( And ) ;
+    public final void rule__Room__Group_4__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:784:1: ( ( And ) )
+            // InternalBmodParser.g:785:1: ( And )
+            {
+            // InternalBmodParser.g:785:1: ( And )
+            // InternalBmodParser.g:786:2: And
+            {
+             before(grammarAccess.getRoomAccess().getAndKeyword_4_0()); 
+            match(input,And,FOLLOW_2); 
+             after(grammarAccess.getRoomAccess().getAndKeyword_4_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Room__Group_4__0__Impl"
+
+
+    // $ANTLR start "rule__Room__Group_4__1"
+    // InternalBmodParser.g:795:1: rule__Room__Group_4__1 : rule__Room__Group_4__1__Impl ;
+    public final void rule__Room__Group_4__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:799:1: ( rule__Room__Group_4__1__Impl )
+            // InternalBmodParser.g:800:2: rule__Room__Group_4__1__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__Room__Group_4__1__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Room__Group_4__1"
+
+
+    // $ANTLR start "rule__Room__Group_4__1__Impl"
+    // InternalBmodParser.g:806:1: rule__Room__Group_4__1__Impl : ( ( rule__Room__AreasAssignment_4_1 ) ) ;
+    public final void rule__Room__Group_4__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:810:1: ( ( ( rule__Room__AreasAssignment_4_1 ) ) )
+            // InternalBmodParser.g:811:1: ( ( rule__Room__AreasAssignment_4_1 ) )
+            {
+            // InternalBmodParser.g:811:1: ( ( rule__Room__AreasAssignment_4_1 ) )
+            // InternalBmodParser.g:812:2: ( rule__Room__AreasAssignment_4_1 )
+            {
+             before(grammarAccess.getRoomAccess().getAreasAssignment_4_1()); 
+            // InternalBmodParser.g:813:2: ( rule__Room__AreasAssignment_4_1 )
+            // InternalBmodParser.g:813:3: rule__Room__AreasAssignment_4_1
+            {
+            pushFollow(FOLLOW_2);
+            rule__Room__AreasAssignment_4_1();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getRoomAccess().getAreasAssignment_4_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Room__Group_4__1__Impl"
 
 
     // $ANTLR start "rule__Door__Group__0"
-    // InternalBmod.g:865:1: rule__Door__Group__0 : rule__Door__Group__0__Impl rule__Door__Group__1 ;
+    // InternalBmodParser.g:822:1: rule__Door__Group__0 : rule__Door__Group__0__Impl rule__Door__Group__1 ;
     public final void rule__Door__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:869:1: ( rule__Door__Group__0__Impl rule__Door__Group__1 )
-            // InternalBmod.g:870:2: rule__Door__Group__0__Impl rule__Door__Group__1
+            // InternalBmodParser.g:826:1: ( rule__Door__Group__0__Impl rule__Door__Group__1 )
+            // InternalBmodParser.g:827:2: rule__Door__Group__0__Impl rule__Door__Group__1
             {
-            pushFollow(FOLLOW_5);
+            pushFollow(FOLLOW_7);
             rule__Door__Group__0__Impl();
 
             state._fsp--;
@@ -2864,20 +2551,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Door__Group__0__Impl"
-    // InternalBmod.g:877:1: rule__Door__Group__0__Impl : ( 'Door' ) ;
+    // InternalBmodParser.g:834:1: rule__Door__Group__0__Impl : ( Door ) ;
     public final void rule__Door__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:881:1: ( ( 'Door' ) )
-            // InternalBmod.g:882:1: ( 'Door' )
+            // InternalBmodParser.g:838:1: ( ( Door ) )
+            // InternalBmodParser.g:839:1: ( Door )
             {
-            // InternalBmod.g:882:1: ( 'Door' )
-            // InternalBmod.g:883:2: 'Door'
+            // InternalBmodParser.g:839:1: ( Door )
+            // InternalBmodParser.g:840:2: Door
             {
              before(grammarAccess.getDoorAccess().getDoorKeyword_0()); 
-            match(input,21,FOLLOW_2); 
+            match(input,Door,FOLLOW_2); 
              after(grammarAccess.getDoorAccess().getDoorKeyword_0()); 
 
             }
@@ -2901,16 +2588,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Door__Group__1"
-    // InternalBmod.g:892:1: rule__Door__Group__1 : rule__Door__Group__1__Impl rule__Door__Group__2 ;
+    // InternalBmodParser.g:849:1: rule__Door__Group__1 : rule__Door__Group__1__Impl rule__Door__Group__2 ;
     public final void rule__Door__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:896:1: ( rule__Door__Group__1__Impl rule__Door__Group__2 )
-            // InternalBmod.g:897:2: rule__Door__Group__1__Impl rule__Door__Group__2
+            // InternalBmodParser.g:853:1: ( rule__Door__Group__1__Impl rule__Door__Group__2 )
+            // InternalBmodParser.g:854:2: rule__Door__Group__1__Impl rule__Door__Group__2
             {
-            pushFollow(FOLLOW_6);
+            pushFollow(FOLLOW_13);
             rule__Door__Group__1__Impl();
 
             state._fsp--;
@@ -2939,21 +2626,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Door__Group__1__Impl"
-    // InternalBmod.g:904:1: rule__Door__Group__1__Impl : ( ( rule__Door__NameAssignment_1 ) ) ;
+    // InternalBmodParser.g:861:1: rule__Door__Group__1__Impl : ( ( rule__Door__NameAssignment_1 ) ) ;
     public final void rule__Door__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:908:1: ( ( ( rule__Door__NameAssignment_1 ) ) )
-            // InternalBmod.g:909:1: ( ( rule__Door__NameAssignment_1 ) )
+            // InternalBmodParser.g:865:1: ( ( ( rule__Door__NameAssignment_1 ) ) )
+            // InternalBmodParser.g:866:1: ( ( rule__Door__NameAssignment_1 ) )
             {
-            // InternalBmod.g:909:1: ( ( rule__Door__NameAssignment_1 ) )
-            // InternalBmod.g:910:2: ( rule__Door__NameAssignment_1 )
+            // InternalBmodParser.g:866:1: ( ( rule__Door__NameAssignment_1 ) )
+            // InternalBmodParser.g:867:2: ( rule__Door__NameAssignment_1 )
             {
              before(grammarAccess.getDoorAccess().getNameAssignment_1()); 
-            // InternalBmod.g:911:2: ( rule__Door__NameAssignment_1 )
-            // InternalBmod.g:911:3: rule__Door__NameAssignment_1
+            // InternalBmodParser.g:868:2: ( rule__Door__NameAssignment_1 )
+            // InternalBmodParser.g:868:3: rule__Door__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__Door__NameAssignment_1();
@@ -2986,16 +2673,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Door__Group__2"
-    // InternalBmod.g:919:1: rule__Door__Group__2 : rule__Door__Group__2__Impl rule__Door__Group__3 ;
+    // InternalBmodParser.g:876:1: rule__Door__Group__2 : rule__Door__Group__2__Impl rule__Door__Group__3 ;
     public final void rule__Door__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:923:1: ( rule__Door__Group__2__Impl rule__Door__Group__3 )
-            // InternalBmod.g:924:2: rule__Door__Group__2__Impl rule__Door__Group__3
+            // InternalBmodParser.g:880:1: ( rule__Door__Group__2__Impl rule__Door__Group__3 )
+            // InternalBmodParser.g:881:2: rule__Door__Group__2__Impl rule__Door__Group__3
             {
-            pushFollow(FOLLOW_9);
+            pushFollow(FOLLOW_14);
             rule__Door__Group__2__Impl();
 
             state._fsp--;
@@ -3024,20 +2711,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Door__Group__2__Impl"
-    // InternalBmod.g:931:1: rule__Door__Group__2__Impl : ( 'from' ) ;
+    // InternalBmodParser.g:888:1: rule__Door__Group__2__Impl : ( From ) ;
     public final void rule__Door__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:935:1: ( ( 'from' ) )
-            // InternalBmod.g:936:1: ( 'from' )
+            // InternalBmodParser.g:892:1: ( ( From ) )
+            // InternalBmodParser.g:893:1: ( From )
             {
-            // InternalBmod.g:936:1: ( 'from' )
-            // InternalBmod.g:937:2: 'from'
+            // InternalBmodParser.g:893:1: ( From )
+            // InternalBmodParser.g:894:2: From
             {
              before(grammarAccess.getDoorAccess().getFromKeyword_2()); 
-            match(input,22,FOLLOW_2); 
+            match(input,From,FOLLOW_2); 
              after(grammarAccess.getDoorAccess().getFromKeyword_2()); 
 
             }
@@ -3061,16 +2748,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Door__Group__3"
-    // InternalBmod.g:946:1: rule__Door__Group__3 : rule__Door__Group__3__Impl rule__Door__Group__4 ;
+    // InternalBmodParser.g:903:1: rule__Door__Group__3 : rule__Door__Group__3__Impl rule__Door__Group__4 ;
     public final void rule__Door__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:950:1: ( rule__Door__Group__3__Impl rule__Door__Group__4 )
-            // InternalBmod.g:951:2: rule__Door__Group__3__Impl rule__Door__Group__4
+            // InternalBmodParser.g:907:1: ( rule__Door__Group__3__Impl rule__Door__Group__4 )
+            // InternalBmodParser.g:908:2: rule__Door__Group__3__Impl rule__Door__Group__4
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_15);
             rule__Door__Group__3__Impl();
 
             state._fsp--;
@@ -3099,21 +2786,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Door__Group__3__Impl"
-    // InternalBmod.g:958:1: rule__Door__Group__3__Impl : ( ( rule__Door__FromAssignment_3 ) ) ;
+    // InternalBmodParser.g:915:1: rule__Door__Group__3__Impl : ( ( rule__Door__FromAssignment_3 ) ) ;
     public final void rule__Door__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:962:1: ( ( ( rule__Door__FromAssignment_3 ) ) )
-            // InternalBmod.g:963:1: ( ( rule__Door__FromAssignment_3 ) )
+            // InternalBmodParser.g:919:1: ( ( ( rule__Door__FromAssignment_3 ) ) )
+            // InternalBmodParser.g:920:1: ( ( rule__Door__FromAssignment_3 ) )
             {
-            // InternalBmod.g:963:1: ( ( rule__Door__FromAssignment_3 ) )
-            // InternalBmod.g:964:2: ( rule__Door__FromAssignment_3 )
+            // InternalBmodParser.g:920:1: ( ( rule__Door__FromAssignment_3 ) )
+            // InternalBmodParser.g:921:2: ( rule__Door__FromAssignment_3 )
             {
              before(grammarAccess.getDoorAccess().getFromAssignment_3()); 
-            // InternalBmod.g:965:2: ( rule__Door__FromAssignment_3 )
-            // InternalBmod.g:965:3: rule__Door__FromAssignment_3
+            // InternalBmodParser.g:922:2: ( rule__Door__FromAssignment_3 )
+            // InternalBmodParser.g:922:3: rule__Door__FromAssignment_3
             {
             pushFollow(FOLLOW_2);
             rule__Door__FromAssignment_3();
@@ -3146,16 +2833,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Door__Group__4"
-    // InternalBmod.g:973:1: rule__Door__Group__4 : rule__Door__Group__4__Impl rule__Door__Group__5 ;
+    // InternalBmodParser.g:930:1: rule__Door__Group__4 : rule__Door__Group__4__Impl rule__Door__Group__5 ;
     public final void rule__Door__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:977:1: ( rule__Door__Group__4__Impl rule__Door__Group__5 )
-            // InternalBmod.g:978:2: rule__Door__Group__4__Impl rule__Door__Group__5
+            // InternalBmodParser.g:934:1: ( rule__Door__Group__4__Impl rule__Door__Group__5 )
+            // InternalBmodParser.g:935:2: rule__Door__Group__4__Impl rule__Door__Group__5
             {
-            pushFollow(FOLLOW_9);
+            pushFollow(FOLLOW_14);
             rule__Door__Group__4__Impl();
 
             state._fsp--;
@@ -3184,20 +2871,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Door__Group__4__Impl"
-    // InternalBmod.g:985:1: rule__Door__Group__4__Impl : ( 'to' ) ;
+    // InternalBmodParser.g:942:1: rule__Door__Group__4__Impl : ( To ) ;
     public final void rule__Door__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:989:1: ( ( 'to' ) )
-            // InternalBmod.g:990:1: ( 'to' )
+            // InternalBmodParser.g:946:1: ( ( To ) )
+            // InternalBmodParser.g:947:1: ( To )
             {
-            // InternalBmod.g:990:1: ( 'to' )
-            // InternalBmod.g:991:2: 'to'
+            // InternalBmodParser.g:947:1: ( To )
+            // InternalBmodParser.g:948:2: To
             {
              before(grammarAccess.getDoorAccess().getToKeyword_4()); 
-            match(input,23,FOLLOW_2); 
+            match(input,To,FOLLOW_2); 
              after(grammarAccess.getDoorAccess().getToKeyword_4()); 
 
             }
@@ -3221,14 +2908,14 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Door__Group__5"
-    // InternalBmod.g:1000:1: rule__Door__Group__5 : rule__Door__Group__5__Impl ;
+    // InternalBmodParser.g:957:1: rule__Door__Group__5 : rule__Door__Group__5__Impl ;
     public final void rule__Door__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1004:1: ( rule__Door__Group__5__Impl )
-            // InternalBmod.g:1005:2: rule__Door__Group__5__Impl
+            // InternalBmodParser.g:961:1: ( rule__Door__Group__5__Impl )
+            // InternalBmodParser.g:962:2: rule__Door__Group__5__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Door__Group__5__Impl();
@@ -3254,21 +2941,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Door__Group__5__Impl"
-    // InternalBmod.g:1011:1: rule__Door__Group__5__Impl : ( ( rule__Door__ToAssignment_5 ) ) ;
+    // InternalBmodParser.g:968:1: rule__Door__Group__5__Impl : ( ( rule__Door__ToAssignment_5 ) ) ;
     public final void rule__Door__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1015:1: ( ( ( rule__Door__ToAssignment_5 ) ) )
-            // InternalBmod.g:1016:1: ( ( rule__Door__ToAssignment_5 ) )
+            // InternalBmodParser.g:972:1: ( ( ( rule__Door__ToAssignment_5 ) ) )
+            // InternalBmodParser.g:973:1: ( ( rule__Door__ToAssignment_5 ) )
             {
-            // InternalBmod.g:1016:1: ( ( rule__Door__ToAssignment_5 ) )
-            // InternalBmod.g:1017:2: ( rule__Door__ToAssignment_5 )
+            // InternalBmodParser.g:973:1: ( ( rule__Door__ToAssignment_5 ) )
+            // InternalBmodParser.g:974:2: ( rule__Door__ToAssignment_5 )
             {
              before(grammarAccess.getDoorAccess().getToAssignment_5()); 
-            // InternalBmod.g:1018:2: ( rule__Door__ToAssignment_5 )
-            // InternalBmod.g:1018:3: rule__Door__ToAssignment_5
+            // InternalBmodParser.g:975:2: ( rule__Door__ToAssignment_5 )
+            // InternalBmodParser.g:975:3: rule__Door__ToAssignment_5
             {
             pushFollow(FOLLOW_2);
             rule__Door__ToAssignment_5();
@@ -3300,327 +2987,17 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Door__Group__5__Impl"
 
 
-    // $ANTLR start "rule__PerceptionLevel__Group__0"
-    // InternalBmod.g:1027:1: rule__PerceptionLevel__Group__0 : rule__PerceptionLevel__Group__0__Impl rule__PerceptionLevel__Group__1 ;
-    public final void rule__PerceptionLevel__Group__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1031:1: ( rule__PerceptionLevel__Group__0__Impl rule__PerceptionLevel__Group__1 )
-            // InternalBmod.g:1032:2: rule__PerceptionLevel__Group__0__Impl rule__PerceptionLevel__Group__1
-            {
-            pushFollow(FOLLOW_5);
-            rule__PerceptionLevel__Group__0__Impl();
-
-            state._fsp--;
-
-            pushFollow(FOLLOW_2);
-            rule__PerceptionLevel__Group__1();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__PerceptionLevel__Group__0"
-
-
-    // $ANTLR start "rule__PerceptionLevel__Group__0__Impl"
-    // InternalBmod.g:1039:1: rule__PerceptionLevel__Group__0__Impl : ( 'PerceptionLevel' ) ;
-    public final void rule__PerceptionLevel__Group__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1043:1: ( ( 'PerceptionLevel' ) )
-            // InternalBmod.g:1044:1: ( 'PerceptionLevel' )
-            {
-            // InternalBmod.g:1044:1: ( 'PerceptionLevel' )
-            // InternalBmod.g:1045:2: 'PerceptionLevel'
-            {
-             before(grammarAccess.getPerceptionLevelAccess().getPerceptionLevelKeyword_0()); 
-            match(input,24,FOLLOW_2); 
-             after(grammarAccess.getPerceptionLevelAccess().getPerceptionLevelKeyword_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__PerceptionLevel__Group__0__Impl"
-
-
-    // $ANTLR start "rule__PerceptionLevel__Group__1"
-    // InternalBmod.g:1054:1: rule__PerceptionLevel__Group__1 : rule__PerceptionLevel__Group__1__Impl ;
-    public final void rule__PerceptionLevel__Group__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1058:1: ( rule__PerceptionLevel__Group__1__Impl )
-            // InternalBmod.g:1059:2: rule__PerceptionLevel__Group__1__Impl
-            {
-            pushFollow(FOLLOW_2);
-            rule__PerceptionLevel__Group__1__Impl();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__PerceptionLevel__Group__1"
-
-
-    // $ANTLR start "rule__PerceptionLevel__Group__1__Impl"
-    // InternalBmod.g:1065:1: rule__PerceptionLevel__Group__1__Impl : ( ( rule__PerceptionLevel__NameAssignment_1 ) ) ;
-    public final void rule__PerceptionLevel__Group__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1069:1: ( ( ( rule__PerceptionLevel__NameAssignment_1 ) ) )
-            // InternalBmod.g:1070:1: ( ( rule__PerceptionLevel__NameAssignment_1 ) )
-            {
-            // InternalBmod.g:1070:1: ( ( rule__PerceptionLevel__NameAssignment_1 ) )
-            // InternalBmod.g:1071:2: ( rule__PerceptionLevel__NameAssignment_1 )
-            {
-             before(grammarAccess.getPerceptionLevelAccess().getNameAssignment_1()); 
-            // InternalBmod.g:1072:2: ( rule__PerceptionLevel__NameAssignment_1 )
-            // InternalBmod.g:1072:3: rule__PerceptionLevel__NameAssignment_1
-            {
-            pushFollow(FOLLOW_2);
-            rule__PerceptionLevel__NameAssignment_1();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getPerceptionLevelAccess().getNameAssignment_1()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__PerceptionLevel__Group__1__Impl"
-
-
-    // $ANTLR start "rule__ActionProfile__Group__0"
-    // InternalBmod.g:1081:1: rule__ActionProfile__Group__0 : rule__ActionProfile__Group__0__Impl rule__ActionProfile__Group__1 ;
-    public final void rule__ActionProfile__Group__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1085:1: ( rule__ActionProfile__Group__0__Impl rule__ActionProfile__Group__1 )
-            // InternalBmod.g:1086:2: rule__ActionProfile__Group__0__Impl rule__ActionProfile__Group__1
-            {
-            pushFollow(FOLLOW_5);
-            rule__ActionProfile__Group__0__Impl();
-
-            state._fsp--;
-
-            pushFollow(FOLLOW_2);
-            rule__ActionProfile__Group__1();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ActionProfile__Group__0"
-
-
-    // $ANTLR start "rule__ActionProfile__Group__0__Impl"
-    // InternalBmod.g:1093:1: rule__ActionProfile__Group__0__Impl : ( 'ActionProfile' ) ;
-    public final void rule__ActionProfile__Group__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1097:1: ( ( 'ActionProfile' ) )
-            // InternalBmod.g:1098:1: ( 'ActionProfile' )
-            {
-            // InternalBmod.g:1098:1: ( 'ActionProfile' )
-            // InternalBmod.g:1099:2: 'ActionProfile'
-            {
-             before(grammarAccess.getActionProfileAccess().getActionProfileKeyword_0()); 
-            match(input,25,FOLLOW_2); 
-             after(grammarAccess.getActionProfileAccess().getActionProfileKeyword_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ActionProfile__Group__0__Impl"
-
-
-    // $ANTLR start "rule__ActionProfile__Group__1"
-    // InternalBmod.g:1108:1: rule__ActionProfile__Group__1 : rule__ActionProfile__Group__1__Impl ;
-    public final void rule__ActionProfile__Group__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1112:1: ( rule__ActionProfile__Group__1__Impl )
-            // InternalBmod.g:1113:2: rule__ActionProfile__Group__1__Impl
-            {
-            pushFollow(FOLLOW_2);
-            rule__ActionProfile__Group__1__Impl();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ActionProfile__Group__1"
-
-
-    // $ANTLR start "rule__ActionProfile__Group__1__Impl"
-    // InternalBmod.g:1119:1: rule__ActionProfile__Group__1__Impl : ( ( rule__ActionProfile__NameAssignment_1 ) ) ;
-    public final void rule__ActionProfile__Group__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1123:1: ( ( ( rule__ActionProfile__NameAssignment_1 ) ) )
-            // InternalBmod.g:1124:1: ( ( rule__ActionProfile__NameAssignment_1 ) )
-            {
-            // InternalBmod.g:1124:1: ( ( rule__ActionProfile__NameAssignment_1 ) )
-            // InternalBmod.g:1125:2: ( rule__ActionProfile__NameAssignment_1 )
-            {
-             before(grammarAccess.getActionProfileAccess().getNameAssignment_1()); 
-            // InternalBmod.g:1126:2: ( rule__ActionProfile__NameAssignment_1 )
-            // InternalBmod.g:1126:3: rule__ActionProfile__NameAssignment_1
-            {
-            pushFollow(FOLLOW_2);
-            rule__ActionProfile__NameAssignment_1();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getActionProfileAccess().getNameAssignment_1()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ActionProfile__Group__1__Impl"
-
-
     // $ANTLR start "rule__Person__Group__0"
-    // InternalBmod.g:1135:1: rule__Person__Group__0 : rule__Person__Group__0__Impl rule__Person__Group__1 ;
+    // InternalBmodParser.g:984:1: rule__Person__Group__0 : rule__Person__Group__0__Impl rule__Person__Group__1 ;
     public final void rule__Person__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1139:1: ( rule__Person__Group__0__Impl rule__Person__Group__1 )
-            // InternalBmod.g:1140:2: rule__Person__Group__0__Impl rule__Person__Group__1
+            // InternalBmodParser.g:988:1: ( rule__Person__Group__0__Impl rule__Person__Group__1 )
+            // InternalBmodParser.g:989:2: rule__Person__Group__0__Impl rule__Person__Group__1
             {
-            pushFollow(FOLLOW_5);
+            pushFollow(FOLLOW_7);
             rule__Person__Group__0__Impl();
 
             state._fsp--;
@@ -3649,20 +3026,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Person__Group__0__Impl"
-    // InternalBmod.g:1147:1: rule__Person__Group__0__Impl : ( 'Person' ) ;
+    // InternalBmodParser.g:996:1: rule__Person__Group__0__Impl : ( Person ) ;
     public final void rule__Person__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1151:1: ( ( 'Person' ) )
-            // InternalBmod.g:1152:1: ( 'Person' )
+            // InternalBmodParser.g:1000:1: ( ( Person ) )
+            // InternalBmodParser.g:1001:1: ( Person )
             {
-            // InternalBmod.g:1152:1: ( 'Person' )
-            // InternalBmod.g:1153:2: 'Person'
+            // InternalBmodParser.g:1001:1: ( Person )
+            // InternalBmodParser.g:1002:2: Person
             {
              before(grammarAccess.getPersonAccess().getPersonKeyword_0()); 
-            match(input,26,FOLLOW_2); 
+            match(input,Person,FOLLOW_2); 
              after(grammarAccess.getPersonAccess().getPersonKeyword_0()); 
 
             }
@@ -3686,16 +3063,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Person__Group__1"
-    // InternalBmod.g:1162:1: rule__Person__Group__1 : rule__Person__Group__1__Impl rule__Person__Group__2 ;
+    // InternalBmodParser.g:1011:1: rule__Person__Group__1 : rule__Person__Group__1__Impl rule__Person__Group__2 ;
     public final void rule__Person__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1166:1: ( rule__Person__Group__1__Impl rule__Person__Group__2 )
-            // InternalBmod.g:1167:2: rule__Person__Group__1__Impl rule__Person__Group__2
+            // InternalBmodParser.g:1015:1: ( rule__Person__Group__1__Impl rule__Person__Group__2 )
+            // InternalBmodParser.g:1016:2: rule__Person__Group__1__Impl rule__Person__Group__2
             {
-            pushFollow(FOLLOW_11);
+            pushFollow(FOLLOW_16);
             rule__Person__Group__1__Impl();
 
             state._fsp--;
@@ -3724,21 +3101,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Person__Group__1__Impl"
-    // InternalBmod.g:1174:1: rule__Person__Group__1__Impl : ( ( rule__Person__NameAssignment_1 ) ) ;
+    // InternalBmodParser.g:1023:1: rule__Person__Group__1__Impl : ( ( rule__Person__NameAssignment_1 ) ) ;
     public final void rule__Person__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1178:1: ( ( ( rule__Person__NameAssignment_1 ) ) )
-            // InternalBmod.g:1179:1: ( ( rule__Person__NameAssignment_1 ) )
+            // InternalBmodParser.g:1027:1: ( ( ( rule__Person__NameAssignment_1 ) ) )
+            // InternalBmodParser.g:1028:1: ( ( rule__Person__NameAssignment_1 ) )
             {
-            // InternalBmod.g:1179:1: ( ( rule__Person__NameAssignment_1 ) )
-            // InternalBmod.g:1180:2: ( rule__Person__NameAssignment_1 )
+            // InternalBmodParser.g:1028:1: ( ( rule__Person__NameAssignment_1 ) )
+            // InternalBmodParser.g:1029:2: ( rule__Person__NameAssignment_1 )
             {
              before(grammarAccess.getPersonAccess().getNameAssignment_1()); 
-            // InternalBmod.g:1181:2: ( rule__Person__NameAssignment_1 )
-            // InternalBmod.g:1181:3: rule__Person__NameAssignment_1
+            // InternalBmodParser.g:1030:2: ( rule__Person__NameAssignment_1 )
+            // InternalBmodParser.g:1030:3: rule__Person__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__Person__NameAssignment_1();
@@ -3771,16 +3148,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Person__Group__2"
-    // InternalBmod.g:1189:1: rule__Person__Group__2 : rule__Person__Group__2__Impl rule__Person__Group__3 ;
+    // InternalBmodParser.g:1038:1: rule__Person__Group__2 : rule__Person__Group__2__Impl rule__Person__Group__3 ;
     public final void rule__Person__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1193:1: ( rule__Person__Group__2__Impl rule__Person__Group__3 )
-            // InternalBmod.g:1194:2: rule__Person__Group__2__Impl rule__Person__Group__3
+            // InternalBmodParser.g:1042:1: ( rule__Person__Group__2__Impl rule__Person__Group__3 )
+            // InternalBmodParser.g:1043:2: rule__Person__Group__2__Impl rule__Person__Group__3
             {
-            pushFollow(FOLLOW_9);
+            pushFollow(FOLLOW_14);
             rule__Person__Group__2__Impl();
 
             state._fsp--;
@@ -3809,20 +3186,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Person__Group__2__Impl"
-    // InternalBmod.g:1201:1: rule__Person__Group__2__Impl : ( 'in' ) ;
+    // InternalBmodParser.g:1050:1: rule__Person__Group__2__Impl : ( In ) ;
     public final void rule__Person__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1205:1: ( ( 'in' ) )
-            // InternalBmod.g:1206:1: ( 'in' )
+            // InternalBmodParser.g:1054:1: ( ( In ) )
+            // InternalBmodParser.g:1055:1: ( In )
             {
-            // InternalBmod.g:1206:1: ( 'in' )
-            // InternalBmod.g:1207:2: 'in'
+            // InternalBmodParser.g:1055:1: ( In )
+            // InternalBmodParser.g:1056:2: In
             {
              before(grammarAccess.getPersonAccess().getInKeyword_2()); 
-            match(input,27,FOLLOW_2); 
+            match(input,In,FOLLOW_2); 
              after(grammarAccess.getPersonAccess().getInKeyword_2()); 
 
             }
@@ -3846,16 +3223,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Person__Group__3"
-    // InternalBmod.g:1216:1: rule__Person__Group__3 : rule__Person__Group__3__Impl rule__Person__Group__4 ;
+    // InternalBmodParser.g:1065:1: rule__Person__Group__3 : rule__Person__Group__3__Impl rule__Person__Group__4 ;
     public final void rule__Person__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1220:1: ( rule__Person__Group__3__Impl rule__Person__Group__4 )
-            // InternalBmod.g:1221:2: rule__Person__Group__3__Impl rule__Person__Group__4
+            // InternalBmodParser.g:1069:1: ( rule__Person__Group__3__Impl rule__Person__Group__4 )
+            // InternalBmodParser.g:1070:2: rule__Person__Group__3__Impl rule__Person__Group__4
             {
-            pushFollow(FOLLOW_12);
+            pushFollow(FOLLOW_17);
             rule__Person__Group__3__Impl();
 
             state._fsp--;
@@ -3884,21 +3261,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Person__Group__3__Impl"
-    // InternalBmod.g:1228:1: rule__Person__Group__3__Impl : ( ( rule__Person__LocationAssignment_3 ) ) ;
+    // InternalBmodParser.g:1077:1: rule__Person__Group__3__Impl : ( ( rule__Person__LocationAssignment_3 ) ) ;
     public final void rule__Person__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1232:1: ( ( ( rule__Person__LocationAssignment_3 ) ) )
-            // InternalBmod.g:1233:1: ( ( rule__Person__LocationAssignment_3 ) )
+            // InternalBmodParser.g:1081:1: ( ( ( rule__Person__LocationAssignment_3 ) ) )
+            // InternalBmodParser.g:1082:1: ( ( rule__Person__LocationAssignment_3 ) )
             {
-            // InternalBmod.g:1233:1: ( ( rule__Person__LocationAssignment_3 ) )
-            // InternalBmod.g:1234:2: ( rule__Person__LocationAssignment_3 )
+            // InternalBmodParser.g:1082:1: ( ( rule__Person__LocationAssignment_3 ) )
+            // InternalBmodParser.g:1083:2: ( rule__Person__LocationAssignment_3 )
             {
              before(grammarAccess.getPersonAccess().getLocationAssignment_3()); 
-            // InternalBmod.g:1235:2: ( rule__Person__LocationAssignment_3 )
-            // InternalBmod.g:1235:3: rule__Person__LocationAssignment_3
+            // InternalBmodParser.g:1084:2: ( rule__Person__LocationAssignment_3 )
+            // InternalBmodParser.g:1084:3: rule__Person__LocationAssignment_3
             {
             pushFollow(FOLLOW_2);
             rule__Person__LocationAssignment_3();
@@ -3931,16 +3308,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Person__Group__4"
-    // InternalBmod.g:1243:1: rule__Person__Group__4 : rule__Person__Group__4__Impl rule__Person__Group__5 ;
+    // InternalBmodParser.g:1092:1: rule__Person__Group__4 : rule__Person__Group__4__Impl rule__Person__Group__5 ;
     public final void rule__Person__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1247:1: ( rule__Person__Group__4__Impl rule__Person__Group__5 )
-            // InternalBmod.g:1248:2: rule__Person__Group__4__Impl rule__Person__Group__5
+            // InternalBmodParser.g:1096:1: ( rule__Person__Group__4__Impl rule__Person__Group__5 )
+            // InternalBmodParser.g:1097:2: rule__Person__Group__4__Impl rule__Person__Group__5
             {
-            pushFollow(FOLLOW_13);
+            pushFollow(FOLLOW_7);
             rule__Person__Group__4__Impl();
 
             state._fsp--;
@@ -3969,20 +3346,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Person__Group__4__Impl"
-    // InternalBmod.g:1255:1: rule__Person__Group__4__Impl : ( ':' ) ;
+    // InternalBmodParser.g:1104:1: rule__Person__Group__4__Impl : ( Colon ) ;
     public final void rule__Person__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1259:1: ( ( ':' ) )
-            // InternalBmod.g:1260:1: ( ':' )
+            // InternalBmodParser.g:1108:1: ( ( Colon ) )
+            // InternalBmodParser.g:1109:1: ( Colon )
             {
-            // InternalBmod.g:1260:1: ( ':' )
-            // InternalBmod.g:1261:2: ':'
+            // InternalBmodParser.g:1109:1: ( Colon )
+            // InternalBmodParser.g:1110:2: Colon
             {
              before(grammarAccess.getPersonAccess().getColonKeyword_4()); 
-            match(input,28,FOLLOW_2); 
+            match(input,Colon,FOLLOW_2); 
              after(grammarAccess.getPersonAccess().getColonKeyword_4()); 
 
             }
@@ -4006,22 +3383,17 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Person__Group__5"
-    // InternalBmod.g:1270:1: rule__Person__Group__5 : rule__Person__Group__5__Impl rule__Person__Group__6 ;
+    // InternalBmodParser.g:1119:1: rule__Person__Group__5 : rule__Person__Group__5__Impl ;
     public final void rule__Person__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1274:1: ( rule__Person__Group__5__Impl rule__Person__Group__6 )
-            // InternalBmod.g:1275:2: rule__Person__Group__5__Impl rule__Person__Group__6
+            // InternalBmodParser.g:1123:1: ( rule__Person__Group__5__Impl )
+            // InternalBmodParser.g:1124:2: rule__Person__Group__5__Impl
             {
-            pushFollow(FOLLOW_14);
-            rule__Person__Group__5__Impl();
-
-            state._fsp--;
-
             pushFollow(FOLLOW_2);
-            rule__Person__Group__6();
+            rule__Person__Group__5__Impl();
 
             state._fsp--;
 
@@ -4044,31 +3416,31 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Person__Group__5__Impl"
-    // InternalBmod.g:1282:1: rule__Person__Group__5__Impl : ( ( rule__Person__PerceptionAssignment_5 ) ) ;
+    // InternalBmodParser.g:1130:1: rule__Person__Group__5__Impl : ( ( rule__Person__ActionAssignment_5 ) ) ;
     public final void rule__Person__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1286:1: ( ( ( rule__Person__PerceptionAssignment_5 ) ) )
-            // InternalBmod.g:1287:1: ( ( rule__Person__PerceptionAssignment_5 ) )
+            // InternalBmodParser.g:1134:1: ( ( ( rule__Person__ActionAssignment_5 ) ) )
+            // InternalBmodParser.g:1135:1: ( ( rule__Person__ActionAssignment_5 ) )
             {
-            // InternalBmod.g:1287:1: ( ( rule__Person__PerceptionAssignment_5 ) )
-            // InternalBmod.g:1288:2: ( rule__Person__PerceptionAssignment_5 )
+            // InternalBmodParser.g:1135:1: ( ( rule__Person__ActionAssignment_5 ) )
+            // InternalBmodParser.g:1136:2: ( rule__Person__ActionAssignment_5 )
             {
-             before(grammarAccess.getPersonAccess().getPerceptionAssignment_5()); 
-            // InternalBmod.g:1289:2: ( rule__Person__PerceptionAssignment_5 )
-            // InternalBmod.g:1289:3: rule__Person__PerceptionAssignment_5
+             before(grammarAccess.getPersonAccess().getActionAssignment_5()); 
+            // InternalBmodParser.g:1137:2: ( rule__Person__ActionAssignment_5 )
+            // InternalBmodParser.g:1137:3: rule__Person__ActionAssignment_5
             {
             pushFollow(FOLLOW_2);
-            rule__Person__PerceptionAssignment_5();
+            rule__Person__ActionAssignment_5();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getPersonAccess().getPerceptionAssignment_5()); 
+             after(grammarAccess.getPersonAccess().getActionAssignment_5()); 
 
             }
 
@@ -4090,172 +3462,17 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Person__Group__5__Impl"
 
 
-    // $ANTLR start "rule__Person__Group__6"
-    // InternalBmod.g:1297:1: rule__Person__Group__6 : rule__Person__Group__6__Impl rule__Person__Group__7 ;
-    public final void rule__Person__Group__6() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1301:1: ( rule__Person__Group__6__Impl rule__Person__Group__7 )
-            // InternalBmod.g:1302:2: rule__Person__Group__6__Impl rule__Person__Group__7
-            {
-            pushFollow(FOLLOW_15);
-            rule__Person__Group__6__Impl();
-
-            state._fsp--;
-
-            pushFollow(FOLLOW_2);
-            rule__Person__Group__7();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Person__Group__6"
-
-
-    // $ANTLR start "rule__Person__Group__6__Impl"
-    // InternalBmod.g:1309:1: rule__Person__Group__6__Impl : ( ',' ) ;
-    public final void rule__Person__Group__6__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1313:1: ( ( ',' ) )
-            // InternalBmod.g:1314:1: ( ',' )
-            {
-            // InternalBmod.g:1314:1: ( ',' )
-            // InternalBmod.g:1315:2: ','
-            {
-             before(grammarAccess.getPersonAccess().getCommaKeyword_6()); 
-            match(input,29,FOLLOW_2); 
-             after(grammarAccess.getPersonAccess().getCommaKeyword_6()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Person__Group__6__Impl"
-
-
-    // $ANTLR start "rule__Person__Group__7"
-    // InternalBmod.g:1324:1: rule__Person__Group__7 : rule__Person__Group__7__Impl ;
-    public final void rule__Person__Group__7() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1328:1: ( rule__Person__Group__7__Impl )
-            // InternalBmod.g:1329:2: rule__Person__Group__7__Impl
-            {
-            pushFollow(FOLLOW_2);
-            rule__Person__Group__7__Impl();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Person__Group__7"
-
-
-    // $ANTLR start "rule__Person__Group__7__Impl"
-    // InternalBmod.g:1335:1: rule__Person__Group__7__Impl : ( ( rule__Person__ActionAssignment_7 ) ) ;
-    public final void rule__Person__Group__7__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1339:1: ( ( ( rule__Person__ActionAssignment_7 ) ) )
-            // InternalBmod.g:1340:1: ( ( rule__Person__ActionAssignment_7 ) )
-            {
-            // InternalBmod.g:1340:1: ( ( rule__Person__ActionAssignment_7 ) )
-            // InternalBmod.g:1341:2: ( rule__Person__ActionAssignment_7 )
-            {
-             before(grammarAccess.getPersonAccess().getActionAssignment_7()); 
-            // InternalBmod.g:1342:2: ( rule__Person__ActionAssignment_7 )
-            // InternalBmod.g:1342:3: rule__Person__ActionAssignment_7
-            {
-            pushFollow(FOLLOW_2);
-            rule__Person__ActionAssignment_7();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getPersonAccess().getActionAssignment_7()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Person__Group__7__Impl"
-
-
     // $ANTLR start "rule__Exit__Group__0"
-    // InternalBmod.g:1351:1: rule__Exit__Group__0 : rule__Exit__Group__0__Impl rule__Exit__Group__1 ;
+    // InternalBmodParser.g:1146:1: rule__Exit__Group__0 : rule__Exit__Group__0__Impl rule__Exit__Group__1 ;
     public final void rule__Exit__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1355:1: ( rule__Exit__Group__0__Impl rule__Exit__Group__1 )
-            // InternalBmod.g:1356:2: rule__Exit__Group__0__Impl rule__Exit__Group__1
+            // InternalBmodParser.g:1150:1: ( rule__Exit__Group__0__Impl rule__Exit__Group__1 )
+            // InternalBmodParser.g:1151:2: rule__Exit__Group__0__Impl rule__Exit__Group__1
             {
-            pushFollow(FOLLOW_11);
+            pushFollow(FOLLOW_16);
             rule__Exit__Group__0__Impl();
 
             state._fsp--;
@@ -4284,20 +3501,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Exit__Group__0__Impl"
-    // InternalBmod.g:1363:1: rule__Exit__Group__0__Impl : ( 'Exit' ) ;
+    // InternalBmodParser.g:1158:1: rule__Exit__Group__0__Impl : ( Exit ) ;
     public final void rule__Exit__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1367:1: ( ( 'Exit' ) )
-            // InternalBmod.g:1368:1: ( 'Exit' )
+            // InternalBmodParser.g:1162:1: ( ( Exit ) )
+            // InternalBmodParser.g:1163:1: ( Exit )
             {
-            // InternalBmod.g:1368:1: ( 'Exit' )
-            // InternalBmod.g:1369:2: 'Exit'
+            // InternalBmodParser.g:1163:1: ( Exit )
+            // InternalBmodParser.g:1164:2: Exit
             {
              before(grammarAccess.getExitAccess().getExitKeyword_0()); 
-            match(input,30,FOLLOW_2); 
+            match(input,Exit,FOLLOW_2); 
              after(grammarAccess.getExitAccess().getExitKeyword_0()); 
 
             }
@@ -4321,16 +3538,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Exit__Group__1"
-    // InternalBmod.g:1378:1: rule__Exit__Group__1 : rule__Exit__Group__1__Impl rule__Exit__Group__2 ;
+    // InternalBmodParser.g:1173:1: rule__Exit__Group__1 : rule__Exit__Group__1__Impl rule__Exit__Group__2 ;
     public final void rule__Exit__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1382:1: ( rule__Exit__Group__1__Impl rule__Exit__Group__2 )
-            // InternalBmod.g:1383:2: rule__Exit__Group__1__Impl rule__Exit__Group__2
+            // InternalBmodParser.g:1177:1: ( rule__Exit__Group__1__Impl rule__Exit__Group__2 )
+            // InternalBmodParser.g:1178:2: rule__Exit__Group__1__Impl rule__Exit__Group__2
             {
-            pushFollow(FOLLOW_9);
+            pushFollow(FOLLOW_14);
             rule__Exit__Group__1__Impl();
 
             state._fsp--;
@@ -4359,20 +3576,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Exit__Group__1__Impl"
-    // InternalBmod.g:1390:1: rule__Exit__Group__1__Impl : ( 'in' ) ;
+    // InternalBmodParser.g:1185:1: rule__Exit__Group__1__Impl : ( In ) ;
     public final void rule__Exit__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1394:1: ( ( 'in' ) )
-            // InternalBmod.g:1395:1: ( 'in' )
+            // InternalBmodParser.g:1189:1: ( ( In ) )
+            // InternalBmodParser.g:1190:1: ( In )
             {
-            // InternalBmod.g:1395:1: ( 'in' )
-            // InternalBmod.g:1396:2: 'in'
+            // InternalBmodParser.g:1190:1: ( In )
+            // InternalBmodParser.g:1191:2: In
             {
              before(grammarAccess.getExitAccess().getInKeyword_1()); 
-            match(input,27,FOLLOW_2); 
+            match(input,In,FOLLOW_2); 
              after(grammarAccess.getExitAccess().getInKeyword_1()); 
 
             }
@@ -4396,14 +3613,14 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Exit__Group__2"
-    // InternalBmod.g:1405:1: rule__Exit__Group__2 : rule__Exit__Group__2__Impl ;
+    // InternalBmodParser.g:1200:1: rule__Exit__Group__2 : rule__Exit__Group__2__Impl ;
     public final void rule__Exit__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1409:1: ( rule__Exit__Group__2__Impl )
-            // InternalBmod.g:1410:2: rule__Exit__Group__2__Impl
+            // InternalBmodParser.g:1204:1: ( rule__Exit__Group__2__Impl )
+            // InternalBmodParser.g:1205:2: rule__Exit__Group__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Exit__Group__2__Impl();
@@ -4429,21 +3646,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Exit__Group__2__Impl"
-    // InternalBmod.g:1416:1: rule__Exit__Group__2__Impl : ( ( rule__Exit__LocationAssignment_2 ) ) ;
+    // InternalBmodParser.g:1211:1: rule__Exit__Group__2__Impl : ( ( rule__Exit__LocationAssignment_2 ) ) ;
     public final void rule__Exit__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1420:1: ( ( ( rule__Exit__LocationAssignment_2 ) ) )
-            // InternalBmod.g:1421:1: ( ( rule__Exit__LocationAssignment_2 ) )
+            // InternalBmodParser.g:1215:1: ( ( ( rule__Exit__LocationAssignment_2 ) ) )
+            // InternalBmodParser.g:1216:1: ( ( rule__Exit__LocationAssignment_2 ) )
             {
-            // InternalBmod.g:1421:1: ( ( rule__Exit__LocationAssignment_2 ) )
-            // InternalBmod.g:1422:2: ( rule__Exit__LocationAssignment_2 )
+            // InternalBmodParser.g:1216:1: ( ( rule__Exit__LocationAssignment_2 ) )
+            // InternalBmodParser.g:1217:2: ( rule__Exit__LocationAssignment_2 )
             {
              before(grammarAccess.getExitAccess().getLocationAssignment_2()); 
-            // InternalBmod.g:1423:2: ( rule__Exit__LocationAssignment_2 )
-            // InternalBmod.g:1423:3: rule__Exit__LocationAssignment_2
+            // InternalBmodParser.g:1218:2: ( rule__Exit__LocationAssignment_2 )
+            // InternalBmodParser.g:1218:3: rule__Exit__LocationAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__Exit__LocationAssignment_2();
@@ -4476,16 +3693,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Fire__Group__0"
-    // InternalBmod.g:1432:1: rule__Fire__Group__0 : rule__Fire__Group__0__Impl rule__Fire__Group__1 ;
+    // InternalBmodParser.g:1227:1: rule__Fire__Group__0 : rule__Fire__Group__0__Impl rule__Fire__Group__1 ;
     public final void rule__Fire__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1436:1: ( rule__Fire__Group__0__Impl rule__Fire__Group__1 )
-            // InternalBmod.g:1437:2: rule__Fire__Group__0__Impl rule__Fire__Group__1
+            // InternalBmodParser.g:1231:1: ( rule__Fire__Group__0__Impl rule__Fire__Group__1 )
+            // InternalBmodParser.g:1232:2: rule__Fire__Group__0__Impl rule__Fire__Group__1
             {
-            pushFollow(FOLLOW_11);
+            pushFollow(FOLLOW_16);
             rule__Fire__Group__0__Impl();
 
             state._fsp--;
@@ -4514,20 +3731,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Fire__Group__0__Impl"
-    // InternalBmod.g:1444:1: rule__Fire__Group__0__Impl : ( 'Fire' ) ;
+    // InternalBmodParser.g:1239:1: rule__Fire__Group__0__Impl : ( Fire ) ;
     public final void rule__Fire__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1448:1: ( ( 'Fire' ) )
-            // InternalBmod.g:1449:1: ( 'Fire' )
+            // InternalBmodParser.g:1243:1: ( ( Fire ) )
+            // InternalBmodParser.g:1244:1: ( Fire )
             {
-            // InternalBmod.g:1449:1: ( 'Fire' )
-            // InternalBmod.g:1450:2: 'Fire'
+            // InternalBmodParser.g:1244:1: ( Fire )
+            // InternalBmodParser.g:1245:2: Fire
             {
              before(grammarAccess.getFireAccess().getFireKeyword_0()); 
-            match(input,31,FOLLOW_2); 
+            match(input,Fire,FOLLOW_2); 
              after(grammarAccess.getFireAccess().getFireKeyword_0()); 
 
             }
@@ -4551,16 +3768,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Fire__Group__1"
-    // InternalBmod.g:1459:1: rule__Fire__Group__1 : rule__Fire__Group__1__Impl rule__Fire__Group__2 ;
+    // InternalBmodParser.g:1254:1: rule__Fire__Group__1 : rule__Fire__Group__1__Impl rule__Fire__Group__2 ;
     public final void rule__Fire__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1463:1: ( rule__Fire__Group__1__Impl rule__Fire__Group__2 )
-            // InternalBmod.g:1464:2: rule__Fire__Group__1__Impl rule__Fire__Group__2
+            // InternalBmodParser.g:1258:1: ( rule__Fire__Group__1__Impl rule__Fire__Group__2 )
+            // InternalBmodParser.g:1259:2: rule__Fire__Group__1__Impl rule__Fire__Group__2
             {
-            pushFollow(FOLLOW_9);
+            pushFollow(FOLLOW_14);
             rule__Fire__Group__1__Impl();
 
             state._fsp--;
@@ -4589,20 +3806,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Fire__Group__1__Impl"
-    // InternalBmod.g:1471:1: rule__Fire__Group__1__Impl : ( 'in' ) ;
+    // InternalBmodParser.g:1266:1: rule__Fire__Group__1__Impl : ( In ) ;
     public final void rule__Fire__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1475:1: ( ( 'in' ) )
-            // InternalBmod.g:1476:1: ( 'in' )
+            // InternalBmodParser.g:1270:1: ( ( In ) )
+            // InternalBmodParser.g:1271:1: ( In )
             {
-            // InternalBmod.g:1476:1: ( 'in' )
-            // InternalBmod.g:1477:2: 'in'
+            // InternalBmodParser.g:1271:1: ( In )
+            // InternalBmodParser.g:1272:2: In
             {
              before(grammarAccess.getFireAccess().getInKeyword_1()); 
-            match(input,27,FOLLOW_2); 
+            match(input,In,FOLLOW_2); 
              after(grammarAccess.getFireAccess().getInKeyword_1()); 
 
             }
@@ -4626,14 +3843,14 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Fire__Group__2"
-    // InternalBmod.g:1486:1: rule__Fire__Group__2 : rule__Fire__Group__2__Impl ;
+    // InternalBmodParser.g:1281:1: rule__Fire__Group__2 : rule__Fire__Group__2__Impl ;
     public final void rule__Fire__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1490:1: ( rule__Fire__Group__2__Impl )
-            // InternalBmod.g:1491:2: rule__Fire__Group__2__Impl
+            // InternalBmodParser.g:1285:1: ( rule__Fire__Group__2__Impl )
+            // InternalBmodParser.g:1286:2: rule__Fire__Group__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Fire__Group__2__Impl();
@@ -4659,21 +3876,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Fire__Group__2__Impl"
-    // InternalBmod.g:1497:1: rule__Fire__Group__2__Impl : ( ( rule__Fire__LocationAssignment_2 ) ) ;
+    // InternalBmodParser.g:1292:1: rule__Fire__Group__2__Impl : ( ( rule__Fire__LocationAssignment_2 ) ) ;
     public final void rule__Fire__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1501:1: ( ( ( rule__Fire__LocationAssignment_2 ) ) )
-            // InternalBmod.g:1502:1: ( ( rule__Fire__LocationAssignment_2 ) )
+            // InternalBmodParser.g:1296:1: ( ( ( rule__Fire__LocationAssignment_2 ) ) )
+            // InternalBmodParser.g:1297:1: ( ( rule__Fire__LocationAssignment_2 ) )
             {
-            // InternalBmod.g:1502:1: ( ( rule__Fire__LocationAssignment_2 ) )
-            // InternalBmod.g:1503:2: ( rule__Fire__LocationAssignment_2 )
+            // InternalBmodParser.g:1297:1: ( ( rule__Fire__LocationAssignment_2 ) )
+            // InternalBmodParser.g:1298:2: ( rule__Fire__LocationAssignment_2 )
             {
              before(grammarAccess.getFireAccess().getLocationAssignment_2()); 
-            // InternalBmod.g:1504:2: ( rule__Fire__LocationAssignment_2 )
-            // InternalBmod.g:1504:3: rule__Fire__LocationAssignment_2
+            // InternalBmodParser.g:1299:2: ( rule__Fire__LocationAssignment_2 )
+            // InternalBmodParser.g:1299:3: rule__Fire__LocationAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__Fire__LocationAssignment_2();
@@ -4706,16 +3923,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EmergencySign__Group__0"
-    // InternalBmod.g:1513:1: rule__EmergencySign__Group__0 : rule__EmergencySign__Group__0__Impl rule__EmergencySign__Group__1 ;
+    // InternalBmodParser.g:1308:1: rule__EmergencySign__Group__0 : rule__EmergencySign__Group__0__Impl rule__EmergencySign__Group__1 ;
     public final void rule__EmergencySign__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1517:1: ( rule__EmergencySign__Group__0__Impl rule__EmergencySign__Group__1 )
-            // InternalBmod.g:1518:2: rule__EmergencySign__Group__0__Impl rule__EmergencySign__Group__1
+            // InternalBmodParser.g:1312:1: ( rule__EmergencySign__Group__0__Impl rule__EmergencySign__Group__1 )
+            // InternalBmodParser.g:1313:2: rule__EmergencySign__Group__0__Impl rule__EmergencySign__Group__1
             {
-            pushFollow(FOLLOW_16);
+            pushFollow(FOLLOW_13);
             rule__EmergencySign__Group__0__Impl();
 
             state._fsp--;
@@ -4744,21 +3961,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EmergencySign__Group__0__Impl"
-    // InternalBmod.g:1525:1: rule__EmergencySign__Group__0__Impl : ( 'Sign' ) ;
+    // InternalBmodParser.g:1320:1: rule__EmergencySign__Group__0__Impl : ( EmergencySign ) ;
     public final void rule__EmergencySign__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1529:1: ( ( 'Sign' ) )
-            // InternalBmod.g:1530:1: ( 'Sign' )
+            // InternalBmodParser.g:1324:1: ( ( EmergencySign ) )
+            // InternalBmodParser.g:1325:1: ( EmergencySign )
             {
-            // InternalBmod.g:1530:1: ( 'Sign' )
-            // InternalBmod.g:1531:2: 'Sign'
+            // InternalBmodParser.g:1325:1: ( EmergencySign )
+            // InternalBmodParser.g:1326:2: EmergencySign
             {
-             before(grammarAccess.getEmergencySignAccess().getSignKeyword_0()); 
-            match(input,32,FOLLOW_2); 
-             after(grammarAccess.getEmergencySignAccess().getSignKeyword_0()); 
+             before(grammarAccess.getEmergencySignAccess().getEmergencySignKeyword_0()); 
+            match(input,EmergencySign,FOLLOW_2); 
+             after(grammarAccess.getEmergencySignAccess().getEmergencySignKeyword_0()); 
 
             }
 
@@ -4781,16 +3998,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EmergencySign__Group__1"
-    // InternalBmod.g:1540:1: rule__EmergencySign__Group__1 : rule__EmergencySign__Group__1__Impl rule__EmergencySign__Group__2 ;
+    // InternalBmodParser.g:1335:1: rule__EmergencySign__Group__1 : rule__EmergencySign__Group__1__Impl rule__EmergencySign__Group__2 ;
     public final void rule__EmergencySign__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1544:1: ( rule__EmergencySign__Group__1__Impl rule__EmergencySign__Group__2 )
-            // InternalBmod.g:1545:2: rule__EmergencySign__Group__1__Impl rule__EmergencySign__Group__2
+            // InternalBmodParser.g:1339:1: ( rule__EmergencySign__Group__1__Impl rule__EmergencySign__Group__2 )
+            // InternalBmodParser.g:1340:2: rule__EmergencySign__Group__1__Impl rule__EmergencySign__Group__2
             {
-            pushFollow(FOLLOW_5);
+            pushFollow(FOLLOW_7);
             rule__EmergencySign__Group__1__Impl();
 
             state._fsp--;
@@ -4819,21 +4036,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EmergencySign__Group__1__Impl"
-    // InternalBmod.g:1552:1: rule__EmergencySign__Group__1__Impl : ( 'on' ) ;
+    // InternalBmodParser.g:1347:1: rule__EmergencySign__Group__1__Impl : ( From ) ;
     public final void rule__EmergencySign__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1556:1: ( ( 'on' ) )
-            // InternalBmod.g:1557:1: ( 'on' )
+            // InternalBmodParser.g:1351:1: ( ( From ) )
+            // InternalBmodParser.g:1352:1: ( From )
             {
-            // InternalBmod.g:1557:1: ( 'on' )
-            // InternalBmod.g:1558:2: 'on'
+            // InternalBmodParser.g:1352:1: ( From )
+            // InternalBmodParser.g:1353:2: From
             {
-             before(grammarAccess.getEmergencySignAccess().getOnKeyword_1()); 
-            match(input,33,FOLLOW_2); 
-             after(grammarAccess.getEmergencySignAccess().getOnKeyword_1()); 
+             before(grammarAccess.getEmergencySignAccess().getFromKeyword_1()); 
+            match(input,From,FOLLOW_2); 
+             after(grammarAccess.getEmergencySignAccess().getFromKeyword_1()); 
 
             }
 
@@ -4856,16 +4073,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EmergencySign__Group__2"
-    // InternalBmod.g:1567:1: rule__EmergencySign__Group__2 : rule__EmergencySign__Group__2__Impl rule__EmergencySign__Group__3 ;
+    // InternalBmodParser.g:1362:1: rule__EmergencySign__Group__2 : rule__EmergencySign__Group__2__Impl rule__EmergencySign__Group__3 ;
     public final void rule__EmergencySign__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1571:1: ( rule__EmergencySign__Group__2__Impl rule__EmergencySign__Group__3 )
-            // InternalBmod.g:1572:2: rule__EmergencySign__Group__2__Impl rule__EmergencySign__Group__3
+            // InternalBmodParser.g:1366:1: ( rule__EmergencySign__Group__2__Impl rule__EmergencySign__Group__3 )
+            // InternalBmodParser.g:1367:2: rule__EmergencySign__Group__2__Impl rule__EmergencySign__Group__3
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_15);
             rule__EmergencySign__Group__2__Impl();
 
             state._fsp--;
@@ -4894,31 +4111,31 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EmergencySign__Group__2__Impl"
-    // InternalBmod.g:1579:1: rule__EmergencySign__Group__2__Impl : ( ( rule__EmergencySign__OnAssignment_2 ) ) ;
+    // InternalBmodParser.g:1374:1: rule__EmergencySign__Group__2__Impl : ( ( rule__EmergencySign__FromAssignment_2 ) ) ;
     public final void rule__EmergencySign__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1583:1: ( ( ( rule__EmergencySign__OnAssignment_2 ) ) )
-            // InternalBmod.g:1584:1: ( ( rule__EmergencySign__OnAssignment_2 ) )
+            // InternalBmodParser.g:1378:1: ( ( ( rule__EmergencySign__FromAssignment_2 ) ) )
+            // InternalBmodParser.g:1379:1: ( ( rule__EmergencySign__FromAssignment_2 ) )
             {
-            // InternalBmod.g:1584:1: ( ( rule__EmergencySign__OnAssignment_2 ) )
-            // InternalBmod.g:1585:2: ( rule__EmergencySign__OnAssignment_2 )
+            // InternalBmodParser.g:1379:1: ( ( rule__EmergencySign__FromAssignment_2 ) )
+            // InternalBmodParser.g:1380:2: ( rule__EmergencySign__FromAssignment_2 )
             {
-             before(grammarAccess.getEmergencySignAccess().getOnAssignment_2()); 
-            // InternalBmod.g:1586:2: ( rule__EmergencySign__OnAssignment_2 )
-            // InternalBmod.g:1586:3: rule__EmergencySign__OnAssignment_2
+             before(grammarAccess.getEmergencySignAccess().getFromAssignment_2()); 
+            // InternalBmodParser.g:1381:2: ( rule__EmergencySign__FromAssignment_2 )
+            // InternalBmodParser.g:1381:3: rule__EmergencySign__FromAssignment_2
             {
             pushFollow(FOLLOW_2);
-            rule__EmergencySign__OnAssignment_2();
+            rule__EmergencySign__FromAssignment_2();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getEmergencySignAccess().getOnAssignment_2()); 
+             after(grammarAccess.getEmergencySignAccess().getFromAssignment_2()); 
 
             }
 
@@ -4941,14 +4158,14 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EmergencySign__Group__3"
-    // InternalBmod.g:1594:1: rule__EmergencySign__Group__3 : rule__EmergencySign__Group__3__Impl ;
+    // InternalBmodParser.g:1389:1: rule__EmergencySign__Group__3 : rule__EmergencySign__Group__3__Impl ;
     public final void rule__EmergencySign__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1598:1: ( rule__EmergencySign__Group__3__Impl )
-            // InternalBmod.g:1599:2: rule__EmergencySign__Group__3__Impl
+            // InternalBmodParser.g:1393:1: ( rule__EmergencySign__Group__3__Impl )
+            // InternalBmodParser.g:1394:2: rule__EmergencySign__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__EmergencySign__Group__3__Impl();
@@ -4974,31 +4191,31 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EmergencySign__Group__3__Impl"
-    // InternalBmod.g:1605:1: rule__EmergencySign__Group__3__Impl : ( ( rule__EmergencySign__ToAssignment_3 ) ) ;
+    // InternalBmodParser.g:1400:1: rule__EmergencySign__Group__3__Impl : ( ( rule__EmergencySign__RefAssignment_3 ) ) ;
     public final void rule__EmergencySign__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1609:1: ( ( ( rule__EmergencySign__ToAssignment_3 ) ) )
-            // InternalBmod.g:1610:1: ( ( rule__EmergencySign__ToAssignment_3 ) )
+            // InternalBmodParser.g:1404:1: ( ( ( rule__EmergencySign__RefAssignment_3 ) ) )
+            // InternalBmodParser.g:1405:1: ( ( rule__EmergencySign__RefAssignment_3 ) )
             {
-            // InternalBmod.g:1610:1: ( ( rule__EmergencySign__ToAssignment_3 ) )
-            // InternalBmod.g:1611:2: ( rule__EmergencySign__ToAssignment_3 )
+            // InternalBmodParser.g:1405:1: ( ( rule__EmergencySign__RefAssignment_3 ) )
+            // InternalBmodParser.g:1406:2: ( rule__EmergencySign__RefAssignment_3 )
             {
-             before(grammarAccess.getEmergencySignAccess().getToAssignment_3()); 
-            // InternalBmod.g:1612:2: ( rule__EmergencySign__ToAssignment_3 )
-            // InternalBmod.g:1612:3: rule__EmergencySign__ToAssignment_3
+             before(grammarAccess.getEmergencySignAccess().getRefAssignment_3()); 
+            // InternalBmodParser.g:1407:2: ( rule__EmergencySign__RefAssignment_3 )
+            // InternalBmodParser.g:1407:3: rule__EmergencySign__RefAssignment_3
             {
             pushFollow(FOLLOW_2);
-            rule__EmergencySign__ToAssignment_3();
+            rule__EmergencySign__RefAssignment_3();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getEmergencySignAccess().getToAssignment_3()); 
+             after(grammarAccess.getEmergencySignAccess().getRefAssignment_3()); 
 
             }
 
@@ -5021,16 +4238,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DoorRef__Group__0"
-    // InternalBmod.g:1621:1: rule__DoorRef__Group__0 : rule__DoorRef__Group__0__Impl rule__DoorRef__Group__1 ;
+    // InternalBmodParser.g:1416:1: rule__DoorRef__Group__0 : rule__DoorRef__Group__0__Impl rule__DoorRef__Group__1 ;
     public final void rule__DoorRef__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1625:1: ( rule__DoorRef__Group__0__Impl rule__DoorRef__Group__1 )
-            // InternalBmod.g:1626:2: rule__DoorRef__Group__0__Impl rule__DoorRef__Group__1
+            // InternalBmodParser.g:1420:1: ( rule__DoorRef__Group__0__Impl rule__DoorRef__Group__1 )
+            // InternalBmodParser.g:1421:2: rule__DoorRef__Group__0__Impl rule__DoorRef__Group__1
             {
-            pushFollow(FOLLOW_5);
+            pushFollow(FOLLOW_7);
             rule__DoorRef__Group__0__Impl();
 
             state._fsp--;
@@ -5059,20 +4276,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DoorRef__Group__0__Impl"
-    // InternalBmod.g:1633:1: rule__DoorRef__Group__0__Impl : ( 'to' ) ;
+    // InternalBmodParser.g:1428:1: rule__DoorRef__Group__0__Impl : ( To ) ;
     public final void rule__DoorRef__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1637:1: ( ( 'to' ) )
-            // InternalBmod.g:1638:1: ( 'to' )
+            // InternalBmodParser.g:1432:1: ( ( To ) )
+            // InternalBmodParser.g:1433:1: ( To )
             {
-            // InternalBmod.g:1638:1: ( 'to' )
-            // InternalBmod.g:1639:2: 'to'
+            // InternalBmodParser.g:1433:1: ( To )
+            // InternalBmodParser.g:1434:2: To
             {
              before(grammarAccess.getDoorRefAccess().getToKeyword_0()); 
-            match(input,23,FOLLOW_2); 
+            match(input,To,FOLLOW_2); 
              after(grammarAccess.getDoorRefAccess().getToKeyword_0()); 
 
             }
@@ -5096,14 +4313,14 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DoorRef__Group__1"
-    // InternalBmod.g:1648:1: rule__DoorRef__Group__1 : rule__DoorRef__Group__1__Impl ;
+    // InternalBmodParser.g:1443:1: rule__DoorRef__Group__1 : rule__DoorRef__Group__1__Impl ;
     public final void rule__DoorRef__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1652:1: ( rule__DoorRef__Group__1__Impl )
-            // InternalBmod.g:1653:2: rule__DoorRef__Group__1__Impl
+            // InternalBmodParser.g:1447:1: ( rule__DoorRef__Group__1__Impl )
+            // InternalBmodParser.g:1448:2: rule__DoorRef__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__DoorRef__Group__1__Impl();
@@ -5129,31 +4346,31 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DoorRef__Group__1__Impl"
-    // InternalBmod.g:1659:1: rule__DoorRef__Group__1__Impl : ( ( rule__DoorRef__RefAssignment_1 ) ) ;
+    // InternalBmodParser.g:1454:1: rule__DoorRef__Group__1__Impl : ( ( rule__DoorRef__ToAssignment_1 ) ) ;
     public final void rule__DoorRef__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1663:1: ( ( ( rule__DoorRef__RefAssignment_1 ) ) )
-            // InternalBmod.g:1664:1: ( ( rule__DoorRef__RefAssignment_1 ) )
+            // InternalBmodParser.g:1458:1: ( ( ( rule__DoorRef__ToAssignment_1 ) ) )
+            // InternalBmodParser.g:1459:1: ( ( rule__DoorRef__ToAssignment_1 ) )
             {
-            // InternalBmod.g:1664:1: ( ( rule__DoorRef__RefAssignment_1 ) )
-            // InternalBmod.g:1665:2: ( rule__DoorRef__RefAssignment_1 )
+            // InternalBmodParser.g:1459:1: ( ( rule__DoorRef__ToAssignment_1 ) )
+            // InternalBmodParser.g:1460:2: ( rule__DoorRef__ToAssignment_1 )
             {
-             before(grammarAccess.getDoorRefAccess().getRefAssignment_1()); 
-            // InternalBmod.g:1666:2: ( rule__DoorRef__RefAssignment_1 )
-            // InternalBmod.g:1666:3: rule__DoorRef__RefAssignment_1
+             before(grammarAccess.getDoorRefAccess().getToAssignment_1()); 
+            // InternalBmodParser.g:1461:2: ( rule__DoorRef__ToAssignment_1 )
+            // InternalBmodParser.g:1461:3: rule__DoorRef__ToAssignment_1
             {
             pushFollow(FOLLOW_2);
-            rule__DoorRef__RefAssignment_1();
+            rule__DoorRef__ToAssignment_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getDoorRefAccess().getRefAssignment_1()); 
+             after(grammarAccess.getDoorRefAccess().getToAssignment_1()); 
 
             }
 
@@ -5175,332 +4392,17 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__DoorRef__Group__1__Impl"
 
 
-    // $ANTLR start "rule__DangerousCondition__Group__0"
-    // InternalBmod.g:1675:1: rule__DangerousCondition__Group__0 : rule__DangerousCondition__Group__0__Impl rule__DangerousCondition__Group__1 ;
-    public final void rule__DangerousCondition__Group__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1679:1: ( rule__DangerousCondition__Group__0__Impl rule__DangerousCondition__Group__1 )
-            // InternalBmod.g:1680:2: rule__DangerousCondition__Group__0__Impl rule__DangerousCondition__Group__1
-            {
-            pushFollow(FOLLOW_16);
-            rule__DangerousCondition__Group__0__Impl();
-
-            state._fsp--;
-
-            pushFollow(FOLLOW_2);
-            rule__DangerousCondition__Group__1();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__DangerousCondition__Group__0"
-
-
-    // $ANTLR start "rule__DangerousCondition__Group__0__Impl"
-    // InternalBmod.g:1687:1: rule__DangerousCondition__Group__0__Impl : ( 'Condition' ) ;
-    public final void rule__DangerousCondition__Group__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1691:1: ( ( 'Condition' ) )
-            // InternalBmod.g:1692:1: ( 'Condition' )
-            {
-            // InternalBmod.g:1692:1: ( 'Condition' )
-            // InternalBmod.g:1693:2: 'Condition'
-            {
-             before(grammarAccess.getDangerousConditionAccess().getConditionKeyword_0()); 
-            match(input,34,FOLLOW_2); 
-             after(grammarAccess.getDangerousConditionAccess().getConditionKeyword_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__DangerousCondition__Group__0__Impl"
-
-
-    // $ANTLR start "rule__DangerousCondition__Group__1"
-    // InternalBmod.g:1702:1: rule__DangerousCondition__Group__1 : rule__DangerousCondition__Group__1__Impl rule__DangerousCondition__Group__2 ;
-    public final void rule__DangerousCondition__Group__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1706:1: ( rule__DangerousCondition__Group__1__Impl rule__DangerousCondition__Group__2 )
-            // InternalBmod.g:1707:2: rule__DangerousCondition__Group__1__Impl rule__DangerousCondition__Group__2
-            {
-            pushFollow(FOLLOW_5);
-            rule__DangerousCondition__Group__1__Impl();
-
-            state._fsp--;
-
-            pushFollow(FOLLOW_2);
-            rule__DangerousCondition__Group__2();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__DangerousCondition__Group__1"
-
-
-    // $ANTLR start "rule__DangerousCondition__Group__1__Impl"
-    // InternalBmod.g:1714:1: rule__DangerousCondition__Group__1__Impl : ( 'on' ) ;
-    public final void rule__DangerousCondition__Group__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1718:1: ( ( 'on' ) )
-            // InternalBmod.g:1719:1: ( 'on' )
-            {
-            // InternalBmod.g:1719:1: ( 'on' )
-            // InternalBmod.g:1720:2: 'on'
-            {
-             before(grammarAccess.getDangerousConditionAccess().getOnKeyword_1()); 
-            match(input,33,FOLLOW_2); 
-             after(grammarAccess.getDangerousConditionAccess().getOnKeyword_1()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__DangerousCondition__Group__1__Impl"
-
-
-    // $ANTLR start "rule__DangerousCondition__Group__2"
-    // InternalBmod.g:1729:1: rule__DangerousCondition__Group__2 : rule__DangerousCondition__Group__2__Impl rule__DangerousCondition__Group__3 ;
-    public final void rule__DangerousCondition__Group__2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1733:1: ( rule__DangerousCondition__Group__2__Impl rule__DangerousCondition__Group__3 )
-            // InternalBmod.g:1734:2: rule__DangerousCondition__Group__2__Impl rule__DangerousCondition__Group__3
-            {
-            pushFollow(FOLLOW_17);
-            rule__DangerousCondition__Group__2__Impl();
-
-            state._fsp--;
-
-            pushFollow(FOLLOW_2);
-            rule__DangerousCondition__Group__3();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__DangerousCondition__Group__2"
-
-
-    // $ANTLR start "rule__DangerousCondition__Group__2__Impl"
-    // InternalBmod.g:1741:1: rule__DangerousCondition__Group__2__Impl : ( ( rule__DangerousCondition__OnAssignment_2 ) ) ;
-    public final void rule__DangerousCondition__Group__2__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1745:1: ( ( ( rule__DangerousCondition__OnAssignment_2 ) ) )
-            // InternalBmod.g:1746:1: ( ( rule__DangerousCondition__OnAssignment_2 ) )
-            {
-            // InternalBmod.g:1746:1: ( ( rule__DangerousCondition__OnAssignment_2 ) )
-            // InternalBmod.g:1747:2: ( rule__DangerousCondition__OnAssignment_2 )
-            {
-             before(grammarAccess.getDangerousConditionAccess().getOnAssignment_2()); 
-            // InternalBmod.g:1748:2: ( rule__DangerousCondition__OnAssignment_2 )
-            // InternalBmod.g:1748:3: rule__DangerousCondition__OnAssignment_2
-            {
-            pushFollow(FOLLOW_2);
-            rule__DangerousCondition__OnAssignment_2();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getDangerousConditionAccess().getOnAssignment_2()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__DangerousCondition__Group__2__Impl"
-
-
-    // $ANTLR start "rule__DangerousCondition__Group__3"
-    // InternalBmod.g:1756:1: rule__DangerousCondition__Group__3 : rule__DangerousCondition__Group__3__Impl ;
-    public final void rule__DangerousCondition__Group__3() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1760:1: ( rule__DangerousCondition__Group__3__Impl )
-            // InternalBmod.g:1761:2: rule__DangerousCondition__Group__3__Impl
-            {
-            pushFollow(FOLLOW_2);
-            rule__DangerousCondition__Group__3__Impl();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__DangerousCondition__Group__3"
-
-
-    // $ANTLR start "rule__DangerousCondition__Group__3__Impl"
-    // InternalBmod.g:1767:1: rule__DangerousCondition__Group__3__Impl : ( ( rule__DangerousCondition__AmountAssignment_3 ) ) ;
-    public final void rule__DangerousCondition__Group__3__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:1771:1: ( ( ( rule__DangerousCondition__AmountAssignment_3 ) ) )
-            // InternalBmod.g:1772:1: ( ( rule__DangerousCondition__AmountAssignment_3 ) )
-            {
-            // InternalBmod.g:1772:1: ( ( rule__DangerousCondition__AmountAssignment_3 ) )
-            // InternalBmod.g:1773:2: ( rule__DangerousCondition__AmountAssignment_3 )
-            {
-             before(grammarAccess.getDangerousConditionAccess().getAmountAssignment_3()); 
-            // InternalBmod.g:1774:2: ( rule__DangerousCondition__AmountAssignment_3 )
-            // InternalBmod.g:1774:3: rule__DangerousCondition__AmountAssignment_3
-            {
-            pushFollow(FOLLOW_2);
-            rule__DangerousCondition__AmountAssignment_3();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getDangerousConditionAccess().getAmountAssignment_3()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__DangerousCondition__Group__3__Impl"
-
-
     // $ANTLR start "rule__Coordinate__Group__0"
-    // InternalBmod.g:1783:1: rule__Coordinate__Group__0 : rule__Coordinate__Group__0__Impl rule__Coordinate__Group__1 ;
+    // InternalBmodParser.g:1470:1: rule__Coordinate__Group__0 : rule__Coordinate__Group__0__Impl rule__Coordinate__Group__1 ;
     public final void rule__Coordinate__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1787:1: ( rule__Coordinate__Group__0__Impl rule__Coordinate__Group__1 )
-            // InternalBmod.g:1788:2: rule__Coordinate__Group__0__Impl rule__Coordinate__Group__1
+            // InternalBmodParser.g:1474:1: ( rule__Coordinate__Group__0__Impl rule__Coordinate__Group__1 )
+            // InternalBmodParser.g:1475:2: rule__Coordinate__Group__0__Impl rule__Coordinate__Group__1
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_11);
             rule__Coordinate__Group__0__Impl();
 
             state._fsp--;
@@ -5529,20 +4431,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Coordinate__Group__0__Impl"
-    // InternalBmod.g:1795:1: rule__Coordinate__Group__0__Impl : ( '(' ) ;
+    // InternalBmodParser.g:1482:1: rule__Coordinate__Group__0__Impl : ( LeftParenthesis ) ;
     public final void rule__Coordinate__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1799:1: ( ( '(' ) )
-            // InternalBmod.g:1800:1: ( '(' )
+            // InternalBmodParser.g:1486:1: ( ( LeftParenthesis ) )
+            // InternalBmodParser.g:1487:1: ( LeftParenthesis )
             {
-            // InternalBmod.g:1800:1: ( '(' )
-            // InternalBmod.g:1801:2: '('
+            // InternalBmodParser.g:1487:1: ( LeftParenthesis )
+            // InternalBmodParser.g:1488:2: LeftParenthesis
             {
              before(grammarAccess.getCoordinateAccess().getLeftParenthesisKeyword_0()); 
-            match(input,35,FOLLOW_2); 
+            match(input,LeftParenthesis,FOLLOW_2); 
              after(grammarAccess.getCoordinateAccess().getLeftParenthesisKeyword_0()); 
 
             }
@@ -5566,16 +4468,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Coordinate__Group__1"
-    // InternalBmod.g:1810:1: rule__Coordinate__Group__1 : rule__Coordinate__Group__1__Impl rule__Coordinate__Group__2 ;
+    // InternalBmodParser.g:1497:1: rule__Coordinate__Group__1 : rule__Coordinate__Group__1__Impl rule__Coordinate__Group__2 ;
     public final void rule__Coordinate__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1814:1: ( rule__Coordinate__Group__1__Impl rule__Coordinate__Group__2 )
-            // InternalBmod.g:1815:2: rule__Coordinate__Group__1__Impl rule__Coordinate__Group__2
+            // InternalBmodParser.g:1501:1: ( rule__Coordinate__Group__1__Impl rule__Coordinate__Group__2 )
+            // InternalBmodParser.g:1502:2: rule__Coordinate__Group__1__Impl rule__Coordinate__Group__2
             {
-            pushFollow(FOLLOW_14);
+            pushFollow(FOLLOW_18);
             rule__Coordinate__Group__1__Impl();
 
             state._fsp--;
@@ -5604,21 +4506,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Coordinate__Group__1__Impl"
-    // InternalBmod.g:1822:1: rule__Coordinate__Group__1__Impl : ( ( rule__Coordinate__XAssignment_1 ) ) ;
+    // InternalBmodParser.g:1509:1: rule__Coordinate__Group__1__Impl : ( ( rule__Coordinate__XAssignment_1 ) ) ;
     public final void rule__Coordinate__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1826:1: ( ( ( rule__Coordinate__XAssignment_1 ) ) )
-            // InternalBmod.g:1827:1: ( ( rule__Coordinate__XAssignment_1 ) )
+            // InternalBmodParser.g:1513:1: ( ( ( rule__Coordinate__XAssignment_1 ) ) )
+            // InternalBmodParser.g:1514:1: ( ( rule__Coordinate__XAssignment_1 ) )
             {
-            // InternalBmod.g:1827:1: ( ( rule__Coordinate__XAssignment_1 ) )
-            // InternalBmod.g:1828:2: ( rule__Coordinate__XAssignment_1 )
+            // InternalBmodParser.g:1514:1: ( ( rule__Coordinate__XAssignment_1 ) )
+            // InternalBmodParser.g:1515:2: ( rule__Coordinate__XAssignment_1 )
             {
              before(grammarAccess.getCoordinateAccess().getXAssignment_1()); 
-            // InternalBmod.g:1829:2: ( rule__Coordinate__XAssignment_1 )
-            // InternalBmod.g:1829:3: rule__Coordinate__XAssignment_1
+            // InternalBmodParser.g:1516:2: ( rule__Coordinate__XAssignment_1 )
+            // InternalBmodParser.g:1516:3: rule__Coordinate__XAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__Coordinate__XAssignment_1();
@@ -5651,16 +4553,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Coordinate__Group__2"
-    // InternalBmod.g:1837:1: rule__Coordinate__Group__2 : rule__Coordinate__Group__2__Impl rule__Coordinate__Group__3 ;
+    // InternalBmodParser.g:1524:1: rule__Coordinate__Group__2 : rule__Coordinate__Group__2__Impl rule__Coordinate__Group__3 ;
     public final void rule__Coordinate__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1841:1: ( rule__Coordinate__Group__2__Impl rule__Coordinate__Group__3 )
-            // InternalBmod.g:1842:2: rule__Coordinate__Group__2__Impl rule__Coordinate__Group__3
+            // InternalBmodParser.g:1528:1: ( rule__Coordinate__Group__2__Impl rule__Coordinate__Group__3 )
+            // InternalBmodParser.g:1529:2: rule__Coordinate__Group__2__Impl rule__Coordinate__Group__3
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_11);
             rule__Coordinate__Group__2__Impl();
 
             state._fsp--;
@@ -5689,20 +4591,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Coordinate__Group__2__Impl"
-    // InternalBmod.g:1849:1: rule__Coordinate__Group__2__Impl : ( ',' ) ;
+    // InternalBmodParser.g:1536:1: rule__Coordinate__Group__2__Impl : ( Comma ) ;
     public final void rule__Coordinate__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1853:1: ( ( ',' ) )
-            // InternalBmod.g:1854:1: ( ',' )
+            // InternalBmodParser.g:1540:1: ( ( Comma ) )
+            // InternalBmodParser.g:1541:1: ( Comma )
             {
-            // InternalBmod.g:1854:1: ( ',' )
-            // InternalBmod.g:1855:2: ','
+            // InternalBmodParser.g:1541:1: ( Comma )
+            // InternalBmodParser.g:1542:2: Comma
             {
              before(grammarAccess.getCoordinateAccess().getCommaKeyword_2()); 
-            match(input,29,FOLLOW_2); 
+            match(input,Comma,FOLLOW_2); 
              after(grammarAccess.getCoordinateAccess().getCommaKeyword_2()); 
 
             }
@@ -5726,16 +4628,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Coordinate__Group__3"
-    // InternalBmod.g:1864:1: rule__Coordinate__Group__3 : rule__Coordinate__Group__3__Impl rule__Coordinate__Group__4 ;
+    // InternalBmodParser.g:1551:1: rule__Coordinate__Group__3 : rule__Coordinate__Group__3__Impl rule__Coordinate__Group__4 ;
     public final void rule__Coordinate__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1868:1: ( rule__Coordinate__Group__3__Impl rule__Coordinate__Group__4 )
-            // InternalBmod.g:1869:2: rule__Coordinate__Group__3__Impl rule__Coordinate__Group__4
+            // InternalBmodParser.g:1555:1: ( rule__Coordinate__Group__3__Impl rule__Coordinate__Group__4 )
+            // InternalBmodParser.g:1556:2: rule__Coordinate__Group__3__Impl rule__Coordinate__Group__4
             {
-            pushFollow(FOLLOW_18);
+            pushFollow(FOLLOW_19);
             rule__Coordinate__Group__3__Impl();
 
             state._fsp--;
@@ -5764,21 +4666,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Coordinate__Group__3__Impl"
-    // InternalBmod.g:1876:1: rule__Coordinate__Group__3__Impl : ( ( rule__Coordinate__YAssignment_3 ) ) ;
+    // InternalBmodParser.g:1563:1: rule__Coordinate__Group__3__Impl : ( ( rule__Coordinate__YAssignment_3 ) ) ;
     public final void rule__Coordinate__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1880:1: ( ( ( rule__Coordinate__YAssignment_3 ) ) )
-            // InternalBmod.g:1881:1: ( ( rule__Coordinate__YAssignment_3 ) )
+            // InternalBmodParser.g:1567:1: ( ( ( rule__Coordinate__YAssignment_3 ) ) )
+            // InternalBmodParser.g:1568:1: ( ( rule__Coordinate__YAssignment_3 ) )
             {
-            // InternalBmod.g:1881:1: ( ( rule__Coordinate__YAssignment_3 ) )
-            // InternalBmod.g:1882:2: ( rule__Coordinate__YAssignment_3 )
+            // InternalBmodParser.g:1568:1: ( ( rule__Coordinate__YAssignment_3 ) )
+            // InternalBmodParser.g:1569:2: ( rule__Coordinate__YAssignment_3 )
             {
              before(grammarAccess.getCoordinateAccess().getYAssignment_3()); 
-            // InternalBmod.g:1883:2: ( rule__Coordinate__YAssignment_3 )
-            // InternalBmod.g:1883:3: rule__Coordinate__YAssignment_3
+            // InternalBmodParser.g:1570:2: ( rule__Coordinate__YAssignment_3 )
+            // InternalBmodParser.g:1570:3: rule__Coordinate__YAssignment_3
             {
             pushFollow(FOLLOW_2);
             rule__Coordinate__YAssignment_3();
@@ -5811,14 +4713,14 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Coordinate__Group__4"
-    // InternalBmod.g:1891:1: rule__Coordinate__Group__4 : rule__Coordinate__Group__4__Impl ;
+    // InternalBmodParser.g:1578:1: rule__Coordinate__Group__4 : rule__Coordinate__Group__4__Impl ;
     public final void rule__Coordinate__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1895:1: ( rule__Coordinate__Group__4__Impl )
-            // InternalBmod.g:1896:2: rule__Coordinate__Group__4__Impl
+            // InternalBmodParser.g:1582:1: ( rule__Coordinate__Group__4__Impl )
+            // InternalBmodParser.g:1583:2: rule__Coordinate__Group__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Coordinate__Group__4__Impl();
@@ -5844,20 +4746,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Coordinate__Group__4__Impl"
-    // InternalBmod.g:1902:1: rule__Coordinate__Group__4__Impl : ( ')' ) ;
+    // InternalBmodParser.g:1589:1: rule__Coordinate__Group__4__Impl : ( RightParenthesis ) ;
     public final void rule__Coordinate__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1906:1: ( ( ')' ) )
-            // InternalBmod.g:1907:1: ( ')' )
+            // InternalBmodParser.g:1593:1: ( ( RightParenthesis ) )
+            // InternalBmodParser.g:1594:1: ( RightParenthesis )
             {
-            // InternalBmod.g:1907:1: ( ')' )
-            // InternalBmod.g:1908:2: ')'
+            // InternalBmodParser.g:1594:1: ( RightParenthesis )
+            // InternalBmodParser.g:1595:2: RightParenthesis
             {
              before(grammarAccess.getCoordinateAccess().getRightParenthesisKeyword_4()); 
-            match(input,36,FOLLOW_2); 
+            match(input,RightParenthesis,FOLLOW_2); 
              after(grammarAccess.getCoordinateAccess().getRightParenthesisKeyword_4()); 
 
             }
@@ -5881,16 +4783,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group__0"
-    // InternalBmod.g:1918:1: rule__Area__Group__0 : rule__Area__Group__0__Impl rule__Area__Group__1 ;
+    // InternalBmodParser.g:1605:1: rule__Area__Group__0 : rule__Area__Group__0__Impl rule__Area__Group__1 ;
     public final void rule__Area__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1922:1: ( rule__Area__Group__0__Impl rule__Area__Group__1 )
-            // InternalBmod.g:1923:2: rule__Area__Group__0__Impl rule__Area__Group__1
+            // InternalBmodParser.g:1609:1: ( rule__Area__Group__0__Impl rule__Area__Group__1 )
+            // InternalBmodParser.g:1610:2: rule__Area__Group__0__Impl rule__Area__Group__1
             {
-            pushFollow(FOLLOW_9);
+            pushFollow(FOLLOW_14);
             rule__Area__Group__0__Impl();
 
             state._fsp--;
@@ -5919,20 +4821,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group__0__Impl"
-    // InternalBmod.g:1930:1: rule__Area__Group__0__Impl : ( 'from' ) ;
+    // InternalBmodParser.g:1617:1: rule__Area__Group__0__Impl : ( From ) ;
     public final void rule__Area__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1934:1: ( ( 'from' ) )
-            // InternalBmod.g:1935:1: ( 'from' )
+            // InternalBmodParser.g:1621:1: ( ( From ) )
+            // InternalBmodParser.g:1622:1: ( From )
             {
-            // InternalBmod.g:1935:1: ( 'from' )
-            // InternalBmod.g:1936:2: 'from'
+            // InternalBmodParser.g:1622:1: ( From )
+            // InternalBmodParser.g:1623:2: From
             {
              before(grammarAccess.getAreaAccess().getFromKeyword_0()); 
-            match(input,22,FOLLOW_2); 
+            match(input,From,FOLLOW_2); 
              after(grammarAccess.getAreaAccess().getFromKeyword_0()); 
 
             }
@@ -5956,16 +4858,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group__1"
-    // InternalBmod.g:1945:1: rule__Area__Group__1 : rule__Area__Group__1__Impl rule__Area__Group__2 ;
+    // InternalBmodParser.g:1632:1: rule__Area__Group__1 : rule__Area__Group__1__Impl rule__Area__Group__2 ;
     public final void rule__Area__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1949:1: ( rule__Area__Group__1__Impl rule__Area__Group__2 )
-            // InternalBmod.g:1950:2: rule__Area__Group__1__Impl rule__Area__Group__2
+            // InternalBmodParser.g:1636:1: ( rule__Area__Group__1__Impl rule__Area__Group__2 )
+            // InternalBmodParser.g:1637:2: rule__Area__Group__1__Impl rule__Area__Group__2
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_15);
             rule__Area__Group__1__Impl();
 
             state._fsp--;
@@ -5994,21 +4896,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group__1__Impl"
-    // InternalBmod.g:1957:1: rule__Area__Group__1__Impl : ( ( rule__Area__FromAssignment_1 ) ) ;
+    // InternalBmodParser.g:1644:1: rule__Area__Group__1__Impl : ( ( rule__Area__FromAssignment_1 ) ) ;
     public final void rule__Area__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1961:1: ( ( ( rule__Area__FromAssignment_1 ) ) )
-            // InternalBmod.g:1962:1: ( ( rule__Area__FromAssignment_1 ) )
+            // InternalBmodParser.g:1648:1: ( ( ( rule__Area__FromAssignment_1 ) ) )
+            // InternalBmodParser.g:1649:1: ( ( rule__Area__FromAssignment_1 ) )
             {
-            // InternalBmod.g:1962:1: ( ( rule__Area__FromAssignment_1 ) )
-            // InternalBmod.g:1963:2: ( rule__Area__FromAssignment_1 )
+            // InternalBmodParser.g:1649:1: ( ( rule__Area__FromAssignment_1 ) )
+            // InternalBmodParser.g:1650:2: ( rule__Area__FromAssignment_1 )
             {
              before(grammarAccess.getAreaAccess().getFromAssignment_1()); 
-            // InternalBmod.g:1964:2: ( rule__Area__FromAssignment_1 )
-            // InternalBmod.g:1964:3: rule__Area__FromAssignment_1
+            // InternalBmodParser.g:1651:2: ( rule__Area__FromAssignment_1 )
+            // InternalBmodParser.g:1651:3: rule__Area__FromAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__Area__FromAssignment_1();
@@ -6041,16 +4943,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group__2"
-    // InternalBmod.g:1972:1: rule__Area__Group__2 : rule__Area__Group__2__Impl rule__Area__Group__3 ;
+    // InternalBmodParser.g:1659:1: rule__Area__Group__2 : rule__Area__Group__2__Impl rule__Area__Group__3 ;
     public final void rule__Area__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1976:1: ( rule__Area__Group__2__Impl rule__Area__Group__3 )
-            // InternalBmod.g:1977:2: rule__Area__Group__2__Impl rule__Area__Group__3
+            // InternalBmodParser.g:1663:1: ( rule__Area__Group__2__Impl rule__Area__Group__3 )
+            // InternalBmodParser.g:1664:2: rule__Area__Group__2__Impl rule__Area__Group__3
             {
-            pushFollow(FOLLOW_9);
+            pushFollow(FOLLOW_14);
             rule__Area__Group__2__Impl();
 
             state._fsp--;
@@ -6079,20 +4981,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group__2__Impl"
-    // InternalBmod.g:1984:1: rule__Area__Group__2__Impl : ( 'to' ) ;
+    // InternalBmodParser.g:1671:1: rule__Area__Group__2__Impl : ( To ) ;
     public final void rule__Area__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:1988:1: ( ( 'to' ) )
-            // InternalBmod.g:1989:1: ( 'to' )
+            // InternalBmodParser.g:1675:1: ( ( To ) )
+            // InternalBmodParser.g:1676:1: ( To )
             {
-            // InternalBmod.g:1989:1: ( 'to' )
-            // InternalBmod.g:1990:2: 'to'
+            // InternalBmodParser.g:1676:1: ( To )
+            // InternalBmodParser.g:1677:2: To
             {
              before(grammarAccess.getAreaAccess().getToKeyword_2()); 
-            match(input,23,FOLLOW_2); 
+            match(input,To,FOLLOW_2); 
              after(grammarAccess.getAreaAccess().getToKeyword_2()); 
 
             }
@@ -6116,16 +5018,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group__3"
-    // InternalBmod.g:1999:1: rule__Area__Group__3 : rule__Area__Group__3__Impl rule__Area__Group__4 ;
+    // InternalBmodParser.g:1686:1: rule__Area__Group__3 : rule__Area__Group__3__Impl rule__Area__Group__4 ;
     public final void rule__Area__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2003:1: ( rule__Area__Group__3__Impl rule__Area__Group__4 )
-            // InternalBmod.g:2004:2: rule__Area__Group__3__Impl rule__Area__Group__4
+            // InternalBmodParser.g:1690:1: ( rule__Area__Group__3__Impl rule__Area__Group__4 )
+            // InternalBmodParser.g:1691:2: rule__Area__Group__3__Impl rule__Area__Group__4
             {
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_20);
             rule__Area__Group__3__Impl();
 
             state._fsp--;
@@ -6154,21 +5056,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group__3__Impl"
-    // InternalBmod.g:2011:1: rule__Area__Group__3__Impl : ( ( rule__Area__ToAssignment_3 ) ) ;
+    // InternalBmodParser.g:1698:1: rule__Area__Group__3__Impl : ( ( rule__Area__ToAssignment_3 ) ) ;
     public final void rule__Area__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2015:1: ( ( ( rule__Area__ToAssignment_3 ) ) )
-            // InternalBmod.g:2016:1: ( ( rule__Area__ToAssignment_3 ) )
+            // InternalBmodParser.g:1702:1: ( ( ( rule__Area__ToAssignment_3 ) ) )
+            // InternalBmodParser.g:1703:1: ( ( rule__Area__ToAssignment_3 ) )
             {
-            // InternalBmod.g:2016:1: ( ( rule__Area__ToAssignment_3 ) )
-            // InternalBmod.g:2017:2: ( rule__Area__ToAssignment_3 )
+            // InternalBmodParser.g:1703:1: ( ( rule__Area__ToAssignment_3 ) )
+            // InternalBmodParser.g:1704:2: ( rule__Area__ToAssignment_3 )
             {
              before(grammarAccess.getAreaAccess().getToAssignment_3()); 
-            // InternalBmod.g:2018:2: ( rule__Area__ToAssignment_3 )
-            // InternalBmod.g:2018:3: rule__Area__ToAssignment_3
+            // InternalBmodParser.g:1705:2: ( rule__Area__ToAssignment_3 )
+            // InternalBmodParser.g:1705:3: rule__Area__ToAssignment_3
             {
             pushFollow(FOLLOW_2);
             rule__Area__ToAssignment_3();
@@ -6201,14 +5103,14 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group__4"
-    // InternalBmod.g:2026:1: rule__Area__Group__4 : rule__Area__Group__4__Impl ;
+    // InternalBmodParser.g:1713:1: rule__Area__Group__4 : rule__Area__Group__4__Impl ;
     public final void rule__Area__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2030:1: ( rule__Area__Group__4__Impl )
-            // InternalBmod.g:2031:2: rule__Area__Group__4__Impl
+            // InternalBmodParser.g:1717:1: ( rule__Area__Group__4__Impl )
+            // InternalBmodParser.g:1718:2: rule__Area__Group__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Area__Group__4__Impl();
@@ -6234,29 +5136,29 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group__4__Impl"
-    // InternalBmod.g:2037:1: rule__Area__Group__4__Impl : ( ( rule__Area__Group_4__0 )? ) ;
+    // InternalBmodParser.g:1724:1: rule__Area__Group__4__Impl : ( ( rule__Area__Group_4__0 )? ) ;
     public final void rule__Area__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2041:1: ( ( ( rule__Area__Group_4__0 )? ) )
-            // InternalBmod.g:2042:1: ( ( rule__Area__Group_4__0 )? )
+            // InternalBmodParser.g:1728:1: ( ( ( rule__Area__Group_4__0 )? ) )
+            // InternalBmodParser.g:1729:1: ( ( rule__Area__Group_4__0 )? )
             {
-            // InternalBmod.g:2042:1: ( ( rule__Area__Group_4__0 )? )
-            // InternalBmod.g:2043:2: ( rule__Area__Group_4__0 )?
+            // InternalBmodParser.g:1729:1: ( ( rule__Area__Group_4__0 )? )
+            // InternalBmodParser.g:1730:2: ( rule__Area__Group_4__0 )?
             {
              before(grammarAccess.getAreaAccess().getGroup_4()); 
-            // InternalBmod.g:2044:2: ( rule__Area__Group_4__0 )?
-            int alt8=2;
-            int LA8_0 = input.LA(1);
+            // InternalBmodParser.g:1731:2: ( rule__Area__Group_4__0 )?
+            int alt6=2;
+            int LA6_0 = input.LA(1);
 
-            if ( (LA8_0==37) ) {
-                alt8=1;
+            if ( (LA6_0==Without) ) {
+                alt6=1;
             }
-            switch (alt8) {
+            switch (alt6) {
                 case 1 :
-                    // InternalBmod.g:2044:3: rule__Area__Group_4__0
+                    // InternalBmodParser.g:1731:3: rule__Area__Group_4__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Area__Group_4__0();
@@ -6292,16 +5194,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group_4__0"
-    // InternalBmod.g:2053:1: rule__Area__Group_4__0 : rule__Area__Group_4__0__Impl rule__Area__Group_4__1 ;
+    // InternalBmodParser.g:1740:1: rule__Area__Group_4__0 : rule__Area__Group_4__0__Impl rule__Area__Group_4__1 ;
     public final void rule__Area__Group_4__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2057:1: ( rule__Area__Group_4__0__Impl rule__Area__Group_4__1 )
-            // InternalBmod.g:2058:2: rule__Area__Group_4__0__Impl rule__Area__Group_4__1
+            // InternalBmodParser.g:1744:1: ( rule__Area__Group_4__0__Impl rule__Area__Group_4__1 )
+            // InternalBmodParser.g:1745:2: rule__Area__Group_4__0__Impl rule__Area__Group_4__1
             {
-            pushFollow(FOLLOW_9);
+            pushFollow(FOLLOW_14);
             rule__Area__Group_4__0__Impl();
 
             state._fsp--;
@@ -6330,20 +5232,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group_4__0__Impl"
-    // InternalBmod.g:2065:1: rule__Area__Group_4__0__Impl : ( 'without' ) ;
+    // InternalBmodParser.g:1752:1: rule__Area__Group_4__0__Impl : ( Without ) ;
     public final void rule__Area__Group_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2069:1: ( ( 'without' ) )
-            // InternalBmod.g:2070:1: ( 'without' )
+            // InternalBmodParser.g:1756:1: ( ( Without ) )
+            // InternalBmodParser.g:1757:1: ( Without )
             {
-            // InternalBmod.g:2070:1: ( 'without' )
-            // InternalBmod.g:2071:2: 'without'
+            // InternalBmodParser.g:1757:1: ( Without )
+            // InternalBmodParser.g:1758:2: Without
             {
              before(grammarAccess.getAreaAccess().getWithoutKeyword_4_0()); 
-            match(input,37,FOLLOW_2); 
+            match(input,Without,FOLLOW_2); 
              after(grammarAccess.getAreaAccess().getWithoutKeyword_4_0()); 
 
             }
@@ -6367,16 +5269,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group_4__1"
-    // InternalBmod.g:2080:1: rule__Area__Group_4__1 : rule__Area__Group_4__1__Impl rule__Area__Group_4__2 ;
+    // InternalBmodParser.g:1767:1: rule__Area__Group_4__1 : rule__Area__Group_4__1__Impl rule__Area__Group_4__2 ;
     public final void rule__Area__Group_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2084:1: ( rule__Area__Group_4__1__Impl rule__Area__Group_4__2 )
-            // InternalBmod.g:2085:2: rule__Area__Group_4__1__Impl rule__Area__Group_4__2
+            // InternalBmodParser.g:1771:1: ( rule__Area__Group_4__1__Impl rule__Area__Group_4__2 )
+            // InternalBmodParser.g:1772:2: rule__Area__Group_4__1__Impl rule__Area__Group_4__2
             {
-            pushFollow(FOLLOW_14);
+            pushFollow(FOLLOW_18);
             rule__Area__Group_4__1__Impl();
 
             state._fsp--;
@@ -6405,21 +5307,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group_4__1__Impl"
-    // InternalBmod.g:2092:1: rule__Area__Group_4__1__Impl : ( ( rule__Area__WithoutAssignment_4_1 ) ) ;
+    // InternalBmodParser.g:1779:1: rule__Area__Group_4__1__Impl : ( ( rule__Area__WithoutAssignment_4_1 ) ) ;
     public final void rule__Area__Group_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2096:1: ( ( ( rule__Area__WithoutAssignment_4_1 ) ) )
-            // InternalBmod.g:2097:1: ( ( rule__Area__WithoutAssignment_4_1 ) )
+            // InternalBmodParser.g:1783:1: ( ( ( rule__Area__WithoutAssignment_4_1 ) ) )
+            // InternalBmodParser.g:1784:1: ( ( rule__Area__WithoutAssignment_4_1 ) )
             {
-            // InternalBmod.g:2097:1: ( ( rule__Area__WithoutAssignment_4_1 ) )
-            // InternalBmod.g:2098:2: ( rule__Area__WithoutAssignment_4_1 )
+            // InternalBmodParser.g:1784:1: ( ( rule__Area__WithoutAssignment_4_1 ) )
+            // InternalBmodParser.g:1785:2: ( rule__Area__WithoutAssignment_4_1 )
             {
              before(grammarAccess.getAreaAccess().getWithoutAssignment_4_1()); 
-            // InternalBmod.g:2099:2: ( rule__Area__WithoutAssignment_4_1 )
-            // InternalBmod.g:2099:3: rule__Area__WithoutAssignment_4_1
+            // InternalBmodParser.g:1786:2: ( rule__Area__WithoutAssignment_4_1 )
+            // InternalBmodParser.g:1786:3: rule__Area__WithoutAssignment_4_1
             {
             pushFollow(FOLLOW_2);
             rule__Area__WithoutAssignment_4_1();
@@ -6452,14 +5354,14 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group_4__2"
-    // InternalBmod.g:2107:1: rule__Area__Group_4__2 : rule__Area__Group_4__2__Impl ;
+    // InternalBmodParser.g:1794:1: rule__Area__Group_4__2 : rule__Area__Group_4__2__Impl ;
     public final void rule__Area__Group_4__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2111:1: ( rule__Area__Group_4__2__Impl )
-            // InternalBmod.g:2112:2: rule__Area__Group_4__2__Impl
+            // InternalBmodParser.g:1798:1: ( rule__Area__Group_4__2__Impl )
+            // InternalBmodParser.g:1799:2: rule__Area__Group_4__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Area__Group_4__2__Impl();
@@ -6485,35 +5387,35 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group_4__2__Impl"
-    // InternalBmod.g:2118:1: rule__Area__Group_4__2__Impl : ( ( rule__Area__Group_4_2__0 )* ) ;
+    // InternalBmodParser.g:1805:1: rule__Area__Group_4__2__Impl : ( ( rule__Area__Group_4_2__0 )* ) ;
     public final void rule__Area__Group_4__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2122:1: ( ( ( rule__Area__Group_4_2__0 )* ) )
-            // InternalBmod.g:2123:1: ( ( rule__Area__Group_4_2__0 )* )
+            // InternalBmodParser.g:1809:1: ( ( ( rule__Area__Group_4_2__0 )* ) )
+            // InternalBmodParser.g:1810:1: ( ( rule__Area__Group_4_2__0 )* )
             {
-            // InternalBmod.g:2123:1: ( ( rule__Area__Group_4_2__0 )* )
-            // InternalBmod.g:2124:2: ( rule__Area__Group_4_2__0 )*
+            // InternalBmodParser.g:1810:1: ( ( rule__Area__Group_4_2__0 )* )
+            // InternalBmodParser.g:1811:2: ( rule__Area__Group_4_2__0 )*
             {
              before(grammarAccess.getAreaAccess().getGroup_4_2()); 
-            // InternalBmod.g:2125:2: ( rule__Area__Group_4_2__0 )*
-            loop9:
+            // InternalBmodParser.g:1812:2: ( rule__Area__Group_4_2__0 )*
+            loop7:
             do {
-                int alt9=2;
-                int LA9_0 = input.LA(1);
+                int alt7=2;
+                int LA7_0 = input.LA(1);
 
-                if ( (LA9_0==29) ) {
-                    alt9=1;
+                if ( (LA7_0==Comma) ) {
+                    alt7=1;
                 }
 
 
-                switch (alt9) {
+                switch (alt7) {
             	case 1 :
-            	    // InternalBmod.g:2125:3: rule__Area__Group_4_2__0
+            	    // InternalBmodParser.g:1812:3: rule__Area__Group_4_2__0
             	    {
-            	    pushFollow(FOLLOW_20);
+            	    pushFollow(FOLLOW_21);
             	    rule__Area__Group_4_2__0();
 
             	    state._fsp--;
@@ -6523,7 +5425,7 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop9;
+            	    break loop7;
                 }
             } while (true);
 
@@ -6550,16 +5452,16 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group_4_2__0"
-    // InternalBmod.g:2134:1: rule__Area__Group_4_2__0 : rule__Area__Group_4_2__0__Impl rule__Area__Group_4_2__1 ;
+    // InternalBmodParser.g:1821:1: rule__Area__Group_4_2__0 : rule__Area__Group_4_2__0__Impl rule__Area__Group_4_2__1 ;
     public final void rule__Area__Group_4_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2138:1: ( rule__Area__Group_4_2__0__Impl rule__Area__Group_4_2__1 )
-            // InternalBmod.g:2139:2: rule__Area__Group_4_2__0__Impl rule__Area__Group_4_2__1
+            // InternalBmodParser.g:1825:1: ( rule__Area__Group_4_2__0__Impl rule__Area__Group_4_2__1 )
+            // InternalBmodParser.g:1826:2: rule__Area__Group_4_2__0__Impl rule__Area__Group_4_2__1
             {
-            pushFollow(FOLLOW_9);
+            pushFollow(FOLLOW_14);
             rule__Area__Group_4_2__0__Impl();
 
             state._fsp--;
@@ -6588,20 +5490,20 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group_4_2__0__Impl"
-    // InternalBmod.g:2146:1: rule__Area__Group_4_2__0__Impl : ( ',' ) ;
+    // InternalBmodParser.g:1833:1: rule__Area__Group_4_2__0__Impl : ( Comma ) ;
     public final void rule__Area__Group_4_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2150:1: ( ( ',' ) )
-            // InternalBmod.g:2151:1: ( ',' )
+            // InternalBmodParser.g:1837:1: ( ( Comma ) )
+            // InternalBmodParser.g:1838:1: ( Comma )
             {
-            // InternalBmod.g:2151:1: ( ',' )
-            // InternalBmod.g:2152:2: ','
+            // InternalBmodParser.g:1838:1: ( Comma )
+            // InternalBmodParser.g:1839:2: Comma
             {
              before(grammarAccess.getAreaAccess().getCommaKeyword_4_2_0()); 
-            match(input,29,FOLLOW_2); 
+            match(input,Comma,FOLLOW_2); 
              after(grammarAccess.getAreaAccess().getCommaKeyword_4_2_0()); 
 
             }
@@ -6625,14 +5527,14 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group_4_2__1"
-    // InternalBmod.g:2161:1: rule__Area__Group_4_2__1 : rule__Area__Group_4_2__1__Impl ;
+    // InternalBmodParser.g:1848:1: rule__Area__Group_4_2__1 : rule__Area__Group_4_2__1__Impl ;
     public final void rule__Area__Group_4_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2165:1: ( rule__Area__Group_4_2__1__Impl )
-            // InternalBmod.g:2166:2: rule__Area__Group_4_2__1__Impl
+            // InternalBmodParser.g:1852:1: ( rule__Area__Group_4_2__1__Impl )
+            // InternalBmodParser.g:1853:2: rule__Area__Group_4_2__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Area__Group_4_2__1__Impl();
@@ -6658,21 +5560,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__Group_4_2__1__Impl"
-    // InternalBmod.g:2172:1: rule__Area__Group_4_2__1__Impl : ( ( rule__Area__WithoutAssignment_4_2_1 ) ) ;
+    // InternalBmodParser.g:1859:1: rule__Area__Group_4_2__1__Impl : ( ( rule__Area__WithoutAssignment_4_2_1 ) ) ;
     public final void rule__Area__Group_4_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2176:1: ( ( ( rule__Area__WithoutAssignment_4_2_1 ) ) )
-            // InternalBmod.g:2177:1: ( ( rule__Area__WithoutAssignment_4_2_1 ) )
+            // InternalBmodParser.g:1863:1: ( ( ( rule__Area__WithoutAssignment_4_2_1 ) ) )
+            // InternalBmodParser.g:1864:1: ( ( rule__Area__WithoutAssignment_4_2_1 ) )
             {
-            // InternalBmod.g:2177:1: ( ( rule__Area__WithoutAssignment_4_2_1 ) )
-            // InternalBmod.g:2178:2: ( rule__Area__WithoutAssignment_4_2_1 )
+            // InternalBmodParser.g:1864:1: ( ( rule__Area__WithoutAssignment_4_2_1 ) )
+            // InternalBmodParser.g:1865:2: ( rule__Area__WithoutAssignment_4_2_1 )
             {
              before(grammarAccess.getAreaAccess().getWithoutAssignment_4_2_1()); 
-            // InternalBmod.g:2179:2: ( rule__Area__WithoutAssignment_4_2_1 )
-            // InternalBmod.g:2179:3: rule__Area__WithoutAssignment_4_2_1
+            // InternalBmodParser.g:1866:2: ( rule__Area__WithoutAssignment_4_2_1 )
+            // InternalBmodParser.g:1866:3: rule__Area__WithoutAssignment_4_2_1
             {
             pushFollow(FOLLOW_2);
             rule__Area__WithoutAssignment_4_2_1();
@@ -6704,26 +5606,26 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Area__Group_4_2__1__Impl"
 
 
-    // $ANTLR start "rule__Floorplan__PerceptionsAssignment_1_0"
-    // InternalBmod.g:2188:1: rule__Floorplan__PerceptionsAssignment_1_0 : ( rulePerceptionLevel ) ;
-    public final void rule__Floorplan__PerceptionsAssignment_1_0() throws RecognitionException {
+    // $ANTLR start "rule__Floorplan__ImportsAssignment_1"
+    // InternalBmodParser.g:1875:1: rule__Floorplan__ImportsAssignment_1 : ( ruleImport ) ;
+    public final void rule__Floorplan__ImportsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2192:1: ( ( rulePerceptionLevel ) )
-            // InternalBmod.g:2193:2: ( rulePerceptionLevel )
+            // InternalBmodParser.g:1879:1: ( ( ruleImport ) )
+            // InternalBmodParser.g:1880:2: ( ruleImport )
             {
-            // InternalBmod.g:2193:2: ( rulePerceptionLevel )
-            // InternalBmod.g:2194:3: rulePerceptionLevel
+            // InternalBmodParser.g:1880:2: ( ruleImport )
+            // InternalBmodParser.g:1881:3: ruleImport
             {
-             before(grammarAccess.getFloorplanAccess().getPerceptionsPerceptionLevelParserRuleCall_1_0_0()); 
+             before(grammarAccess.getFloorplanAccess().getImportsImportParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
-            rulePerceptionLevel();
+            ruleImport();
 
             state._fsp--;
 
-             after(grammarAccess.getFloorplanAccess().getPerceptionsPerceptionLevelParserRuleCall_1_0_0()); 
+             after(grammarAccess.getFloorplanAccess().getImportsImportParserRuleCall_1_0()); 
 
             }
 
@@ -6742,70 +5644,29 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Floorplan__PerceptionsAssignment_1_0"
+    // $ANTLR end "rule__Floorplan__ImportsAssignment_1"
 
 
-    // $ANTLR start "rule__Floorplan__ActionsAssignment_1_1"
-    // InternalBmod.g:2203:1: rule__Floorplan__ActionsAssignment_1_1 : ( ruleActionProfile ) ;
-    public final void rule__Floorplan__ActionsAssignment_1_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:2207:1: ( ( ruleActionProfile ) )
-            // InternalBmod.g:2208:2: ( ruleActionProfile )
-            {
-            // InternalBmod.g:2208:2: ( ruleActionProfile )
-            // InternalBmod.g:2209:3: ruleActionProfile
-            {
-             before(grammarAccess.getFloorplanAccess().getActionsActionProfileParserRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_2);
-            ruleActionProfile();
-
-            state._fsp--;
-
-             after(grammarAccess.getFloorplanAccess().getActionsActionProfileParserRuleCall_1_1_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Floorplan__ActionsAssignment_1_1"
-
-
-    // $ANTLR start "rule__Floorplan__RoomsAssignment_1_2"
-    // InternalBmod.g:2218:1: rule__Floorplan__RoomsAssignment_1_2 : ( ruleRoom ) ;
-    public final void rule__Floorplan__RoomsAssignment_1_2() throws RecognitionException {
+    // $ANTLR start "rule__Floorplan__RoomsAssignment_2_0"
+    // InternalBmodParser.g:1890:1: rule__Floorplan__RoomsAssignment_2_0 : ( ruleRoom ) ;
+    public final void rule__Floorplan__RoomsAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2222:1: ( ( ruleRoom ) )
-            // InternalBmod.g:2223:2: ( ruleRoom )
+            // InternalBmodParser.g:1894:1: ( ( ruleRoom ) )
+            // InternalBmodParser.g:1895:2: ( ruleRoom )
             {
-            // InternalBmod.g:2223:2: ( ruleRoom )
-            // InternalBmod.g:2224:3: ruleRoom
+            // InternalBmodParser.g:1895:2: ( ruleRoom )
+            // InternalBmodParser.g:1896:3: ruleRoom
             {
-             before(grammarAccess.getFloorplanAccess().getRoomsRoomParserRuleCall_1_2_0()); 
+             before(grammarAccess.getFloorplanAccess().getRoomsRoomParserRuleCall_2_0_0()); 
             pushFollow(FOLLOW_2);
             ruleRoom();
 
             state._fsp--;
 
-             after(grammarAccess.getFloorplanAccess().getRoomsRoomParserRuleCall_1_2_0()); 
+             after(grammarAccess.getFloorplanAccess().getRoomsRoomParserRuleCall_2_0_0()); 
 
             }
 
@@ -6824,29 +5685,29 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Floorplan__RoomsAssignment_1_2"
+    // $ANTLR end "rule__Floorplan__RoomsAssignment_2_0"
 
 
-    // $ANTLR start "rule__Floorplan__DoorsAssignment_1_3"
-    // InternalBmod.g:2233:1: rule__Floorplan__DoorsAssignment_1_3 : ( ruleDoor ) ;
-    public final void rule__Floorplan__DoorsAssignment_1_3() throws RecognitionException {
+    // $ANTLR start "rule__Floorplan__DoorsAssignment_2_1"
+    // InternalBmodParser.g:1905:1: rule__Floorplan__DoorsAssignment_2_1 : ( ruleDoor ) ;
+    public final void rule__Floorplan__DoorsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2237:1: ( ( ruleDoor ) )
-            // InternalBmod.g:2238:2: ( ruleDoor )
+            // InternalBmodParser.g:1909:1: ( ( ruleDoor ) )
+            // InternalBmodParser.g:1910:2: ( ruleDoor )
             {
-            // InternalBmod.g:2238:2: ( ruleDoor )
-            // InternalBmod.g:2239:3: ruleDoor
+            // InternalBmodParser.g:1910:2: ( ruleDoor )
+            // InternalBmodParser.g:1911:3: ruleDoor
             {
-             before(grammarAccess.getFloorplanAccess().getDoorsDoorParserRuleCall_1_3_0()); 
+             before(grammarAccess.getFloorplanAccess().getDoorsDoorParserRuleCall_2_1_0()); 
             pushFollow(FOLLOW_2);
             ruleDoor();
 
             state._fsp--;
 
-             after(grammarAccess.getFloorplanAccess().getDoorsDoorParserRuleCall_1_3_0()); 
+             after(grammarAccess.getFloorplanAccess().getDoorsDoorParserRuleCall_2_1_0()); 
 
             }
 
@@ -6865,29 +5726,29 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Floorplan__DoorsAssignment_1_3"
+    // $ANTLR end "rule__Floorplan__DoorsAssignment_2_1"
 
 
-    // $ANTLR start "rule__Floorplan__PersonsAssignment_1_4"
-    // InternalBmod.g:2248:1: rule__Floorplan__PersonsAssignment_1_4 : ( rulePerson ) ;
-    public final void rule__Floorplan__PersonsAssignment_1_4() throws RecognitionException {
+    // $ANTLR start "rule__Floorplan__PersonsAssignment_2_2"
+    // InternalBmodParser.g:1920:1: rule__Floorplan__PersonsAssignment_2_2 : ( rulePerson ) ;
+    public final void rule__Floorplan__PersonsAssignment_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2252:1: ( ( rulePerson ) )
-            // InternalBmod.g:2253:2: ( rulePerson )
+            // InternalBmodParser.g:1924:1: ( ( rulePerson ) )
+            // InternalBmodParser.g:1925:2: ( rulePerson )
             {
-            // InternalBmod.g:2253:2: ( rulePerson )
-            // InternalBmod.g:2254:3: rulePerson
+            // InternalBmodParser.g:1925:2: ( rulePerson )
+            // InternalBmodParser.g:1926:3: rulePerson
             {
-             before(grammarAccess.getFloorplanAccess().getPersonsPersonParserRuleCall_1_4_0()); 
+             before(grammarAccess.getFloorplanAccess().getPersonsPersonParserRuleCall_2_2_0()); 
             pushFollow(FOLLOW_2);
             rulePerson();
 
             state._fsp--;
 
-             after(grammarAccess.getFloorplanAccess().getPersonsPersonParserRuleCall_1_4_0()); 
+             after(grammarAccess.getFloorplanAccess().getPersonsPersonParserRuleCall_2_2_0()); 
 
             }
 
@@ -6906,29 +5767,29 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Floorplan__PersonsAssignment_1_4"
+    // $ANTLR end "rule__Floorplan__PersonsAssignment_2_2"
 
 
-    // $ANTLR start "rule__Floorplan__ExitsAssignment_1_5"
-    // InternalBmod.g:2263:1: rule__Floorplan__ExitsAssignment_1_5 : ( ruleExit ) ;
-    public final void rule__Floorplan__ExitsAssignment_1_5() throws RecognitionException {
+    // $ANTLR start "rule__Floorplan__ExitsAssignment_2_3"
+    // InternalBmodParser.g:1935:1: rule__Floorplan__ExitsAssignment_2_3 : ( ruleExit ) ;
+    public final void rule__Floorplan__ExitsAssignment_2_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2267:1: ( ( ruleExit ) )
-            // InternalBmod.g:2268:2: ( ruleExit )
+            // InternalBmodParser.g:1939:1: ( ( ruleExit ) )
+            // InternalBmodParser.g:1940:2: ( ruleExit )
             {
-            // InternalBmod.g:2268:2: ( ruleExit )
-            // InternalBmod.g:2269:3: ruleExit
+            // InternalBmodParser.g:1940:2: ( ruleExit )
+            // InternalBmodParser.g:1941:3: ruleExit
             {
-             before(grammarAccess.getFloorplanAccess().getExitsExitParserRuleCall_1_5_0()); 
+             before(grammarAccess.getFloorplanAccess().getExitsExitParserRuleCall_2_3_0()); 
             pushFollow(FOLLOW_2);
             ruleExit();
 
             state._fsp--;
 
-             after(grammarAccess.getFloorplanAccess().getExitsExitParserRuleCall_1_5_0()); 
+             after(grammarAccess.getFloorplanAccess().getExitsExitParserRuleCall_2_3_0()); 
 
             }
 
@@ -6947,29 +5808,29 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Floorplan__ExitsAssignment_1_5"
+    // $ANTLR end "rule__Floorplan__ExitsAssignment_2_3"
 
 
-    // $ANTLR start "rule__Floorplan__FiresAssignment_1_6"
-    // InternalBmod.g:2278:1: rule__Floorplan__FiresAssignment_1_6 : ( ruleFire ) ;
-    public final void rule__Floorplan__FiresAssignment_1_6() throws RecognitionException {
+    // $ANTLR start "rule__Floorplan__FiresAssignment_2_4"
+    // InternalBmodParser.g:1950:1: rule__Floorplan__FiresAssignment_2_4 : ( ruleFire ) ;
+    public final void rule__Floorplan__FiresAssignment_2_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2282:1: ( ( ruleFire ) )
-            // InternalBmod.g:2283:2: ( ruleFire )
+            // InternalBmodParser.g:1954:1: ( ( ruleFire ) )
+            // InternalBmodParser.g:1955:2: ( ruleFire )
             {
-            // InternalBmod.g:2283:2: ( ruleFire )
-            // InternalBmod.g:2284:3: ruleFire
+            // InternalBmodParser.g:1955:2: ( ruleFire )
+            // InternalBmodParser.g:1956:3: ruleFire
             {
-             before(grammarAccess.getFloorplanAccess().getFiresFireParserRuleCall_1_6_0()); 
+             before(grammarAccess.getFloorplanAccess().getFiresFireParserRuleCall_2_4_0()); 
             pushFollow(FOLLOW_2);
             ruleFire();
 
             state._fsp--;
 
-             after(grammarAccess.getFloorplanAccess().getFiresFireParserRuleCall_1_6_0()); 
+             after(grammarAccess.getFloorplanAccess().getFiresFireParserRuleCall_2_4_0()); 
 
             }
 
@@ -6988,29 +5849,29 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Floorplan__FiresAssignment_1_6"
+    // $ANTLR end "rule__Floorplan__FiresAssignment_2_4"
 
 
-    // $ANTLR start "rule__Floorplan__SignsAssignment_1_7"
-    // InternalBmod.g:2293:1: rule__Floorplan__SignsAssignment_1_7 : ( ruleEmergencySign ) ;
-    public final void rule__Floorplan__SignsAssignment_1_7() throws RecognitionException {
+    // $ANTLR start "rule__Floorplan__SignsAssignment_2_5"
+    // InternalBmodParser.g:1965:1: rule__Floorplan__SignsAssignment_2_5 : ( ruleEmergencySign ) ;
+    public final void rule__Floorplan__SignsAssignment_2_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2297:1: ( ( ruleEmergencySign ) )
-            // InternalBmod.g:2298:2: ( ruleEmergencySign )
+            // InternalBmodParser.g:1969:1: ( ( ruleEmergencySign ) )
+            // InternalBmodParser.g:1970:2: ( ruleEmergencySign )
             {
-            // InternalBmod.g:2298:2: ( ruleEmergencySign )
-            // InternalBmod.g:2299:3: ruleEmergencySign
+            // InternalBmodParser.g:1970:2: ( ruleEmergencySign )
+            // InternalBmodParser.g:1971:3: ruleEmergencySign
             {
-             before(grammarAccess.getFloorplanAccess().getSignsEmergencySignParserRuleCall_1_7_0()); 
+             before(grammarAccess.getFloorplanAccess().getSignsEmergencySignParserRuleCall_2_5_0()); 
             pushFollow(FOLLOW_2);
             ruleEmergencySign();
 
             state._fsp--;
 
-             after(grammarAccess.getFloorplanAccess().getSignsEmergencySignParserRuleCall_1_7_0()); 
+             after(grammarAccess.getFloorplanAccess().getSignsEmergencySignParserRuleCall_2_5_0()); 
 
             }
 
@@ -7029,29 +5890,25 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Floorplan__SignsAssignment_1_7"
+    // $ANTLR end "rule__Floorplan__SignsAssignment_2_5"
 
 
-    // $ANTLR start "rule__Floorplan__DanconsAssignment_1_8"
-    // InternalBmod.g:2308:1: rule__Floorplan__DanconsAssignment_1_8 : ( ruleDangerousCondition ) ;
-    public final void rule__Floorplan__DanconsAssignment_1_8() throws RecognitionException {
+    // $ANTLR start "rule__Import__ImportURIAssignment_1"
+    // InternalBmodParser.g:1980:1: rule__Import__ImportURIAssignment_1 : ( RULE_STRING ) ;
+    public final void rule__Import__ImportURIAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2312:1: ( ( ruleDangerousCondition ) )
-            // InternalBmod.g:2313:2: ( ruleDangerousCondition )
+            // InternalBmodParser.g:1984:1: ( ( RULE_STRING ) )
+            // InternalBmodParser.g:1985:2: ( RULE_STRING )
             {
-            // InternalBmod.g:2313:2: ( ruleDangerousCondition )
-            // InternalBmod.g:2314:3: ruleDangerousCondition
+            // InternalBmodParser.g:1985:2: ( RULE_STRING )
+            // InternalBmodParser.g:1986:3: RULE_STRING
             {
-             before(grammarAccess.getFloorplanAccess().getDanconsDangerousConditionParserRuleCall_1_8_0()); 
-            pushFollow(FOLLOW_2);
-            ruleDangerousCondition();
-
-            state._fsp--;
-
-             after(grammarAccess.getFloorplanAccess().getDanconsDangerousConditionParserRuleCall_1_8_0()); 
+             before(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0()); 
+            match(input,RULE_STRING,FOLLOW_2); 
+             after(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0()); 
 
             }
 
@@ -7070,21 +5927,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Floorplan__DanconsAssignment_1_8"
+    // $ANTLR end "rule__Import__ImportURIAssignment_1"
 
 
     // $ANTLR start "rule__Room__NameAssignment_1"
-    // InternalBmod.g:2323:1: rule__Room__NameAssignment_1 : ( RULE_VARNAME ) ;
+    // InternalBmodParser.g:1995:1: rule__Room__NameAssignment_1 : ( RULE_VARNAME ) ;
     public final void rule__Room__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2327:1: ( ( RULE_VARNAME ) )
-            // InternalBmod.g:2328:2: ( RULE_VARNAME )
+            // InternalBmodParser.g:1999:1: ( ( RULE_VARNAME ) )
+            // InternalBmodParser.g:2000:2: ( RULE_VARNAME )
             {
-            // InternalBmod.g:2328:2: ( RULE_VARNAME )
-            // InternalBmod.g:2329:3: RULE_VARNAME
+            // InternalBmodParser.g:2000:2: ( RULE_VARNAME )
+            // InternalBmodParser.g:2001:3: RULE_VARNAME
             {
              before(grammarAccess.getRoomAccess().getNameVARNAMETerminalRuleCall_1_0()); 
             match(input,RULE_VARNAME,FOLLOW_2); 
@@ -7110,26 +5967,30 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Room__NameAssignment_1"
 
 
-    // $ANTLR start "rule__Room__AreasAssignment_2"
-    // InternalBmod.g:2338:1: rule__Room__AreasAssignment_2 : ( ruleArea ) ;
-    public final void rule__Room__AreasAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__Room__HasCapacityAssignment_2_0"
+    // InternalBmodParser.g:2010:1: rule__Room__HasCapacityAssignment_2_0 : ( ( LeftSquareBracket ) ) ;
+    public final void rule__Room__HasCapacityAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2342:1: ( ( ruleArea ) )
-            // InternalBmod.g:2343:2: ( ruleArea )
+            // InternalBmodParser.g:2014:1: ( ( ( LeftSquareBracket ) ) )
+            // InternalBmodParser.g:2015:2: ( ( LeftSquareBracket ) )
             {
-            // InternalBmod.g:2343:2: ( ruleArea )
-            // InternalBmod.g:2344:3: ruleArea
+            // InternalBmodParser.g:2015:2: ( ( LeftSquareBracket ) )
+            // InternalBmodParser.g:2016:3: ( LeftSquareBracket )
             {
-             before(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_2);
-            ruleArea();
+             before(grammarAccess.getRoomAccess().getHasCapacityLeftSquareBracketKeyword_2_0_0()); 
+            // InternalBmodParser.g:2017:3: ( LeftSquareBracket )
+            // InternalBmodParser.g:2018:4: LeftSquareBracket
+            {
+             before(grammarAccess.getRoomAccess().getHasCapacityLeftSquareBracketKeyword_2_0_0()); 
+            match(input,LeftSquareBracket,FOLLOW_2); 
+             after(grammarAccess.getRoomAccess().getHasCapacityLeftSquareBracketKeyword_2_0_0()); 
 
-            state._fsp--;
+            }
 
-             after(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_2_0()); 
+             after(grammarAccess.getRoomAccess().getHasCapacityLeftSquareBracketKeyword_2_0_0()); 
 
             }
 
@@ -7148,29 +6009,25 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Room__AreasAssignment_2"
+    // $ANTLR end "rule__Room__HasCapacityAssignment_2_0"
 
 
-    // $ANTLR start "rule__Room__AreasAssignment_3_1"
-    // InternalBmod.g:2353:1: rule__Room__AreasAssignment_3_1 : ( ruleArea ) ;
-    public final void rule__Room__AreasAssignment_3_1() throws RecognitionException {
+    // $ANTLR start "rule__Room__CapacityAssignment_2_1"
+    // InternalBmodParser.g:2029:1: rule__Room__CapacityAssignment_2_1 : ( RULE_INT ) ;
+    public final void rule__Room__CapacityAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2357:1: ( ( ruleArea ) )
-            // InternalBmod.g:2358:2: ( ruleArea )
+            // InternalBmodParser.g:2033:1: ( ( RULE_INT ) )
+            // InternalBmodParser.g:2034:2: ( RULE_INT )
             {
-            // InternalBmod.g:2358:2: ( ruleArea )
-            // InternalBmod.g:2359:3: ruleArea
+            // InternalBmodParser.g:2034:2: ( RULE_INT )
+            // InternalBmodParser.g:2035:3: RULE_INT
             {
-             before(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_3_1_0()); 
-            pushFollow(FOLLOW_2);
-            ruleArea();
-
-            state._fsp--;
-
-             after(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_3_1_0()); 
+             before(grammarAccess.getRoomAccess().getCapacityINTTerminalRuleCall_2_1_0()); 
+            match(input,RULE_INT,FOLLOW_2); 
+             after(grammarAccess.getRoomAccess().getCapacityINTTerminalRuleCall_2_1_0()); 
 
             }
 
@@ -7189,21 +6046,103 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Room__AreasAssignment_3_1"
+    // $ANTLR end "rule__Room__CapacityAssignment_2_1"
+
+
+    // $ANTLR start "rule__Room__AreasAssignment_3"
+    // InternalBmodParser.g:2044:1: rule__Room__AreasAssignment_3 : ( ruleArea ) ;
+    public final void rule__Room__AreasAssignment_3() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:2048:1: ( ( ruleArea ) )
+            // InternalBmodParser.g:2049:2: ( ruleArea )
+            {
+            // InternalBmodParser.g:2049:2: ( ruleArea )
+            // InternalBmodParser.g:2050:3: ruleArea
+            {
+             before(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_3_0()); 
+            pushFollow(FOLLOW_2);
+            ruleArea();
+
+            state._fsp--;
+
+             after(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_3_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Room__AreasAssignment_3"
+
+
+    // $ANTLR start "rule__Room__AreasAssignment_4_1"
+    // InternalBmodParser.g:2059:1: rule__Room__AreasAssignment_4_1 : ( ruleArea ) ;
+    public final void rule__Room__AreasAssignment_4_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBmodParser.g:2063:1: ( ( ruleArea ) )
+            // InternalBmodParser.g:2064:2: ( ruleArea )
+            {
+            // InternalBmodParser.g:2064:2: ( ruleArea )
+            // InternalBmodParser.g:2065:3: ruleArea
+            {
+             before(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_4_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleArea();
+
+            state._fsp--;
+
+             after(grammarAccess.getRoomAccess().getAreasAreaParserRuleCall_4_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Room__AreasAssignment_4_1"
 
 
     // $ANTLR start "rule__Door__NameAssignment_1"
-    // InternalBmod.g:2368:1: rule__Door__NameAssignment_1 : ( RULE_VARNAME ) ;
+    // InternalBmodParser.g:2074:1: rule__Door__NameAssignment_1 : ( RULE_VARNAME ) ;
     public final void rule__Door__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2372:1: ( ( RULE_VARNAME ) )
-            // InternalBmod.g:2373:2: ( RULE_VARNAME )
+            // InternalBmodParser.g:2078:1: ( ( RULE_VARNAME ) )
+            // InternalBmodParser.g:2079:2: ( RULE_VARNAME )
             {
-            // InternalBmod.g:2373:2: ( RULE_VARNAME )
-            // InternalBmod.g:2374:3: RULE_VARNAME
+            // InternalBmodParser.g:2079:2: ( RULE_VARNAME )
+            // InternalBmodParser.g:2080:3: RULE_VARNAME
             {
              before(grammarAccess.getDoorAccess().getNameVARNAMETerminalRuleCall_1_0()); 
             match(input,RULE_VARNAME,FOLLOW_2); 
@@ -7230,17 +6169,17 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Door__FromAssignment_3"
-    // InternalBmod.g:2383:1: rule__Door__FromAssignment_3 : ( ruleCoordinate ) ;
+    // InternalBmodParser.g:2089:1: rule__Door__FromAssignment_3 : ( ruleCoordinate ) ;
     public final void rule__Door__FromAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2387:1: ( ( ruleCoordinate ) )
-            // InternalBmod.g:2388:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2093:1: ( ( ruleCoordinate ) )
+            // InternalBmodParser.g:2094:2: ( ruleCoordinate )
             {
-            // InternalBmod.g:2388:2: ( ruleCoordinate )
-            // InternalBmod.g:2389:3: ruleCoordinate
+            // InternalBmodParser.g:2094:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2095:3: ruleCoordinate
             {
              before(grammarAccess.getDoorAccess().getFromCoordinateParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -7271,17 +6210,17 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Door__ToAssignment_5"
-    // InternalBmod.g:2398:1: rule__Door__ToAssignment_5 : ( ruleCoordinate ) ;
+    // InternalBmodParser.g:2104:1: rule__Door__ToAssignment_5 : ( ruleCoordinate ) ;
     public final void rule__Door__ToAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2402:1: ( ( ruleCoordinate ) )
-            // InternalBmod.g:2403:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2108:1: ( ( ruleCoordinate ) )
+            // InternalBmodParser.g:2109:2: ( ruleCoordinate )
             {
-            // InternalBmod.g:2403:2: ( ruleCoordinate )
-            // InternalBmod.g:2404:3: ruleCoordinate
+            // InternalBmodParser.g:2109:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2110:3: ruleCoordinate
             {
              before(grammarAccess.getDoorAccess().getToCoordinateParserRuleCall_5_0()); 
             pushFollow(FOLLOW_2);
@@ -7311,264 +6250,18 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Door__ToAssignment_5"
 
 
-    // $ANTLR start "rule__Perception__ExistingAssignment_0"
-    // InternalBmod.g:2413:1: rule__Perception__ExistingAssignment_0 : ( rulePerceptionEnum ) ;
-    public final void rule__Perception__ExistingAssignment_0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:2417:1: ( ( rulePerceptionEnum ) )
-            // InternalBmod.g:2418:2: ( rulePerceptionEnum )
-            {
-            // InternalBmod.g:2418:2: ( rulePerceptionEnum )
-            // InternalBmod.g:2419:3: rulePerceptionEnum
-            {
-             before(grammarAccess.getPerceptionAccess().getExistingPerceptionEnumEnumRuleCall_0_0()); 
-            pushFollow(FOLLOW_2);
-            rulePerceptionEnum();
-
-            state._fsp--;
-
-             after(grammarAccess.getPerceptionAccess().getExistingPerceptionEnumEnumRuleCall_0_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Perception__ExistingAssignment_0"
-
-
-    // $ANTLR start "rule__Perception__CustomAssignment_1"
-    // InternalBmod.g:2428:1: rule__Perception__CustomAssignment_1 : ( ( RULE_VARNAME ) ) ;
-    public final void rule__Perception__CustomAssignment_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:2432:1: ( ( ( RULE_VARNAME ) ) )
-            // InternalBmod.g:2433:2: ( ( RULE_VARNAME ) )
-            {
-            // InternalBmod.g:2433:2: ( ( RULE_VARNAME ) )
-            // InternalBmod.g:2434:3: ( RULE_VARNAME )
-            {
-             before(grammarAccess.getPerceptionAccess().getCustomPerceptionLevelCrossReference_1_0()); 
-            // InternalBmod.g:2435:3: ( RULE_VARNAME )
-            // InternalBmod.g:2436:4: RULE_VARNAME
-            {
-             before(grammarAccess.getPerceptionAccess().getCustomPerceptionLevelVARNAMETerminalRuleCall_1_0_1()); 
-            match(input,RULE_VARNAME,FOLLOW_2); 
-             after(grammarAccess.getPerceptionAccess().getCustomPerceptionLevelVARNAMETerminalRuleCall_1_0_1()); 
-
-            }
-
-             after(grammarAccess.getPerceptionAccess().getCustomPerceptionLevelCrossReference_1_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Perception__CustomAssignment_1"
-
-
-    // $ANTLR start "rule__Action__ExistingAssignment_0"
-    // InternalBmod.g:2447:1: rule__Action__ExistingAssignment_0 : ( ruleActionEnum ) ;
-    public final void rule__Action__ExistingAssignment_0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:2451:1: ( ( ruleActionEnum ) )
-            // InternalBmod.g:2452:2: ( ruleActionEnum )
-            {
-            // InternalBmod.g:2452:2: ( ruleActionEnum )
-            // InternalBmod.g:2453:3: ruleActionEnum
-            {
-             before(grammarAccess.getActionAccess().getExistingActionEnumEnumRuleCall_0_0()); 
-            pushFollow(FOLLOW_2);
-            ruleActionEnum();
-
-            state._fsp--;
-
-             after(grammarAccess.getActionAccess().getExistingActionEnumEnumRuleCall_0_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Action__ExistingAssignment_0"
-
-
-    // $ANTLR start "rule__Action__CustomAssignment_1"
-    // InternalBmod.g:2462:1: rule__Action__CustomAssignment_1 : ( ( RULE_VARNAME ) ) ;
-    public final void rule__Action__CustomAssignment_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:2466:1: ( ( ( RULE_VARNAME ) ) )
-            // InternalBmod.g:2467:2: ( ( RULE_VARNAME ) )
-            {
-            // InternalBmod.g:2467:2: ( ( RULE_VARNAME ) )
-            // InternalBmod.g:2468:3: ( RULE_VARNAME )
-            {
-             before(grammarAccess.getActionAccess().getCustomActionProfileCrossReference_1_0()); 
-            // InternalBmod.g:2469:3: ( RULE_VARNAME )
-            // InternalBmod.g:2470:4: RULE_VARNAME
-            {
-             before(grammarAccess.getActionAccess().getCustomActionProfileVARNAMETerminalRuleCall_1_0_1()); 
-            match(input,RULE_VARNAME,FOLLOW_2); 
-             after(grammarAccess.getActionAccess().getCustomActionProfileVARNAMETerminalRuleCall_1_0_1()); 
-
-            }
-
-             after(grammarAccess.getActionAccess().getCustomActionProfileCrossReference_1_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Action__CustomAssignment_1"
-
-
-    // $ANTLR start "rule__PerceptionLevel__NameAssignment_1"
-    // InternalBmod.g:2481:1: rule__PerceptionLevel__NameAssignment_1 : ( RULE_VARNAME ) ;
-    public final void rule__PerceptionLevel__NameAssignment_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:2485:1: ( ( RULE_VARNAME ) )
-            // InternalBmod.g:2486:2: ( RULE_VARNAME )
-            {
-            // InternalBmod.g:2486:2: ( RULE_VARNAME )
-            // InternalBmod.g:2487:3: RULE_VARNAME
-            {
-             before(grammarAccess.getPerceptionLevelAccess().getNameVARNAMETerminalRuleCall_1_0()); 
-            match(input,RULE_VARNAME,FOLLOW_2); 
-             after(grammarAccess.getPerceptionLevelAccess().getNameVARNAMETerminalRuleCall_1_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__PerceptionLevel__NameAssignment_1"
-
-
-    // $ANTLR start "rule__ActionProfile__NameAssignment_1"
-    // InternalBmod.g:2496:1: rule__ActionProfile__NameAssignment_1 : ( RULE_VARNAME ) ;
-    public final void rule__ActionProfile__NameAssignment_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:2500:1: ( ( RULE_VARNAME ) )
-            // InternalBmod.g:2501:2: ( RULE_VARNAME )
-            {
-            // InternalBmod.g:2501:2: ( RULE_VARNAME )
-            // InternalBmod.g:2502:3: RULE_VARNAME
-            {
-             before(grammarAccess.getActionProfileAccess().getNameVARNAMETerminalRuleCall_1_0()); 
-            match(input,RULE_VARNAME,FOLLOW_2); 
-             after(grammarAccess.getActionProfileAccess().getNameVARNAMETerminalRuleCall_1_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ActionProfile__NameAssignment_1"
-
-
     // $ANTLR start "rule__Person__NameAssignment_1"
-    // InternalBmod.g:2511:1: rule__Person__NameAssignment_1 : ( RULE_VARNAME ) ;
+    // InternalBmodParser.g:2119:1: rule__Person__NameAssignment_1 : ( RULE_VARNAME ) ;
     public final void rule__Person__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2515:1: ( ( RULE_VARNAME ) )
-            // InternalBmod.g:2516:2: ( RULE_VARNAME )
+            // InternalBmodParser.g:2123:1: ( ( RULE_VARNAME ) )
+            // InternalBmodParser.g:2124:2: ( RULE_VARNAME )
             {
-            // InternalBmod.g:2516:2: ( RULE_VARNAME )
-            // InternalBmod.g:2517:3: RULE_VARNAME
+            // InternalBmodParser.g:2124:2: ( RULE_VARNAME )
+            // InternalBmodParser.g:2125:3: RULE_VARNAME
             {
              before(grammarAccess.getPersonAccess().getNameVARNAMETerminalRuleCall_1_0()); 
             match(input,RULE_VARNAME,FOLLOW_2); 
@@ -7595,17 +6288,17 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Person__LocationAssignment_3"
-    // InternalBmod.g:2526:1: rule__Person__LocationAssignment_3 : ( ruleCoordinate ) ;
+    // InternalBmodParser.g:2134:1: rule__Person__LocationAssignment_3 : ( ruleCoordinate ) ;
     public final void rule__Person__LocationAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2530:1: ( ( ruleCoordinate ) )
-            // InternalBmod.g:2531:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2138:1: ( ( ruleCoordinate ) )
+            // InternalBmodParser.g:2139:2: ( ruleCoordinate )
             {
-            // InternalBmod.g:2531:2: ( ruleCoordinate )
-            // InternalBmod.g:2532:3: ruleCoordinate
+            // InternalBmodParser.g:2139:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2140:3: ruleCoordinate
             {
              before(grammarAccess.getPersonAccess().getLocationCoordinateParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -7635,26 +6328,30 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Person__LocationAssignment_3"
 
 
-    // $ANTLR start "rule__Person__PerceptionAssignment_5"
-    // InternalBmod.g:2541:1: rule__Person__PerceptionAssignment_5 : ( rulePerception ) ;
-    public final void rule__Person__PerceptionAssignment_5() throws RecognitionException {
+    // $ANTLR start "rule__Person__ActionAssignment_5"
+    // InternalBmodParser.g:2149:1: rule__Person__ActionAssignment_5 : ( ( RULE_VARNAME ) ) ;
+    public final void rule__Person__ActionAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2545:1: ( ( rulePerception ) )
-            // InternalBmod.g:2546:2: ( rulePerception )
+            // InternalBmodParser.g:2153:1: ( ( ( RULE_VARNAME ) ) )
+            // InternalBmodParser.g:2154:2: ( ( RULE_VARNAME ) )
             {
-            // InternalBmod.g:2546:2: ( rulePerception )
-            // InternalBmod.g:2547:3: rulePerception
+            // InternalBmodParser.g:2154:2: ( ( RULE_VARNAME ) )
+            // InternalBmodParser.g:2155:3: ( RULE_VARNAME )
             {
-             before(grammarAccess.getPersonAccess().getPerceptionPerceptionParserRuleCall_5_0()); 
-            pushFollow(FOLLOW_2);
-            rulePerception();
+             before(grammarAccess.getPersonAccess().getActionActionDescCrossReference_5_0()); 
+            // InternalBmodParser.g:2156:3: ( RULE_VARNAME )
+            // InternalBmodParser.g:2157:4: RULE_VARNAME
+            {
+             before(grammarAccess.getPersonAccess().getActionActionDescVARNAMETerminalRuleCall_5_0_1()); 
+            match(input,RULE_VARNAME,FOLLOW_2); 
+             after(grammarAccess.getPersonAccess().getActionActionDescVARNAMETerminalRuleCall_5_0_1()); 
 
-            state._fsp--;
+            }
 
-             after(grammarAccess.getPersonAccess().getPerceptionPerceptionParserRuleCall_5_0()); 
+             after(grammarAccess.getPersonAccess().getActionActionDescCrossReference_5_0()); 
 
             }
 
@@ -7673,62 +6370,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Person__PerceptionAssignment_5"
-
-
-    // $ANTLR start "rule__Person__ActionAssignment_7"
-    // InternalBmod.g:2556:1: rule__Person__ActionAssignment_7 : ( ruleAction ) ;
-    public final void rule__Person__ActionAssignment_7() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:2560:1: ( ( ruleAction ) )
-            // InternalBmod.g:2561:2: ( ruleAction )
-            {
-            // InternalBmod.g:2561:2: ( ruleAction )
-            // InternalBmod.g:2562:3: ruleAction
-            {
-             before(grammarAccess.getPersonAccess().getActionActionParserRuleCall_7_0()); 
-            pushFollow(FOLLOW_2);
-            ruleAction();
-
-            state._fsp--;
-
-             after(grammarAccess.getPersonAccess().getActionActionParserRuleCall_7_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Person__ActionAssignment_7"
+    // $ANTLR end "rule__Person__ActionAssignment_5"
 
 
     // $ANTLR start "rule__Exit__LocationAssignment_2"
-    // InternalBmod.g:2571:1: rule__Exit__LocationAssignment_2 : ( ruleCoordinate ) ;
+    // InternalBmodParser.g:2168:1: rule__Exit__LocationAssignment_2 : ( ruleCoordinate ) ;
     public final void rule__Exit__LocationAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2575:1: ( ( ruleCoordinate ) )
-            // InternalBmod.g:2576:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2172:1: ( ( ruleCoordinate ) )
+            // InternalBmodParser.g:2173:2: ( ruleCoordinate )
             {
-            // InternalBmod.g:2576:2: ( ruleCoordinate )
-            // InternalBmod.g:2577:3: ruleCoordinate
+            // InternalBmodParser.g:2173:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2174:3: ruleCoordinate
             {
              before(grammarAccess.getExitAccess().getLocationCoordinateParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -7759,17 +6415,17 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Fire__LocationAssignment_2"
-    // InternalBmod.g:2586:1: rule__Fire__LocationAssignment_2 : ( ruleCoordinate ) ;
+    // InternalBmodParser.g:2183:1: rule__Fire__LocationAssignment_2 : ( ruleCoordinate ) ;
     public final void rule__Fire__LocationAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2590:1: ( ( ruleCoordinate ) )
-            // InternalBmod.g:2591:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2187:1: ( ( ruleCoordinate ) )
+            // InternalBmodParser.g:2188:2: ( ruleCoordinate )
             {
-            // InternalBmod.g:2591:2: ( ruleCoordinate )
-            // InternalBmod.g:2592:3: ruleCoordinate
+            // InternalBmodParser.g:2188:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2189:3: ruleCoordinate
             {
              before(grammarAccess.getFireAccess().getLocationCoordinateParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -7799,30 +6455,30 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Fire__LocationAssignment_2"
 
 
-    // $ANTLR start "rule__EmergencySign__OnAssignment_2"
-    // InternalBmod.g:2601:1: rule__EmergencySign__OnAssignment_2 : ( ( RULE_VARNAME ) ) ;
-    public final void rule__EmergencySign__OnAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__EmergencySign__FromAssignment_2"
+    // InternalBmodParser.g:2198:1: rule__EmergencySign__FromAssignment_2 : ( ( RULE_VARNAME ) ) ;
+    public final void rule__EmergencySign__FromAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2605:1: ( ( ( RULE_VARNAME ) ) )
-            // InternalBmod.g:2606:2: ( ( RULE_VARNAME ) )
+            // InternalBmodParser.g:2202:1: ( ( ( RULE_VARNAME ) ) )
+            // InternalBmodParser.g:2203:2: ( ( RULE_VARNAME ) )
             {
-            // InternalBmod.g:2606:2: ( ( RULE_VARNAME ) )
-            // InternalBmod.g:2607:3: ( RULE_VARNAME )
+            // InternalBmodParser.g:2203:2: ( ( RULE_VARNAME ) )
+            // InternalBmodParser.g:2204:3: ( RULE_VARNAME )
             {
-             before(grammarAccess.getEmergencySignAccess().getOnDoorCrossReference_2_0()); 
-            // InternalBmod.g:2608:3: ( RULE_VARNAME )
-            // InternalBmod.g:2609:4: RULE_VARNAME
+             before(grammarAccess.getEmergencySignAccess().getFromDoorCrossReference_2_0()); 
+            // InternalBmodParser.g:2205:3: ( RULE_VARNAME )
+            // InternalBmodParser.g:2206:4: RULE_VARNAME
             {
-             before(grammarAccess.getEmergencySignAccess().getOnDoorVARNAMETerminalRuleCall_2_0_1()); 
+             before(grammarAccess.getEmergencySignAccess().getFromDoorVARNAMETerminalRuleCall_2_0_1()); 
             match(input,RULE_VARNAME,FOLLOW_2); 
-             after(grammarAccess.getEmergencySignAccess().getOnDoorVARNAMETerminalRuleCall_2_0_1()); 
+             after(grammarAccess.getEmergencySignAccess().getFromDoorVARNAMETerminalRuleCall_2_0_1()); 
 
             }
 
-             after(grammarAccess.getEmergencySignAccess().getOnDoorCrossReference_2_0()); 
+             after(grammarAccess.getEmergencySignAccess().getFromDoorCrossReference_2_0()); 
 
             }
 
@@ -7841,29 +6497,29 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__EmergencySign__OnAssignment_2"
+    // $ANTLR end "rule__EmergencySign__FromAssignment_2"
 
 
-    // $ANTLR start "rule__EmergencySign__ToAssignment_3"
-    // InternalBmod.g:2620:1: rule__EmergencySign__ToAssignment_3 : ( ruleDoorRef ) ;
-    public final void rule__EmergencySign__ToAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__EmergencySign__RefAssignment_3"
+    // InternalBmodParser.g:2217:1: rule__EmergencySign__RefAssignment_3 : ( ruleDoorRef ) ;
+    public final void rule__EmergencySign__RefAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2624:1: ( ( ruleDoorRef ) )
-            // InternalBmod.g:2625:2: ( ruleDoorRef )
+            // InternalBmodParser.g:2221:1: ( ( ruleDoorRef ) )
+            // InternalBmodParser.g:2222:2: ( ruleDoorRef )
             {
-            // InternalBmod.g:2625:2: ( ruleDoorRef )
-            // InternalBmod.g:2626:3: ruleDoorRef
+            // InternalBmodParser.g:2222:2: ( ruleDoorRef )
+            // InternalBmodParser.g:2223:3: ruleDoorRef
             {
-             before(grammarAccess.getEmergencySignAccess().getToDoorRefParserRuleCall_3_0()); 
+             before(grammarAccess.getEmergencySignAccess().getRefDoorRefParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
             ruleDoorRef();
 
             state._fsp--;
 
-             after(grammarAccess.getEmergencySignAccess().getToDoorRefParserRuleCall_3_0()); 
+             after(grammarAccess.getEmergencySignAccess().getRefDoorRefParserRuleCall_3_0()); 
 
             }
 
@@ -7882,78 +6538,33 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__EmergencySign__ToAssignment_3"
+    // $ANTLR end "rule__EmergencySign__RefAssignment_3"
 
 
-    // $ANTLR start "rule__DoorRef__RefAssignment_1"
-    // InternalBmod.g:2635:1: rule__DoorRef__RefAssignment_1 : ( ( RULE_VARNAME ) ) ;
-    public final void rule__DoorRef__RefAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__DoorRef__ToAssignment_1"
+    // InternalBmodParser.g:2232:1: rule__DoorRef__ToAssignment_1 : ( ( RULE_VARNAME ) ) ;
+    public final void rule__DoorRef__ToAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2639:1: ( ( ( RULE_VARNAME ) ) )
-            // InternalBmod.g:2640:2: ( ( RULE_VARNAME ) )
+            // InternalBmodParser.g:2236:1: ( ( ( RULE_VARNAME ) ) )
+            // InternalBmodParser.g:2237:2: ( ( RULE_VARNAME ) )
             {
-            // InternalBmod.g:2640:2: ( ( RULE_VARNAME ) )
-            // InternalBmod.g:2641:3: ( RULE_VARNAME )
+            // InternalBmodParser.g:2237:2: ( ( RULE_VARNAME ) )
+            // InternalBmodParser.g:2238:3: ( RULE_VARNAME )
             {
-             before(grammarAccess.getDoorRefAccess().getRefDoorCrossReference_1_0()); 
-            // InternalBmod.g:2642:3: ( RULE_VARNAME )
-            // InternalBmod.g:2643:4: RULE_VARNAME
+             before(grammarAccess.getDoorRefAccess().getToDoorCrossReference_1_0()); 
+            // InternalBmodParser.g:2239:3: ( RULE_VARNAME )
+            // InternalBmodParser.g:2240:4: RULE_VARNAME
             {
-             before(grammarAccess.getDoorRefAccess().getRefDoorVARNAMETerminalRuleCall_1_0_1()); 
+             before(grammarAccess.getDoorRefAccess().getToDoorVARNAMETerminalRuleCall_1_0_1()); 
             match(input,RULE_VARNAME,FOLLOW_2); 
-             after(grammarAccess.getDoorRefAccess().getRefDoorVARNAMETerminalRuleCall_1_0_1()); 
+             after(grammarAccess.getDoorRefAccess().getToDoorVARNAMETerminalRuleCall_1_0_1()); 
 
             }
 
-             after(grammarAccess.getDoorRefAccess().getRefDoorCrossReference_1_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__DoorRef__RefAssignment_1"
-
-
-    // $ANTLR start "rule__DangerousCondition__OnAssignment_2"
-    // InternalBmod.g:2654:1: rule__DangerousCondition__OnAssignment_2 : ( ( RULE_VARNAME ) ) ;
-    public final void rule__DangerousCondition__OnAssignment_2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:2658:1: ( ( ( RULE_VARNAME ) ) )
-            // InternalBmod.g:2659:2: ( ( RULE_VARNAME ) )
-            {
-            // InternalBmod.g:2659:2: ( ( RULE_VARNAME ) )
-            // InternalBmod.g:2660:3: ( RULE_VARNAME )
-            {
-             before(grammarAccess.getDangerousConditionAccess().getOnRoomCrossReference_2_0()); 
-            // InternalBmod.g:2661:3: ( RULE_VARNAME )
-            // InternalBmod.g:2662:4: RULE_VARNAME
-            {
-             before(grammarAccess.getDangerousConditionAccess().getOnRoomVARNAMETerminalRuleCall_2_0_1()); 
-            match(input,RULE_VARNAME,FOLLOW_2); 
-             after(grammarAccess.getDangerousConditionAccess().getOnRoomVARNAMETerminalRuleCall_2_0_1()); 
-
-            }
-
-             after(grammarAccess.getDangerousConditionAccess().getOnRoomCrossReference_2_0()); 
+             after(grammarAccess.getDoorRefAccess().getToDoorCrossReference_1_0()); 
 
             }
 
@@ -7972,58 +6583,21 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DangerousCondition__OnAssignment_2"
-
-
-    // $ANTLR start "rule__DangerousCondition__AmountAssignment_3"
-    // InternalBmod.g:2673:1: rule__DangerousCondition__AmountAssignment_3 : ( RULE_INT ) ;
-    public final void rule__DangerousCondition__AmountAssignment_3() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBmod.g:2677:1: ( ( RULE_INT ) )
-            // InternalBmod.g:2678:2: ( RULE_INT )
-            {
-            // InternalBmod.g:2678:2: ( RULE_INT )
-            // InternalBmod.g:2679:3: RULE_INT
-            {
-             before(grammarAccess.getDangerousConditionAccess().getAmountINTTerminalRuleCall_3_0()); 
-            match(input,RULE_INT,FOLLOW_2); 
-             after(grammarAccess.getDangerousConditionAccess().getAmountINTTerminalRuleCall_3_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__DangerousCondition__AmountAssignment_3"
+    // $ANTLR end "rule__DoorRef__ToAssignment_1"
 
 
     // $ANTLR start "rule__Coordinate__XAssignment_1"
-    // InternalBmod.g:2688:1: rule__Coordinate__XAssignment_1 : ( RULE_INT ) ;
+    // InternalBmodParser.g:2251:1: rule__Coordinate__XAssignment_1 : ( RULE_INT ) ;
     public final void rule__Coordinate__XAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2692:1: ( ( RULE_INT ) )
-            // InternalBmod.g:2693:2: ( RULE_INT )
+            // InternalBmodParser.g:2255:1: ( ( RULE_INT ) )
+            // InternalBmodParser.g:2256:2: ( RULE_INT )
             {
-            // InternalBmod.g:2693:2: ( RULE_INT )
-            // InternalBmod.g:2694:3: RULE_INT
+            // InternalBmodParser.g:2256:2: ( RULE_INT )
+            // InternalBmodParser.g:2257:3: RULE_INT
             {
              before(grammarAccess.getCoordinateAccess().getXINTTerminalRuleCall_1_0()); 
             match(input,RULE_INT,FOLLOW_2); 
@@ -8050,17 +6624,17 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Coordinate__YAssignment_3"
-    // InternalBmod.g:2703:1: rule__Coordinate__YAssignment_3 : ( RULE_INT ) ;
+    // InternalBmodParser.g:2266:1: rule__Coordinate__YAssignment_3 : ( RULE_INT ) ;
     public final void rule__Coordinate__YAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2707:1: ( ( RULE_INT ) )
-            // InternalBmod.g:2708:2: ( RULE_INT )
+            // InternalBmodParser.g:2270:1: ( ( RULE_INT ) )
+            // InternalBmodParser.g:2271:2: ( RULE_INT )
             {
-            // InternalBmod.g:2708:2: ( RULE_INT )
-            // InternalBmod.g:2709:3: RULE_INT
+            // InternalBmodParser.g:2271:2: ( RULE_INT )
+            // InternalBmodParser.g:2272:3: RULE_INT
             {
              before(grammarAccess.getCoordinateAccess().getYINTTerminalRuleCall_3_0()); 
             match(input,RULE_INT,FOLLOW_2); 
@@ -8087,17 +6661,17 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__FromAssignment_1"
-    // InternalBmod.g:2718:1: rule__Area__FromAssignment_1 : ( ruleCoordinate ) ;
+    // InternalBmodParser.g:2281:1: rule__Area__FromAssignment_1 : ( ruleCoordinate ) ;
     public final void rule__Area__FromAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2722:1: ( ( ruleCoordinate ) )
-            // InternalBmod.g:2723:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2285:1: ( ( ruleCoordinate ) )
+            // InternalBmodParser.g:2286:2: ( ruleCoordinate )
             {
-            // InternalBmod.g:2723:2: ( ruleCoordinate )
-            // InternalBmod.g:2724:3: ruleCoordinate
+            // InternalBmodParser.g:2286:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2287:3: ruleCoordinate
             {
              before(grammarAccess.getAreaAccess().getFromCoordinateParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -8128,17 +6702,17 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__ToAssignment_3"
-    // InternalBmod.g:2733:1: rule__Area__ToAssignment_3 : ( ruleCoordinate ) ;
+    // InternalBmodParser.g:2296:1: rule__Area__ToAssignment_3 : ( ruleCoordinate ) ;
     public final void rule__Area__ToAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2737:1: ( ( ruleCoordinate ) )
-            // InternalBmod.g:2738:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2300:1: ( ( ruleCoordinate ) )
+            // InternalBmodParser.g:2301:2: ( ruleCoordinate )
             {
-            // InternalBmod.g:2738:2: ( ruleCoordinate )
-            // InternalBmod.g:2739:3: ruleCoordinate
+            // InternalBmodParser.g:2301:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2302:3: ruleCoordinate
             {
              before(grammarAccess.getAreaAccess().getToCoordinateParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -8169,17 +6743,17 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__WithoutAssignment_4_1"
-    // InternalBmod.g:2748:1: rule__Area__WithoutAssignment_4_1 : ( ruleCoordinate ) ;
+    // InternalBmodParser.g:2311:1: rule__Area__WithoutAssignment_4_1 : ( ruleCoordinate ) ;
     public final void rule__Area__WithoutAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2752:1: ( ( ruleCoordinate ) )
-            // InternalBmod.g:2753:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2315:1: ( ( ruleCoordinate ) )
+            // InternalBmodParser.g:2316:2: ( ruleCoordinate )
             {
-            // InternalBmod.g:2753:2: ( ruleCoordinate )
-            // InternalBmod.g:2754:3: ruleCoordinate
+            // InternalBmodParser.g:2316:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2317:3: ruleCoordinate
             {
              before(grammarAccess.getAreaAccess().getWithoutCoordinateParserRuleCall_4_1_0()); 
             pushFollow(FOLLOW_2);
@@ -8210,17 +6784,17 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Area__WithoutAssignment_4_2_1"
-    // InternalBmod.g:2763:1: rule__Area__WithoutAssignment_4_2_1 : ( ruleCoordinate ) ;
+    // InternalBmodParser.g:2326:1: rule__Area__WithoutAssignment_4_2_1 : ( ruleCoordinate ) ;
     public final void rule__Area__WithoutAssignment_4_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBmod.g:2767:1: ( ( ruleCoordinate ) )
-            // InternalBmod.g:2768:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2330:1: ( ( ruleCoordinate ) )
+            // InternalBmodParser.g:2331:2: ( ruleCoordinate )
             {
-            // InternalBmod.g:2768:2: ( ruleCoordinate )
-            // InternalBmod.g:2769:3: ruleCoordinate
+            // InternalBmodParser.g:2331:2: ( ruleCoordinate )
+            // InternalBmodParser.g:2332:3: ruleCoordinate
             {
              before(grammarAccess.getAreaAccess().getWithoutCoordinateParserRuleCall_4_2_1_0()); 
             pushFollow(FOLLOW_2);
@@ -8256,23 +6830,24 @@ public class InternalBmodParser extends AbstractInternalContentAssistParser {
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x00000005C7280000L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x00000005C7280002L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000100002L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x000000000000F010L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000070010L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000020000002L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000FD0L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000082L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000F52L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000101000L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000002002L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000000040002L});
 
 }

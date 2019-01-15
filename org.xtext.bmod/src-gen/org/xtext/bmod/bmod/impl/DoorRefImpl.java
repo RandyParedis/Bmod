@@ -23,7 +23,7 @@ import org.xtext.bmod.bmod.DoorRef;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.bmod.bmod.impl.DoorRefImpl#getRef <em>Ref</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.impl.DoorRefImpl#getTo <em>To</em>}</li>
  * </ul>
  *
  * @generated
@@ -31,14 +31,14 @@ import org.xtext.bmod.bmod.DoorRef;
 public class DoorRefImpl extends MinimalEObjectImpl.Container implements DoorRef
 {
   /**
-   * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
+   * The cached value of the '{@link #getTo() <em>To</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRef()
+   * @see #getTo()
    * @generated
    * @ordered
    */
-  protected Door ref;
+  protected Door to;
 
   /**
    * <!-- begin-user-doc -->
@@ -66,19 +66,19 @@ public class DoorRefImpl extends MinimalEObjectImpl.Container implements DoorRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public Door getRef()
+  public Door getTo()
   {
-    if (ref != null && ref.eIsProxy())
+    if (to != null && to.eIsProxy())
     {
-      InternalEObject oldRef = (InternalEObject)ref;
-      ref = (Door)eResolveProxy(oldRef);
-      if (ref != oldRef)
+      InternalEObject oldTo = (InternalEObject)to;
+      to = (Door)eResolveProxy(oldTo);
+      if (to != oldTo)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, BmodPackage.DOOR_REF__REF, oldRef, ref));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, BmodPackage.DOOR_REF__TO, oldTo, to));
       }
     }
-    return ref;
+    return to;
   }
 
   /**
@@ -86,9 +86,9 @@ public class DoorRefImpl extends MinimalEObjectImpl.Container implements DoorRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public Door basicGetRef()
+  public Door basicGetTo()
   {
-    return ref;
+    return to;
   }
 
   /**
@@ -96,12 +96,12 @@ public class DoorRefImpl extends MinimalEObjectImpl.Container implements DoorRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRef(Door newRef)
+  public void setTo(Door newTo)
   {
-    Door oldRef = ref;
-    ref = newRef;
+    Door oldTo = to;
+    to = newTo;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.DOOR_REF__REF, oldRef, ref));
+      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.DOOR_REF__TO, oldTo, to));
   }
 
   /**
@@ -114,9 +114,9 @@ public class DoorRefImpl extends MinimalEObjectImpl.Container implements DoorRef
   {
     switch (featureID)
     {
-      case BmodPackage.DOOR_REF__REF:
-        if (resolve) return getRef();
-        return basicGetRef();
+      case BmodPackage.DOOR_REF__TO:
+        if (resolve) return getTo();
+        return basicGetTo();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -131,8 +131,8 @@ public class DoorRefImpl extends MinimalEObjectImpl.Container implements DoorRef
   {
     switch (featureID)
     {
-      case BmodPackage.DOOR_REF__REF:
-        setRef((Door)newValue);
+      case BmodPackage.DOOR_REF__TO:
+        setTo((Door)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -148,8 +148,8 @@ public class DoorRefImpl extends MinimalEObjectImpl.Container implements DoorRef
   {
     switch (featureID)
     {
-      case BmodPackage.DOOR_REF__REF:
-        setRef((Door)null);
+      case BmodPackage.DOOR_REF__TO:
+        setTo((Door)null);
         return;
     }
     super.eUnset(featureID);
@@ -165,8 +165,8 @@ public class DoorRefImpl extends MinimalEObjectImpl.Container implements DoorRef
   {
     switch (featureID)
     {
-      case BmodPackage.DOOR_REF__REF:
-        return ref != null;
+      case BmodPackage.DOOR_REF__TO:
+        return to != null;
     }
     return super.eIsSet(featureID);
   }

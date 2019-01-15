@@ -44,7 +44,7 @@ import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.xtext.bmod.generator.BmodGenerator;
 import org.xtext.bmod.parser.antlr.BmodAntlrTokenFileProvider;
 import org.xtext.bmod.parser.antlr.BmodParser;
-import org.xtext.bmod.parser.antlr.internal.InternalBmodLexer;
+import org.xtext.bmod.parser.antlr.lexer.InternalBmodLexer;
 import org.xtext.bmod.scoping.BmodScopeProvider;
 import org.xtext.bmod.serializer.BmodSemanticSequencer;
 import org.xtext.bmod.serializer.BmodSyntacticSequencer;

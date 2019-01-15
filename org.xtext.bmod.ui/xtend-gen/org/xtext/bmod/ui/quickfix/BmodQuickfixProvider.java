@@ -3,7 +3,16 @@
  */
 package org.xtext.bmod.ui.quickfix;
 
+import org.eclipse.jface.text.FindReplaceDocumentAdapter;
+import org.eclipse.jface.text.IRegion;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.edit.IModification;
+import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
+import org.eclipse.xtext.ui.editor.quickfix.Fix;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.validation.Issue;
+import org.xtext.bmod.validation.BmodValidator;
 
 /**
  * Custom quickfixes.
@@ -12,4 +21,31 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
  */
 @SuppressWarnings("all")
 public class BmodQuickfixProvider extends DefaultQuickfixProvider {
+  @Fix(BmodValidator.BR_TL)
+  public void swapAreaCoords(final Issue issue, final IssueResolutionAcceptor acceptor) {
+    final IModification _function = (IModificationContext context) -> {
+      final IXtextDocument doc = context.getXtextDocument();
+      final FindReplaceDocumentAdapter frda = new FindReplaceDocumentAdapter(doc);
+      final IRegion to = frda.find((issue.getOffset()).intValue(), "to", true, true, true, false);
+      Integer _offset = issue.getOffset();
+      int _offset_1 = to.getOffset();
+      Integer _offset_2 = issue.getOffset();
+      int _minus = (_offset_1 - (_offset_2).intValue());
+      int _minus_1 = (_minus - 1);
+      final String fromcoord = doc.get((_offset).intValue(), _minus_1);
+      final IRegion eol = frda.find(to.getOffset(), ")", true, true, false, false);
+      int _offset_3 = to.getOffset();
+      int _plus = (_offset_3 + 3);
+      int _offset_4 = eol.getOffset();
+      int _offset_5 = to.getOffset();
+      int _minus_2 = (_offset_4 - _offset_5);
+      int _minus_3 = (_minus_2 - 2);
+      final String tocoord = doc.get(_plus, _minus_3);
+      int _offset_6 = to.getOffset();
+      int _plus_1 = (_offset_6 + 3);
+      doc.replace(_plus_1, tocoord.length(), fromcoord);
+      doc.replace((issue.getOffset()).intValue(), fromcoord.length(), tocoord);
+    };
+    acceptor.accept(issue, "Swap coordinates", "Swap coordinates.", "upcase.png", _function);
+  }
 }

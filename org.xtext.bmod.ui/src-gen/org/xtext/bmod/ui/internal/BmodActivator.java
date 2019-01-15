@@ -13,7 +13,9 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
 import org.osgi.framework.BundleContext;
+import org.xtext.bmod.BReactRuntimeModule;
 import org.xtext.bmod.BmodRuntimeModule;
+import org.xtext.bmod.ui.BReactUiModule;
 import org.xtext.bmod.ui.BmodUiModule;
 
 /**
@@ -23,6 +25,7 @@ import org.xtext.bmod.ui.BmodUiModule;
 public class BmodActivator extends AbstractUIPlugin {
 
 	public static final String PLUGIN_ID = "org.xtext.bmod.ui";
+	public static final String ORG_XTEXT_BMOD_BREACT = "org.xtext.bmod.BReact";
 	public static final String ORG_XTEXT_BMOD_BMOD = "org.xtext.bmod.Bmod";
 	
 	private static final Logger logger = Logger.getLogger(BmodActivator.class);
@@ -73,6 +76,9 @@ public class BmodActivator extends AbstractUIPlugin {
 	}
 	
 	protected com.google.inject.Module getRuntimeModule(String grammar) {
+		if (ORG_XTEXT_BMOD_BREACT.equals(grammar)) {
+			return new BReactRuntimeModule();
+		}
 		if (ORG_XTEXT_BMOD_BMOD.equals(grammar)) {
 			return new BmodRuntimeModule();
 		}
@@ -80,6 +86,9 @@ public class BmodActivator extends AbstractUIPlugin {
 	}
 	
 	protected com.google.inject.Module getUiModule(String grammar) {
+		if (ORG_XTEXT_BMOD_BREACT.equals(grammar)) {
+			return new BReactUiModule(this);
+		}
 		if (ORG_XTEXT_BMOD_BMOD.equals(grammar)) {
 			return new BmodUiModule(this);
 		}

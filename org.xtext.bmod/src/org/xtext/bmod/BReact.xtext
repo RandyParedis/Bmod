@@ -1,0 +1,29 @@
+grammar org.xtext.bmod.BReact with org.eclipse.xtext.common.Terminals
+
+generate breact "http://www.xtext.org/bmod/BReact"
+
+React:
+	{React}
+	(actions += ActionDesc)*
+;
+
+ActionDesc:
+	(shared?='shared')? 'action' name=VARNAME ':'
+		(finds += Find)+
+;
+
+Find:
+	(global?='global')? 'find' distance=Distance (from?='from')? (burning?='burning' | normal?='normal')? locatable=Locatable ';'
+;
+
+enum Distance:
+	nearest='nearest' | farthest='farthest' | first='first' | last='last'
+;
+
+enum Locatable:
+	Cell='Cell' | Door='Door' | Exit='Exit' | Fire='Fire' | Person='Person'
+;
+
+terminal VARNAME:
+	('a'..'z'|'A'..'Z'|'_')('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
+;

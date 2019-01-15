@@ -4,7 +4,6 @@
 package org.xtext.bmod.bmod.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -68,60 +67,18 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
     {
       case BmodPackage.MODEL: return createModel();
       case BmodPackage.FLOORPLAN: return createFloorplan();
+      case BmodPackage.IMPORT: return createImport();
       case BmodPackage.ROOM: return createRoom();
       case BmodPackage.DOOR: return createDoor();
-      case BmodPackage.PERCEPTION: return createPerception();
-      case BmodPackage.ACTION: return createAction();
-      case BmodPackage.PERCEPTION_LEVEL: return createPerceptionLevel();
-      case BmodPackage.ACTION_PROFILE: return createActionProfile();
       case BmodPackage.PERSON: return createPerson();
       case BmodPackage.EXIT: return createExit();
       case BmodPackage.FIRE: return createFire();
       case BmodPackage.EMERGENCY_SIGN: return createEmergencySign();
       case BmodPackage.DOOR_REF: return createDoorRef();
-      case BmodPackage.DANGEROUS_CONDITION: return createDangerousCondition();
       case BmodPackage.COORDINATE: return createCoordinate();
       case BmodPackage.AREA: return createArea();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object createFromString(EDataType eDataType, String initialValue)
-  {
-    switch (eDataType.getClassifierID())
-    {
-      case BmodPackage.PERCEPTION_ENUM:
-        return createPerceptionEnumFromString(eDataType, initialValue);
-      case BmodPackage.ACTION_ENUM:
-        return createActionEnumFromString(eDataType, initialValue);
-      default:
-        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-    }
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String convertToString(EDataType eDataType, Object instanceValue)
-  {
-    switch (eDataType.getClassifierID())
-    {
-      case BmodPackage.PERCEPTION_ENUM:
-        return convertPerceptionEnumToString(eDataType, instanceValue);
-      case BmodPackage.ACTION_ENUM:
-        return convertActionEnumToString(eDataType, instanceValue);
-      default:
-        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
   }
 
@@ -152,6 +109,17 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public Import createImport()
+  {
+    ImportImpl import_ = new ImportImpl();
+    return import_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Room createRoom()
   {
     RoomImpl room = new RoomImpl();
@@ -167,50 +135,6 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
   {
     DoorImpl door = new DoorImpl();
     return door;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Perception createPerception()
-  {
-    PerceptionImpl perception = new PerceptionImpl();
-    return perception;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Action createAction()
-  {
-    ActionImpl action = new ActionImpl();
-    return action;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PerceptionLevel createPerceptionLevel()
-  {
-    PerceptionLevelImpl perceptionLevel = new PerceptionLevelImpl();
-    return perceptionLevel;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ActionProfile createActionProfile()
-  {
-    ActionProfileImpl actionProfile = new ActionProfileImpl();
-    return actionProfile;
   }
 
   /**
@@ -273,17 +197,6 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public DangerousCondition createDangerousCondition()
-  {
-    DangerousConditionImpl dangerousCondition = new DangerousConditionImpl();
-    return dangerousCondition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public Coordinate createCoordinate()
   {
     CoordinateImpl coordinate = new CoordinateImpl();
@@ -299,50 +212,6 @@ public class BmodFactoryImpl extends EFactoryImpl implements BmodFactory
   {
     AreaImpl area = new AreaImpl();
     return area;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PerceptionEnum createPerceptionEnumFromString(EDataType eDataType, String initialValue)
-  {
-    PerceptionEnum result = PerceptionEnum.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertPerceptionEnumToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ActionEnum createActionEnumFromString(EDataType eDataType, String initialValue)
-  {
-    ActionEnum result = ActionEnum.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertActionEnumToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

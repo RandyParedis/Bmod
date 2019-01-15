@@ -86,6 +86,11 @@ public class BmodAdapterFactory extends AdapterFactoryImpl
         return createFloorplanAdapter();
       }
       @Override
+      public Adapter caseImport(Import object)
+      {
+        return createImportAdapter();
+      }
+      @Override
       public Adapter caseRoom(Room object)
       {
         return createRoomAdapter();
@@ -94,26 +99,6 @@ public class BmodAdapterFactory extends AdapterFactoryImpl
       public Adapter caseDoor(Door object)
       {
         return createDoorAdapter();
-      }
-      @Override
-      public Adapter casePerception(Perception object)
-      {
-        return createPerceptionAdapter();
-      }
-      @Override
-      public Adapter caseAction(Action object)
-      {
-        return createActionAdapter();
-      }
-      @Override
-      public Adapter casePerceptionLevel(PerceptionLevel object)
-      {
-        return createPerceptionLevelAdapter();
-      }
-      @Override
-      public Adapter caseActionProfile(ActionProfile object)
-      {
-        return createActionProfileAdapter();
       }
       @Override
       public Adapter casePerson(Person object)
@@ -139,11 +124,6 @@ public class BmodAdapterFactory extends AdapterFactoryImpl
       public Adapter caseDoorRef(DoorRef object)
       {
         return createDoorRefAdapter();
-      }
-      @Override
-      public Adapter caseDangerousCondition(DangerousCondition object)
-      {
-        return createDangerousConditionAdapter();
       }
       @Override
       public Adapter caseCoordinate(Coordinate object)
@@ -208,6 +188,21 @@ public class BmodAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.xtext.bmod.bmod.Import <em>Import</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.bmod.bmod.Import
+   * @generated
+   */
+  public Adapter createImportAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.xtext.bmod.bmod.Room <em>Room</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -233,66 +228,6 @@ public class BmodAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDoorAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.bmod.bmod.Perception <em>Perception</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.bmod.bmod.Perception
-   * @generated
-   */
-  public Adapter createPerceptionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.bmod.bmod.Action <em>Action</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.bmod.bmod.Action
-   * @generated
-   */
-  public Adapter createActionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.bmod.bmod.PerceptionLevel <em>Perception Level</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.bmod.bmod.PerceptionLevel
-   * @generated
-   */
-  public Adapter createPerceptionLevelAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.bmod.bmod.ActionProfile <em>Action Profile</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.bmod.bmod.ActionProfile
-   * @generated
-   */
-  public Adapter createActionProfileAdapter()
   {
     return null;
   }
@@ -368,21 +303,6 @@ public class BmodAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDoorRefAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.bmod.bmod.DangerousCondition <em>Dangerous Condition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.bmod.bmod.DangerousCondition
-   * @generated
-   */
-  public Adapter createDangerousConditionAdapter()
   {
     return null;
   }

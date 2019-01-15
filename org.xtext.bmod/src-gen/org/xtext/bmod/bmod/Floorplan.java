@@ -14,15 +14,13 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.bmod.bmod.Floorplan#getPerceptions <em>Perceptions</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.Floorplan#getActions <em>Actions</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.Floorplan#getImports <em>Imports</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getRooms <em>Rooms</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getDoors <em>Doors</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getPersons <em>Persons</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getExits <em>Exits</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getFires <em>Fires</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Floorplan#getSigns <em>Signs</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.Floorplan#getDancons <em>Dancons</em>}</li>
  * </ul>
  *
  * @see org.xtext.bmod.bmod.BmodPackage#getFloorplan()
@@ -32,36 +30,20 @@ import org.eclipse.emf.common.util.EList;
 public interface Floorplan extends Model
 {
   /**
-   * Returns the value of the '<em><b>Perceptions</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.bmod.bmod.PerceptionLevel}.
+   * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.bmod.bmod.Import}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Perceptions</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Perceptions</em>' containment reference list.
-   * @see org.xtext.bmod.bmod.BmodPackage#getFloorplan_Perceptions()
+   * @return the value of the '<em>Imports</em>' containment reference list.
+   * @see org.xtext.bmod.bmod.BmodPackage#getFloorplan_Imports()
    * @model containment="true"
    * @generated
    */
-  EList<PerceptionLevel> getPerceptions();
-
-  /**
-   * Returns the value of the '<em><b>Actions</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.bmod.bmod.ActionProfile}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Actions</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Actions</em>' containment reference list.
-   * @see org.xtext.bmod.bmod.BmodPackage#getFloorplan_Actions()
-   * @model containment="true"
-   * @generated
-   */
-  EList<ActionProfile> getActions();
+  EList<Import> getImports();
 
   /**
    * Returns the value of the '<em><b>Rooms</b></em>' containment reference list.
@@ -158,21 +140,5 @@ public interface Floorplan extends Model
    * @generated
    */
   EList<EmergencySign> getSigns();
-
-  /**
-   * Returns the value of the '<em><b>Dancons</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.bmod.bmod.DangerousCondition}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Dancons</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Dancons</em>' containment reference list.
-   * @see org.xtext.bmod.bmod.BmodPackage#getFloorplan_Dancons()
-   * @model containment="true"
-   * @generated
-   */
-  EList<DangerousCondition> getDancons();
 
 } // Floorplan

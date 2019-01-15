@@ -12,11 +12,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.xtext.bmod.bmod.Action;
 import org.xtext.bmod.bmod.BmodPackage;
 import org.xtext.bmod.bmod.Coordinate;
-import org.xtext.bmod.bmod.Perception;
 import org.xtext.bmod.bmod.Person;
+
+import org.xtext.bmod.breact.ActionDesc;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +28,6 @@ import org.xtext.bmod.bmod.Person;
  * <ul>
  *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getLocation <em>Location</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getPerception <em>Perception</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.impl.PersonImpl#getAction <em>Action</em>}</li>
  * </ul>
  *
@@ -67,24 +66,14 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
   protected Coordinate location;
 
   /**
-   * The cached value of the '{@link #getPerception() <em>Perception</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getPerception()
-   * @generated
-   * @ordered
-   */
-  protected Perception perception;
-
-  /**
-   * The cached value of the '{@link #getAction() <em>Action</em>}' containment reference.
+   * The cached value of the '{@link #getAction() <em>Action</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getAction()
    * @generated
    * @ordered
    */
-  protected Action action;
+  protected ActionDesc action;
 
   /**
    * <!-- begin-user-doc -->
@@ -183,26 +172,19 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
    * <!-- end-user-doc -->
    * @generated
    */
-  public Perception getPerception()
+  public ActionDesc getAction()
   {
-    return perception;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetPerception(Perception newPerception, NotificationChain msgs)
-  {
-    Perception oldPerception = perception;
-    perception = newPerception;
-    if (eNotificationRequired())
+    if (action != null && action.eIsProxy())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__PERCEPTION, oldPerception, newPerception);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      InternalEObject oldAction = (InternalEObject)action;
+      action = (ActionDesc)eResolveProxy(oldAction);
+      if (action != oldAction)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, BmodPackage.PERSON__ACTION, oldAction, action));
+      }
     }
-    return msgs;
+    return action;
   }
 
   /**
@@ -210,28 +192,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPerception(Perception newPerception)
-  {
-    if (newPerception != perception)
-    {
-      NotificationChain msgs = null;
-      if (perception != null)
-        msgs = ((InternalEObject)perception).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BmodPackage.PERSON__PERCEPTION, null, msgs);
-      if (newPerception != null)
-        msgs = ((InternalEObject)newPerception).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BmodPackage.PERSON__PERCEPTION, null, msgs);
-      msgs = basicSetPerception(newPerception, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__PERCEPTION, newPerception, newPerception));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Action getAction()
+  public ActionDesc basicGetAction()
   {
     return action;
   }
@@ -241,37 +202,12 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetAction(Action newAction, NotificationChain msgs)
+  public void setAction(ActionDesc newAction)
   {
-    Action oldAction = action;
+    ActionDesc oldAction = action;
     action = newAction;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__ACTION, oldAction, newAction);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setAction(Action newAction)
-  {
-    if (newAction != action)
-    {
-      NotificationChain msgs = null;
-      if (action != null)
-        msgs = ((InternalEObject)action).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BmodPackage.PERSON__ACTION, null, msgs);
-      if (newAction != null)
-        msgs = ((InternalEObject)newAction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BmodPackage.PERSON__ACTION, null, msgs);
-      msgs = basicSetAction(newAction, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__ACTION, newAction, newAction));
+      eNotify(new ENotificationImpl(this, Notification.SET, BmodPackage.PERSON__ACTION, oldAction, action));
   }
 
   /**
@@ -286,10 +222,6 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
     {
       case BmodPackage.PERSON__LOCATION:
         return basicSetLocation(null, msgs);
-      case BmodPackage.PERSON__PERCEPTION:
-        return basicSetPerception(null, msgs);
-      case BmodPackage.PERSON__ACTION:
-        return basicSetAction(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -308,10 +240,9 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
         return getName();
       case BmodPackage.PERSON__LOCATION:
         return getLocation();
-      case BmodPackage.PERSON__PERCEPTION:
-        return getPerception();
       case BmodPackage.PERSON__ACTION:
-        return getAction();
+        if (resolve) return getAction();
+        return basicGetAction();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -332,11 +263,8 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
       case BmodPackage.PERSON__LOCATION:
         setLocation((Coordinate)newValue);
         return;
-      case BmodPackage.PERSON__PERCEPTION:
-        setPerception((Perception)newValue);
-        return;
       case BmodPackage.PERSON__ACTION:
-        setAction((Action)newValue);
+        setAction((ActionDesc)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -358,11 +286,8 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
       case BmodPackage.PERSON__LOCATION:
         setLocation((Coordinate)null);
         return;
-      case BmodPackage.PERSON__PERCEPTION:
-        setPerception((Perception)null);
-        return;
       case BmodPackage.PERSON__ACTION:
-        setAction((Action)null);
+        setAction((ActionDesc)null);
         return;
     }
     super.eUnset(featureID);
@@ -382,8 +307,6 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case BmodPackage.PERSON__LOCATION:
         return location != null;
-      case BmodPackage.PERSON__PERCEPTION:
-        return perception != null;
       case BmodPackage.PERSON__ACTION:
         return action != null;
     }

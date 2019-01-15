@@ -1,7 +1,7 @@
 grammar org.xtext.bmod.Bmod with org.eclipse.xtext.common.Terminals
-//grammar org.xtext.bmod.Bmod with org.eclipse.xtext.xbase.Xbase
 
 generate bmod "http://www.xtext.org/bmod/Bmod"
+import "http://www.xtext.org/bmod/BReact"
 
 Model:
 	Floorplan
@@ -9,16 +9,20 @@ Model:
 
 Floorplan:
 	{Floorplan}
+	(imports += Import)*
 	(
-		perceptions += PerceptionLevel | actions += ActionProfile |
 		rooms += Room | doors += Door |
 		persons += Person | exits += Exit | fires += Fire |
-		signs += EmergencySign | dancons += DangerousCondition
+		signs += EmergencySign
 	)*
 ;
 
+Import:
+	'import' importURI=STRING
+;
+
 Room:
-	'Room' name=VARNAME
+	'Room' name=VARNAME (hasCapacity?='[' capacity=INT ']')?
 		areas += Area ('and' areas += Area)*
 ;
 
@@ -26,36 +30,8 @@ Door:
 	'Door' name=VARNAME 'from' from=Coordinate 'to' to=Coordinate
 ;
 
-Perception:
-	(existing=PerceptionEnum)
-	|(custom=[PerceptionLevel|VARNAME])
-;
-
-Action:
-	(existing=ActionEnum)
-	|(custom=[ActionProfile|VARNAME])
-;
-
-enum PerceptionEnum:
-	attentive = 'attentive'   | relaxed = 'relaxed' |
-	optimistic = 'optimistic' | sceptic = 'sceptic'
-;
-
-enum ActionEnum:
-	newcomer = 'newcomer' | experienced = 'experienced' | panic = 'panic'
-;
-
-PerceptionLevel:
-	'PerceptionLevel' name=VARNAME
-;
-
-ActionProfile:
-	'ActionProfile' name=VARNAME
-;
-
 Person:
-	'Person' name=VARNAME 'in' location=Coordinate ':'
-	perception=Perception ',' action=Action
+	'Person' name=VARNAME 'in' location=Coordinate ':' action=[ActionDesc|VARNAME]
 ;
 
 Exit:
@@ -67,15 +43,11 @@ Fire:
 ;
 
 EmergencySign:
-	'Sign' 'on' on=[Door|VARNAME] to=DoorRef
+	'EmergencySign' 'from' from=[Door|VARNAME] ref=DoorRef
 ;
 
 DoorRef:
-	'to' ref=[Door|VARNAME]
-;
-
-DangerousCondition:
-	'Condition' 'on' on=[Room|VARNAME] amount=INT
+	'to' to=[Door|VARNAME]
 ;
 	
 Coordinate: '(' x=INT ',' y=INT ')';

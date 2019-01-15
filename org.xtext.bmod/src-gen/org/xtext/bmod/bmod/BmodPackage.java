@@ -5,7 +5,6 @@ package org.xtext.bmod.bmod;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -88,22 +87,13 @@ public interface BmodPackage extends EPackage
   int FLOORPLAN = 1;
 
   /**
-   * The feature id for the '<em><b>Perceptions</b></em>' containment reference list.
+   * The feature id for the '<em><b>Imports</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FLOORPLAN__PERCEPTIONS = MODEL_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Actions</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FLOORPLAN__ACTIONS = MODEL_FEATURE_COUNT + 1;
+  int FLOORPLAN__IMPORTS = MODEL_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Rooms</b></em>' containment reference list.
@@ -112,7 +102,7 @@ public interface BmodPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FLOORPLAN__ROOMS = MODEL_FEATURE_COUNT + 2;
+  int FLOORPLAN__ROOMS = MODEL_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Doors</b></em>' containment reference list.
@@ -121,7 +111,7 @@ public interface BmodPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FLOORPLAN__DOORS = MODEL_FEATURE_COUNT + 3;
+  int FLOORPLAN__DOORS = MODEL_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Persons</b></em>' containment reference list.
@@ -130,7 +120,7 @@ public interface BmodPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FLOORPLAN__PERSONS = MODEL_FEATURE_COUNT + 4;
+  int FLOORPLAN__PERSONS = MODEL_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Exits</b></em>' containment reference list.
@@ -139,7 +129,7 @@ public interface BmodPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FLOORPLAN__EXITS = MODEL_FEATURE_COUNT + 5;
+  int FLOORPLAN__EXITS = MODEL_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Fires</b></em>' containment reference list.
@@ -148,7 +138,7 @@ public interface BmodPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FLOORPLAN__FIRES = MODEL_FEATURE_COUNT + 6;
+  int FLOORPLAN__FIRES = MODEL_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>Signs</b></em>' containment reference list.
@@ -157,16 +147,7 @@ public interface BmodPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FLOORPLAN__SIGNS = MODEL_FEATURE_COUNT + 7;
-
-  /**
-   * The feature id for the '<em><b>Dancons</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FLOORPLAN__DANCONS = MODEL_FEATURE_COUNT + 8;
+  int FLOORPLAN__SIGNS = MODEL_FEATURE_COUNT + 6;
 
   /**
    * The number of structural features of the '<em>Floorplan</em>' class.
@@ -175,7 +156,35 @@ public interface BmodPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FLOORPLAN_FEATURE_COUNT = MODEL_FEATURE_COUNT + 9;
+  int FLOORPLAN_FEATURE_COUNT = MODEL_FEATURE_COUNT + 7;
+
+  /**
+   * The meta object id for the '{@link org.xtext.bmod.bmod.impl.ImportImpl <em>Import</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.bmod.bmod.impl.ImportImpl
+   * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getImport()
+   * @generated
+   */
+  int IMPORT = 2;
+
+  /**
+   * The feature id for the '<em><b>Import URI</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPORT__IMPORT_URI = 0;
+
+  /**
+   * The number of structural features of the '<em>Import</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPORT_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.xtext.bmod.bmod.impl.RoomImpl <em>Room</em>}' class.
@@ -185,7 +194,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getRoom()
    * @generated
    */
-  int ROOM = 2;
+  int ROOM = 3;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -197,13 +206,31 @@ public interface BmodPackage extends EPackage
   int ROOM__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Has Capacity</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROOM__HAS_CAPACITY = 1;
+
+  /**
+   * The feature id for the '<em><b>Capacity</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROOM__CAPACITY = 2;
+
+  /**
    * The feature id for the '<em><b>Areas</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ROOM__AREAS = 1;
+  int ROOM__AREAS = 3;
 
   /**
    * The number of structural features of the '<em>Room</em>' class.
@@ -212,7 +239,7 @@ public interface BmodPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROOM_FEATURE_COUNT = 2;
+  int ROOM_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.xtext.bmod.bmod.impl.DoorImpl <em>Door</em>}' class.
@@ -222,7 +249,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getDoor()
    * @generated
    */
-  int DOOR = 3;
+  int DOOR = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -261,136 +288,6 @@ public interface BmodPackage extends EPackage
   int DOOR_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link org.xtext.bmod.bmod.impl.PerceptionImpl <em>Perception</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.bmod.bmod.impl.PerceptionImpl
-   * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getPerception()
-   * @generated
-   */
-  int PERCEPTION = 4;
-
-  /**
-   * The feature id for the '<em><b>Existing</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PERCEPTION__EXISTING = 0;
-
-  /**
-   * The feature id for the '<em><b>Custom</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PERCEPTION__CUSTOM = 1;
-
-  /**
-   * The number of structural features of the '<em>Perception</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PERCEPTION_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.xtext.bmod.bmod.impl.ActionImpl <em>Action</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.bmod.bmod.impl.ActionImpl
-   * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getAction()
-   * @generated
-   */
-  int ACTION = 5;
-
-  /**
-   * The feature id for the '<em><b>Existing</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTION__EXISTING = 0;
-
-  /**
-   * The feature id for the '<em><b>Custom</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTION__CUSTOM = 1;
-
-  /**
-   * The number of structural features of the '<em>Action</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTION_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.xtext.bmod.bmod.impl.PerceptionLevelImpl <em>Perception Level</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.bmod.bmod.impl.PerceptionLevelImpl
-   * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getPerceptionLevel()
-   * @generated
-   */
-  int PERCEPTION_LEVEL = 6;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PERCEPTION_LEVEL__NAME = 0;
-
-  /**
-   * The number of structural features of the '<em>Perception Level</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PERCEPTION_LEVEL_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.xtext.bmod.bmod.impl.ActionProfileImpl <em>Action Profile</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.bmod.bmod.impl.ActionProfileImpl
-   * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getActionProfile()
-   * @generated
-   */
-  int ACTION_PROFILE = 7;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTION_PROFILE__NAME = 0;
-
-  /**
-   * The number of structural features of the '<em>Action Profile</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTION_PROFILE_FEATURE_COUNT = 1;
-
-  /**
    * The meta object id for the '{@link org.xtext.bmod.bmod.impl.PersonImpl <em>Person</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -398,7 +295,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getPerson()
    * @generated
    */
-  int PERSON = 8;
+  int PERSON = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -419,22 +316,13 @@ public interface BmodPackage extends EPackage
   int PERSON__LOCATION = 1;
 
   /**
-   * The feature id for the '<em><b>Perception</b></em>' containment reference.
+   * The feature id for the '<em><b>Action</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PERSON__PERCEPTION = 2;
-
-  /**
-   * The feature id for the '<em><b>Action</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PERSON__ACTION = 3;
+  int PERSON__ACTION = 2;
 
   /**
    * The number of structural features of the '<em>Person</em>' class.
@@ -443,7 +331,7 @@ public interface BmodPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PERSON_FEATURE_COUNT = 4;
+  int PERSON_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.xtext.bmod.bmod.impl.ExitImpl <em>Exit</em>}' class.
@@ -453,7 +341,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getExit()
    * @generated
    */
-  int EXIT = 9;
+  int EXIT = 6;
 
   /**
    * The feature id for the '<em><b>Location</b></em>' containment reference.
@@ -481,7 +369,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getFire()
    * @generated
    */
-  int FIRE = 10;
+  int FIRE = 7;
 
   /**
    * The feature id for the '<em><b>Location</b></em>' containment reference.
@@ -509,25 +397,25 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getEmergencySign()
    * @generated
    */
-  int EMERGENCY_SIGN = 11;
+  int EMERGENCY_SIGN = 8;
 
   /**
-   * The feature id for the '<em><b>On</b></em>' reference.
+   * The feature id for the '<em><b>From</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EMERGENCY_SIGN__ON = 0;
+  int EMERGENCY_SIGN__FROM = 0;
 
   /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
+   * The feature id for the '<em><b>Ref</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EMERGENCY_SIGN__TO = 1;
+  int EMERGENCY_SIGN__REF = 1;
 
   /**
    * The number of structural features of the '<em>Emergency Sign</em>' class.
@@ -546,16 +434,16 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getDoorRef()
    * @generated
    */
-  int DOOR_REF = 12;
+  int DOOR_REF = 9;
 
   /**
-   * The feature id for the '<em><b>Ref</b></em>' reference.
+   * The feature id for the '<em><b>To</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DOOR_REF__REF = 0;
+  int DOOR_REF__TO = 0;
 
   /**
    * The number of structural features of the '<em>Door Ref</em>' class.
@@ -567,43 +455,6 @@ public interface BmodPackage extends EPackage
   int DOOR_REF_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.xtext.bmod.bmod.impl.DangerousConditionImpl <em>Dangerous Condition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.bmod.bmod.impl.DangerousConditionImpl
-   * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getDangerousCondition()
-   * @generated
-   */
-  int DANGEROUS_CONDITION = 13;
-
-  /**
-   * The feature id for the '<em><b>On</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DANGEROUS_CONDITION__ON = 0;
-
-  /**
-   * The feature id for the '<em><b>Amount</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DANGEROUS_CONDITION__AMOUNT = 1;
-
-  /**
-   * The number of structural features of the '<em>Dangerous Condition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DANGEROUS_CONDITION_FEATURE_COUNT = 2;
-
-  /**
    * The meta object id for the '{@link org.xtext.bmod.bmod.impl.CoordinateImpl <em>Coordinate</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -611,7 +462,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getCoordinate()
    * @generated
    */
-  int COORDINATE = 14;
+  int COORDINATE = 10;
 
   /**
    * The feature id for the '<em><b>X</b></em>' attribute.
@@ -648,7 +499,7 @@ public interface BmodPackage extends EPackage
    * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getArea()
    * @generated
    */
-  int AREA = 15;
+  int AREA = 11;
 
   /**
    * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -686,26 +537,6 @@ public interface BmodPackage extends EPackage
    */
   int AREA_FEATURE_COUNT = 3;
 
-  /**
-   * The meta object id for the '{@link org.xtext.bmod.bmod.PerceptionEnum <em>Perception Enum</em>}' enum.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.bmod.bmod.PerceptionEnum
-   * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getPerceptionEnum()
-   * @generated
-   */
-  int PERCEPTION_ENUM = 16;
-
-  /**
-   * The meta object id for the '{@link org.xtext.bmod.bmod.ActionEnum <em>Action Enum</em>}' enum.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.bmod.bmod.ActionEnum
-   * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getActionEnum()
-   * @generated
-   */
-  int ACTION_ENUM = 17;
-
 
   /**
    * Returns the meta object for class '{@link org.xtext.bmod.bmod.Model <em>Model</em>}'.
@@ -728,26 +559,15 @@ public interface BmodPackage extends EPackage
   EClass getFloorplan();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.bmod.bmod.Floorplan#getPerceptions <em>Perceptions</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.bmod.bmod.Floorplan#getImports <em>Imports</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Perceptions</em>'.
-   * @see org.xtext.bmod.bmod.Floorplan#getPerceptions()
+   * @return the meta object for the containment reference list '<em>Imports</em>'.
+   * @see org.xtext.bmod.bmod.Floorplan#getImports()
    * @see #getFloorplan()
    * @generated
    */
-  EReference getFloorplan_Perceptions();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.bmod.bmod.Floorplan#getActions <em>Actions</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Actions</em>'.
-   * @see org.xtext.bmod.bmod.Floorplan#getActions()
-   * @see #getFloorplan()
-   * @generated
-   */
-  EReference getFloorplan_Actions();
+  EReference getFloorplan_Imports();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.xtext.bmod.bmod.Floorplan#getRooms <em>Rooms</em>}'.
@@ -816,15 +636,25 @@ public interface BmodPackage extends EPackage
   EReference getFloorplan_Signs();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.bmod.bmod.Floorplan#getDancons <em>Dancons</em>}'.
+   * Returns the meta object for class '{@link org.xtext.bmod.bmod.Import <em>Import</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Dancons</em>'.
-   * @see org.xtext.bmod.bmod.Floorplan#getDancons()
-   * @see #getFloorplan()
+   * @return the meta object for class '<em>Import</em>'.
+   * @see org.xtext.bmod.bmod.Import
    * @generated
    */
-  EReference getFloorplan_Dancons();
+  EClass getImport();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.Import#getImportURI <em>Import URI</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Import URI</em>'.
+   * @see org.xtext.bmod.bmod.Import#getImportURI()
+   * @see #getImport()
+   * @generated
+   */
+  EAttribute getImport_ImportURI();
 
   /**
    * Returns the meta object for class '{@link org.xtext.bmod.bmod.Room <em>Room</em>}'.
@@ -846,6 +676,28 @@ public interface BmodPackage extends EPackage
    * @generated
    */
   EAttribute getRoom_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.Room#isHasCapacity <em>Has Capacity</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Has Capacity</em>'.
+   * @see org.xtext.bmod.bmod.Room#isHasCapacity()
+   * @see #getRoom()
+   * @generated
+   */
+  EAttribute getRoom_HasCapacity();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.Room#getCapacity <em>Capacity</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Capacity</em>'.
+   * @see org.xtext.bmod.bmod.Room#getCapacity()
+   * @see #getRoom()
+   * @generated
+   */
+  EAttribute getRoom_Capacity();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.xtext.bmod.bmod.Room#getAreas <em>Areas</em>}'.
@@ -902,112 +754,6 @@ public interface BmodPackage extends EPackage
   EReference getDoor_To();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.bmod.bmod.Perception <em>Perception</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Perception</em>'.
-   * @see org.xtext.bmod.bmod.Perception
-   * @generated
-   */
-  EClass getPerception();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.Perception#getExisting <em>Existing</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Existing</em>'.
-   * @see org.xtext.bmod.bmod.Perception#getExisting()
-   * @see #getPerception()
-   * @generated
-   */
-  EAttribute getPerception_Existing();
-
-  /**
-   * Returns the meta object for the reference '{@link org.xtext.bmod.bmod.Perception#getCustom <em>Custom</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Custom</em>'.
-   * @see org.xtext.bmod.bmod.Perception#getCustom()
-   * @see #getPerception()
-   * @generated
-   */
-  EReference getPerception_Custom();
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.bmod.bmod.Action <em>Action</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Action</em>'.
-   * @see org.xtext.bmod.bmod.Action
-   * @generated
-   */
-  EClass getAction();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.Action#getExisting <em>Existing</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Existing</em>'.
-   * @see org.xtext.bmod.bmod.Action#getExisting()
-   * @see #getAction()
-   * @generated
-   */
-  EAttribute getAction_Existing();
-
-  /**
-   * Returns the meta object for the reference '{@link org.xtext.bmod.bmod.Action#getCustom <em>Custom</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Custom</em>'.
-   * @see org.xtext.bmod.bmod.Action#getCustom()
-   * @see #getAction()
-   * @generated
-   */
-  EReference getAction_Custom();
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.bmod.bmod.PerceptionLevel <em>Perception Level</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Perception Level</em>'.
-   * @see org.xtext.bmod.bmod.PerceptionLevel
-   * @generated
-   */
-  EClass getPerceptionLevel();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.PerceptionLevel#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.xtext.bmod.bmod.PerceptionLevel#getName()
-   * @see #getPerceptionLevel()
-   * @generated
-   */
-  EAttribute getPerceptionLevel_Name();
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.bmod.bmod.ActionProfile <em>Action Profile</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Action Profile</em>'.
-   * @see org.xtext.bmod.bmod.ActionProfile
-   * @generated
-   */
-  EClass getActionProfile();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.ActionProfile#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.xtext.bmod.bmod.ActionProfile#getName()
-   * @see #getActionProfile()
-   * @generated
-   */
-  EAttribute getActionProfile_Name();
-
-  /**
    * Returns the meta object for class '{@link org.xtext.bmod.bmod.Person <em>Person</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1040,21 +786,10 @@ public interface BmodPackage extends EPackage
   EReference getPerson_Location();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.xtext.bmod.bmod.Person#getPerception <em>Perception</em>}'.
+   * Returns the meta object for the reference '{@link org.xtext.bmod.bmod.Person#getAction <em>Action</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Perception</em>'.
-   * @see org.xtext.bmod.bmod.Person#getPerception()
-   * @see #getPerson()
-   * @generated
-   */
-  EReference getPerson_Perception();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.xtext.bmod.bmod.Person#getAction <em>Action</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Action</em>'.
+   * @return the meta object for the reference '<em>Action</em>'.
    * @see org.xtext.bmod.bmod.Person#getAction()
    * @see #getPerson()
    * @generated
@@ -1114,26 +849,26 @@ public interface BmodPackage extends EPackage
   EClass getEmergencySign();
 
   /**
-   * Returns the meta object for the reference '{@link org.xtext.bmod.bmod.EmergencySign#getOn <em>On</em>}'.
+   * Returns the meta object for the reference '{@link org.xtext.bmod.bmod.EmergencySign#getFrom <em>From</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>On</em>'.
-   * @see org.xtext.bmod.bmod.EmergencySign#getOn()
+   * @return the meta object for the reference '<em>From</em>'.
+   * @see org.xtext.bmod.bmod.EmergencySign#getFrom()
    * @see #getEmergencySign()
    * @generated
    */
-  EReference getEmergencySign_On();
+  EReference getEmergencySign_From();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.xtext.bmod.bmod.EmergencySign#getTo <em>To</em>}'.
+   * Returns the meta object for the containment reference '{@link org.xtext.bmod.bmod.EmergencySign#getRef <em>Ref</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>To</em>'.
-   * @see org.xtext.bmod.bmod.EmergencySign#getTo()
+   * @return the meta object for the containment reference '<em>Ref</em>'.
+   * @see org.xtext.bmod.bmod.EmergencySign#getRef()
    * @see #getEmergencySign()
    * @generated
    */
-  EReference getEmergencySign_To();
+  EReference getEmergencySign_Ref();
 
   /**
    * Returns the meta object for class '{@link org.xtext.bmod.bmod.DoorRef <em>Door Ref</em>}'.
@@ -1146,47 +881,15 @@ public interface BmodPackage extends EPackage
   EClass getDoorRef();
 
   /**
-   * Returns the meta object for the reference '{@link org.xtext.bmod.bmod.DoorRef#getRef <em>Ref</em>}'.
+   * Returns the meta object for the reference '{@link org.xtext.bmod.bmod.DoorRef#getTo <em>To</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Ref</em>'.
-   * @see org.xtext.bmod.bmod.DoorRef#getRef()
+   * @return the meta object for the reference '<em>To</em>'.
+   * @see org.xtext.bmod.bmod.DoorRef#getTo()
    * @see #getDoorRef()
    * @generated
    */
-  EReference getDoorRef_Ref();
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.bmod.bmod.DangerousCondition <em>Dangerous Condition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Dangerous Condition</em>'.
-   * @see org.xtext.bmod.bmod.DangerousCondition
-   * @generated
-   */
-  EClass getDangerousCondition();
-
-  /**
-   * Returns the meta object for the reference '{@link org.xtext.bmod.bmod.DangerousCondition#getOn <em>On</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>On</em>'.
-   * @see org.xtext.bmod.bmod.DangerousCondition#getOn()
-   * @see #getDangerousCondition()
-   * @generated
-   */
-  EReference getDangerousCondition_On();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.bmod.bmod.DangerousCondition#getAmount <em>Amount</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Amount</em>'.
-   * @see org.xtext.bmod.bmod.DangerousCondition#getAmount()
-   * @see #getDangerousCondition()
-   * @generated
-   */
-  EAttribute getDangerousCondition_Amount();
+  EReference getDoorRef_To();
 
   /**
    * Returns the meta object for class '{@link org.xtext.bmod.bmod.Coordinate <em>Coordinate</em>}'.
@@ -1264,26 +967,6 @@ public interface BmodPackage extends EPackage
   EReference getArea_Without();
 
   /**
-   * Returns the meta object for enum '{@link org.xtext.bmod.bmod.PerceptionEnum <em>Perception Enum</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>Perception Enum</em>'.
-   * @see org.xtext.bmod.bmod.PerceptionEnum
-   * @generated
-   */
-  EEnum getPerceptionEnum();
-
-  /**
-   * Returns the meta object for enum '{@link org.xtext.bmod.bmod.ActionEnum <em>Action Enum</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>Action Enum</em>'.
-   * @see org.xtext.bmod.bmod.ActionEnum
-   * @generated
-   */
-  EEnum getActionEnum();
-
-  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1327,20 +1010,12 @@ public interface BmodPackage extends EPackage
     EClass FLOORPLAN = eINSTANCE.getFloorplan();
 
     /**
-     * The meta object literal for the '<em><b>Perceptions</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FLOORPLAN__PERCEPTIONS = eINSTANCE.getFloorplan_Perceptions();
-
-    /**
-     * The meta object literal for the '<em><b>Actions</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FLOORPLAN__ACTIONS = eINSTANCE.getFloorplan_Actions();
+    EReference FLOORPLAN__IMPORTS = eINSTANCE.getFloorplan_Imports();
 
     /**
      * The meta object literal for the '<em><b>Rooms</b></em>' containment reference list feature.
@@ -1391,12 +1066,22 @@ public interface BmodPackage extends EPackage
     EReference FLOORPLAN__SIGNS = eINSTANCE.getFloorplan_Signs();
 
     /**
-     * The meta object literal for the '<em><b>Dancons</b></em>' containment reference list feature.
+     * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.ImportImpl <em>Import</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.bmod.bmod.impl.ImportImpl
+     * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getImport()
+     * @generated
+     */
+    EClass IMPORT = eINSTANCE.getImport();
+
+    /**
+     * The meta object literal for the '<em><b>Import URI</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FLOORPLAN__DANCONS = eINSTANCE.getFloorplan_Dancons();
+    EAttribute IMPORT__IMPORT_URI = eINSTANCE.getImport_ImportURI();
 
     /**
      * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.RoomImpl <em>Room</em>}' class.
@@ -1415,6 +1100,22 @@ public interface BmodPackage extends EPackage
      * @generated
      */
     EAttribute ROOM__NAME = eINSTANCE.getRoom_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Has Capacity</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ROOM__HAS_CAPACITY = eINSTANCE.getRoom_HasCapacity();
+
+    /**
+     * The meta object literal for the '<em><b>Capacity</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ROOM__CAPACITY = eINSTANCE.getRoom_Capacity();
 
     /**
      * The meta object literal for the '<em><b>Areas</b></em>' containment reference list feature.
@@ -1459,94 +1160,6 @@ public interface BmodPackage extends EPackage
     EReference DOOR__TO = eINSTANCE.getDoor_To();
 
     /**
-     * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.PerceptionImpl <em>Perception</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.bmod.bmod.impl.PerceptionImpl
-     * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getPerception()
-     * @generated
-     */
-    EClass PERCEPTION = eINSTANCE.getPerception();
-
-    /**
-     * The meta object literal for the '<em><b>Existing</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute PERCEPTION__EXISTING = eINSTANCE.getPerception_Existing();
-
-    /**
-     * The meta object literal for the '<em><b>Custom</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference PERCEPTION__CUSTOM = eINSTANCE.getPerception_Custom();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.ActionImpl <em>Action</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.bmod.bmod.impl.ActionImpl
-     * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getAction()
-     * @generated
-     */
-    EClass ACTION = eINSTANCE.getAction();
-
-    /**
-     * The meta object literal for the '<em><b>Existing</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ACTION__EXISTING = eINSTANCE.getAction_Existing();
-
-    /**
-     * The meta object literal for the '<em><b>Custom</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ACTION__CUSTOM = eINSTANCE.getAction_Custom();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.PerceptionLevelImpl <em>Perception Level</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.bmod.bmod.impl.PerceptionLevelImpl
-     * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getPerceptionLevel()
-     * @generated
-     */
-    EClass PERCEPTION_LEVEL = eINSTANCE.getPerceptionLevel();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute PERCEPTION_LEVEL__NAME = eINSTANCE.getPerceptionLevel_Name();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.ActionProfileImpl <em>Action Profile</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.bmod.bmod.impl.ActionProfileImpl
-     * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getActionProfile()
-     * @generated
-     */
-    EClass ACTION_PROFILE = eINSTANCE.getActionProfile();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ACTION_PROFILE__NAME = eINSTANCE.getActionProfile_Name();
-
-    /**
      * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.PersonImpl <em>Person</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1573,15 +1186,7 @@ public interface BmodPackage extends EPackage
     EReference PERSON__LOCATION = eINSTANCE.getPerson_Location();
 
     /**
-     * The meta object literal for the '<em><b>Perception</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference PERSON__PERCEPTION = eINSTANCE.getPerson_Perception();
-
-    /**
-     * The meta object literal for the '<em><b>Action</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Action</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -1635,20 +1240,20 @@ public interface BmodPackage extends EPackage
     EClass EMERGENCY_SIGN = eINSTANCE.getEmergencySign();
 
     /**
-     * The meta object literal for the '<em><b>On</b></em>' reference feature.
+     * The meta object literal for the '<em><b>From</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EMERGENCY_SIGN__ON = eINSTANCE.getEmergencySign_On();
+    EReference EMERGENCY_SIGN__FROM = eINSTANCE.getEmergencySign_From();
 
     /**
-     * The meta object literal for the '<em><b>To</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Ref</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EMERGENCY_SIGN__TO = eINSTANCE.getEmergencySign_To();
+    EReference EMERGENCY_SIGN__REF = eINSTANCE.getEmergencySign_Ref();
 
     /**
      * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.DoorRefImpl <em>Door Ref</em>}' class.
@@ -1661,38 +1266,12 @@ public interface BmodPackage extends EPackage
     EClass DOOR_REF = eINSTANCE.getDoorRef();
 
     /**
-     * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
+     * The meta object literal for the '<em><b>To</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference DOOR_REF__REF = eINSTANCE.getDoorRef_Ref();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.DangerousConditionImpl <em>Dangerous Condition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.bmod.bmod.impl.DangerousConditionImpl
-     * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getDangerousCondition()
-     * @generated
-     */
-    EClass DANGEROUS_CONDITION = eINSTANCE.getDangerousCondition();
-
-    /**
-     * The meta object literal for the '<em><b>On</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference DANGEROUS_CONDITION__ON = eINSTANCE.getDangerousCondition_On();
-
-    /**
-     * The meta object literal for the '<em><b>Amount</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute DANGEROUS_CONDITION__AMOUNT = eINSTANCE.getDangerousCondition_Amount();
+    EReference DOOR_REF__TO = eINSTANCE.getDoorRef_To();
 
     /**
      * The meta object literal for the '{@link org.xtext.bmod.bmod.impl.CoordinateImpl <em>Coordinate</em>}' class.
@@ -1753,26 +1332,6 @@ public interface BmodPackage extends EPackage
      * @generated
      */
     EReference AREA__WITHOUT = eINSTANCE.getArea_Without();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.bmod.bmod.PerceptionEnum <em>Perception Enum</em>}' enum.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.bmod.bmod.PerceptionEnum
-     * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getPerceptionEnum()
-     * @generated
-     */
-    EEnum PERCEPTION_ENUM = eINSTANCE.getPerceptionEnum();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.bmod.bmod.ActionEnum <em>Action Enum</em>}' enum.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.bmod.bmod.ActionEnum
-     * @see org.xtext.bmod.bmod.impl.BmodPackageImpl#getActionEnum()
-     * @generated
-     */
-    EEnum ACTION_ENUM = eINSTANCE.getActionEnum();
 
   }
 

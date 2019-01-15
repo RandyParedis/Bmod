@@ -3,6 +3,12 @@
 <plugin>
 	<extension point="org.eclipse.emf.ecore.generated_package">
 		<package 
+			uri = "http://www.xtext.org/bmod/BReact"
+			class = "org.xtext.bmod.breact.BreactPackage"
+			genModel = "model/generated/BReact.genmodel" />
+	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package 
 			uri = "http://www.xtext.org/bmod/Bmod"
 			class = "org.xtext.bmod.bmod.BmodPackage"
 			genModel = "model/generated/Bmod.genmodel" />

@@ -3,7 +3,6 @@
  */
 package org.xtext.bmod.scoping
 
-
 /**
  * This class contains custom scoping description.
  * 
@@ -11,5 +10,4 @@ package org.xtext.bmod.scoping
  * on how and when to use it.
  */
 class BmodScopeProvider extends AbstractBmodScopeProvider {
-
 }

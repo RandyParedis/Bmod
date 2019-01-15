@@ -6,6 +6,7 @@ package org.xtext.bmod.generator;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -24,6 +25,7 @@ import org.xtext.bmod.bmod.Door;
 import org.xtext.bmod.bmod.Exit;
 import org.xtext.bmod.bmod.Fire;
 import org.xtext.bmod.bmod.Floorplan;
+import org.xtext.bmod.bmod.Import;
 import org.xtext.bmod.bmod.Person;
 import org.xtext.bmod.bmod.Room;
 import org.xtext.bmod.generator.CppGenerationHelper;
@@ -36,7 +38,23 @@ import org.xtext.bmod.generator.Helper;
  */
 @SuppressWarnings("all")
 public class BmodGenerator implements IGenerator2 {
-  private void generateCMakeLists(final String project_name, final IFileSystemAccess2 fsa) {
+  private static String removeExtension(final String s) {
+    final String separator = System.getProperty("file.separator");
+    String filename = "";
+    int lastSeparatorIndex = s.lastIndexOf(separator);
+    if ((lastSeparatorIndex == (-1))) {
+      filename = s;
+    } else {
+      filename = s.substring((lastSeparatorIndex + 1));
+    }
+    int extensionIndex = filename.lastIndexOf(".");
+    if ((extensionIndex == (-1))) {
+      return filename;
+    }
+    return filename.substring(0, extensionIndex);
+  }
+  
+  private void generateCMakeLists(final String project_name, final List<String> lst, final IFileSystemAccess2 fsa) {
     final String pedsim_lib = "/usr/include/libpedsim";
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(project_name);
@@ -59,6 +77,24 @@ public class BmodGenerator implements IGenerator2 {
     _builder_1.newLine();
     _builder_1.append("file(GLOB_RECURSE SRC ../simulation/*)");
     _builder_1.newLine();
+    {
+      boolean _isEmpty = lst.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        _builder_1.append("list(APPEND SRC");
+        _builder_1.newLine();
+        {
+          for(final String elm : lst) {
+            _builder_1.append("\"");
+            _builder_1.append(elm);
+            _builder_1.append("\"");
+            _builder_1.newLineIfNotEmpty();
+          }
+        }
+        _builder_1.append(")");
+        _builder_1.newLine();
+      }
+    }
     _builder_1.newLine();
     _builder_1.append("add_executable(${PROJECT_NAME} main.cpp ${SRC})");
     _builder_1.newLine();
@@ -157,8 +193,16 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append("#include \"simulation/person.h\"");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("#include \"simulation/targetters/experienced.h\"");
-    _builder.newLine();
+    {
+      Iterable<Import> _filter = Iterables.<Import>filter(floorplan, Import.class);
+      for(final Import imp : _filter) {
+        _builder.append("#include \"");
+        String _removeExtension = BmodGenerator.removeExtension(imp.getImportURI());
+        _builder.append(_removeExtension);
+        _builder.append("/targetters.h\"");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.newLine();
     _builder.append("using namespace std;");
     _builder.newLine();
@@ -173,9 +217,6 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append(", floor);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("p->registerTargetter(targetters::action_experienced);");
-    _builder.newLine();
-    _builder.append("\t");
     _builder.append("scene->addAgent(p->get());");
     _builder.newLine();
     _builder.append("\t");
@@ -184,52 +225,7 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("void fireObstacle(Cell* cell, Ped::Tscene* scene, Ped::OutputWriter* ow) {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("if(!cell->drawn) {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("scene->addObstacle(new Ped::Tobstacle(cell->x, cell->y, cell->x + ");
-    _builder.append(scale, "\t\t");
-    _builder.append(", cell->y));");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("scene->addObstacle(new Ped::Tobstacle(cell->x, cell->y, cell->x, cell->y + ");
-    _builder.append(scale, "\t\t");
-    _builder.append("));");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("scene->addObstacle(new Ped::Tobstacle(cell->x + ");
-    _builder.append(scale, "\t\t");
-    _builder.append(", cell->y, cell->x + ");
-    _builder.append(scale, "\t\t");
-    _builder.append(", cell->y + ");
-    _builder.append(scale, "\t\t");
-    _builder.append("));");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("scene->addObstacle(new Ped::Tobstacle(cell->x, cell->y + ");
-    _builder.append(scale, "\t\t");
-    _builder.append(", cell->x + ");
-    _builder.append(scale, "\t\t");
-    _builder.append(", cell->y + ");
-    _builder.append(scale, "\t\t");
-    _builder.append("));");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// prevent creating too much obstacles");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("cell->drawn = true;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("// Draw cross");
+    _builder.append("void drawLocation(Cell* cell, Ped::OutputWriter* ow, double red, double green, double blue) {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("Ped::Tvector c1(cell->x, cell->y);");
@@ -252,10 +248,15 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append(", cell->y);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("ow->drawLine(c1, c2, 1, 1, 0, 0);");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("ow->drawLine(c3, c4, 1, 1, 0, 0);");
+    _builder.append("// Draw cross");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("ow->drawLine(c1, c2, 1, red, green, blue);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("ow->drawLine(c3, c4, 1, red, green, blue);");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -266,8 +267,10 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("cout << \"# PedSim Example using libpedsim version \" << Ped::LIBPEDSIM_VERSION << endl;");
-    _builder.newLine();
+    _builder.append("cout << \"# PedSim Simulation of \'");
+    _builder.append(simpleClassName, "\t");
+    _builder.append("\' using libpedsim version \" << Ped::LIBPEDSIM_VERSION << endl;");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
@@ -304,11 +307,16 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append("Floor floor;");
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("floor.scale = ");
+    _builder.append(scale, "\t");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
     _builder.append("vector<Cell*> room;");
     _builder.newLine();
     {
-      Iterable<Room> _filter = Iterables.<Room>filter(floorplan, Room.class);
-      for(final Room room_1 : _filter) {
+      Iterable<Room> _filter_1 = Iterables.<Room>filter(floorplan, Room.class);
+      for(final Room room_1 : _filter_1) {
         {
           ArrayList<Pair<Coordinate, Coordinate>> _roomObstacles = Helper.getRoomObstacles(room_1, floor);
           for(final Pair<Coordinate, Coordinate> ob : _roomObstacles) {
@@ -355,6 +363,20 @@ public class BmodGenerator implements IGenerator2 {
         _builder.append("\t");
         _builder.append("floor.rooms.emplace_back(room);");
         _builder.newLine();
+        {
+          boolean _isHasCapacity = room_1.isHasCapacity();
+          if (_isHasCapacity) {
+            _builder.append("\t");
+            _builder.append("floor.capacities.insert(std::make_pair<unsigned long, unsigned long>(");
+            int _indexOf = IterableExtensions.<Room>toList(Iterables.<Room>filter(floorplan, Room.class)).indexOf(room_1);
+            _builder.append(_indexOf, "\t");
+            _builder.append(", ");
+            int _capacity = room_1.getCapacity();
+            _builder.append(_capacity, "\t");
+            _builder.append("));");
+            _builder.newLineIfNotEmpty();
+          }
+        }
       }
     }
     _builder.append("\t");
@@ -375,15 +397,17 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append("// Set exits");
     _builder.newLine();
     {
-      Iterable<Exit> _filter_1 = Iterables.<Exit>filter(floorplan, Exit.class);
-      for(final Exit exit : _filter_1) {
+      Iterable<Exit> _filter_2 = Iterables.<Exit>filter(floorplan, Exit.class);
+      for(final Exit exit : _filter_2) {
         _builder.append("\t");
         _builder.append("floor.setExit(");
-        int _x = exit.getLocation().getX();
-        _builder.append(_x, "\t");
+        double _compX_3 = this.compX(bounds, exit.getLocation().getX());
+        double _multiply_6 = (_compX_3 * scale);
+        _builder.append(_multiply_6, "\t");
         _builder.append(", ");
-        int _y = exit.getLocation().getY();
-        _builder.append(_y, "\t");
+        double _compY_3 = this.compY(bounds, exit.getLocation().getY());
+        double _multiply_7 = (_compY_3 * scale);
+        _builder.append(_multiply_7, "\t");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
       }
@@ -394,21 +418,25 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append("// Draw doors");
     _builder.newLine();
     {
-      Iterable<Door> _filter_2 = Iterables.<Door>filter(floorplan, Door.class);
-      for(final Door door : _filter_2) {
+      ArrayList<Door> _sortDoors = Helper.sortDoors(floor);
+      for(final Door door : _sortDoors) {
         _builder.append("\t");
         _builder.append("floor.doors.emplace_back(new Door(");
-        double _compX_3 = this.compX(bounds, door.getFrom().getX());
-        _builder.append(_compX_3, "\t");
+        double _compX_4 = this.compX(bounds, door.getFrom().getX());
+        double _multiply_8 = (_compX_4 * scale);
+        _builder.append(_multiply_8, "\t");
         _builder.append(", ");
-        double _compY_3 = this.compY(bounds, door.getFrom().getY());
-        _builder.append(_compY_3, "\t");
+        double _compY_4 = this.compY(bounds, door.getFrom().getY());
+        double _multiply_9 = (_compY_4 * scale);
+        _builder.append(_multiply_9, "\t");
         _builder.append(", ");
-        double _compX_4 = this.compX(bounds, door.getTo().getX());
-        _builder.append(_compX_4, "\t");
+        double _compX_5 = this.compX(bounds, door.getTo().getX());
+        double _multiply_10 = (_compX_5 * scale);
+        _builder.append(_multiply_10, "\t");
         _builder.append(", ");
-        double _compY_4 = this.compY(bounds, door.getTo().getY());
-        _builder.append(_compY_4, "\t");
+        double _compY_5 = this.compY(bounds, door.getTo().getY());
+        double _multiply_11 = (_compY_5 * scale);
+        _builder.append(_multiply_11, "\t");
         _builder.append("));");
         _builder.newLineIfNotEmpty();
       }
@@ -429,30 +457,47 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append("\t");
     _builder.append("// Fire");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("vector<Cell*> fire;");
-    _builder.newLine();
     {
       Iterable<Fire> _filter_3 = Iterables.<Fire>filter(floorplan, Fire.class);
       for(final Fire fire : _filter_3) {
         _builder.append("\t");
-        _builder.append("fire.emplace_back(new Cell(");
-        double _compX_5 = this.compX(bounds, fire.getLocation().getX());
-        double _multiply_6 = (_compX_5 * scale);
-        _builder.append(_multiply_6, "\t");
+        _builder.append("floor.at(");
+        double _compX_6 = this.compX(bounds, fire.getLocation().getX());
+        double _multiply_12 = (_compX_6 * scale);
+        _builder.append(_multiply_12, "\t");
         _builder.append(", ");
-        double _compY_5 = this.compY(bounds, fire.getLocation().getY());
-        double _multiply_7 = (_compY_5 * scale);
-        _builder.append(_multiply_7, "\t");
-        _builder.append("));");
+        double _compY_6 = this.compY(bounds, fire.getLocation().getY());
+        double _multiply_13 = (_compY_6 * scale);
+        _builder.append(_multiply_13, "\t");
+        _builder.append(")->onfire = true;");
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.append("\t");
-    _builder.append("for(auto f: fire) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for(const std::vector<Cell*>& room: floor.rooms) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("fireObstacle(f, pedscene, ow);");
+    _builder.append("for(Cell* cell: room) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("if(cell->onfire) {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("drawLocation(cell, ow, 1, 0, 0);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("} else if(cell->exit) {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("drawLocation(cell, ow, 0, 1, 0);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -460,21 +505,30 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("// Create people (TODO: complicated logic needed for behaviour)");
+    _builder.append("// Create people");
     _builder.newLine();
     {
       Iterable<Person> _filter_4 = Iterables.<Person>filter(floorplan, Person.class);
       for(final Person person : _filter_4) {
         _builder.append("\t");
         _builder.append("floor.people.emplace_back(newAgent(pedscene, ");
-        double _compX_6 = this.compX(bounds, person.getLocation().getX());
-        double _multiply_8 = (_compX_6 * scale);
-        _builder.append(_multiply_8, "\t");
+        double _compX_7 = this.compX(bounds, person.getLocation().getX());
+        double _multiply_14 = (_compX_7 * scale);
+        _builder.append(_multiply_14, "\t");
         _builder.append(", ");
-        double _compY_6 = this.compY(bounds, person.getLocation().getY());
-        double _multiply_9 = (_compY_6 * scale);
-        _builder.append(_multiply_9, "\t");
+        double _compY_7 = this.compY(bounds, person.getLocation().getY());
+        double _multiply_15 = (_compY_7 * scale);
+        _builder.append(_multiply_15, "\t");
         _builder.append(", floor));");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("floor.people.back()->registerTargetter(targetters::action_");
+        String _name = person.getAction().getName();
+        _builder.append(_name, "\t");
+        _builder.append(", targetters::action_");
+        String _name_1 = person.getAction().getName();
+        _builder.append(_name_1, "\t");
+        _builder.append("_shared);");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -510,7 +564,10 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append("{\"Escaped People\", \"0\"},");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("{\"Escaped (Percentage)\", \"0\"}");
+    _builder.append("{\"Death People\", \"0\"},");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("{\"Room Capacities Violated\", \"0\"}");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("});");
@@ -527,9 +584,12 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append("long int time = 0;");
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("vector<Cell*> fire = floor.find([](const Cell* c) { return c->onfire; });");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("while(fire.size() < ");
     _builder.append(floorcells, "\t");
-    _builder.append(") {");
+    _builder.append(" && floor.find([](const Person* p) { return p->isAlive() && !p->hasEscaped(); }).size() > 0) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("++time;");
@@ -541,18 +601,18 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append("// Delay for next step");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("char c;");
+    _builder.append("// char c;");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("cin >> c;");
+    _builder.append("// cin >> c;");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("// usleep(500*1000);");
+    _builder.append("usleep(500*1000);");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("// Compute agent movement (TODO)");
+    _builder.append("// Compute agent movement");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("for(Person* person: floor.people) {");
@@ -655,19 +715,40 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append("for(auto f: to_add) {");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("// Ensure 1 tick per timestep");
+    _builder.append("Cell* loc = floor.at(f->x, f->y);");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("fire.emplace_back(f);");
+    _builder.append("loc->onfire = true;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fire.emplace_back(loc);");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("for(auto f: fire) {");
+    _builder.append("for(const std::vector<Cell*>& room: floor.rooms) {");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("fireObstacle(f, pedscene, ow);");
+    _builder.append("for(Cell* cell: room) {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("if(cell->onfire) {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("drawLocation(cell, ow, 1, 0, 0);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("} else if(cell->exit) {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("drawLocation(cell, ow, 0, 1, 0);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
@@ -693,6 +774,49 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append("\t\t");
     _builder.newLine();
     _builder.append("\t\t");
+    _builder.append("// Clear escaped persons");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(Person* p: floor.people) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("if(p->hasEscaped()) {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("pedscene->removeAgent(p->get());");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("// Check Capacities");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("int caps = 0;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(const auto& cap: floor.capacities) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("if(floor.find([](const Person* p) { return p->isAlive() && !p->hasEscaped(); }, floor.rooms.at(cap.first).front()).size() > cap.second) {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("++caps;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
     _builder.append("// Metrics");
     _builder.newLine();
     _builder.append("\t\t");
@@ -710,33 +834,16 @@ public class BmodGenerator implements IGenerator2 {
     _builder.append(")},");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
-    _builder.append("{\"Escaped People\", \"0\"},");
+    _builder.append("{\"Escaped People\", std::to_string(floor.people.size() - myagents.size())},");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("{\"Escaped (Percentage)\", \"0\"}");
+    _builder.append("{\"Death People\", std::to_string(floor.people.size() - floor.find([](const Person* p) { return p->isAlive(); }).size())},");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("{\"Room Capacities Violated\", std::to_string(caps)}");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("});");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// Clear escaped persons");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("for(Person* p: floor.people) {");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("if(p->hasEscaped()) {");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("pedscene->removeAgent(p->get());");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -776,7 +883,25 @@ public class BmodGenerator implements IGenerator2 {
     _builder.newLine();
     fsa.generateFile((simpleClassName + "/main.cpp"), _builder);
     this.generateSimulationLibrary(fsa);
-    this.generateCMakeLists(simpleClassName, fsa);
+    ArrayList<String> lst = CollectionLiterals.<String>newArrayList();
+    Iterable<Import> _filter_5 = Iterables.<Import>filter(floorplan, Import.class);
+    for (final Import imp_1 : _filter_5) {
+      {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("../");
+        String _removeExtension_1 = BmodGenerator.removeExtension(imp_1.getImportURI());
+        _builder_1.append(_removeExtension_1);
+        _builder_1.append("/targetters.h");
+        lst.add(_builder_1.toString());
+        StringConcatenation _builder_2 = new StringConcatenation();
+        _builder_2.append("../");
+        String _removeExtension_2 = BmodGenerator.removeExtension(imp_1.getImportURI());
+        _builder_2.append(_removeExtension_2);
+        _builder_2.append("/targetters.cpp");
+        lst.add(_builder_2.toString());
+      }
+    }
+    this.generateCMakeLists(simpleClassName, lst, fsa);
   }
   
   @Override

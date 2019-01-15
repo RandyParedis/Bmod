@@ -19,8 +19,8 @@ namespace simulation {
 		for(std::vector<Cell*> room: floor.rooms) {
 			if(!find(this, room)) { continue; }
 			for(Door* door: floor.doors) {
-				room.emplace_back(new Cell(door->x1, door->y1));
-				room.emplace_back(new Cell(door->x2, door->y2));
+				room.emplace_back(new Cell(door->getX1(), door->getY1()));
+				room.emplace_back(new Cell(door->getX2(), door->getY2()));
 			}
 			return find(target, room);
 		}

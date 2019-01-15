@@ -11,6 +11,6 @@ public class BmodAntlrTokenFileProvider implements IAntlrTokenFileProvider {
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-		return classLoader.getResourceAsStream("org/xtext/bmod/parser/antlr/internal/InternalBmod.tokens");
+		return classLoader.getResourceAsStream("org/xtext/bmod/parser/antlr/internal/InternalBmodParser.tokens");
 	}
 }

@@ -17,7 +17,7 @@ import org.eclipse.xtext.ide.refactoring.IRenameStrategy2;
 import org.eclipse.xtext.ide.server.rename.IRenameService;
 import org.eclipse.xtext.ide.server.rename.RenameService;
 import org.xtext.bmod.ide.contentassist.antlr.BmodParser;
-import org.xtext.bmod.ide.contentassist.antlr.internal.InternalBmodLexer;
+import org.xtext.bmod.ide.contentassist.antlr.lexer.InternalBmodLexer;
 
 /**
  * Manual modifications go to {@link BmodIdeModule}.

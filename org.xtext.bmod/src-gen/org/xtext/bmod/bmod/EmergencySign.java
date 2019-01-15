@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.bmod.bmod.EmergencySign#getOn <em>On</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.EmergencySign#getTo <em>To</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.EmergencySign#getFrom <em>From</em>}</li>
+ *   <li>{@link org.xtext.bmod.bmod.EmergencySign#getRef <em>Ref</em>}</li>
  * </ul>
  *
  * @see org.xtext.bmod.bmod.BmodPackage#getEmergencySign()
@@ -25,55 +25,55 @@ import org.eclipse.emf.ecore.EObject;
 public interface EmergencySign extends EObject
 {
   /**
-   * Returns the value of the '<em><b>On</b></em>' reference.
+   * Returns the value of the '<em><b>From</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>On</em>' reference isn't clear,
+   * If the meaning of the '<em>From</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>On</em>' reference.
-   * @see #setOn(Door)
-   * @see org.xtext.bmod.bmod.BmodPackage#getEmergencySign_On()
+   * @return the value of the '<em>From</em>' reference.
+   * @see #setFrom(Door)
+   * @see org.xtext.bmod.bmod.BmodPackage#getEmergencySign_From()
    * @model
    * @generated
    */
-  Door getOn();
+  Door getFrom();
 
   /**
-   * Sets the value of the '{@link org.xtext.bmod.bmod.EmergencySign#getOn <em>On</em>}' reference.
+   * Sets the value of the '{@link org.xtext.bmod.bmod.EmergencySign#getFrom <em>From</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>On</em>' reference.
-   * @see #getOn()
+   * @param value the new value of the '<em>From</em>' reference.
+   * @see #getFrom()
    * @generated
    */
-  void setOn(Door value);
+  void setFrom(Door value);
 
   /**
-   * Returns the value of the '<em><b>To</b></em>' containment reference.
+   * Returns the value of the '<em><b>Ref</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>To</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Ref</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>To</em>' containment reference.
-   * @see #setTo(DoorRef)
-   * @see org.xtext.bmod.bmod.BmodPackage#getEmergencySign_To()
+   * @return the value of the '<em>Ref</em>' containment reference.
+   * @see #setRef(DoorRef)
+   * @see org.xtext.bmod.bmod.BmodPackage#getEmergencySign_Ref()
    * @model containment="true"
    * @generated
    */
-  DoorRef getTo();
+  DoorRef getRef();
 
   /**
-   * Sets the value of the '{@link org.xtext.bmod.bmod.EmergencySign#getTo <em>To</em>}' containment reference.
+   * Sets the value of the '{@link org.xtext.bmod.bmod.EmergencySign#getRef <em>Ref</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>To</em>' containment reference.
-   * @see #getTo()
+   * @param value the new value of the '<em>Ref</em>' containment reference.
+   * @see #getRef()
    * @generated
    */
-  void setTo(DoorRef value);
+  void setRef(DoorRef value);
 
 } // EmergencySign

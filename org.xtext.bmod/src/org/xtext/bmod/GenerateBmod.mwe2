@@ -30,8 +30,8 @@ Workflow {
 			}
 		}
 		language = StandardLanguage {
-			name = "org.xtext.bmod.Bmod"
-			fileExtensions = "bmod"
+			name = "org.xtext.bmod.BReact"
+			fileExtensions = "br,breact"
 
 			serializer = {
 				generateStub = false
@@ -40,6 +40,30 @@ Workflow {
 				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
 				// Generates checks for @Deprecated grammar annotations, an IssueProvider and a corresponding PropertyPage
 				generateDeprecationValidation = true
+			}
+			parserGenerator = {
+				combinedGrammar = false
+			}
+			
+			fragment = ui.quickfix.QuickfixProviderFragment2 {}
+		}
+		language = StandardLanguage {
+			name = "org.xtext.bmod.Bmod"
+			fileExtensions = "bmod"
+
+			referencedResource = "platform:/resource/org.xtext.bmod/model/generated/BReact.genmodel"
+//			fragment = scoping.ImportNamespacesScopingFragment2 {}
+
+			serializer = {
+				generateStub = false
+			}
+			validator = {
+				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+				// Generates checks for @Deprecated grammar annotations, an IssueProvider and a corresponding PropertyPage
+				generateDeprecationValidation = true
+			}
+			parserGenerator = {
+				combinedGrammar = false
 			}
 		}
 	}

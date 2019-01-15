@@ -29,5 +29,9 @@ Export-Package: org.xtext.bmod.parser.antlr.internal,
  org.xtext.bmod,
  org.xtext.bmod.services,
  org.xtext.bmod.bmod.util,
- org.xtext.bmod.jvmmodel
+ org.xtext.bmod.jvmmodel,
+ org.xtext.bmod.parser.antlr.lexer,
+ org.xtext.bmod.breact.util,
+ org.xtext.bmod.breact,
+ org.xtext.bmod.breact.impl
 Import-Package: org.apache.log4j

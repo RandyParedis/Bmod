@@ -19,4 +19,12 @@ class BmodRuntimeModule extends AbstractBmodRuntimeModule {
 //	override Class<? extends IGenerator> bindIGenerator() {
 //		return IGeneratorRoot
 //	}
+//
+//	def Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+//		BmodResourceDescriptionStrategy
+//	}
+//	
+//	override Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+//		BmodGlobalScopeProvider
+//	}
 }

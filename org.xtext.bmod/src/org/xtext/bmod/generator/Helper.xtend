@@ -8,6 +8,7 @@ import org.xtext.bmod.bmod.Door
 import org.xtext.bmod.bmod.EmergencySign
 import org.xtext.bmod.bmod.Floorplan
 import org.xtext.bmod.bmod.Room
+import java.util.PriorityQueue
 
 class Helper {
 	static def Coordinate newCoordinate(int x, int y) {
@@ -100,8 +101,67 @@ class Helper {
 	
 	static def EmergencySign getDoorSign(Door door, Floorplan fp) {
 		for(sign: fp.signs) {
-			if(sign.on == door) {
+			if(sign.from == door) {
 				return sign;
+			}
+		}
+		return null;
+	}
+	
+	static def ArrayList<EmergencySign> getDoorSigns(Door door, Floorplan fp) {
+		var set = new ArrayList<EmergencySign>();
+		for(sign: fp.signs) {
+			if(sign.from == door) {
+				set.add(sign);
+			}
+		}
+		return set;
+	}
+	
+	static def ArrayList<Door> chainDoors(Door door, Floorplan fp) {
+		var set = new ArrayList<Door>();
+		var queue = new ArrayList<EmergencySign>();
+		for(s: getDoorSigns(door, fp)) {
+			queue.add(s);
+		}
+		while(!queue.empty) {
+			val current = queue.get(0);
+			queue.remove(0);
+			set.add(current.ref.to);
+			for(s: getDoorSigns(current.ref.to, fp)) {
+				queue.add(s);
+			}
+		}
+		return set;
+	}
+	
+	static def ArrayList<Door> sortDoors(Floorplan fp) {
+		val doors = <Door>newArrayList();
+		for(d: fp.doors) {
+			doors.add(d);
+		}
+		doors.sort[ a, b |
+			val chainA = chainDoors(a, fp);
+			val chainB = chainDoors(b, fp);
+			if(chainA.contains(b)) {
+				return -1
+			}
+			if(chainB.contains(a)) {
+				return 1;
+			}
+			return 0;
+		]
+		return doors;
+	}
+	
+	static def Room commonRoom(Door d1, Door d2, Floorplan fp) {
+		for(room: fp.rooms) {
+			val rc = room.getRoomCoords();
+			if((d1.from.isIn(rc) && d2.from.isIn(rc)) ||
+				(d1.from.isIn(rc) && d2.to.isIn(rc)) ||
+				(d1.to.isIn(rc) && d2.from.isIn(rc)) ||
+				(d1.to.isIn(rc) && d2.to.isIn(rc))) {
+				return room;
 			}
 		}
 		return null;

@@ -5,6 +5,8 @@ package org.xtext.bmod.bmod;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.xtext.bmod.breact.ActionDesc;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Person</b></em>'.
@@ -16,7 +18,6 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.xtext.bmod.bmod.Person#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Person#getLocation <em>Location</em>}</li>
- *   <li>{@link org.xtext.bmod.bmod.Person#getPerception <em>Perception</em>}</li>
  *   <li>{@link org.xtext.bmod.bmod.Person#getAction <em>Action</em>}</li>
  * </ul>
  *
@@ -79,55 +80,29 @@ public interface Person extends EObject
   void setLocation(Coordinate value);
 
   /**
-   * Returns the value of the '<em><b>Perception</b></em>' containment reference.
+   * Returns the value of the '<em><b>Action</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Perception</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Action</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Perception</em>' containment reference.
-   * @see #setPerception(Perception)
-   * @see org.xtext.bmod.bmod.BmodPackage#getPerson_Perception()
-   * @model containment="true"
-   * @generated
-   */
-  Perception getPerception();
-
-  /**
-   * Sets the value of the '{@link org.xtext.bmod.bmod.Person#getPerception <em>Perception</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Perception</em>' containment reference.
-   * @see #getPerception()
-   * @generated
-   */
-  void setPerception(Perception value);
-
-  /**
-   * Returns the value of the '<em><b>Action</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Action</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Action</em>' containment reference.
-   * @see #setAction(Action)
+   * @return the value of the '<em>Action</em>' reference.
+   * @see #setAction(ActionDesc)
    * @see org.xtext.bmod.bmod.BmodPackage#getPerson_Action()
-   * @model containment="true"
+   * @model
    * @generated
    */
-  Action getAction();
+  ActionDesc getAction();
 
   /**
-   * Sets the value of the '{@link org.xtext.bmod.bmod.Person#getAction <em>Action</em>}' containment reference.
+   * Sets the value of the '{@link org.xtext.bmod.bmod.Person#getAction <em>Action</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Action</em>' containment reference.
+   * @param value the new value of the '<em>Action</em>' reference.
    * @see #getAction()
    * @generated
    */
-  void setAction(Action value);
+  void setAction(ActionDesc value);
 
 } // Person

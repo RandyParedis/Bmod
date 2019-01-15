@@ -9,7 +9,8 @@
  
 namespace simulation {
 	struct Door {
-		Door(double x1, double x2, double y1, double y2): x1(x1), y1(y1), x2(x2), y2(y2) {}
+	public:
+		Door(double x1, double y1, double x2, double y2): x1(x1), y1(y1), x2(x2), y2(y2) {}
 		
 		void draw(Ped::OutputWriter* ow, double scale) {
 			Ped::Tvector door_1(0, 0);
@@ -39,7 +40,13 @@ namespace simulation {
 			}
 			ow->drawLine(door_1, door_2, 1, 0, 1, 0);
 		}
+		
+		double getX1() const { return x1; };
+		double getY1() const { return y1; };
+		double getX2() const { return x2; };
+		double getY2() const { return y2; };
 
+	private:
 		double x1;
 		double y1;
 		double x2;

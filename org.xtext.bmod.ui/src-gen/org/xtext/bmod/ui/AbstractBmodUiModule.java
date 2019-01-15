@@ -71,7 +71,7 @@ import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.xtext.bmod.ide.contentassist.antlr.BmodParser;
 import org.xtext.bmod.ide.contentassist.antlr.PartialBmodContentAssistParser;
-import org.xtext.bmod.ide.contentassist.antlr.internal.InternalBmodLexer;
+import org.xtext.bmod.ide.contentassist.antlr.lexer.InternalBmodLexer;
 import org.xtext.bmod.ui.contentassist.BmodProposalProvider;
 import org.xtext.bmod.ui.labeling.BmodDescriptionLabelProvider;
 import org.xtext.bmod.ui.labeling.BmodLabelProvider;
@@ -110,7 +110,7 @@ public abstract class AbstractBmodUiModule extends DefaultUiModule {
 	public void configureHighlightingLexer(Binder binder) {
 		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class)
 			.annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
-			.to(org.xtext.bmod.parser.antlr.internal.InternalBmodLexer.class);
+			.to(org.xtext.bmod.parser.antlr.lexer.InternalBmodLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
