@@ -1,0 +1,353 @@
+\documentclass[review]{elsarticle}
+
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+\usepackage{csquotes, listings}
+
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\lstdefinelanguage{Bmod}{
+	morekeywords={
+		import, from, to, and, in, without,
+		Room, Door, Person, Exit, Fire, EmergencySign
+	},
+	commentstyle=\color{mygreen},
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/}
+}
+\lstdefinelanguage{Breact}{
+	morekeywords={
+		shared, action, global, find, from,
+		burning, normal,
+		nearest, farthest, first, last,
+		Cell, Door, Person, Exit, Fire
+	},
+	commentstyle=\color{mygreen},
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/}
+}
+
+\journal{MSBDesign}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Using \texttt{Xtext} and \texttt{Xtend} to Create \texttt{Bmod}}
+
+%% Group authors per affiliation:
+\author{Randy Paredis, s0151613}
+\address{Master in Computer Science, University of Antwerp}
+
+\begin{abstract}
+In this document, we will try and describe the abilities and drawbacks of using \texttt{Xtext} (and \texttt{Xtend}) within the context of creating a building modelling language. The modularity of \texttt{Xtext} will be explored and combined with a \texttt{C++} pedesitian simulator.
+\end{abstract}
+
+\begin{keyword}
+\texttt{Bmod}\sep\texttt{Breact}\sep\texttt{C++}\sep\texttt{DSL}\sep\textsf{Java}\sep Modelling\sep Model Driven Engineering\sep\texttt{PedSim}\sep Pedestrian Simulator\sep\texttt{Xtend}\sep\texttt{Xtext}
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+\section{Introduction}
+Within this document, we will explore the \texttt{Java} library of \texttt{Xtext} \cite{xtext} and by extension \texttt{Xtend}. In order to describe all the possibilities and features \texttt{Xtext} offers, we will use it to create \texttt{Bmod}, a building modelling language and \texttt{Breact}, an additional file specification that allows for modelling the behaviour of people. The exact idea behind these languages will be respectively described in \textsl{Sections \ref{sec:bmod}} and \textsl{\ref{sec:breact}}, while \textsl{Section \ref{sec:xtext}} will go deeper into detail on \texttt{Xtext} and \texttt{Xtend} itself. 
+
+Seeing as any file can be generated in \texttt{Xtext}, we will limit the scope of this project to generating a \texttt{C++} project will be generated that will be used in conjunction with \texttt{PedSim}\cite{pedsim} to simulate the behaviour of people in emergency situations. More details will be discussed in \textsl{Section \ref{sec:pedsim}}.
+
+\subsection{Related Work}
+This project is based upon the same constructs as \cite{Hannu2014}, but uses another angle on the topic (Building Modelling instead of RPGs).
+
+\subsection{Code Base}
+All the code for this project was made publicly available on \texttt{GitHub}.
+
+
+
+
+\section{What is Xtext and Xtend?}
+\label{sec:xtext}
+
+\subsection{Xtext}
+\texttt{Xtext} \cite{xtext} is a \textsf{Java} library/framework that allows software engineers to create custom \texttt{DSL}s (Domain Specific Languages). It is based at the \textsf{Eclipse Org} \cite{eclipse}, but was not designed to be solemnly an \textsf{Eclipse} plug-in. Originally, the project was meant to also be available for \textsf{JetBrains}' \textsf{IntelliJ} and web applications, but only the \textsf{Eclipse} plug-in reaches its full potential.
+
+\begin{displaycquote}{nointellij}
+	\textit{For IntelliJ IDEA the situation is different. Neither the Xtext integration has been updated with the last release, nor has Jetbrains yet started to work on LSP support. The code for the IDEA integration is quite extensive and deep. So deep that we get regularly broken because we use non-public API. Since the demand for IDEA integration is not high, maintaining it doesn’t make sense to us.}
+\end{displaycquote}
+
+Needless to say, \cite{nointellij} clearly states the \textsf{IntelliJ} plug-ins for \texttt{Xtext} are discontinued.
+
+When taking a look at the web-integration, we can see that an \textsf{IDE} can be easily obtained from the \textsf{Eclipse} plug-in (if you know what you're doing), but it still requires applets, or other \textsf{Java} entry points. This is mainly the reason we will not be focussing on this part of the plug-in.
+
+\subsection{Xtend}
+\texttt{Xtend} is, as its name implies, an extension for \texttt{Xtext}. It is a modular language that uses \texttt{Java} as an entry point and has a lot of practical (and less practical) features of common programming languages.
+
+One of the handy features that will become available is a templatable string, which can prevent a lot of concatenation structures. The downside of this feature is that it uses the \textsf{French guillemets}, which by default don't come on a keyboard. So it's a good thing that \textsf{Eclipse} will automatically make them available within the correct context when using the auto-completion shortcuts\footnote{\texttt{CTRL + SPACE} if no remapping was done, or \texttt{CTRL + LESS THAN} and \texttt{CTRL + GREATER THAN} for a specific type of guillemet.}.
+
+Behind the scenes, it is translated to plain \texttt{Java} code, which is bundled with the project and compiled when necessary. This makes the two of them interchangeable within an \texttt{Xtext} project.
+
+\subsection{General Workflow}
+Generating a custom \texttt{DSL} with \texttt{Xtext} needs an accustomed workflow, that will be described here (apart from the obvious "\textsf{Create a Project}").
+
+\subsubsection{Create a Grammar}
+Using the power of \texttt{Antlr4} \cite{antlr}, combined with a set of handy shortcuts (such as cross references, ranges, until-structures\footnote{This structure allows you to match anything between two sets of tokens.}...), any file specification can be defined.
+
+\texttt{Xtext} is rather proud of one of those shortcuts, called "\textsf{Cross References}", which allows the user to give their language an automatic validation for existing objects. Beside its functionality being incredibly useful and powerful, I've noticed a massive drawback when making my project. When using such cross references, you can only use a single one in the same rule of the grammar. The workaround? Split up the rule in multiple rules.
+
+\subsubsection{Compile the Grammar}
+Making use of the power of \texttt{MWE2}, the project's workflow can be described in a \texttt{JSON}/\texttt{YAML}-like structure. Within this file, you can (among others) define the set of languages to compile and which file extensions to associate them with.
+
+For \texttt{Bmod} and \texttt{Breact}, we have two different grammars, with dissimilar file extensions, but \texttt{Bmod} references structures from \texttt{Breact}. All this information can be described in this \texttt{MWE2}-file.
+
+See the \texttt{GenerateBmod.mwe2} file for an example on this.
+
+\subsubsection{Add Generation, Scoping and Validation}
+By default, \texttt{Xtext} will add an empty generator and an empty validator. The scoping will default to the \texttt{Java}-scoping. Luckily \texttt{Xtext} allows for overriding these classes.
+
+The \textsf{Generator} is the class that will create a set of files based upon the grammar. Unfortunately, it is not possible to include a custom-made logic library to be linked in this grammar. Let's say (within the context of \texttt{Bmod}) we need some logic that is static, for instance to describe the logic of visually representing the simulation. A good feature would have been to be able to create a file that has this set of files as library. In this project, I've worked around this problem by explicitly setting the \texttt{JAVA\_ROOT} in \textsf{Eclipse} to the workspace directory and by implementing a class that (using the \texttt{Java} file-handlers) loads a file into a string, which can be send through the generator.
+
+The \textsf{ScopeProvider} was not wildly used in this project, but after doing some research, I've noticed it can be quite powerful.
+
+The \textsf{Validator} class allows the creator of a \texttt{DSL} to describe when the semantics of the language becomes invalid. For \texttt{Bmod} and \texttt{Breact}, this has been used to check the constraints of both languages.
+
+In addition to the \textsf{Validator}, it is possible to add \textsf{Fixes} for certain invalid constraints. For instance, in \texttt{Bmod}, this has been used for (among others) to allow for swapping the coordinates of an area if it was not defined from top-left to bottom-right.
+
+
+
+
+\section{Designing \texttt{Bmod}}
+\label{sec:bmod}
+\paragraph{Bmod: A Building Modelling Tool} Continuing on the assignments throughout the semester, this project makes use of \texttt{Bmod}, a fictional language that should allow architects to easily create floorplans and run simulations on them. The main focus of this year was a fire in the building, which is also what we will be discussing in this paper.
+
+To create a \texttt{Bmod} file, you must create a file with the extension \texttt{bmod}. In this file, it is possible to add comments in the same way as most languages do that:
+\begin{lstlisting}[language=Bmod]
+	// This is a single-line comment
+	/* This is a multiline
+		comment */
+\end{lstlisting}
+
+\subsection{What is in \texttt{Bmod}?}
+
+\texttt{Bmod} is quite a simple language, but nevertheless it's important to state all concepts within this \textsf{DSL} and built them incrementally. All the information below is based upon the information given in \cite{A1}.
+
+\paragraph{Cells} A cell is the smallest unit of size in our model. Depending on the exact requirements/needs of the architect/user, these will be bigger or smaller. They are represented with a coordinate $(x, y)$, which have its origin in the top-left corner. A cell itself should not be instantiated by the user to disallow for a bad floorplan creation.
+
+\paragraph{Rooms} A collection of cells is what we call a room, or an area. Internally, in our system, we will use the terminology \textsf{area} to describe a group of connected cells, that can be joined and can have certain cells missing.\\
+We're also making a simplification and say that a room will not have any internal walls.\\
+A square room called \texttt{cusom\_room\_name} from $(0, 0)$ to $(5, 5)$ can be created in \texttt{Bmod} as follows:
+\begin{lstlisting}[language=Bmod]
+	Room custom_room_name
+		from (0, 0) to (5, 5)
+\end{lstlisting}
+Another way of doing this is using joins (keyword \texttt{and}):
+\begin{lstlisting}[language=Bmod]
+	Room custom_room_name
+		from (0, 0) to (4, 5) and
+		from (5, 0) to (5, 5)
+\end{lstlisting}
+If you don't want the center in a 3 by 3 room anchored in $(0, 0)$? Simply make use of the \texttt{without} keyword:
+\begin{lstlisting}[language=Bmod]
+	Room custom_room_name
+		from (0, 0) to (3, 3)
+		without (1, 1)
+\end{lstlisting}
+
+\paragraph{Doors} When we have multiple rooms, we must also have something that connects them, which are doors. These doors are made up by two neighbouring coordinates of two different rooms.\\
+A door can be created similarly to a room:
+\begin{lstlisting}[language=Bmod]
+	Door my_door_name from (0, 0) to (1, 0)
+\end{lstlisting}
+Please note that the \texttt{from} and \texttt{to} cells are interchangeable, yielding the above example exactly the same as:
+\begin{lstlisting}[language=Bmod]
+	Door my_door_name from (1, 0) to (0, 0)
+\end{lstlisting}
+
+\paragraph{Exits} To allow the building to be exitted, some cells can be marked as exit cells. Please be aware that it is required to have at least one exit in a floor.\\
+When you want to mark cell $(5, 6)$ as an exit cell, you just write this:
+\begin{lstlisting}[language=Bmod]
+	Exit in (5, 6)
+\end{lstlisting}
+
+\paragraph{Fire} Similarly to describing an exit, a fire can be described, which denotes where a fire is created on the floor.\\
+Igniting cell $(8, 8)$ can thus be done like this:
+\begin{lstlisting}[language=Bmod]
+	Fire in (8, 8)
+\end{lstlisting}
+
+\paragraph{Emergency Signs} Each door can have one or more signs that denote the emergency path. It points towards the next door to go to, when going through this one.\\
+Describing an emergency sign that points you from door \texttt{door1} to \texttt{door2}, must be done as so (of course both doors must exist somewhere in the file):
+\begin{lstlisting}[language=Bmod]
+	EmergencySign from door1 to door2
+\end{lstlisting}
+
+\paragraph{Persons} Of course, in order to do some simulations, we must have some people that will undergo the fire in the floorplan. Each person belongs to a coordinate (which can change throughout the simulation), has a name and an action profile. The latter is a reference to a \texttt{Breact} action.\\
+To create a person called \texttt{my\_person} in $(3, 3)$ that follows action \texttt{my\_action} from the \texttt{actions.breact} file in the same project, you must use this syntax:
+\begin{lstlisting}[language=Bmod]
+	import "actions.breact"
+	Person my_person in (3, 3): my_action
+\end{lstlisting}
+Please do note that the references to \texttt{Breact} (using the keyword \texttt{import}) must be defined in the beginning of the file, not just anywhere.
+
+\paragraph{Dangerous Conditions} As per the assignments during this semester, there is only one single type of dangerous condition: the \emph{occupancy condition}. This condition forces the simulation to halt, or show a warning (or both) that it has been reached.\\
+Instead of implementing a dangerous condition similar to all other constructs, the decision was made to allow it inside of the creation of a room:
+\begin{lstlisting}[language=Bmod]
+	Room custom_room_name [3]
+		from (0, 0) to (3, 3)
+		without (1, 1)
+\end{lstlisting}
+As you can see, there is a \texttt{[3]} behind the name of the room, which implies an occupancy condition of 3.\footnote{At least, in this example. The value can be any positive real number, including 0. Why you would ever want to use 0, is beyond my understanding.} When this constraint is reached, the user will be notified.
+
+\subsection{Constraints}
+
+All the above concepts still allow for misuse, bad design and undefined behaviour, which is why we will define some constraints on all the above objects. These are checked in \texttt{Xtext}, in the code validation.
+
+\begin{enumerate}
+	\item Each room must be made up of a group of \textsf{connected} cells. To simplify, each cell in a room must be reachable from every other cell. This can easily be obtained by a floodfill-like algorithm.
+	\item Rooms cannot, may not and shall not have any cells in common, i.e. two different rooms must not have any overlapping areas.
+	\item Similar to the first constraint, all rooms must be connected to one another and thus must be reachable.
+	\item As said before, the two cells of a door must be neighbouring and must be part of two different rooms. This is to prevent a door from being placed in the middle of a room.
+	\item Each floorplan must have at least one exit.
+	\item An emergency path cannot be cyclic. That is, any path from an emergency sign cannot eventually point back to itself.
+\end{enumerate}
+
+\subsubsection{Implicit Constraints}
+Besides the above-mentioned constraints, there are others that are checked, but not necessarily correlate to the model.
+\begin{enumerate}
+	\item Each area in a room must be defined from top-left to bottom-right.
+	\item Both the locations of a fire and an exit must exist within the floor.
+	\item An emergency sign may not cause the exit to be non-reachable.
+	\item An import must point to a valid file.
+	\item The action of a person must be defined in any imported file.
+	\item The action of a person must be unique.
+\end{enumerate}
+
+\section{Designing \texttt{Breact}}
+\label{sec:breact}
+\texttt{Breact}, a combination of \texttt{Bmod} and the word \textsf{react}, is the language that comes bundled with the \texttt{Bmod} project and describes how people react in an emergency, by following a certain set of rules.
+
+A \texttt{Breact} file has the extension of \texttt{breact} or \texttt{br} and, just as with \texttt{Bmod}, comments can be used in exactly the same way.
+
+\subsection{Actions}
+The main construct of a \texttt{Breact} file is an \texttt{action}, which has a name and a set of \texttt{find} statements, each ending in a semicolon. The name of an action must be defined, so it can be used in \texttt{Bmod}. But, note that there are no namespaces or similar constructs, yielding in undefined behaviour for actions that have the same name. This is automatically checked in the validator for \texttt{Bmod}, though.
+
+An action can additionally be defined as \texttt{shared}, allowing for cooperation. All persons with a \texttt{shared} action profile within the same room will act according to a single profile\footnote{Technically, they will react according to the first profile that could be found.}.
+
+The idea of shared actions came from \cite{Zheng2011}, but can be expanded in a more psychological manner.
+
+\subsection{Find}
+Each action consists of a set of find statements. The most simple find statement is as follows, which does what it says on the tin (locate the nearest exit):
+\begin{lstlisting}[language=Breact]
+	find nearest Exit;
+\end{lstlisting}
+
+Besides the use of \texttt{nearest}, it's also possible to find the \texttt{farthest}, the \texttt{first} or the \texttt{last} of any object (being one of \texttt{Cell}, \texttt{Fire}, \texttt{Door}, \texttt{Person} or \texttt{Exit}). For completion's sake, let's describe the meaning of all different selectors:
+\begin{description}
+	\item[nearest] Finds the closest object.
+	\item[farthest] Finds the farthest object, e.g. the object that is the farthest away from the current person.
+	\item[first] Finds the first object that suffices.
+	\item[last] Finds the last object from the list.
+\end{description}
+Both \texttt{first} and \texttt{last} can come in handy when looking for doors, seeing as the doors will be ordered according to the emergency path. Finding the last door thus means finding the door that is farthest along the emergency path (and logically closer to the exit).
+
+Another way of modifying the search is by using \texttt{farthest from} instead of merely \texttt{farthest}, which will look for the non-burning cell that is farthest away from the described object.
+\begin{lstlisting}[language=Breact]
+	find farthest from Fire;
+\end{lstlisting}
+
+By default, a find statement will look for these within the same room as the person is in. If you would rather it find on the entire floor, the find can be modified by a \texttt{global} keyword:
+\begin{lstlisting}[language=Breact]
+	global find nearest Exit;
+\end{lstlisting}
+
+Another way to describe what to find is to modify the objects. Which can be done by adding either \texttt{burning} or \texttt{normal} to the objects. When using the former, the object that needs to be matched must be on fire, whilst, when using the latter, it may not be on fire. When using none of the above, it will mach any object.
+\begin{lstlisting}[language=Breact]
+	find farthest from burning Door;
+	find nearest normal Exit;
+\end{lstlisting}
+
+\subsection{Combined}
+Now that we know how find-statements can be constructed and we know that an action consists of a series of them (at least one), we can identify the semantics of an action.
+\begin{lstlisting}[language=Breact]
+	// Original experienced action profile	
+	action experienced:
+		find nearest normal Exit;
+		find nearest normal Door;
+		global find nearest normal Exit; 
+\end{lstlisting}
+The above \texttt{Breact} code segment will do the following (for each person with the action of \texttt{experienced}):
+\begin{enumerate}
+	\item Find all the exits in the room that are not on fire. If there are exits, try moving to the nearest one.
+	\item If no exit was found, try looking for the nearest door in the room and go through that door.
+	\item If (somehow) there are no doors, move to the cell that is the closest to an exit on the floor.
+\end{enumerate}
+It's also good to denote that the distance function uses maze-distance throughout the floor and not the simpler euclidean distance.
+
+
+\section{Connecting the Pedestrian Simulator}
+\label{sec:pedsim}
+\texttt{PedSim} is a \textsf{microscopic pedestrian crowd simulation library}\footnote{The words of the creator.}. It allows for creating obstacles and agents which are simulated over an interval of time. \cite{pedsim}
+
+We will be using the aptly named \texttt{2dvis} from \texttt{PedSim}'s \textsf{ecosystem}, listening on port 2222. Our generator will create a program that will send \texttt{XML} messages to the \texttt{UDP} port of 2222, which can be read by \texttt{2dvis}.
+
+\subsection{Compilation}
+Seeing as \texttt{PedSim} was written in \texttt{C++} and \texttt{Xtext} is a \texttt{Java} library, we have to create a simple mapping in order to simulate our \texttt{Bmod} and \texttt{Breact} files.
+
+But, unfortunately, there is quite a set of additional logic and functionality that must be liked and compiled validly, which is why our generator creates a \texttt{cmake}-project that holds the name of our \texttt{Bmod} file. Simply execute the command \texttt{cmake .; make} in the project's root folder and you're good to go. Now you can start the simulation by executing \texttt{simxxxx} where \texttt{xxxx} stands for the project name.
+
+For instance, let's say we have an \texttt{example.bmod} and an \texttt{actions.br} file. By default, there should be a project folder called \texttt{example}, which, when compiled, will create a \texttt{simexample} file.
+
+\section{Related Work}
+\section{Conclusions and Future Work}
+I have shown in this paper that anyone with no notable experience with \texttt{Xtext} (but of course with programming experience) can create a simple set of \texttt{DSL}s, which can generate anything.
+
+Unfortunately, there are still some issues with \texttt{Xtext}, like the inability to add custom libraries and the convoluted manner in which rules with multiple references must be created in grammars. Also, the documentation of the new system is lacking terribly in the necessary explanation on \texttt{MWE2} and there were a lot of precise features that I had to scramble together from forums and outdated tutorials in order to arrive where this project is now.
+
+Just as with any project, \texttt{Bmod}/\texttt{Breact} is still expandable to more features and functionality, like:
+\begin{itemize}
+	\item The ability to interrupt going to a waypoint and changing direction. i.e. \texttt{interruptable} action.
+	\item The ability to add urgencies to each find.
+	%\item A better way of representing emergency signs.
+	\item Being able to "spawn" a random group of people.
+	\item Ability to target \texttt{any} object.
+	%\item Disallowing occupancy conditions of 0.
+	%\item Custom dangerous conditions.
+	%\item Ability to allow for perception levels.
+	\item ...
+\end{itemize}
+
+\bibliography{mybibfile}
+
+\end{document}

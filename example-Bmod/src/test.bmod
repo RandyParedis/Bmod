@@ -1,0 +1,27 @@
+import "actions.br"
+
+Room r1
+	from (0, 0) to (10, 1)
+	without (5, 0)
+
+Room r2 [0]
+	from (2, 2) to (4, 4)
+
+Room r3
+	from (5, 4) to (9, 9) and
+	from (10, 6) to (12, 8)
+
+Door d1 from (2, 1) to (2, 2)
+
+Door d2 from (4, 4) to (5, 4)
+
+Door d3 from (4, 1) to (4, 2)
+
+EmergencySign from d2 to d1
+EmergencySign from d2 to d3
+
+Person p1 in (3, 3): smart
+
+Exit in (0, 0)
+
+Fire in (8, 8)

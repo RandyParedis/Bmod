@@ -1,0 +1,3 @@
+/home/red/Software/eclipse/runtime-EclipseXtext/example-Bmod/src-gen/test/CMakeFiles/rebuild_cache.dir
+/home/red/Software/eclipse/runtime-EclipseXtext/example-Bmod/src-gen/test/CMakeFiles/edit_cache.dir
+/home/red/Software/eclipse/runtime-EclipseXtext/example-Bmod/src-gen/test/CMakeFiles/simtest.dir

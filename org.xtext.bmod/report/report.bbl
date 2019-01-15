@@ -1,0 +1,43 @@
+\begin{thebibliography}{1}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{xtext}
+\href{https://xtext.org}{{Xtext} home page}.
+\newline\urlprefix\url{https://xtext.org}
+
+\bibitem{pedsim}
+\href{http://pedsim.silmaril.org}{{PedSim} home page}.
+\newline\urlprefix\url{http://pedsim.silmaril.org}
+
+\bibitem{Hannu2014}
+V.~Hannu, Making domain specific language with xtext and xbase for creating
+  role playing games (2014).
+
+\bibitem{eclipse}
+\href{https://eclipse.org}{{Eclipse} home page}.
+\newline\urlprefix\url{https://eclipse.org}
+
+\bibitem{nointellij}
+TypeFox, \href{https://typefox.io/xtext-lsp-vs-xtext-web}{{Xtext LSP} vs.
+  {Xtext Web}}.
+\newline\urlprefix\url{https://typefox.io/xtext-lsp-vs-xtext-web}
+
+\bibitem{antlr}
+\href{https://www.antlr.org/}{{Antlr} home page}.
+\newline\urlprefix\url{https://www.antlr.org/}
+
+\bibitem{A1}
+C.~Gomes,
+  \href{http://msdl.cs.mcgill.ca/people/hv/teaching/MSBDesign/assignments/Assign1-metaDepth.pdf}{Assignment
+  1 - building evacuation modelling in {metaDepth}}.
+\newline\urlprefix\url{http://msdl.cs.mcgill.ca/people/hv/teaching/MSBDesign/assignments/Assign1-metaDepth.pdf}
+
+\bibitem{Zheng2011}
+X.~Zheng, Y.~Cheng, Modeling cooperative and competitive behaviors in emergency
+  evacuation: A game-theoretical approach (2011).
+
+\end{thebibliography}

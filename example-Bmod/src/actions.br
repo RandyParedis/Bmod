@@ -1,0 +1,53 @@
+/*
+ * This file contains all the default actions that were required in the original assignments.
+ * There are also examples on all the possibilities of the actions
+ */
+
+// Original experienced action profile	
+action experienced:
+	find nearest normal Exit;
+	find nearest normal Door;
+	global find nearest normal Exit; 
+
+// Original newcomer profile
+action newcomer:
+	find nearest normal Person;
+
+	
+// How the newcomer profile should actually work
+action newcomer_better:
+	find nearest normal Person;
+	find nearest Exit;
+	find first Door;
+	
+
+/* 
+ * From this point, the actions are invented and have no correlation with the original assignment
+ */
+ 
+// Move around with no specific goal
+action panic1:
+	find first Cell;
+	
+// Move around with no specific goal (alternative)
+action panic2:
+	find last Cell;
+	
+// Go as far away from the fire as possible
+action scared:
+	find farthest from burning Fire;
+	
+// Go as close to the fire as possible
+action suicidal:
+	find nearest burning Cell;
+	
+// How everyone should act in case of emergency
+shared action smart:
+	find nearest normal Exit;
+	find nearest Exit;
+	find last normal Door;
+	find nearest Door;
+	find farthest from Fire;
+
+
+
