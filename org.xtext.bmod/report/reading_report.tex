@@ -1,0 +1,103 @@
+\documentclass[review]{elsarticle}
+
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+\usepackage{csquotes, listings}
+
+\journal{MSBDesign}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Using \texttt{Xtext} and \texttt{Xtend} to Create \texttt{Bmod}\\\normalsize{Reading Report}}
+
+%% Group authors per affiliation:
+\author{Randy Paredis, s0151613}
+\address{Master in Computer Science, University of Antwerp}
+
+\begin{abstract}
+This document is meant to lead as an introduction to the actual project. It is a culmination of all the sources I've read and explains the basic concepts of \texttt{Xtext} and \texttt{Xtend}. All this information can also be found in the final report.
+\end{abstract}
+
+\begin{keyword}
+\texttt{Bmod}\sep\texttt{DSL}\sep\textsf{Java}\sep Modelling\sep Model Driven Engineering\sep\texttt{Xtend}\sep\texttt{Xtext}
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+\section{Introduction}
+In this introductionary paper, I will try and list the strengths and drawbacks for using \texttt{Xtext} and \texttt{Xtend}. In \textsf{Section \ref{sec:workflow}}, it will also discuss the general workflow needed to obtain a custom-made \texttt{DSL} (Domain Specific Language).
+
+In the final section (\textsf{Section \ref{sec:next}}), a series of possible next steps is also listed as example, but the project is not contained to these possibilities.
+
+\section{\texttt{Xtext}}
+\texttt{Xtext} \cite{xtext} is a \textsf{Java} library/framework that allows software engineers to easily create custom \texttt{DSL}s.
+
+It is an \textbf{open-source} project, which allows for full flexibility, but unfortunately the code is (as far as I've been able to go through it) quite complex and an unfortunate overhead for trying to understand certain features. Coupled with this, \texttt{Xtext} also undergoes some \textbf{continuous integration}, which implies it is not a dead project, in fact it is very much still in development.
+
+Using the strong \texttt{Antlr 4} \cite{antlr} grammar behind the scenes, \texttt{Xtext} is fully \textbf{grammar-driven} and implements some custom and complex features that usually don't appear in a grammar file (cross references, easy range operator...).
+
+The project is based at the \textsf{Eclipse Org} \cite{eclipse}, but was not designed to be solemnly an \textsf{Eclipse} plug-in. Originally, the project was meant to also be available for \textsf{JetBrains}' \textsf{IntelliJ} and web applications, but unfortunately these other implementations have some difficulties.
+
+\begin{displaycquote}{nointellij}
+	\textit{For IntelliJ IDEA the situation is different. Neither the Xtext integration has been updated with the last release, nor has Jetbrains yet started to work on LSP support. The code for the IDEA integration is quite extensive and deep. So deep that we get regularly broken because we use non-public API. Since the demand for IDEA integration is not high, maintaining it doesn’t make sense to us.}
+\end{displaycquote}
+
+This quote made me choose to use \texttt{Xtext} in a normal fashion, by using \textsf{Eclipse Photon}. Although, it was possible to get the \textsf{ACE}-webeditor have the valid syntax-highlighting\footnote{This general idea was discarded when it became clear that the McGill site did not allow for uploading \texttt{JavaScript} files.}.
+
+\section{Workflow}
+\label{sec:workflow}
+When you create a new project in \textsf{Eclipse}, you will go through a wizard that helps you by defining the base grammar name, the file extension to be associated with it and some optional testing frameworks. At this point in time, I've experienced some difficulties with the \textsf{JUnit 5}-framework, leaving me to use the \textsf{JUnit 4}-framework, where these issues do not occur.
+
+When you have your project, a default grammar file that allows you to create certain greetings has been created. This file can be turned into any grammar you desire for your \texttt{DSL}. When this file is compiled with the \texttt{MWE2}-workflow file, you will get a generator, validator and a scopehandler class. These classes respectively allow for generating code from the \texttt{DSL}-files, (semantically) validating the syntax of these files and make sure the scoping of these files is done as required (by default, this is the normal \textsf{Java}-scoping).
+
+These classes can be implemented in both \textsf{Java} and \texttt{Xtend}, which is a custom \texttt{DSL}, based upon \textsf{Java}.
+
+\section{Next Steps}
+\label{sec:next}
+In this project, it seems that the following steps can introduce a good project\footnote{Note: these steps are not necessarily the steps that will be taken in this project.}:
+\begin{enumerate}
+	\item Create a grammar for \texttt{Bmod}, a building modelling language, as was defined in the assignments.
+	\item Allow for exporting it to \texttt{HTML}, \texttt{CSS} and \texttt{JavaScript}, so it would be possible to simulate any floor in a browser.
+	\item Get the web-editor to work as \textsf{Eclipse} does (make it so the \texttt{ACE}-engine also calls the generator).
+	\item Make the project available on the McGill site for life testing of \texttt{Bmod}.
+\end{enumerate}
+
+\bibliography{mybibfile}
+
+\end{document}

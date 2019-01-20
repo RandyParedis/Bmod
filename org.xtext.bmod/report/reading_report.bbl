@@ -1,0 +1,25 @@
+\begin{thebibliography}{1}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{xtext}
+\href{https://xtext.org}{{Xtext} home page}.
+\newline\urlprefix\url{https://xtext.org}
+
+\bibitem{antlr}
+\href{https://www.antlr.org/}{{Antlr} home page}.
+\newline\urlprefix\url{https://www.antlr.org/}
+
+\bibitem{eclipse}
+\href{https://eclipse.org}{{Eclipse} home page}.
+\newline\urlprefix\url{https://eclipse.org}
+
+\bibitem{nointellij}
+TypeFox, \href{https://typefox.io/xtext-lsp-vs-xtext-web}{{Xtext LSP} vs.
+  {Xtext Web}}.
+\newline\urlprefix\url{https://typefox.io/xtext-lsp-vs-xtext-web}
+
+\end{thebibliography}

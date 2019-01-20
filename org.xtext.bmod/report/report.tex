@@ -98,7 +98,7 @@ All the code for this project was made publicly available on \texttt{GitHub}\foo
 
 
 
-\section{What is Xtext and Xtend?}
+\section{What are Xtext and Xtend?}
 \label{sec:xtext}
 
 \subsection{Xtext}
@@ -329,7 +329,6 @@ But, unfortunately, there is quite a set of additional logic and functionality t
 
 For instance, let's say we have an \texttt{example.bmod} and an \texttt{actions.br} file. By default, there should be a project folder called \texttt{example}, which, when compiled, will create a \texttt{simexample} file.
 
-\section{Related Work}
 \section{Conclusions and Future Work}
 I have shown in this paper that anyone with no notable experience with \texttt{Xtext} (but of course with programming experience) can create a simple set of \texttt{DSL}s, which can generate anything.
 
@@ -337,11 +336,12 @@ Unfortunately, there are still some issues with \texttt{Xtext}, like the inabili
 
 Just as with any project, \texttt{Bmod}/\texttt{Breact} is still expandable to more features and functionality, like:
 \begin{itemize}
-	\item The ability to interrupt going to a waypoint and changing direction. i.e. \texttt{interruptable} action.
-	\item The ability to add urgencies to each find.
+	\item The ability to interrupt going to a waypoint and changing direction; i.e. \texttt{interruptable} action.
+	\item The ability to add urgencies to each find; i.e. \texttt{find ... if ...} statement.
 	%\item A better way of representing emergency signs.
 	\item Being able to "spawn" a random group of people.
 	\item Ability to target \texttt{any} object.
+	%\item Ability to add custom obstacles.
 	%\item Disallowing occupancy conditions of 0.
 	%\item Custom dangerous conditions.
 	%\item Ability to allow for perception levels.
