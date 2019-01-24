@@ -49,6 +49,12 @@ namespace simulation {
 					m_target = m_targetter(this, m_floor);
 				}
 				if(m_target != nullptr) {
+					// TODO: use BFS to determine where to go instead of going straight to the target
+					// std::vector<Cell*> lst = m_floor.bfs(m_x, m_y, m_target->x, m_target->y);
+					// if(lst.size() > 1) {
+				 	//	Cell* next = lst.at(1);
+					// 	m_agent->addWaypoint(new Ped::Twaypoint(next->x + m_offset, next->y + m_offset, 1));
+					// }
 					m_agent->addWaypoint(new Ped::Twaypoint(m_target->x + m_offset, m_target->y + m_offset, 1));
 				}
 			}

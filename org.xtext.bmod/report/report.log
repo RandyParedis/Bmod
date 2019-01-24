@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  20 JAN 2019 11:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  24 JAN 2019 21:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -353,14 +353,14 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 83.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 83.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 96.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 96.
  [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 96.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 96.
 Missing character: There is no â in font cmti10!
 Missing character: There is no € in font cmti10!
 Missing character: There is no ™ in font cmti10!
@@ -394,11 +394,11 @@ Package rerunfilecheck Info: File `report.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 353.
  ) 
 Here is how much of TeX's memory you used:
- 8104 strings out of 494805
- 117307 string characters out of 6177999
+ 8106 strings out of 494805
+ 117326 string characters out of 6177999
  217909 words of memory out of 5000000
- 11241 multiletter control sequences out of 15000+600000
- 9088 words of font info for 33 fonts, out of 8000000 for 9000
+ 11242 multiletter control sequences out of 15000+600000
+ 9433 words of font info for 34 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  32i,8n,42p,911b,1728s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
@@ -414,13 +414,14 @@ cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 s8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on report.pdf (13 pages, 222579 bytes).
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on report.pdf (13 pages, 233981 bytes).
 PDF statistics:
- 366 PDF objects out of 1000 (max. 8388607)
- 330 compressed objects within 4 object streams
+ 370 PDF objects out of 1000 (max. 8388607)
+ 333 compressed objects within 4 object streams
  121 named destinations out of 1000 (max. 500000)
  169 words of extra memory for PDF output out of 10000 (max. 10000000)
 

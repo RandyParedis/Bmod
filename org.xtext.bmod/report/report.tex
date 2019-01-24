@@ -70,7 +70,7 @@
 
 %% Group authors per affiliation:
 \author{Randy Paredis, s0151613}
-\address{Master in Computer Science, University of Antwerp}
+\address{\small{randy.paredis@student.uantwerpen.be}\\Master in Computer Science, University of Antwerp}
 
 \begin{abstract}
 In this document, we will try and describe the abilities and drawbacks of using \texttt{Xtext} (and \texttt{Xtend}) within the context of creating a building modelling language. The modularity of \texttt{Xtext} will be explored and combined with a \texttt{C++} pedesitian simulator.
@@ -87,7 +87,7 @@ In this document, we will try and describe the abilities and drawbacks of using 
 \section{Introduction}
 Within this document, we will explore the \texttt{Java} library of \texttt{Xtext} \cite{xtext} and by extension \texttt{Xtend}. In order to describe all the possibilities and features \texttt{Xtext} offers, we will use it to create \texttt{Bmod}, a building modelling language and \texttt{Breact}, an additional file specification that allows for modelling the behaviour of people. The exact idea behind these languages will be respectively described in \textsl{Sections \ref{sec:bmod}} and \textsl{\ref{sec:breact}}, while \textsl{Section \ref{sec:xtext}} will go deeper into detail on \texttt{Xtext} and \texttt{Xtend} itself. 
 
-Seeing as any file can be generated in \texttt{Xtext}, we will limit the scope of this project to generating a \texttt{C++} project will be generated that will be used in conjunction with \texttt{PedSim}\cite{pedsim} to simulate the behaviour of people in emergency situations. More details will be discussed in \textsl{Section \ref{sec:pedsim}}.
+Seeing as any file can be generated in \texttt{Xtext}, we will limit the scope of this project to generating a set of \texttt{C++} files that can be used in conjunction with \texttt{PedSim}\cite{pedsim} to simulate the behaviour of people in emergency situations. More details will be discussed in \textsl{Section \ref{sec:pedsim}}.
 
 \subsection{Related Work}
 This project is based upon the same constructs as \cite{Hannu2014}, but uses another angle on the topic (Building Modelling instead of RPGs).
